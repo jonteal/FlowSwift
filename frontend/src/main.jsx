@@ -18,6 +18,7 @@ import RegisterScreen from "./screens/RegisterScreen.jsx";
 import ProfileScreen from "./screens/ProfileScreen";
 import PrivateRoute from "./components/PrivateRoute";
 import { AddClient } from "./screens/AddClient";
+import { Home } from "./screens/Home";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -47,6 +48,7 @@ const router = createBrowserRouter(
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/addClient" element={<AddClient />} />
+        <Route path="/home" element={<Home />} />
       </Route>
     </Route>
   )

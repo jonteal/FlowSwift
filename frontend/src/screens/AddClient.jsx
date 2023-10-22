@@ -20,7 +20,6 @@ export const AddClient = () => {
   const [companyName, setCompanyName] = useState("");
   const [status, setStatus] = useState("prospect");
   const [userId, setUserId] = useState(userInfo._id);
-  console.log("userId after state set", userId);
 
   const [addClient] = useMutation(ADD_CLIENT, {
     variables: {
