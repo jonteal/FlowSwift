@@ -9,7 +9,7 @@ import { GET_CLIENTS } from "../graphql/queries/clientQueries";
 import { useSelector } from "react-redux";
 
 // COMPONENTS
-// import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { DynamicButton } from "../components/reusable/DynamicButton/DynamicButton";
 
 export const AddClient = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -67,7 +67,6 @@ export const AddClient = () => {
 
   return (
     <>
-      <h1>Add Client</h1>
       <div className="flex flex-col items-center">
         <h3 className="font-semibold text-slate-800 text-lg my-3">
           Add Client
@@ -214,7 +213,9 @@ export const AddClient = () => {
               </div>
             </div>
           </div>
-          <button type="submit">Save</button>
+          <DynamicButton color="red" type="submit">
+            Save
+          </DynamicButton>
         </form>
       </div>
     </>
