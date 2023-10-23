@@ -7,18 +7,19 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
-import store from "./store";
 import { Provider } from "react-redux";
-import App from "./App.jsx";
+import { ThemeProvider } from "./context";
+import { App } from "./App.jsx";
+import { HomeScreen } from "./views/HomeScreen.jsx";
+import { LoginScreen } from "./views/LoginScreen.jsx";
+import { RegisterScreen } from "./views/RegisterScreen.jsx";
+import { ProfileScreen } from "./views/ProfileScreen";
+import { AddClient } from "./views/AddClient";
+import { Home } from "./views/Home";
+import { PrivateRoute } from "./components/PrivateRoute";
+import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import HomeScreen from "./screens/HomeScreen.jsx";
-import LoginScreen from "./screens/LoginScreen.jsx";
-import RegisterScreen from "./screens/RegisterScreen.jsx";
-import ProfileScreen from "./screens/ProfileScreen";
-import PrivateRoute from "./components/PrivateRoute";
-import { AddClient } from "./screens/AddClient";
-import { Home } from "./screens/Home";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -56,10 +57,12 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <ApolloProvider client={client}>
-      <React.StrictMode>
-        <RouterProvider router={router} />
-      </React.StrictMode>
-    </ApolloProvider>
+    <ThemeProvider>
+      <ApolloProvider client={client}>
+        <React.StrictMode>
+          <RouterProvider router={router} />
+        </React.StrictMode>
+      </ApolloProvider>
+    </ThemeProvider>
   </Provider>
 );
