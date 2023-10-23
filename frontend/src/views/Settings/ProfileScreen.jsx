@@ -2,12 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
-import FormContainer from "../components/FormContainer";
+import FormContainer from "../../components/FormContainer";
 import { toast } from "react-toastify";
-import Loader from "../components/Loader";
-import { setCredentials } from "../slices/authSlice";
+import Loader from "../../components/Loader";
+import { setCredentials } from "../../slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useUpdateUserMutation } from "../slices/usersApiSlice";
+import { useUpdateUserMutation } from "../../slices/usersApiSlice";
+import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
 
 export const ProfileScreen = () => {
   const [name, setName] = useState("");
@@ -92,9 +93,9 @@ export const ProfileScreen = () => {
 
         {isLoading && <Loader />}
 
-        <Button type="submit" variant="primary" className="mt-3">
+        <DynamicButton type="submit" color="red" className="mt-3">
           Sign Up
-        </Button>
+        </DynamicButton>
       </Form>
     </FormContainer>
   );

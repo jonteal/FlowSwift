@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 
 // GRAPHQL
-import { ADD_CLIENT } from "../graphql/mutations/clientMutations";
-import { GET_CLIENTS } from "../graphql/queries/clientQueries";
+import { ADD_CLIENT } from "../../graphql/mutations/clientMutations";
+import { GET_CLIENTS } from "../../graphql/queries/clientQueries";
 import { useSelector } from "react-redux";
 
 // COMPONENTS
-import { DynamicButton } from "../components/reusable/DynamicButton/DynamicButton";
+import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
 
 export const AddClient = () => {
   const { userInfo } = useSelector((state) => state.auth);

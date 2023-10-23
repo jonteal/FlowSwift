@@ -1,5 +1,5 @@
-import Hero from "../components/Hero";
+import { Home } from "./homeView/Home/Home";
 
 export const HomeScreen = () => {
-  return <Hero />;
+  return <Home />;
 };

@@ -11,10 +11,10 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "./context";
 import { App } from "./App.jsx";
 import { HomeScreen } from "./views/HomeScreen.jsx";
-import { LoginScreen } from "./views/LoginScreen.jsx";
-import { RegisterScreen } from "./views/RegisterScreen.jsx";
-import { ProfileScreen } from "./views/ProfileScreen";
-import { AddClient } from "./views/AddClient";
+import { LoginScreen } from "./views/Auth/Login/LoginScreen.jsx";
+import { RegisterScreen } from "./views/Auth/Signup/RegisterScreen.jsx";
+import { ProfileScreen } from "./views/Settings/ProfileScreen";
+import { AddClient } from "./views/Clients/AddClient";
 import { Home } from "./views/Home";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { MainDashboard } from "./views/homeView/MainDashboard/MainDashboard";
@@ -53,6 +53,8 @@ import { NotFound } from "./views/NotFound";
 import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import { Settings } from "./views/Settings/Settings";
+import { Documentation } from "./views/Settings/Documentation";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -80,7 +82,10 @@ const router = createBrowserRouter(
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="" element={<PrivateRoute />}>
-        <Route path="/profile" element={<ProfileScreen />} />
+        <Route path="/settings" element={<Settings />}>
+          <Route path="/settings/profile" element={<ProfileScreen />} />
+          <Route path="/settings/documentation" element={<Documentation />} />
+        </Route>
         <Route path="/addClient" element={<AddClient />} />
         <Route path="/home" element={<Home />} />
         <Route path="/dashboard" element={<MainDashboard />} />

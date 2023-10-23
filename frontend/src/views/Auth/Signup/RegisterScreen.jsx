@@ -2,11 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import FormContainer from "../components/FormContainer";
+import FormContainer from "../../../components/FormContainer";
 import { toast } from "react-toastify";
-import Loader from "../components/Loader";
-import { useRegisterMutation } from "../slices/usersApiSlice";
-import { setCredentials } from "../slices/authSlice";
+import Loader from "../../../components/Loader";
+import { useRegisterMutation } from "../../../slices/usersApiSlice";
+import { setCredentials } from "../../../slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export const RegisterScreen = () => {
@@ -14,6 +14,8 @@ export const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState("admin");
+  const [organization, setOrganization] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,7 +36,13 @@ export const RegisterScreen = () => {
       toast.error("Passwords do not match");
     } else {
       try {
-        const res = await register({ name, email, password }).unwrap();
+        const res = await register({
+          name,
+          email,
+          password,
+          role,
+          organization,
+        }).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate("/");
       } catch (error) {
@@ -85,6 +93,31 @@ export const RegisterScreen = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
+
+        <Form.Group className="my-2" controlId="organization">
+          <Form.Label>Organization</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Organization name"
+            value={organization}
+            onChange={(e) => setOrganization(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <label htmlFor="role" className="form-label mt-8">
+          Role
+        </label>
+        <select
+          className="form-select"
+          aria-label="Role selection"
+          id="role"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <option value="admin">Admin</option>
+          <option value="manager">Manager</option>
+          <option value="employee">Employee</option>
+        </select>
 
         {isLoading && <Loader />}
 

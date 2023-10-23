@@ -8,13 +8,16 @@ import { ClientsContainer } from "../../../components/ClientsContainer/ClientsCo
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 
 import { FaUserAlt } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 export const ClientList = () => {
+  const { userInfo } = useSelector((state) => state.auth);
+
   const {
     loading: clientLoading,
     error: clientError,
     data: clientData,
-  } = useQuery(GET_CLIENTS);
+  } = useQuery(GET_CLIENTS, { variables: { userId: userInfo._id } });
 
   if (clientLoading) return <Spinner />;
   if (clientError) return <p>Something went wrong...</p>;

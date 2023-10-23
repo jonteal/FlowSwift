@@ -1,12 +1,32 @@
 import { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../slices/authSlice";
+import { useLogoutMutation } from "../../../slices/usersApiSlice";
 
 export const MenuDrawer = ({ name, ...props }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [logoutApiCall] = useLogoutMutation();
+
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <>
@@ -27,40 +47,71 @@ export const MenuDrawer = ({ name, ...props }) => {
           closeButton
         ></Offcanvas.Header>
         <Offcanvas.Body>
-          <Fragment>
-            <div className="nav-links flex flex-col">
+          {userInfo ? (
+            <Fragment>
+              <div className="nav-links flex flex-col">
+                <Link
+                  className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
+                  to="/"
+                >
+                  Home
+                </Link>
+                <Link
+                  className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
+                  to="/profile"
+                >
+                  Update Profile
+                </Link>
+                <Link
+                  className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
+                  to="dashboard"
+                >
+                  My Dashboard
+                </Link>
+                <Link
+                  className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
+                  to="clients"
+                >
+                  Clients
+                </Link>
+                <Link
+                  className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
+                  to="projects"
+                >
+                  Projects
+                </Link>
+                <Link
+                  className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
+                  to="settings"
+                >
+                  Settings
+                </Link>
+                <button
+                  className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2 self-start"
+                  onClick={logoutHandler}
+                >
+                  Sign Out
+                </button>
+              </div>
+            </Fragment>
+          ) : (
+            <Fragment>
               <Link
                 className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
-                to="/"
+                to="login"
               >
-                Home
+                Sign In
               </Link>
               <Link
                 className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
-                to="dashboard"
+                to="/register"
               >
-                My Dashboard
+                Sign Up
               </Link>
-              <Link
-                className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
-                to="clients"
-              >
-                Clients
-              </Link>
-              <Link
-                className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
-                to="projects"
-              >
-                Projects
-              </Link>
-              <Link
-                className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
-                to="projects"
-              >
-                Settings
-              </Link>
-            </div>
-          </Fragment>
+            </Fragment>
+          )}
+
+          <Fragment></Fragment>
         </Offcanvas.Body>
       </Offcanvas>
     </>

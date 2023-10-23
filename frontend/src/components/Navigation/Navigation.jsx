@@ -8,9 +8,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../../slices/usersApiSlice";
 import { logout } from "../../slices/authSlice";
+import { DropdownComponent } from "../reusable/DropdownComponent/DropdownComponent";
 
 export const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
+
+  console.log("userInfo: ", userInfo);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,7 +34,7 @@ export const Navigation = () => {
       <div className="w-48 bg-sky-700 pt-10 pb-2">
         <Link
           className="mx-3 flex-wrap flex text-2xl text-zinc-100 font-bold italic"
-          to="/"
+          to={userInfo ? "/clients" : "/login"}
         >
           FlowSwift
         </Link>

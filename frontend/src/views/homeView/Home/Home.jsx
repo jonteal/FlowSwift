@@ -6,11 +6,7 @@ export const Home = () => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   return (
-    <div
-      className={`mx-20 ${darkMode ? "bg-sky-950" : "white"} ${
-        darkMode ? "text-sky-50" : "text-slate-900"
-      }`}
-    >
+    <div>
       <div className="mt-3 flex flex-row justify-center">
         <DynamicButton
           color="lightBlue"
