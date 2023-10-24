@@ -529,7 +529,7 @@ const mutation = new GraphQLObjectType({
     addClient: {
       type: ClientType,
       args: {
-        userId: { type: new GraphQLNonNull(GraphQLString) },
+        organizationId: { type: new GraphQLNonNull(GraphQLID) },
         firstName: { type: new GraphQLNonNull(GraphQLString) },
         lastName: { type: new GraphQLNonNull(GraphQLString) },
         phoneNumber: { type: GraphQLString },
@@ -551,7 +551,7 @@ const mutation = new GraphQLObjectType({
       },
       resolve(parent, args) {
         const client = new Client({
-          userId: args.userId,
+          organizationId: args.organizationId,
           firstName: args.firstName,
           lastName: args.lastName,
           phoneNumber: args.phoneNumber,

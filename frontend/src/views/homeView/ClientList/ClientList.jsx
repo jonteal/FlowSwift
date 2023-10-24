@@ -9,15 +9,37 @@ import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 
 import { FaUserAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { GET_USER } from "../../../graphql/queries/userQueries";
+import { GET_ORGANIZATION } from "../../../graphql/queries/organizationQueries";
 
 export const ClientList = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const {
+    loading: userLoading,
+    error: userError,
+    data: userData,
+  } = useQuery(GET_USER, {
+    variables: { id: userInfo._id },
+  });
+
+  // const {
+  //   loading: organizationLoading,
+  //   error: organizationError,
+  //   data: organizationData,
+  // } = useQuery(GET_ORGANIZATION, {
+  //   variables: { id: userData?.user.organizationId },
+  // });
+
+  // console.log("organizationData: ", organizationData);
+
+  const {
     loading: clientLoading,
     error: clientError,
     data: clientData,
-  } = useQuery(GET_CLIENTS, { variables: { userId: userInfo._id } });
+  } = useQuery(GET_CLIENTS, {
+    variables: { organizationId: userData?.user.organizationId },
+  });
 
   if (clientLoading) return <Spinner />;
   if (clientError) return <p>Something went wrong...</p>;

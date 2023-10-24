@@ -6,7 +6,10 @@ import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
 import { GET_USER } from "../../../graphql/queries/userQueries";
-import { GET_ORGANIZATIONS } from "../../../graphql/queries/organizationQueries";
+import {
+  GET_ORGANIZATION,
+  GET_ORGANIZATIONS,
+} from "../../../graphql/queries/organizationQueries";
 import { ADD_ORGANIZATION } from "../../../graphql/mutations/organizationMutations";
 
 // COMPONENTS
@@ -16,18 +19,21 @@ import { DynamicButton } from "../../../components/reusable/DynamicButton/Dynami
 import { useContext } from "react";
 import { ThemeContext } from "../../../context";
 import { useSelector } from "react-redux";
+import { useUpdateUserMutation } from "../../../slices/usersApiSlice";
 
 export const AddOrganization = () => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
+
   const { userInfo } = useSelector((state) => state.auth);
+
   const [organizationName, setOrganizationName] = useState("");
   const [userId, setUserId] = useState("");
   const [alertOn, setAlertOn] = useState(false);
 
-  console.log("userInfo: ", userInfo);
-
   const { loading, error, data } = useQuery(GET_ORGANIZATIONS);
+
+  const [updateProfile, { isLoading }] = useUpdateUserMutation();
 
   useEffect(() => {
     setUserId(userInfo._id);

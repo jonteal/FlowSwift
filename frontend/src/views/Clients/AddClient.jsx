@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 // LIBRARIES
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
 import { ADD_CLIENT } from "../../graphql/mutations/clientMutations";
@@ -10,16 +10,37 @@ import { useSelector } from "react-redux";
 
 // COMPONENTS
 import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
+import { GET_USER } from "../../graphql/queries/userQueries";
+import { Spinner } from "react-bootstrap";
 
 export const AddClient = () => {
   const { userInfo } = useSelector((state) => state.auth);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [status, setStatus] = useState("prospect");
-  const [userId, setUserId] = useState(userInfo._id);
+  // const [organizationId, setOrganizationId] = useState("");
+
+  const {
+    loading: userLoading,
+    error: userError,
+    data: userData,
+  } = useQuery(GET_USER, {
+    variables: { id: userInfo._id },
+  });
+
+  if (userLoading) return <Spinner />;
+
+  // useEffect(() => {
+  //   setOrganizationId(userData.user.organizationId);
+  // }, [userData]);
+
+  const organizationId = userData.user.organizationId;
+
+  console.log("userData: ", userData);
 
   const [addClient] = useMutation(ADD_CLIENT, {
     variables: {
@@ -29,7 +50,7 @@ export const AddClient = () => {
       emailAddress,
       companyName,
       status,
-      userId,
+      organizationId,
     },
     update(cache, { data: { addClient } }) {
       const { clients } = cache.readQuery({ query: GET_CLIENTS });
@@ -40,6 +61,12 @@ export const AddClient = () => {
       });
     },
   });
+
+  if (userLoading) return <Spinner />;
+
+  // useEffect(() => {
+  //   setOrganizationId(userData.user.organizationId);
+  // }, [userData]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -54,7 +81,8 @@ export const AddClient = () => {
       phoneNumber,
       emailAddress,
       companyName,
-      status
+      status,
+      organizationId
     );
 
     setFirstName("");
@@ -63,6 +91,7 @@ export const AddClient = () => {
     setEmailAddress("");
     setCompanyName("");
     setStatus("prospect");
+    setOrganizationId("");
   };
 
   return (

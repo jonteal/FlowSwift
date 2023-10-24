@@ -1,23 +1,26 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
-import FormContainer from "../../../components/FormContainer";
+
+// COMPONENTS
+import { Form, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
+import FormContainer from "../../../components/FormContainer";
 import Loader from "../../../components/Loader";
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+
+// REDUX
 import { useRegisterMutation } from "../../../slices/usersApiSlice";
 import { setCredentials } from "../../../slices/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 
 export const RegisterScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [role, setRole] = useState("admin");
+  const [role, setRole] = useState("owner");
   const [organization, setOrganization] = useState(undefined);
-  const [manager, setManager] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

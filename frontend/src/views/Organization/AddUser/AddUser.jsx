@@ -46,6 +46,8 @@ export const AddUser = () => {
     variables: { organizationId },
   });
 
+  console.log("usersData: ", usersData);
+
   const [register, { isLoading }] = useRegisterMutation();
 
   if (usersLoading) return <Spinner />;
@@ -58,8 +60,6 @@ export const AddUser = () => {
     (user) =>
       user.role === "admin" || user.role === "manager" || user.role === "owner"
   );
-  console.log("usersData: ", usersData);
-  console.log("organizationId", organizationId);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -144,7 +144,7 @@ export const AddUser = () => {
           />
         </div>
 
-        <label htmlFor="role" className="form-label mt-8">
+        <label htmlFor="role" className="form-label mt-2">
           Role
         </label>
         <select
@@ -160,19 +160,19 @@ export const AddUser = () => {
           <option value="owner">Owner</option>
         </select>
 
-        <label htmlFor="manager" className="form-label mt-8">
+        <label htmlFor="manager" className="form-label mt-2">
           Reports to
         </label>
         <select
           className="form-select"
           aria-label="Manager selection"
           id="manager"
-          value={manager}
-          onChange={(e) => setManager(e.target.value)}
+          value={managerId}
+          onChange={(e) => setManagerId(e.target.value)}
         >
           <option value="">N/A</option>
           {potentialManagers.map((user) => (
-            <option key={user._id} value={user.id}>
+            <option key={user._id} value={user._id}>
               {user.name}
             </option>
           ))}

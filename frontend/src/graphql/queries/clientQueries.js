@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const GET_CLIENTS = gql`
-  query getClients($userId: ID) {
-    clients(userId: $userId) {
+  query getClients($organizationId: ID) {
+    clients(organizationId: $organizationId) {
       id
       firstName
       lastName
@@ -10,11 +10,6 @@ const GET_CLIENTS = gql`
       emailAddress
       companyName
       status
-      user {
-        _id
-        name
-        email
-      }
     }
   }
 `;
@@ -43,11 +38,6 @@ const GET_CLIENT = gql`
       emailAddress
       companyName
       status
-      user {
-        _id
-        name
-        email
-      }
     }
   }
 `;
