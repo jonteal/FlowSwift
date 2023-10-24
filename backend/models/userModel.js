@@ -26,7 +26,6 @@ const userSchema = mongoose.Schema(
     organizationId: {
       type: String,
       required: false,
-      trim: true,
     },
     manager: {
       type: String,

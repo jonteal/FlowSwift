@@ -1,15 +1,15 @@
 import { gql } from "@apollo/client";
 
 const GET_ORGANIZATIONS = gql`
-  query getOrganizations {
-    organizations {
+  query getOrganizations($userId: ID) {
+    organizations(userId: $userId) {
       id
       organizationName
       user {
         _id
         name
         email
-        organization
+        organizationId
       }
     }
   }
@@ -24,7 +24,7 @@ const GET_ORGANIZATION = gql`
         _id
         name
         email
-        organization
+        organizationId
       }
     }
   }

@@ -1,18 +1,37 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../../../context";
 import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../../../slices/usersApiSlice";
 import FormContainer from "../../../components/FormContainer";
-import { Form } from "react-bootstrap";
+import { Form, Spinner } from "react-bootstrap";
+import { GET_ORGANIZATIONS } from "../../../graphql/queries/organizationQueries";
+import { useQuery } from "@apollo/client";
+import { GET_USERS } from "../../../graphql/queries/userQueries";
 
 export const AddUser = () => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const {
+    loading: organizationsLoading,
+    error: organizationsError,
+    data: organizationsData,
+  } = useQuery(GET_ORGANIZATIONS, {
+    variables: { userId: userInfo._id },
+  });
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("admin");
-  const [organization, setOrganization] = useState("");
+  const [organizationId, setOrganizationId] = useState(
+    organizationsData?.organizations[0].id
+  );
   const [manager, setManager] = useState("");
 
   const navigate = useNavigate();
@@ -20,13 +39,21 @@ export const AddUser = () => {
 
   const [register, { isLoading }] = useRegisterMutation();
 
-  const { userInfo } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    setOrganization(userInfo?.organization);
+  const {
+    loading: usersLoading,
+    error: usersError,
+    data: usersData,
+  } = useQuery(GET_USERS, {
+    variables: { organizationId },
   });
 
-  console.log("organization: ", organization);
+  if (usersLoading) return <Spinner />;
+  if (usersError) return <p>There was an error...</p>;
+
+  if (organizationsLoading) return <Spinner />;
+  if (organizationsError) return <p>There was an error...</p>;
+
+  console.log("usersData: ", usersData);
 
   // TODO: how to add manager options
   // create a query to fetch users by organization
@@ -43,7 +70,7 @@ export const AddUser = () => {
           email,
           password,
           role,
-          organization,
+          organizationId,
           manager,
         }).unwrap();
         dispatch(setCredentials({ ...res }));
@@ -57,55 +84,61 @@ export const AddUser = () => {
     <FormContainer>
       <h1>Add User</h1>
       <Form onSubmit={submitHandler}>
-        <Form.Group className="my-2" controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
+        <div className="mb-3">
+          <label htmlFor="employee-name" className="form-label">
+            Name
+          </label>
+          <input
             type="text"
+            className="form-control"
+            id="employee-name"
             placeholder="Enter Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+          />
+        </div>
 
-        <Form.Group className="my-2" controlId="email">
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
+        <div className="mb-3">
+          <label htmlFor="employee-email" className="form-label">
+            Email Address
+          </label>
+          <input
             type="email"
+            className="form-control"
+            id="employee-email"
             placeholder="Enter Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+          />
+        </div>
 
-        <Form.Group className="my-2" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+        <div className="mb-3">
+          <label htmlFor="employee-password" className="form-label">
+            Password
+          </label>
+          <input
             type="password"
+            className="form-control"
+            id="employee-password"
             placeholder="Enter Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
+          />
+        </div>
 
-        <Form.Group className="my-2" controlId="confirm-password">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
+        <div className="mb-3">
+          <label htmlFor="employee-confirm-password" className="form-label">
+            Confirm Password
+          </label>
+          <input
             type="password"
-            placeholder="Confirm Password"
+            className="form-control"
+            id="employee-confirm-password"
+            placeholder="Enter Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-
-        {/* <Form.Group className="my-2" controlId="organization">
-          <Form.Label>Organization</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Organization name"
-            value={organization}
-            onChange={(e) => setOrganization(e.target.value)}
-          ></Form.Control>
-        </Form.Group> */}
+          />
+        </div>
 
         <label htmlFor="role" className="form-label mt-8">
           Role
@@ -122,7 +155,7 @@ export const AddUser = () => {
           <option value="employee">Employee</option>
         </select>
 
-        {isLoading && <Loader />}
+        {isLoading && <Spinner />}
 
         <DynamicButton type="submit" color="red" className="mt-3">
           Add User

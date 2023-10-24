@@ -31,7 +31,7 @@ const UserType = new GraphQLObjectType({
     email: { type: GraphQLString },
     password: { type: GraphQLString },
     role: { type: GraphQLString },
-    organization: { type: GraphQLString }, // might need this be GraphqlID. test
+    organizationId: { type: GraphQLID },
     manager: { type: GraphQLID },
   }),
 });
@@ -56,10 +56,10 @@ const ClientType = new GraphQLObjectType({
   name: "Client",
   fields: () => ({
     id: { type: GraphQLID },
-    user: {
-      type: UserType,
+    organization: {
+      type: OrganizationType,
       resolve(parent, args) {
-        return User.findById(parent.userId);
+        return Organization.findById(parent.organizationId);
       },
     },
     firstName: { type: GraphQLString },
@@ -269,13 +269,14 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return Project.findById(args.id);
+        return User.findById(args.id);
       },
     },
     organizations: {
       type: new GraphQLList(OrganizationType),
+      args: { userId: { type: GraphQLID } },
       resolve(parent, args) {
-        return Organization.find();
+        return Organization.find({ userId: args.userId });
       },
     },
     organization: {
@@ -287,9 +288,9 @@ const RootQuery = new GraphQLObjectType({
     },
     clients: {
       type: new GraphQLList(ClientType),
-      args: { userId: { type: GraphQLID } },
+      args: { organizationId: { type: GraphQLID } },
       resolve(parent, args) {
-        return Client.find({ userId: args.userId });
+        return Client.find({ organizationId: args.organizationId });
       },
     },
     clientsByStatus: {

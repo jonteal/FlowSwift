@@ -33,8 +33,6 @@ export const AddOrganization = () => {
     setUserId(userInfo._id);
   }, []);
 
-  console.log("userId: ", userId);
-
   const [addOrganization] = useMutation(ADD_ORGANIZATION, {
     variables: {
       organizationName,
