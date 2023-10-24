@@ -16,7 +16,7 @@ export const Home = () => {
 
   return (
     <div className={`${darkMode ? "bg-sky-800" : "bg-slate-50"} h-screen`}>
-      <h1 className="font-semibold text-3xl mt-3">Welcome back, {name}!</h1>
+      <h1 className="font-semibold text-3xl pt-5">Welcome back, {name}!</h1>
 
       {/*  Fix this to only show if there is no organization */}
       {!organization && <p className="mb-3">Add Company</p>}

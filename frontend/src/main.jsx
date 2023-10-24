@@ -50,12 +50,12 @@ import { Projects } from "./views/Projects/Projects";
 import { NotFound } from "./views/NotFound";
 import { Settings } from "./views/Settings/Settings";
 import { Documentation } from "./views/Settings/Documentation";
+import { AddUser } from "./views/Organization/AddUser/AddUser";
+import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganization";
 
 import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import { AddUser } from "./views/Organization/AddUser/AddUser";
-import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganization";
 
 const cache = new InMemoryCache({
   typePolicies: {

@@ -96,7 +96,8 @@ export const RegisterScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group className="my-2" controlId="organization">
+        {/* TODO: maybe add this back in when I have a better architecture pattern */}
+        {/* <Form.Group className="my-2" controlId="organization">
           <Form.Label>Organization</Form.Label>
           <Form.Control
             type="text"
@@ -119,7 +120,7 @@ export const RegisterScreen = () => {
           <option value="admin">Admin</option>
           <option value="manager">Manager</option>
           <option value="employee">Employee</option>
-        </select>
+        </select> */}
 
         {isLoading && <Loader />}
 

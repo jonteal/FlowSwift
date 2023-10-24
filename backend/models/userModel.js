@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema(
       type: String,
       enum: ["admin", "manager", "employee"],
     },
-    organization: {
+    organizationId: {
       type: String,
       required: false,
       trim: true,

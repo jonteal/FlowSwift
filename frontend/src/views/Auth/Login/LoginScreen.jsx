@@ -8,6 +8,7 @@ import { useLoginMutation } from "../../../slices/usersApiSlice";
 import { setCredentials } from "../../../slices/authSlice";
 import { toast } from "react-toastify";
 import Loader from "../../../components/Loader";
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -62,9 +63,9 @@ export const LoginScreen = () => {
 
         {isLoading && <Loader />}
 
-        <Button type="submit" variant="primary" className="mt-3">
+        <DynamicButton type="submit" color="red" className="mt-3">
           Sign In
-        </Button>
+        </DynamicButton>
 
         <Row>
           <Col>

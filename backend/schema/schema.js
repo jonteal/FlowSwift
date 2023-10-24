@@ -9,6 +9,7 @@ import Service from "../models/Service.js";
 import ClientActivityCommentReply from "../models/ClientActivityCommentReply.js";
 import ProjectActivityCommentReply from "../models/ProjectActivityCommentReply.js";
 import Ticket from "../models/Ticket.js";
+import Organization from "../models/Organization.js";
 
 import {
   GraphQLObjectType,
@@ -35,7 +36,22 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
-// Client Type
+// Organization Name
+const OrganizationType = new GraphQLObjectType({
+  name: "Organization",
+  fields: () => ({
+    id: { type: GraphQLID },
+    organizationName: { type: GraphQLString },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      },
+    },
+  }),
+});
+
+// Client Type - TODO: change user to organization (org owns clients, not a single user)
 const ClientType = new GraphQLObjectType({
   name: "Client",
   fields: () => ({
@@ -242,6 +258,33 @@ const TicketType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: {
+    users: {
+      type: new GraphQLList(UserType),
+      args: { organizationId: { type: GraphQLID } },
+      resolve(parent, args) {
+        return User.find({ organizationId: args.organizationId });
+      },
+    },
+    user: {
+      type: UserType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Project.findById(args.id);
+      },
+    },
+    organizations: {
+      type: new GraphQLList(OrganizationType),
+      resolve(parent, args) {
+        return Organization.find();
+      },
+    },
+    organization: {
+      type: OrganizationType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Organization.findById(args.id);
+      },
+    },
     clients: {
       type: new GraphQLList(ClientType),
       args: { userId: { type: GraphQLID } },
@@ -424,6 +467,60 @@ const RootQuery = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
+    // Add Organization
+    addOrganization: {
+      type: OrganizationType,
+      args: {
+        organizationName: { type: new GraphQLNonNull(GraphQLString) },
+        userId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        const organization = new Organization({
+          organizationName: args.organizationName,
+          userId: args.userId,
+        });
+
+        return organization.save();
+      },
+    },
+
+    // Delete Organization
+    deleteClient: {
+      type: OrganizationType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        Client.find({ organizationId: args.id }).then((clients) => {
+          clients.forEach((client) => {
+            client.remove();
+          });
+        });
+
+        return Organization.findByIdAndRemove(args.id);
+      },
+    },
+
+    // Update Organization
+    updateOrganization: {
+      type: OrganizationType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        organizationName: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Client.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              organizationName: args.organizationName,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+
     // Add a Client
     addClient: {
       type: ClientType,
