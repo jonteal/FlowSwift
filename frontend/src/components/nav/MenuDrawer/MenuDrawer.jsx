@@ -58,12 +58,6 @@ export const MenuDrawer = ({ name, ...props }) => {
                 </Link>
                 <Link
                   className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
-                  to="/profile"
-                >
-                  Update Profile
-                </Link>
-                <Link
-                  className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
                   to="dashboard"
                 >
                   My Dashboard

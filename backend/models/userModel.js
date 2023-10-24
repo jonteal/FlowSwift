@@ -28,6 +28,11 @@ const userSchema = mongoose.Schema(
       required: false,
       trim: true,
     },
+    manager: {
+      type: String,
+      required: false,
+      trim: true,
+    },
   },
   {
     timestamps: true,

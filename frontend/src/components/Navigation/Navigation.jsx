@@ -8,12 +8,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../../slices/usersApiSlice";
 import { logout } from "../../slices/authSlice";
-import { DropdownComponent } from "../reusable/DropdownComponent/DropdownComponent";
 
 export const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
-
-  console.log("userInfo: ", userInfo);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,7 +31,7 @@ export const Navigation = () => {
       <div className="w-48 bg-sky-700 pt-10 pb-2">
         <Link
           className="mx-3 flex-wrap flex text-2xl text-zinc-100 font-bold italic"
-          to={userInfo ? "/clients" : "/login"}
+          to={userInfo ? "/" : "/login"}
         >
           FlowSwift
         </Link>
@@ -42,39 +39,6 @@ export const Navigation = () => {
       <div>
         <Toggle />
       </div>
-      <Container>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            {userInfo ? (
-              <>
-                <NavDropdown title={userInfo.name} id="username">
-                  <LinkContainer to="/profile">
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
-                  </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </>
-            ) : (
-              <Nav>
-                <LinkContainer to="login">
-                  <Nav.Link>
-                    <FaSignInAlt /> Sign In
-                  </Nav.Link>
-                </LinkContainer>
-                <LinkContainer to="/register">
-                  <Nav.Link>
-                    <FaSignInAlt /> Sign Up
-                  </Nav.Link>
-                </LinkContainer>
-              </Nav>
-            )}
-          </Nav>
-          <Nav className="ms-auto"></Nav>
-        </Navbar.Collapse>
-      </Container>
 
       <MenuDrawer placement="end" />
     </div>

@@ -1,22 +1,18 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
-import FormContainer from "../../../components/FormContainer";
-import { toast } from "react-toastify";
-import Loader from "../../../components/Loader";
-import { useRegisterMutation } from "../../../slices/usersApiSlice";
-import { setCredentials } from "../../../slices/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useRegisterMutation } from "../../../slices/usersApiSlice";
+import FormContainer from "../../../components/FormContainer";
+import { Form } from "react-bootstrap";
 
-export const RegisterScreen = () => {
+export const AddUser = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("admin");
-  const [organization, setOrganization] = useState(undefined);
+  const [organization, setOrganization] = useState("");
   const [manager, setManager] = useState("");
 
   const navigate = useNavigate();
@@ -27,10 +23,14 @@ export const RegisterScreen = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (userInfo) {
-      navigate("/");
-    }
-  }, [navigate, userInfo]);
+    setOrganization(userInfo?.organization);
+  });
+
+  console.log("organization: ", organization);
+
+  // TODO: how to add manager options
+  // create a query to fetch users by organization
+  // filter the list by members with the manager role
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -44,6 +44,7 @@ export const RegisterScreen = () => {
           password,
           role,
           organization,
+          manager,
         }).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate("/");
@@ -54,7 +55,7 @@ export const RegisterScreen = () => {
   };
   return (
     <FormContainer>
-      <h1>Sign Up</h1>
+      <h1>Add User</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group className="my-2" controlId="name">
           <Form.Label>Name</Form.Label>
@@ -96,7 +97,7 @@ export const RegisterScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group className="my-2" controlId="organization">
+        {/* <Form.Group className="my-2" controlId="organization">
           <Form.Label>Organization</Form.Label>
           <Form.Control
             type="text"
@@ -104,7 +105,7 @@ export const RegisterScreen = () => {
             value={organization}
             onChange={(e) => setOrganization(e.target.value)}
           ></Form.Control>
-        </Form.Group>
+        </Form.Group> */}
 
         <label htmlFor="role" className="form-label mt-8">
           Role
@@ -124,14 +125,8 @@ export const RegisterScreen = () => {
         {isLoading && <Loader />}
 
         <DynamicButton type="submit" color="red" className="mt-3">
-          Sign Up
+          Add User
         </DynamicButton>
-
-        <Row>
-          <Col>
-            Already have an account? <Link to="/login">Login</Link>
-          </Col>
-        </Row>
       </Form>
     </FormContainer>
   );

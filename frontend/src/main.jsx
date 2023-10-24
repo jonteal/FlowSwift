@@ -10,12 +10,11 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "./context";
 import { App } from "./App.jsx";
-import { HomeScreen } from "./views/HomeScreen.jsx";
+import { Home } from "./views/homeView/Home/Home";
 import { LoginScreen } from "./views/Auth/Login/LoginScreen.jsx";
 import { RegisterScreen } from "./views/Auth/Signup/RegisterScreen.jsx";
 import { ProfileScreen } from "./views/Settings/ProfileScreen";
 import { AddClient } from "./views/Clients/AddClient";
-import { Home } from "./views/Home";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { MainDashboard } from "./views/homeView/MainDashboard/MainDashboard";
 import { ClientView } from "./views/dashboard/ClientView/ClientView";
@@ -49,12 +48,14 @@ import { Clients } from "./views/Clients/Clients";
 import { ClientsListByStatus } from "./views/Clients/ClientsListByStatus/ClientsListByStatus";
 import { Projects } from "./views/Projects/Projects";
 import { NotFound } from "./views/NotFound";
+import { Settings } from "./views/Settings/Settings";
+import { Documentation } from "./views/Settings/Documentation";
 
 import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import { Settings } from "./views/Settings/Settings";
-import { Documentation } from "./views/Settings/Documentation";
+import { AddUser } from "./views/Organization/AddUser/AddUser";
+import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganization";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -78,16 +79,18 @@ const client = new ApolloClient({
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index={true} path="/" element={<HomeScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="" element={<PrivateRoute />}>
+        <Route index={true} path="/" element={<Home />} />
         <Route path="/settings" element={<Settings />}>
           <Route path="/settings/profile" element={<ProfileScreen />} />
           <Route path="/settings/documentation" element={<Documentation />} />
         </Route>
         <Route path="/addClient" element={<AddClient />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/addUser" element={<AddUser />} />
+        <Route path="/addOrganization" element={<AddOrganization />} />
         <Route path="/dashboard" element={<MainDashboard />} />
         <Route path="/clients" element={<Clients />} />
         <Route path="/clients/:clientId" element={<ClientView />}>

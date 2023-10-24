@@ -27,7 +27,7 @@ const authUser = asyncHandler(async (req, res) => {
 // route POST /api/users
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, role, organization } = req.body;
+  const { name, email, password, role, organization, manager } = req.body;
 
   const userExists = await User.findOne({ email });
 
@@ -42,6 +42,7 @@ const registerUser = asyncHandler(async (req, res) => {
     password,
     role,
     organization,
+    manager,
   });
 
   if (user) {
@@ -52,6 +53,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       role: user.role,
       organization: user.organization,
+      manager: user.manager,
     });
   } else {
     res.status(400);
@@ -80,6 +82,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     email: req.user.email,
     role: req.user.role,
     organization: req.user.organization,
+    manager: req.user.manager,
   };
   res.status(200).json(user);
 });
@@ -95,6 +98,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.email = req.body.email || user.email;
     user.role = req.body.role || user.role;
     user.organization = req.body.organization || user.organization;
+    user.manager = req.body.manager || user.manager;
 
     if (req.body.password) {
       user.password = req.body.password;
@@ -108,6 +112,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       role: updatedUser.role,
       organization: updatedUser.organization,
+      manager: updatedUser.manager,
     });
   } else {
     req.status(404);

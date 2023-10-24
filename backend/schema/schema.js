@@ -31,6 +31,7 @@ const UserType = new GraphQLObjectType({
     password: { type: GraphQLString },
     role: { type: GraphQLString },
     organization: { type: GraphQLString }, // might need this be GraphqlID. test
+    manager: { type: GraphQLID },
   }),
 });
 
