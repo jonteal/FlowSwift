@@ -39,9 +39,13 @@ export const AddOrganization = () => {
       userId,
     },
     update(cache, { data: { addOrganization } }) {
-      const { organizations } = cache.readQuery({ query: GET_ORGANIZATIONS });
+      const { organizations } = cache.readQuery({
+        query: GET_ORGANIZATIONS,
+        variables: { userId: userInfo._id },
+      });
       cache.writeQuery({
         query: GET_ORGANIZATIONS,
+        variables: { userId: userInfo._id },
         data: { organizations: [...organizations, addOrganization] },
       });
     },

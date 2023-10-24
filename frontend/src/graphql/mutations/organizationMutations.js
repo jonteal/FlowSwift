@@ -9,7 +9,7 @@ const ADD_ORGANIZATION = gql`
         _id
         name
         email
-        organization
+        organizationId
       }
     }
   }
@@ -40,7 +40,7 @@ const UPDATE_ORGANIZATION = gql`
         _id
         name
         email
-        organization
+        organizationId
       }
     }
   }

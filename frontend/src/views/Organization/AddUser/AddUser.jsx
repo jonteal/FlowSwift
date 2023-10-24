@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../../context";
 import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useRegisterMutation } from "../../../slices/usersApiSlice";
 import FormContainer from "../../../components/FormContainer";
@@ -9,6 +10,7 @@ import { Form, Spinner } from "react-bootstrap";
 import { GET_ORGANIZATIONS } from "../../../graphql/queries/organizationQueries";
 import { useQuery } from "@apollo/client";
 import { GET_USERS } from "../../../graphql/queries/userQueries";
+// import { setCredentials } from "../../../slices/authSlice";
 
 export const AddUser = () => {
   const theme = useContext(ThemeContext);
@@ -16,28 +18,25 @@ export const AddUser = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
 
-  const {
-    loading: organizationsLoading,
-    error: organizationsError,
-    data: organizationsData,
-  } = useQuery(GET_ORGANIZATIONS, {
-    variables: { userId: userInfo._id },
-  });
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("admin");
-  const [organizationId, setOrganizationId] = useState(
-    organizationsData?.organizations[0].id
-  );
+  // const [organizationId, setOrganizationId] = useState("");
   const [manager, setManager] = useState("");
+  const [managerId, setManagerId] = useState("");
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const {
+    loading: organizationsLoading,
+    error: organizationsError,
+    data: organizationsData,
+    refetchOnMount,
+  } = useQuery(GET_ORGANIZATIONS, {
+    variables: { userId: userInfo._id },
+  });
 
-  const [register, { isLoading }] = useRegisterMutation();
+  const organizationId = organizationsData?.organizations[0].id;
 
   const {
     loading: usersLoading,
@@ -47,36 +46,41 @@ export const AddUser = () => {
     variables: { organizationId },
   });
 
+  const [register, { isLoading }] = useRegisterMutation();
+
   if (usersLoading) return <Spinner />;
   if (usersError) return <p>There was an error...</p>;
 
   if (organizationsLoading) return <Spinner />;
   if (organizationsError) return <p>There was an error...</p>;
 
+  const potentialManagers = usersData.users.filter(
+    (user) =>
+      user.role === "admin" || user.role === "manager" || user.role === "owner"
+  );
   console.log("usersData: ", usersData);
-
-  // TODO: how to add manager options
-  // create a query to fetch users by organization
-  // filter the list by members with the manager role
+  console.log("organizationId", organizationId);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
+      // toast.error("Passwords do not match");
+      console.log("passwords do not match");
     } else {
       try {
-        const res = await register({
+        register({
           name,
           email,
           password,
           role,
           organizationId,
           manager,
+          managerId,
         }).unwrap();
-        dispatch(setCredentials({ ...res }));
-        navigate("/");
+        refetchOnMount;
       } catch (error) {
-        toast.error(err.data.message || err.error);
+        // toast.error(err.data.message || err.error);
+        console.log("Error: ", error);
       }
     }
   };
@@ -153,6 +157,25 @@ export const AddUser = () => {
           <option value="admin">Admin</option>
           <option value="manager">Manager</option>
           <option value="employee">Employee</option>
+          <option value="owner">Owner</option>
+        </select>
+
+        <label htmlFor="manager" className="form-label mt-8">
+          Reports to
+        </label>
+        <select
+          className="form-select"
+          aria-label="Manager selection"
+          id="manager"
+          value={manager}
+          onChange={(e) => setManager(e.target.value)}
+        >
+          <option value="">N/A</option>
+          {potentialManagers.map((user) => (
+            <option key={user._id} value={user.id}>
+              {user.name}
+            </option>
+          ))}
         </select>
 
         {isLoading && <Spinner />}

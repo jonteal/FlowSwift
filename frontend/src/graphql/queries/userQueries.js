@@ -7,6 +7,9 @@ const GET_USERS = gql`
       name
       email
       organizationId
+      role
+      manager
+      managerId
     }
   }
 `;
@@ -18,6 +21,9 @@ const GET_USER = gql`
       name
       email
       organizationId
+      role
+      manager
+      managerId
     }
   }
 `;

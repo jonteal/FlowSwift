@@ -16,7 +16,7 @@ export const App = () => {
       } ${darkMode ? "text-sky-50" : "text-slate-900"}`}
     >
       <Navigation />
-      {/* <ToastContainer /> */}
+      <ToastContainer />
       <Outlet />
     </div>
   );

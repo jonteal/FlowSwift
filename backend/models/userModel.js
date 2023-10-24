@@ -21,13 +21,18 @@ const userSchema = mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["admin", "manager", "employee"],
+      enum: ["owner", "admin", "manager", "employee"],
     },
     organizationId: {
       type: String,
       required: false,
     },
     manager: {
+      type: String,
+      required: false,
+      trim: true,
+    },
+    managerId: {
       type: String,
       required: false,
       trim: true,

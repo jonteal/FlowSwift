@@ -29,7 +29,6 @@ export const Home = () => {
   console.log("userInfo: ", userInfo);
 
   const { name } = userInfo;
-
   const { organizationName } = organizationsData.organizations[0];
 
   return (
@@ -47,7 +46,7 @@ export const Home = () => {
 
       {organizationName && (
         <h2 className="font-semibold text-1xl mt-3">
-          Company: {organizationName}
+          Company: {organizationName || ""}
         </h2>
       )}
 

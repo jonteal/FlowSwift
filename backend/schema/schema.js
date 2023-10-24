@@ -32,7 +32,8 @@ const UserType = new GraphQLObjectType({
     password: { type: GraphQLString },
     role: { type: GraphQLString },
     organizationId: { type: GraphQLID },
-    manager: { type: GraphQLID },
+    manager: { type: GraphQLString },
+    managerId: { type: GraphQLID },
   }),
 });
 
@@ -486,7 +487,7 @@ const mutation = new GraphQLObjectType({
     },
 
     // Delete Organization
-    deleteClient: {
+    deleteOrganization: {
       type: OrganizationType,
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
@@ -508,6 +509,7 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
         organizationName: { type: GraphQLString },
+        userId: { type: GraphQLID },
       },
       resolve(parent, args) {
         return Client.findByIdAndUpdate(
@@ -515,6 +517,7 @@ const mutation = new GraphQLObjectType({
           {
             $set: {
               organizationName: args.organizationName,
+              userId: args.userId,
             },
           },
           { new: true }
