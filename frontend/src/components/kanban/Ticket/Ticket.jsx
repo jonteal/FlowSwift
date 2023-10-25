@@ -63,6 +63,7 @@ export const Ticket = ({ ticket }) => {
       </div>
       <p className="font-bold text-sm text-left my-2">{ticket.title}</p>
       <p className="text-left text-sm my-2">{ticket.description}</p>
+      <p className="text-left text-sm my-2">Owned by: {ticket.user.name}</p>
       <p className="text-left text-sm my-2">Created: {ticket.createdAt}</p>
       {isBlocked && (
         <div className="bg-red-500 text-slate-50 text-sm rounded-2xl mt-2 py-1">

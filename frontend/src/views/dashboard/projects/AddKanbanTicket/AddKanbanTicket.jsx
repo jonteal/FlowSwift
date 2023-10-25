@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
 import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
@@ -8,7 +8,10 @@ import { ADD_TICKET } from "../../../../graphql/mutations/ticketMutations";
 
 // COMPONENTS
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
+import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
+import { GET_USER } from "../../../../graphql/queries/userQueries";
+import { useSelector } from "react-redux";
 
 export const AddKanbanTicket = () => {
   const { projectId } = useParams();
@@ -18,6 +21,11 @@ export const AddKanbanTicket = () => {
   const [status, setStatus] = useState("pre");
   const [blocked, setBlocked] = useState(false);
   const [blockedReason, setBlockedReason] = useState("");
+  const { userInfo } = useSelector((state) => state.auth);
+  const [userId, setUserId] = useState(userInfo._id);
+  console.log("userId: ", userId);
+
+  console.log("userInfo: ", userInfo);
 
   const [addTicket] = useMutation(ADD_TICKET, {
     variables: {
@@ -28,6 +36,7 @@ export const AddKanbanTicket = () => {
       projectId,
       status,
       blockedReason,
+      userId,
     },
     update(cache, { data: { addTicket } }) {
       const { tickets } = cache.readQuery({
@@ -42,12 +51,29 @@ export const AddKanbanTicket = () => {
     },
   });
 
+  const {
+    loading: userLoading,
+    error: userError,
+    data: userData,
+  } = useQuery(GET_USER, {
+    variables: { id: userInfo._id },
+  });
+
+  if (userLoading) return <Spinner />;
+  if (userError) return <p>There was an error..</p>;
+
+  // console.log("userData: ", userData);
+
   const onSubmit = (e) => {
     e.preventDefault();
 
     if (title === "" || description === "") {
       return alert("Please fill out all fields");
     }
+
+    // setUserId(userData?.user?._id);
+
+    // console.log("userId: ", userId);
 
     addTicket(
       title,
@@ -56,7 +82,8 @@ export const AddKanbanTicket = () => {
       projectId,
       status,
       blocked,
-      blockedReason
+      blockedReason,
+      userId
     );
 
     setTitle("");

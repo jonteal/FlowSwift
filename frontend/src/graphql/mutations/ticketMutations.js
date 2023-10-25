@@ -9,6 +9,7 @@ const ADD_TICKET = gql`
     $blocked: Boolean!
     $blockedReason: String
     $projectId: ID!
+    $userId: ID
   ) {
     addTicket(
       title: $title
@@ -18,6 +19,7 @@ const ADD_TICKET = gql`
       blocked: $blocked
       blockedReason: $blockedReason
       projectId: $projectId
+      userId: $userId
     ) {
       id
       title
@@ -28,6 +30,10 @@ const ADD_TICKET = gql`
       blockedReason
       project {
         id
+      }
+      user {
+        _id
+        name
       }
       createdAt
     }
@@ -51,6 +57,7 @@ const UPDATE_TICKET = gql`
     $blocked: Boolean
     $blockedReason: String
     $status: TicketStatusUpdate
+    $userId: ID
   ) {
     updateTicket(
       id: $id
@@ -60,6 +67,7 @@ const UPDATE_TICKET = gql`
       blocked: $blocked
       blockedReason: $blockedReason
       status: $status
+      userId: $userId
     ) {
       id
       title
@@ -70,6 +78,10 @@ const UPDATE_TICKET = gql`
       status
       project {
         id
+      }
+      user {
+        _id
+        name
       }
       createdAt
     }

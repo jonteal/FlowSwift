@@ -249,6 +249,12 @@ const TicketType = new GraphQLObjectType({
         return Project.findById(parent.projectId);
       },
     },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      },
+    },
     createdAt: {
       type: GraphQLString,
     },
@@ -1274,6 +1280,7 @@ const mutation = new GraphQLObjectType({
         blocked: { type: GraphQLBoolean },
         blockedReason: { type: GraphQLString },
         projectId: { type: new GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLID },
         createdAt: { type: GraphQLString },
       },
       resolve(parent, args) {
@@ -1285,6 +1292,7 @@ const mutation = new GraphQLObjectType({
           blocked: args.blocked,
           blockedReason: args.blockedReason,
           projectId: args.projectId,
+          userId: args.userId,
           createdAt: args.createdAt,
         });
 
@@ -1332,6 +1340,7 @@ const mutation = new GraphQLObjectType({
             },
           }),
         },
+        userId: { type: GraphQLID },
         createdAt: { type: GraphQLString },
       },
       resolve(parent, args) {
@@ -1345,6 +1354,7 @@ const mutation = new GraphQLObjectType({
               status: args.status,
               blocked: args.blocked,
               blockedReason: args.blockedReason,
+              userId: args.userId,
             },
           },
           { new: true }

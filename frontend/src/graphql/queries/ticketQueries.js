@@ -13,6 +13,10 @@ const GET_TICKETS = gql`
       project {
         id
       }
+      user {
+        _id
+        name
+      }
       createdAt
     }
   }
@@ -30,6 +34,10 @@ const GET_TICKET = gql`
       blockedReason
       project {
         id
+      }
+      user {
+        _id
+        name
       }
       createdAt
     }

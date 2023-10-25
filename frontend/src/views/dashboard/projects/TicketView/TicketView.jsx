@@ -30,7 +30,7 @@ export const TicketView = () => {
   if (ticketLoading) return <Spinner />;
   if (ticketError) return <p>Something went wrong</p>;
 
-  const { id, title, description, status, createdAt } = ticketData.ticket;
+  const { id, title, description, status, createdAt, user } = ticketData.ticket;
 
   return (
     <div className="h-screen border-slate-500 rounded-xl">
@@ -77,6 +77,15 @@ export const TicketView = () => {
                   {status}
                 </p>
               </div>
+              <div className="px-3 py-0 m-2">
+                <p className="text-slate-600 font-bold text-left text-sm mb-1">
+                  Owned by:
+                </p>
+                <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
+                  {user.name}
+                </p>
+              </div>
+
               <div className="px-3 py-0 m-2">
                 <p className="text-slate-600 font-bold text-left text-sm mb-1">
                   Created:

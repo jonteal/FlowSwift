@@ -113,7 +113,6 @@ export const AddProject = () => {
 
   useEffect(() => {
     setOrganizationId(userData?.user?.organizationId);
-    console.log("organizationId: ", organizationId);
   }, [userData?.user?.organizationId]);
 
   if (loading) return <Spinner />;
