@@ -23,6 +23,7 @@ import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../context";
+import { useSelector } from "react-redux";
 
 export const Comment = ({ comment, type }) => {
   const theme = useContext(ThemeContext);
@@ -31,6 +32,9 @@ export const Comment = ({ comment, type }) => {
 
   const [addReply, setAddReply] = useState(false);
   const [commentText, setCommentText] = useState("");
+
+  const { userInfo } = useSelector((state) => state.auth);
+  const [userId, setUserId] = useState(userInfo._id);
 
   const formattedDate = new Date(parseInt(comment.createdAt)).toDateString();
 
@@ -42,6 +46,7 @@ export const Comment = ({ comment, type }) => {
       variables: {
         commentText,
         commentId,
+        userId,
       },
       update(cache, { data: { addClientActivityCommentReply } }) {
         const { clientActivityCommentReplies } = cache.readQuery({
@@ -68,6 +73,7 @@ export const Comment = ({ comment, type }) => {
       variables: {
         commentText,
         commentId,
+        userId,
       },
       update(cache, { data: { addProjectActivityCommentReply } }) {
         const { projectActivityCommentReplies } = cache.readQuery({
@@ -148,9 +154,9 @@ export const Comment = ({ comment, type }) => {
     }
 
     if (type === "client") {
-      addClientActivityCommentReply(commentText, comment.id);
+      addClientActivityCommentReply(commentText, comment.id, userId);
     } else if (type === "project") {
-      addProjectActivityCommentReply(commentText, comment.id);
+      addProjectActivityCommentReply(commentText, comment.id, userId);
     }
 
     setCommentText("");
@@ -170,7 +176,7 @@ export const Comment = ({ comment, type }) => {
           }  rounded-xl flex flex-row justify-between items-center`}
           key={comment.id}
         >
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start w-full">
             <p
               className={`${
                 darkMode ? "text-slate-100" : "text-slate-700"

@@ -10,7 +10,14 @@ import { DELETE_PROJECT_ACTIVITY_COMMENT_REPLY } from "../../graphql/mutations/p
 import { GET_CLIENT_ACTIVITY_COMMENT_REPLIES } from "../../graphql/queries/clientActivityCommentReplyQueries";
 import { GET_PROJECT_ACTIVITY_COMMENT_REPLIES } from "../../graphql/queries/projectActivityCommentReplyQueries";
 
+// STATE
+import { useContext } from "react";
+import { ThemeContext } from "../../context";
+
 export const CommentReply = ({ reply, formattedDate, type, commentId }) => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
+
   const [deleteClientCommentReply] = useMutation(
     DELETE_CLIENT_ACTIVITY_COMMENT_REPLY,
     {
@@ -51,7 +58,16 @@ export const CommentReply = ({ reply, formattedDate, type, commentId }) => {
         key={reply.id}
         className="border ml-10 mt-2 px-3 py-2 bg-slate-100 rounded-xl flex flex-row justify-between items-center"
       >
-        <p>{reply.commentText}</p>
+        <div className="w-full flex flex-col items-start">
+          <p
+            className={`${
+              darkMode ? "text-slate-100" : "text-slate-700"
+            } text-start text-sm block w-full tracking-wide font-bold`}
+          >
+            {reply.user.name}
+          </p>
+          <p>{reply.commentText}</p>
+        </div>
         <div className="flex justify-end">
           {/* <button className="mr-2">
             <FiEdit2 />

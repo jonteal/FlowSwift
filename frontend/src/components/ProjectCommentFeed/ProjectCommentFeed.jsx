@@ -16,7 +16,6 @@ export const ProjectCommentFeed = ({ projectId, comments }) => {
   const [commentText, setCommentText] = useState("");
   const { userInfo } = useSelector((state) => state.auth);
   const [userId, setUserId] = useState(userInfo._id);
-  console.log("userId: ", userId);
 
   const [addProjectActivityComment] = useMutation(
     ADD_PROJECT_ACTIVITY_COMMENT,
