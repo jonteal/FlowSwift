@@ -14,33 +14,15 @@ import { GET_USER } from "../../graphql/queries/userQueries";
 import { Spinner } from "react-bootstrap";
 
 export const AddClient = () => {
-  const { userInfo } = useSelector((state) => state.auth);
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [status, setStatus] = useState("prospect");
-  // const [organizationId, setOrganizationId] = useState("");
+  const [organizationId, setOrganizationId] = useState("");
 
-  const {
-    loading: userLoading,
-    error: userError,
-    data: userData,
-  } = useQuery(GET_USER, {
-    variables: { id: userInfo._id },
-  });
-
-  if (userLoading) return <Spinner />;
-
-  // useEffect(() => {
-  //   setOrganizationId(userData.user.organizationId);
-  // }, [userData]);
-
-  const organizationId = userData.user.organizationId;
-
-  console.log("userData: ", userData);
+  const { userInfo } = useSelector((state) => state.auth);
 
   const [addClient] = useMutation(ADD_CLIENT, {
     variables: {
@@ -62,11 +44,16 @@ export const AddClient = () => {
     },
   });
 
-  if (userLoading) return <Spinner />;
+  const {
+    loading: userLoading,
+    error: userError,
+    data: userData,
+  } = useQuery(GET_USER, {
+    variables: { id: userInfo._id },
+  });
 
-  // useEffect(() => {
-  //   setOrganizationId(userData.user.organizationId);
-  // }, [userData]);
+  if (userLoading) return <Spinner />;
+  if (userError) return <p>There was an error..</p>;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -74,6 +61,8 @@ export const AddClient = () => {
     if (firstName === "" || lastName === "") {
       alert("Please fill in the client name");
     }
+
+    setOrganizationId(userData.user.organizationId);
 
     addClient(
       firstName,
@@ -91,7 +80,7 @@ export const AddClient = () => {
     setEmailAddress("");
     setCompanyName("");
     setStatus("prospect");
-    setOrganizationId("");
+    // setOrganizationId("");
   };
 
   return (

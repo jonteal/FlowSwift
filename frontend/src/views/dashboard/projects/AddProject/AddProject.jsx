@@ -1,5 +1,5 @@
 // REACT
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // APOLLO
 import { useMutation, useQuery } from "@apollo/client";
@@ -13,6 +13,8 @@ import { GET_CLIENTS } from "../../../../graphql/queries/clientQueries";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
+import { useSelector } from "react-redux";
+import { GET_USER } from "../../../../graphql/queries/userQueries";
 
 export const AddProject = () => {
   const [title, setTitle] = useState("");
@@ -25,6 +27,8 @@ export const AddProject = () => {
   const [clientBudget, setClientBudget] = useState("");
   const [projectEstimate, setProjectEstimate] = useState("");
   const [alertOn, setAlertOn] = useState(false);
+  const { userInfo } = useSelector((state) => state.auth);
+  const [organizationId, setOrganizationId] = useState("");
 
   const [addProject] = useMutation(ADD_PROJECT, {
     variables: {
@@ -47,7 +51,9 @@ export const AddProject = () => {
     },
   });
 
-  const { loading, error, data } = useQuery(GET_CLIENTS);
+  const { loading, error, data } = useQuery(GET_CLIENTS, {
+    variables: { organizationId },
+  });
 
   const handleStartDateChange = (date) => {
     setStartDate(date);
@@ -96,6 +102,19 @@ export const AddProject = () => {
     setClientBudget("");
     setProjectEstimate("");
   };
+
+  const {
+    loading: userLoading,
+    error: userError,
+    data: userData,
+  } = useQuery(GET_USER, {
+    variables: { id: userInfo._id },
+  });
+
+  useEffect(() => {
+    setOrganizationId(userData?.user?.organizationId);
+    console.log("organizationId: ", organizationId);
+  }, [userData?.user?.organizationId]);
 
   if (loading) return <Spinner />;
   if (error) return <p>There was an error loading the content</p>;
