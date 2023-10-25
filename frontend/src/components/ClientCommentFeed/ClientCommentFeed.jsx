@@ -14,16 +14,20 @@ import { Comment } from "../Comment/Comment";
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../context";
+import { useSelector } from "react-redux";
 
 export const ClientCommentFeed = ({ clientId, comments }) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   const [commentText, setCommentText] = useState("");
+  const { userInfo } = useSelector((state) => state.auth);
+  const [userId, setUserId] = useState(userInfo._id);
 
   const [addClientActivityComment] = useMutation(ADD_CLIENT_ACTIVITY_COMMENT, {
     variables: {
       commentText,
       clientId,
+      userId,
     },
     update(cache, { data: { addClientActivityComment } }) {
       const { clientActivityComments } = cache.readQuery({
@@ -50,7 +54,7 @@ export const ClientCommentFeed = ({ clientId, comments }) => {
       alert("You must write a comment");
     }
 
-    addClientActivityComment(commentText, clientId);
+    addClientActivityComment(commentText, clientId, userId);
 
     setCommentText("");
   };

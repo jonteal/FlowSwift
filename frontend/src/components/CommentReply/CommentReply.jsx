@@ -64,7 +64,7 @@ export const CommentReply = ({ reply, formattedDate, type, commentId }) => {
               darkMode ? "text-slate-100" : "text-slate-700"
             } text-start text-sm block w-full tracking-wide font-bold`}
           >
-            {reply.user.name}
+            {reply?.user?.name}
           </p>
           <p>{reply.commentText}</p>
         </div>
