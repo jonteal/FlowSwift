@@ -26,6 +26,10 @@ const ADD_CLIENT = gql`
       emailAddress
       companyName
       status
+      organization {
+        id
+        organizationName
+      }
     }
   }
 `;
@@ -66,6 +70,10 @@ const UPDATE_CLIENT = gql`
       emailAddress
       companyName
       status
+      organization {
+        id
+        organizationName
+      }
     }
   }
 `;

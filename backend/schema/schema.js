@@ -525,7 +525,7 @@ const mutation = new GraphQLObjectType({
       resolve(parent, args) {
         Client.find({ organizationId: args.id }).then((clients) => {
           clients.forEach((client) => {
-            client.remove();
+            client.deleteOne();
           });
         });
 
@@ -603,7 +603,7 @@ const mutation = new GraphQLObjectType({
       resolve(parent, args) {
         Project.find({ clientId: args.id }).then((projects) => {
           projects.forEach((project) => {
-            project.remove();
+            project.deleteOne();
           });
         });
 
@@ -705,23 +705,23 @@ const mutation = new GraphQLObjectType({
         ProjectActivityComment.find({ projectId: args.id }).then(
           (projectActivityComments) => {
             projectActivityComments.forEach((projectActivityComment) => {
-              projectActivityComment.remove();
+              projectActivityComment.deleteOne();
             });
           }
         );
         Service.find({ projectId: args.id }).then((services) => {
           services.forEach((service) => {
-            service.remove();
+            service.deleteOne();
           });
         });
         Transaction.find({ projectId: args.id }).then((transactions) => {
           transactions.forEach((transaction) => {
-            transaction.remove();
+            transaction.deleteOne();
           });
         });
         Invoice.find({ projectId: args.id }).then((invoices) => {
           invoices.forEach((invoice) => {
-            invoice.remove();
+            invoice.deleteOne();
           });
         });
         return Project.findByIdAndRemove(args.id);
@@ -1091,7 +1091,7 @@ const mutation = new GraphQLObjectType({
           (projectActivityCommentReplies) => {
             projectActivityCommentReplies.forEach(
               (projectActivityCommentReply) => {
-                projectActivityCommentReply.remove();
+                projectActivityCommentReply.deleteOne();
               }
             );
           }
@@ -1156,7 +1156,7 @@ const mutation = new GraphQLObjectType({
           (clientActivityCommentReplies) => {
             clientActivityCommentReplies.forEach(
               (clientActivityCommentReply) => {
-                clientActivityCommentReply.remove();
+                clientActivityCommentReply.deleteOne();
               }
             );
           }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // LIBRARIES
 import { useMutation, useQuery } from "@apollo/client";
@@ -24,6 +24,10 @@ export const AddClient = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
 
+  console.log("userInfo: ", userInfo);
+
+  console.log("organizationId", organizationId);
+
   const [addClient] = useMutation(ADD_CLIENT, {
     variables: {
       firstName,
@@ -35,10 +39,14 @@ export const AddClient = () => {
       organizationId,
     },
     update(cache, { data: { addClient } }) {
-      const { clients } = cache.readQuery({ query: GET_CLIENTS });
+      const { clients } = cache.readQuery({
+        query: GET_CLIENTS,
+        variables: { organizationId },
+      });
 
       cache.writeQuery({
         query: GET_CLIENTS,
+        variables: { organizationId },
         data: { clients: [...clients, addClient] },
       });
     },
@@ -52,6 +60,11 @@ export const AddClient = () => {
     variables: { id: userInfo._id },
   });
 
+  useEffect(() => {
+    if (userData.user.organizationId)
+      setOrganizationId(userData?.user?.organizationId);
+  }, []);
+
   if (userLoading) return <Spinner />;
   if (userError) return <p>There was an error..</p>;
 
@@ -62,7 +75,7 @@ export const AddClient = () => {
       alert("Please fill in the client name");
     }
 
-    setOrganizationId(userData.user.organizationId);
+    // setOrganizationId(userData?.user?.organizationId);
 
     addClient(
       firstName,
