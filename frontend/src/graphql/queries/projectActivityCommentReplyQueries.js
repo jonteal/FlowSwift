@@ -9,6 +9,10 @@ const GET_PROJECT_ACTIVITY_COMMENT_REPLIES = gql`
       projectActivityComment {
         id
       }
+      user {
+        _id
+        name
+      }
     }
   }
 `;
@@ -21,6 +25,10 @@ const GET_PROJECT_ACTIVITY_COMMENT_REPLY = gql`
       createdAt
       projectActivityComment {
         id
+      }
+      user {
+        _id
+        name
       }
     }
   }

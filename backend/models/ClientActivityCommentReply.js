@@ -15,6 +15,10 @@ const clientActivityCommentReplySchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "ClientActivityComment",
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 const ClientActivityCommentReply = mongoose.model(

@@ -1,8 +1,16 @@
 import { gql } from "@apollo/client";
 
 const ADD_CLIENT_ACTIVITY_COMMENT = gql`
-  mutation addClientActivityComment($commentText: String!, $clientId: ID!) {
-    addClientActivityComment(commentText: $commentText, clientId: $clientId) {
+  mutation addClientActivityComment(
+    $commentText: String!
+    $clientId: ID!
+    $userId: ID
+  ) {
+    addClientActivityComment(
+      commentText: $commentText
+      clientId: $clientId
+      userId: $userId
+    ) {
       id
       commentText
       createdAt
@@ -10,6 +18,10 @@ const ADD_CLIENT_ACTIVITY_COMMENT = gql`
         id
         firstName
         lastName
+      }
+      user {
+        _id
+        name
       }
     }
   }
@@ -26,18 +38,23 @@ const DELETE_CLIENT_ACTIVITY_COMMENT = gql`
 const UPDATE_CLIENT_ACTIVITY_COMMENT = gql`
   mutation UpdateClientActivityComment(
     $commentText: String!
-    $createdAt: String!
     $clientId: ID!
+    $userId: ID
   ) {
     updateClientActivityComment(
       commentText: $commentText
       clientId: $clientId
+      userId: $userId
     ) {
       id
       commentText
       createdAt
       clientId {
         id
+      }
+      user {
+        _id
+        name
       }
     }
   }

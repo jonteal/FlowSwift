@@ -14,6 +14,10 @@ const GET_PROJECT_ACTIVITY_COMMENTS = gql`
           lastName
         }
       }
+      user {
+        _id
+        name
+      }
     }
   }
 `;
@@ -31,6 +35,10 @@ const GET_PROJECT_ACTIVITY_COMMENT = gql`
           firstName
           lastName
         }
+      }
+      user {
+        _id
+        name
       }
     }
   }

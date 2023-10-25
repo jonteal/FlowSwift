@@ -2,6 +2,7 @@ import { useState } from "react";
 
 // LIBRARIES
 import { useMutation } from "@apollo/client";
+import { useSelector } from "react-redux";
 
 // GRAPHQL
 import { ADD_PROJECT_ACTIVITY_COMMENT } from "../../graphql/mutations/projectActivityCommentMutations";
@@ -13,6 +14,9 @@ import { Comment } from "../Comment/Comment";
 
 export const ProjectCommentFeed = ({ projectId, comments }) => {
   const [commentText, setCommentText] = useState("");
+  const { userInfo } = useSelector((state) => state.auth);
+  const [userId, setUserId] = useState(userInfo._id);
+  console.log("userId: ", userId);
 
   const [addProjectActivityComment] = useMutation(
     ADD_PROJECT_ACTIVITY_COMMENT,
@@ -20,6 +24,7 @@ export const ProjectCommentFeed = ({ projectId, comments }) => {
       variables: {
         commentText,
         projectId,
+        userId,
       },
       update(cache, { data: { addProjectActivityComment } }) {
         const { projectActivityComments } = cache.readQuery({
@@ -47,7 +52,7 @@ export const ProjectCommentFeed = ({ projectId, comments }) => {
       alert("You must write a comment");
     }
 
-    addProjectActivityComment(commentText, projectId);
+    addProjectActivityComment(commentText, projectId, userId);
 
     setCommentText("");
   };

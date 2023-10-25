@@ -1,10 +1,15 @@
 import { gql } from "@apollo/client";
 
 const ADD_PROJECT_ACTIVITY_COMMENT = gql`
-  mutation addProjectActivityComment($commentText: String!, $projectId: ID!) {
+  mutation addProjectActivityComment(
+    $commentText: String!
+    $projectId: ID!
+    $userId: ID
+  ) {
     addProjectActivityComment(
       commentText: $commentText
       projectId: $projectId
+      userId: $userId
     ) {
       id
       commentText
@@ -17,6 +22,10 @@ const ADD_PROJECT_ACTIVITY_COMMENT = gql`
           firstName
           lastName
         }
+      }
+      user {
+        _id
+        name
       }
     }
   }
@@ -35,11 +44,13 @@ const UPDATE_PROJECT_ACTIVITY_COMMENT = gql`
     $id: ID!
     $commentText: String!
     $projectId: ID!
+    $userId: ID
   ) {
     updateProjectActivityComment(
       id: $id
       commentText: $commentText
       projectId: $projectId
+      userId: $userId
     ) {
       id
       commentText
@@ -52,6 +63,10 @@ const UPDATE_PROJECT_ACTIVITY_COMMENT = gql`
           firstName
           lastName
         }
+      }
+      user {
+        _id
+        name
       }
     }
   }

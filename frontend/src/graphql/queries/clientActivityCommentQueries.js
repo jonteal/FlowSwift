@@ -11,6 +11,10 @@ const GET_CLIENT_ACTIVITY_COMMENTS = gql`
         firstName
         lastName
       }
+      user {
+        _id
+        name
+      }
     }
   }
 `;
@@ -25,6 +29,10 @@ const GET_CLIENT_ACTIVITY_COMMENT = gql`
         id
         firstName
         lastName
+      }
+      user {
+        _id
+        name
       }
     }
   }

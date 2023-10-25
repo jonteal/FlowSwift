@@ -9,6 +9,10 @@ const GET_CLIENT_ACTIVITY_COMMENT_REPLIES = gql`
       clientActivityComment {
         id
       }
+      user {
+        _id
+        name
+      }
     }
   }
 `;
@@ -21,6 +25,10 @@ const GET_CLIENT_ACTIVITY_COMMENT_REPLY = gql`
       createdAt
       clientActivityComment {
         id
+      }
+      user {
+        _id
+        name
       }
     }
   }

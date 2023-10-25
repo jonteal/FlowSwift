@@ -170,13 +170,22 @@ export const Comment = ({ comment, type }) => {
           }  rounded-xl flex flex-row justify-between items-center`}
           key={comment.id}
         >
-          <p
-            className={`${
-              darkMode ? "text-slate-100" : "text-slate-700"
-            } text-start w-5/6`}
-          >
-            {comment.commentText}
-          </p>
+          <div className="flex flex-col items-start">
+            <p
+              className={`${
+                darkMode ? "text-slate-100" : "text-slate-700"
+              } text-start text-sm block w-full tracking-wide font-bold`}
+            >
+              {comment?.user?.name}
+            </p>
+            <p
+              className={`${
+                darkMode ? "text-slate-100" : "text-slate-700"
+              } text-start mt-3 w-full`}
+            >
+              {comment.commentText}
+            </p>
+          </div>
 
           <div className="flex justify-end">
             <button onClick={handleCommentDelete}>

@@ -23,9 +23,6 @@ export const AddKanbanTicket = () => {
   const [blockedReason, setBlockedReason] = useState("");
   const { userInfo } = useSelector((state) => state.auth);
   const [userId, setUserId] = useState(userInfo._id);
-  console.log("userId: ", userId);
-
-  console.log("userInfo: ", userInfo);
 
   const [addTicket] = useMutation(ADD_TICKET, {
     variables: {
@@ -62,18 +59,12 @@ export const AddKanbanTicket = () => {
   if (userLoading) return <Spinner />;
   if (userError) return <p>There was an error..</p>;
 
-  // console.log("userData: ", userData);
-
   const onSubmit = (e) => {
     e.preventDefault();
 
     if (title === "" || description === "") {
       return alert("Please fill out all fields");
     }
-
-    // setUserId(userData?.user?._id);
-
-    // console.log("userId: ", userId);
 
     addTicket(
       title,

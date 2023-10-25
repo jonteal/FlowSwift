@@ -181,6 +181,12 @@ const ProjectActivityCommentType = new GraphQLObjectType({
         return Project.findById(parent.projectId);
       },
     },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      },
+    },
   }),
 });
 
@@ -195,6 +201,12 @@ const ClientActivityCommentType = new GraphQLObjectType({
       type: ClientType,
       resolve(parent, args) {
         return Client.findById(parent.clientId);
+      },
+    },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
       },
     },
   }),
@@ -213,6 +225,12 @@ const ClientActivityCommentReplyType = new GraphQLObjectType({
         return ClientActivityComment.findById(parent.commentId);
       },
     },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      },
+    },
   }),
 });
 
@@ -227,6 +245,12 @@ const ProjectActivityCommentReplyType = new GraphQLObjectType({
       type: ProjectActivityCommentType,
       resolve(parent, args) {
         return ProjectActivityComment.findById(parent.commentId);
+      },
+    },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
       },
     },
   }),
@@ -1042,12 +1066,14 @@ const mutation = new GraphQLObjectType({
       args: {
         commentText: { type: new GraphQLNonNull(GraphQLString) },
         projectId: { type: new GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLID },
       },
       resolve(parent, args) {
         const projectActivityComment = new ProjectActivityComment({
           commentText: args.commentText,
           createdAt: args.createdAt,
           projectId: args.projectId,
+          userId: args.userId,
         });
 
         return projectActivityComment.save();
@@ -1081,6 +1107,7 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
         commentText: { type: new GraphQLNonNull(GraphQLString) },
         projectId: { type: new GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLID },
       },
       resolve(parent, args) {
         return ProjectActivityComment.findByIdAndUpdate(
@@ -1090,6 +1117,7 @@ const mutation = new GraphQLObjectType({
               id: args.id,
               commentText: args.commentText,
               projectId: args.projectId,
+              userId: args.userId,
             },
           },
           { new: true }
@@ -1103,12 +1131,14 @@ const mutation = new GraphQLObjectType({
       args: {
         commentText: { type: new GraphQLNonNull(GraphQLString) },
         clientId: { type: new GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLID },
       },
       resolve(parent, args) {
         const clientActivityComment = new ClientActivityComment({
           commentText: args.commentText,
           createdAt: args.createdAt,
           clientId: args.clientId,
+          userId: args.userId,
         });
 
         return clientActivityComment.save();
@@ -1142,12 +1172,14 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
         commentText: { type: new GraphQLNonNull(GraphQLString) },
         clientId: { type: new GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLID },
       },
       resolve(parent, args) {
         const clientActivityComment = new ClientActivityComment({
           commentText: args.commentText,
           createdAt: args.createdAt,
           clientId: args.clientId,
+          userId: args.userId,
         });
 
         return clientActivityComment.save();
@@ -1160,12 +1192,14 @@ const mutation = new GraphQLObjectType({
       args: {
         commentText: { type: new GraphQLNonNull(GraphQLString) },
         commentId: { type: new GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLID },
       },
       resolve(parent, args) {
         const clientActivityCommentReply = new ClientActivityCommentReply({
           commentText: args.commentText,
           createdAt: args.createdAt,
           commentId: args.commentId,
+          userId: args.userId,
         });
 
         return clientActivityCommentReply.save();
@@ -1190,12 +1224,14 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
         commentText: { type: new GraphQLNonNull(GraphQLString) },
         commentId: { type: new GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLID },
       },
       resolve(parent, args) {
         const clientActivityCommentReply = new ClientActivityCommentReply({
           commentText: args.commentText,
           createdAt: args.createdAt,
           commentId: args.commentId,
+          userId: args.userId,
         });
 
         return clientActivityCommentReply.save();
@@ -1208,12 +1244,14 @@ const mutation = new GraphQLObjectType({
       args: {
         commentText: { type: new GraphQLNonNull(GraphQLString) },
         commentId: { type: new GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLID },
       },
       resolve(parent, args) {
         const projectActivityCommentReply = new ProjectActivityCommentReply({
           commentText: args.commentText,
           createdAt: args.createdAt,
           commentId: args.commentId,
+          userId: args.userId,
         });
 
         return projectActivityCommentReply.save();
@@ -1238,12 +1276,14 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
         commentText: { type: new GraphQLNonNull(GraphQLString) },
         commentId: { type: new GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLID },
       },
       resolve(parent, args) {
         const projectActivityCommentReply = new ProjectActivityCommentReply({
           commentText: args.commentText,
           createdAt: args.createdAt,
           commentId: args.commentId,
+          userId: args.userId,
         });
 
         return projectActivityCommentReply.save();
