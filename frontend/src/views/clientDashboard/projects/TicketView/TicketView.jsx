@@ -4,14 +4,17 @@ import { useQuery } from "@apollo/client";
 // GRAPHQL
 import { GET_TICKET } from "../../../../graphql/queries/ticketQueries";
 
-// ICONS
-import { FaRegArrowAltCircleLeft } from "react-icons/fa";
-
 // COMPONENTS
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 
+// STATE
+import { ThemeContext } from "../../../../context";
+import { useContext } from "react";
+
 export const TicketView = () => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   const { ticketId, clientId, projectId } = useParams();
   const {
     loading: ticketLoading,
@@ -35,7 +38,11 @@ export const TicketView = () => {
   return (
     <div className="h-screen border-slate-500 rounded-xl">
       {!ticketLoading && !ticketError && (
-        <div className="h-screen bg-slate-50 mx-2 mt-2 rounded-xl">
+        <div
+          className={`h-screen ${
+            darkMode ? "bg-sky-800" : "bg-slate-50"
+          }  mx-2 mt-2 rounded-xl`}
+        >
           <div className="mx-auto w-100 p-5">
             <div className="flex flex-row justify-start">
               <DynamicButton type="back" color="lightBlue">
@@ -51,9 +58,17 @@ export const TicketView = () => {
               </DynamicButton>
             </div>
 
-            <div className="mt-5 flex flex-col items-start border rounded-xl py-3 bg-sky-300">
+            <div
+              className={`${
+                darkMode ? "bg-sky-950" : ""
+              } mt-5 flex flex-col items-start border rounded-xl py-3`}
+            >
               <div className="px-3 py-0 m-2">
-                <p className="text-slate-600 font-bold text-left text-sm mb-1">
+                <p
+                  className={`${
+                    darkMode ? "text-slate-50" : "text-slate-600"
+                  }  font-bold text-left text-sm mb-1`}
+                >
                   Title
                 </p>
                 <p className="text-slate-800 font-normal text-left text-lg border px-3 py-1 rounded-md bg-slate-50">
@@ -61,7 +76,11 @@ export const TicketView = () => {
                 </p>
               </div>
               <div className="px-3 py-0 m-2 w-full">
-                <p className="text-slate-600 font-bold text-left text-sm mb-1">
+                <p
+                  className={`${
+                    darkMode ? "text-slate-50" : "text-slate-600"
+                  }  font-bold text-left text-sm mb-1`}
+                >
                   Description
                 </p>
 
@@ -70,7 +89,11 @@ export const TicketView = () => {
                 </p>
               </div>
               <div className="px-3 py-0 m-2">
-                <p className="text-slate-600 font-bold text-left text-sm mb-1">
+                <p
+                  className={`${
+                    darkMode ? "text-slate-50" : "text-slate-600"
+                  }  font-bold text-left text-sm mb-1`}
+                >
                   Status
                 </p>
                 <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
@@ -78,7 +101,11 @@ export const TicketView = () => {
                 </p>
               </div>
               <div className="px-3 py-0 m-2">
-                <p className="text-slate-600 font-bold text-left text-sm mb-1">
+                <p
+                  className={`${
+                    darkMode ? "text-slate-50" : "text-slate-600"
+                  }  font-bold text-left text-sm mb-1`}
+                >
                   Owned by:
                 </p>
                 <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
@@ -87,7 +114,11 @@ export const TicketView = () => {
               </div>
 
               <div className="px-3 py-0 m-2">
-                <p className="text-slate-600 font-bold text-left text-sm mb-1">
+                <p
+                  className={`${
+                    darkMode ? "text-slate-50" : "text-slate-600"
+                  }  font-bold text-left text-sm mb-1`}
+                >
                   Created:
                 </p>
                 <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
