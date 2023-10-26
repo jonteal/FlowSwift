@@ -10,11 +10,21 @@ import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
 import Table from "react-bootstrap/Table";
 import { capitalized } from "../../../utils/format";
 
+// STATE
+import { useContext } from "react";
+import { ThemeContext } from "../../../context";
+
 export const ServicesTable = ({ services, type }) => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   const { clientId, projectId } = useParams();
 
   return (
-    <div className="rounded-xl bg-slate-50 mx-2 mt-3 px-3 w-full">
+    <div
+      className={`rounded-xl ${
+        darkMode ? "bg-sky-800" : "bg-slate-50"
+      }  mx-2 mt-3 px-3 w-full`}
+    >
       <div className="flex flex-row justify-between items-center py-3">
         <div className="flex flex-row items-center">
           <div
@@ -24,7 +34,11 @@ export const ServicesTable = ({ services, type }) => {
           >
             {type === "In House" ? <AiFillHome /> : <FaGasPump />}
           </div>
-          <h2 className="text-left text-slate-700 text-lg mx-2">
+          <h2
+            className={`text-left ${
+              darkMode ? "text-slate-50" : "text-slate-700"
+            }  text-lg mx-2`}
+          >
             {type === "In House" ? "In House" : "Third Party Services"}
           </h2>
         </div>

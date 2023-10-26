@@ -5,17 +5,33 @@ import { GrTransaction } from "react-icons/gr";
 import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import { ClientTransactionItem } from "../dashboardBilling/ClientTransactionItem/ClientTransactionItem";
 
+// STATE
+import { useContext } from "react";
+import { ThemeContext } from "../../context";
+
 export const TransactionTable = ({ transactions, shortList }) => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   const { clientId, projectId } = useParams();
 
   const filteredList = shortList ? transactions : transactions.slice(0, 5);
 
   return (
-    <div className="bg-slate-50 w-full rounded-xl mx-2 py-2">
+    <div
+      className={`${
+        darkMode ? "bg-sky-800" : "bg-slate-50"
+      } w-full rounded-xl mx-2 py-2`}
+    >
       <div className="flex flex-row justify-between items-start">
         <div className="flex flex-row items-center mx-1">
-          <GrTransaction className="ml-2 text-lg" />
-          <h2 className="text-left text-slate-700 text-lg mx-2">
+          <GrTransaction
+            className={`ml-2 text-lg ${darkMode ? "text-slate-50" : ""}`}
+          />
+          <h2
+            className={`text-left ${
+              darkMode ? "text-slate-50" : "text-slate-700"
+            }  text-lg mx-2`}
+          >
             Transactions
           </h2>
         </div>

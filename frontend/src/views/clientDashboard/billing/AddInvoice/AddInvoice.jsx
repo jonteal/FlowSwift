@@ -14,7 +14,13 @@ import { DynamicButton } from "../../../../components/reusable/DynamicButton/Dyn
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
 
+// STATE
+import { useContext } from "react";
+import { ThemeContext } from "../../../../context";
+
 export const AddInvoice = () => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   const { clientId } = useParams();
 
   const [date, setDate] = useState("");
@@ -81,11 +87,19 @@ export const AddInvoice = () => {
   };
 
   return (
-    <div className="bg-slate-50 flex flex-col items-center rounded-xl mx-2 mt-2">
+    <div
+      className={`${
+        darkMode ? "bg-sky-800" : "bg-slate-50"
+      } flex flex-col items-center rounded-xl mx-2 mt-2`}
+    >
       <h3 className="font-semibold text-lg mt-2">Add Invoice</h3>
       <div className="flex flex-row justify-between my-3 w-full px-4">
         <div className="flex flex-col w-full ml-2">
-          <label className="form-label block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          <label
+            className={`form-label block uppercase tracking-wide ${
+              darkMode ? "text-slate-50" : "text-slate-700"
+            }  text-xs font-bold mb-2`}
+          >
             Project Name
           </label>
           <select
@@ -117,7 +131,9 @@ export const AddInvoice = () => {
           </div>
           <div className="w-full md:w-1/2 px-3">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className={`form-label block uppercase tracking-wide ${
+                darkMode ? "text-slate-50" : "text-slate-700"
+              }  text-xs font-bold mb-2`}
               htmlFor="grid-invoice-number"
             >
               Invoice Number
@@ -136,7 +152,9 @@ export const AddInvoice = () => {
         <div className="flex flex-wrap mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className={`form-label block uppercase tracking-wide ${
+                darkMode ? "text-slate-50" : "text-slate-700"
+              }  text-xs font-bold mb-2`}
               htmlFor="grid-invoice-amount"
             >
               Amount
@@ -158,7 +176,9 @@ export const AddInvoice = () => {
           </div>
           <div className="w-full">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className={`form-label block uppercase tracking-wide ${
+                darkMode ? "text-slate-50" : "text-slate-700"
+              }  text-xs font-bold mb-2`}
               htmlFor="grid-notes"
             >
               Notes

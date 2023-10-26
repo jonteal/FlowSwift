@@ -5,17 +5,33 @@ import { TbFileInvoice } from "react-icons/tb";
 import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import { InvoiceTableItem } from "../dashboardBilling/InvoiceTableItem/InvoiceTableItem";
 
+// STATE
+import { useContext } from "react";
+import { ThemeContext } from "../../context";
+
 export const InvoiceTable = ({ invoices, shortList }) => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   const { clientId, projectId } = useParams();
 
   const filteredList = shortList ? invoices : invoices.slice(0, 5);
 
   return (
-    <div className="bg-slate-50 w-full rounded-xl mx-2 py-2">
+    <div
+      className={`${
+        darkMode ? "bg-sky-800" : "bg-slate-50"
+      }  w-full rounded-xl mx-2 py-2`}
+    >
       <div className="flex flex-row justify-between items-start">
         <div className="flex flex-row items-center mx-1">
           <TbFileInvoice className="ml-2 text-lg" />
-          <h2 className="text-left text-slate-700 text-lg mx-2">Invoices</h2>
+          <h2
+            className={`text-left ${
+              darkMode ? "text-slate-50" : "text-slate-700"
+            } text-lg mx-2`}
+          >
+            Invoices
+          </h2>
         </div>
         <div className="flex flex-row justify-between py-2 px-2">
           <DynamicButton

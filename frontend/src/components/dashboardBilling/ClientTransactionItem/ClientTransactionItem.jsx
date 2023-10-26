@@ -1,6 +1,12 @@
 import { BsArrowUpSquare, BsArrowDownSquare } from "react-icons/bs";
 
+// STATE
+import { useContext } from "react";
+import { ThemeContext } from "../../../context";
+
 export const ClientTransactionItem = ({ transaction }) => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   return (
     <div className="flex flex-row justify-between items-center w-full px-4 my-2">
       <div className="flex flex-row items-center">
@@ -10,10 +16,18 @@ export const ClientTransactionItem = ({ transaction }) => {
           <BsArrowUpSquare className="text-lime-600" />
         )}
         <div className="flex flex-col items-start mx-4">
-          <p className="text-left text-slate-800 text-base">
+          <p
+            className={`text-left ${
+              darkMode ? "text-slate-50" : "text-slate-800"
+            }  text-base`}
+          >
             {transaction.paymentParty}
           </p>
-          <p className="text-left text-slate-500 text-sm">
+          <p
+            className={`text-left ${
+              darkMode ? "text-slate-100" : "text-slate-500"
+            }  text-sm`}
+          >
             {transaction.paymentDate}
           </p>
         </div>
