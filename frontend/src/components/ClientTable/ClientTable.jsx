@@ -9,30 +9,68 @@ export const ClientTable = ({ clients, clientContainer }) => {
   const darkMode = theme.state.darkMode;
 
   return (
-    <Table responsive>
+    <table className="table-auto">
       <thead>
         <tr>
-          <th className="text-slate-400 font-light w-auto text-left pl-2">#</th>
-          <th className="text-slate-400 font-light w-2/12 text-left pl-2">
+          <th
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            }  font-light w-auto text-left pl-2 border`}
+          >
+            #
+          </th>
+          <th
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            }  font-light w-2/12 text-left pl-2 border`}
+          >
             First Name
           </th>
-          <th className="text-slate-400 font-light w-2/12 text-left pl-2">
+          <th
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            }  font-light w-2/12 text-left pl-2 border`}
+          >
             Last Name
           </th>
-          <th className="text-slate-400 font-light w-2/12 text-left pl-2">
+          <th
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            }  font-light w-2/12 text-left pl-2 border`}
+          >
             Phone Number
           </th>
-          <th className="text-slate-400 font-light w-2/12 text-left pl-2">
+          <th
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            }  font-light w-2/12 text-left pl-2 border`}
+          >
             Email Address
           </th>
-          <th className="text-slate-400 font-light w-3/12 text-left pl-2">
+          <th
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            }  font-light w-3/12 text-left pl-2 border`}
+          >
             Company
           </th>
-          <th className="text-slate-400 font-light w-2/12 text-left pl-2">
+          <th
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            }  font-light w-2/12 text-left pl-2 border`}
+          >
             Status
           </th>
-          <th></th>
-          <th></th>
+          <th
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            }  font-light w-2/12 text-left pl-2 border`}
+          ></th>
+          <th
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            }  font-light w-2/12 text-left pl-2 border`}
+          ></th>
         </tr>
       </thead>
       <tbody>
@@ -40,33 +78,73 @@ export const ClientTable = ({ clients, clientContainer }) => {
           .filter((client) => client.status === clientContainer.state)
           .map((client, index) => (
             <tr key={client.id}>
-              <td className="text-slate-700 font-light text-left border pl-2 pr-2">
+              <td
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                }  font-light text-left border pl-2 pr-2`}
+              >
                 {index + 1}
               </td>
-              <td className="text-slate-700 font-light text-left border pl-2">
+              <td
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                }  font-light text-left border pl-2`}
+              >
                 {client.firstName}
               </td>
-              <td className="text-slate-700 font-light text-left border pl-2">
+              <td
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                }  font-light text-left border pl-2`}
+              >
                 {client.lastName}
               </td>
-              <td className="text-slate-700 font-light text-left border pl-2">
+              <td
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                }  font-light text-left border pl-2`}
+              >
                 {client.phoneNumber}
               </td>
-              <td className="text-slate-700 font-light text-left border pl-2">
+              <td
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                }  font-light text-left border pl-2`}
+              >
                 {client.emailAddress}
               </td>
-              <td className="text-slate-700 font-light text-left border pl-2">
+              <td
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                }  font-light text-left border pl-2`}
+              >
                 {client.companyName}
               </td>
-              <td className="text-slate-700 font-light text-left border pl-2">
+              <td
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                }  font-light text-left border pl-2`}
+              >
                 {client.status}
               </td>
-              <td className="text-slate-700 font-light text-left border pl-2">
+              <td
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                }  font-light text-left border pl-2`}
+              >
                 <Link to={`/clients/${client.id}/dashboard`}>
-                  <FaRegEye className="text-sky-600" />
+                  <FaRegEye
+                    className={`${
+                      darkMode ? "text-sky-200" : "text-sky-600"
+                    } mr-2`}
+                  />
                 </Link>
               </td>
-              <td className="text-slate-700 font-light text-left border pl-2">
+              <td
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                }  font-light text-left border pl-2`}
+              >
                 {/* <button>
                   <FaRegTrashAlt className="text-red-500" />
                 </button> */}
@@ -74,6 +152,6 @@ export const ClientTable = ({ clients, clientContainer }) => {
             </tr>
           ))}
       </tbody>
-    </Table>
+    </table>
   );
 };
