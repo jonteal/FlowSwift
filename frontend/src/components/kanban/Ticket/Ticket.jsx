@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 
@@ -12,7 +12,11 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { DELETE_TICKET } from "../../../graphql/mutations/ticketMutations";
 import { GET_TICKETS } from "../../../graphql/queries/ticketQueries";
 
+import { ThemeContext } from "../../../context";
+
 export const Ticket = ({ ticket }) => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   const { clientId, projectId } = useParams();
   const [isBlocked, setIsBlocked] = useState(ticket.blocked);
 
@@ -26,7 +30,11 @@ export const Ticket = ({ ticket }) => {
   });
 
   return (
-    <div className="border-slate-600 bg-slate-50 rounded-lg p-3 my-3 mx-auto w-11/12 h-auto shadow-md text-center">
+    <div
+      className={`${
+        darkMode ? "border-sky-100 bg-sky-950" : "border-slate-600 bg-slate-50"
+      }  rounded-lg p-3 my-3 mx-auto w-11/12 h-auto shadow-md text-center`}
+    >
       <div className="flex flex-row w-full justify-between items-center mb-3">
         <div
           className={`${
