@@ -1,4 +1,10 @@
+// STATE
+import { useContext } from "react";
+import { ThemeContext } from "../../../context";
+
 export const Checkbox = ({ value, setChangeHandler, label }) => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   return (
     <div className="flex flex-row items-center w-full mx-10 mb-5">
       <input
@@ -10,7 +16,11 @@ export const Checkbox = ({ value, setChangeHandler, label }) => {
       />
       <label
         htmlFor="default-checkbox"
-        className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+        className={`ml-2 text-sm font-medium ${
+          darkMode
+            ? "text-slate-50 dark:text-gray-300"
+            : "text-gray-900 dark:text-gray-300"
+        } `}
       >
         {label}
       </label>

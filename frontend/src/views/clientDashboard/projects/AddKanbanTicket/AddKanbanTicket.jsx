@@ -13,7 +13,13 @@ import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
 import { GET_USER } from "../../../../graphql/queries/userQueries";
 import { useSelector } from "react-redux";
 
+// STATE
+import { useContext } from "react";
+import { ThemeContext } from "../../../../context";
+
 export const AddKanbanTicket = () => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   const { projectId } = useParams();
   const [title, setTitle] = useState("");
   const [typeOfTicket, setTypeOfTicket] = useState("userStory");
@@ -86,11 +92,19 @@ export const AddKanbanTicket = () => {
   };
 
   return (
-    <div className="bg-slate-50 mt-2 mx-2 p-3 rounded-xl">
+    <div
+      className={`${
+        darkMode ? "bg-sky-800" : "bg-slate-50"
+      }  mt-2 mx-2 p-3 rounded-xl`}
+    >
       <h1 className="text-lg text-left">New Ticket</h1>
       <form onSubmit={onSubmit}>
         <div>
-          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-3">
+          <label
+            className={`block uppercase tracking-wide ${
+              darkMode ? "text-slate-50" : "text-gray-700"
+            }  text-xs font-bold mb-2 mt-3`}
+          >
             Title
           </label>
           <input
@@ -99,25 +113,45 @@ export const AddKanbanTicket = () => {
             id="name"
             type="text"
             placeholder="Name of the ticket"
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white"
+            className={`appearance-none block w-full ${
+              darkMode
+                ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
+                : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
+            }  border  rounded py-2 px-3 mb-3 leading-tight focus:outline-none `}
           />
-          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold my-4">
+          <label
+            className={`block uppercase tracking-wide ${
+              darkMode ? "text-slate-50" : "text-gray-700"
+            }  text-xs font-bold my-4`}
+          >
             Ticket Type
           </label>
           <select
             id="type"
-            className="form-select mb-4"
+            className={`${
+              darkMode
+                ? "bg-sky-950 text-slate-50"
+                : "bg-gray-200 text-gray-700"
+            } form-select mb-4`}
             value={typeOfTicket}
             onChange={(e) => setTypeOfTicket(e.target.value)}
           >
             <option value="userStory">User Story</option>
             <option value="defect">Defect</option>
           </select>
-          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-4">
+          <label
+            className={`block uppercase tracking-wide ${
+              darkMode ? "text-slate-50" : "text-gray-700"
+            }  text-xs font-bold my-4`}
+          >
             Description
           </label>
           <textarea
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            className={`appearance-none block w-full ${
+              darkMode
+                ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950 focus:border-gray-500"
+                : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
+            } border rounded py-3 px-4 leading-tight focus:outline-none `}
             id="grid-notes"
             aria-label="Ticket description section"
             //   type="text"
@@ -126,12 +160,20 @@ export const AddKanbanTicket = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold my-4">
+          <label
+            className={`block uppercase tracking-wide ${
+              darkMode ? "text-slate-50" : "text-gray-700"
+            }  text-xs font-bold my-4`}
+          >
             Status
           </label>
           <select
             id="status"
-            className="form-select mb-4"
+            className={`${
+              darkMode
+                ? "bg-sky-950 text-slate-50"
+                : "bg-gray-200 text-gray-700"
+            } form-select mb-4`}
             value={status}
             onChange={(e) => setStatus(e.target.value)}
           >
@@ -149,11 +191,19 @@ export const AddKanbanTicket = () => {
 
             {blocked && (
               <div className="w-full">
-                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-4">
+                <label
+                  className={`block uppercase tracking-wide ${
+                    darkMode ? "text-slate-50" : "text-gray-700"
+                  }  text-xs font-bold my-4 mb-2`}
+                >
                   Description
                 </label>
                 <textarea
-                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  className={`appearance-none block w-full ${
+                    darkMode
+                      ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950 focus:border-gray-500"
+                      : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
+                  } border rounded py-3 px-4 leading-tight focus:outline-none`}
                   id="grid-notes"
                   aria-label="Blocked reason section"
                   //   type="text"
