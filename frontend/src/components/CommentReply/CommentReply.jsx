@@ -56,7 +56,9 @@ export const CommentReply = ({ reply, formattedDate, type, commentId }) => {
     <>
       <div
         key={reply.id}
-        className="border ml-10 mt-2 px-3 py-2 bg-slate-100 rounded-xl flex flex-row justify-between items-center"
+        className={`${
+          darkMode ? "bg-sky-800" : "bg-slate-100"
+        } border ml-10 mt-2 px-3 py-2 rounded-xl flex flex-row justify-between items-center`}
       >
         <div className="w-full flex flex-col items-start">
           <p
@@ -77,7 +79,11 @@ export const CommentReply = ({ reply, formattedDate, type, commentId }) => {
           </button>
         </div>
       </div>
-      <p className="text-slate-600 text-start text-xs mt-2 mr-3 ml-12">
+      <p
+        className={`${
+          darkMode ? "text-sky-100" : "text-slate-600"
+        } text-start text-xs mt-2 mr-3 ml-12`}
+      >
         {formattedDate}
       </p>
     </>

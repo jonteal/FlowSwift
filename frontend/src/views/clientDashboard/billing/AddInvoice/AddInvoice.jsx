@@ -90,7 +90,7 @@ export const AddInvoice = () => {
     <div
       className={`${
         darkMode ? "bg-sky-800" : "bg-slate-50"
-      } flex flex-col items-center rounded-xl mx-2 mt-2`}
+      } flex flex-col items-center rounded-xl mx-2 mt-2 px-3`}
     >
       <h3 className="font-semibold text-lg mt-2">Add Invoice</h3>
       <div className="flex flex-row justify-between my-3 w-full px-4">
@@ -103,7 +103,11 @@ export const AddInvoice = () => {
             Project Name
           </label>
           <select
-            className="form-select"
+            className={`${
+              darkMode
+                ? "bg-sky-950 text-slate-50"
+                : "bg-slate-50 text-slate-700"
+            } form-select`}
             aria-label="Select Project"
             id="projectId"
             value={projectId}
@@ -139,7 +143,11 @@ export const AddInvoice = () => {
               Invoice Number
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className={`${
+                darkMode
+                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950 focus:border-gray-500"
+                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
+              } appearance-none block w-full border rounded py-2 px-4 leading-tight focus:outline-none`}
               id="grid-invoice-number"
               aria-label="Invoice Number input"
               type="text"
@@ -162,7 +170,11 @@ export const AddInvoice = () => {
             <div className="flex flex-row items-center">
               <span className="mx-2 text-lg">$</span>
               <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                className={`${
+                  darkMode
+                    ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
+                    : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
+                } appearance-none block w-full border rounded py-2 px-4 mb-3 leading-tight focus:outline-none`}
                 id="grid-invoice-amount"
                 min="0.01"
                 step="0.01"
@@ -184,7 +196,11 @@ export const AddInvoice = () => {
               Notes
             </label>
             <textarea
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className={`${
+                darkMode
+                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950 focus:border-gray-500"
+                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
+              } appearance-none block w-full border rounded py-3 px-4 leading-tight focus:outline-none`}
               id="grid-notes"
               aria-label="Invoice notes section"
               //   type="text"

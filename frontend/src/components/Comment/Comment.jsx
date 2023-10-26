@@ -172,7 +172,7 @@ export const Comment = ({ comment, type }) => {
       <>
         <div
           className={`border px-3 py-2 ${
-            darkMode ? "bg-sky-700" : "bg-slate-100"
+            darkMode ? "bg-sky-800" : "bg-slate-100"
           }  rounded-xl flex flex-row justify-between items-center`}
           key={comment.id}
         >

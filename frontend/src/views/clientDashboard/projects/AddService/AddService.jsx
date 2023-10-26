@@ -14,7 +14,13 @@ import { DynamicButton } from "../../../../components/reusable/DynamicButton/Dyn
 import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
 import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
 
+// STATE
+import { useContext } from "react";
+import { ThemeContext } from "../../../../context";
+
 export const AddService = () => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   const { projectId } = useParams();
 
   const [service, setService] = useState("");
@@ -95,7 +101,11 @@ export const AddService = () => {
   };
 
   return (
-    <div className="w-full bg-slate-50 mx-2 px-20 rounded-xl">
+    <div
+      className={`${
+        darkMode ? "bg-sky-800" : "bg-slate-50"
+      } w-full mx-2 px-20 rounded-xl`}
+    >
       <div>
         {alertOn && (
           <div className="alert alert-danger mt-3" role="alert">
@@ -103,7 +113,11 @@ export const AddService = () => {
           </div>
         )}
 
-        <h1 className="text-gray-700 block uppercase tracking-wide text-lg font-bold mt-2 mb-3 pt-3">
+        <h1
+          className={`${
+            darkMode ? "text-slate=50" : "text-gray-700 "
+          } block uppercase tracking-wide text-lg font-bold mt-2 mb-3 pt-3`}
+        >
           Add Service
         </h1>
 
@@ -112,13 +126,19 @@ export const AddService = () => {
             <div className="flex flex-row">
               <div className="w-full mx-2">
                 <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className={`${
+                    darkMode ? "text-slate-50" : "text-gray-700"
+                  } block uppercase tracking-wide text-xs font-bold mb-2`}
                   htmlFor="grid-state"
                 >
                   Service Status
                 </label>
                 <select
-                  className="form-select block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  className={`${
+                    darkMode
+                      ? "bg-sky-950 border-gray-200 text-slate-50 focus:bg-sky-950 focus:border-gray-500"
+                      : "bg-gray-200 border-gray-200 text-gray-700 focus:bg-white focus:border-gray-500"
+                  } form-select block appearance-none w-full border py-3 px-4 pr-8 rounded leading-tight focus:outline-none`}
                   id="grid-state"
                   aria-label="Service Status select"
                   value={status}
@@ -134,13 +154,19 @@ export const AddService = () => {
               </div>
               <div className="w-full mx-2">
                 <label
-                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  className={`${
+                    darkMode ? "text-slate-50" : "text-gray-700"
+                  } block uppercase tracking-wide text-xs font-bold mb-2`}
                   htmlFor="grid-state"
                 >
                   In House / Third Party
                 </label>
                 <select
-                  className="form-select block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  className={`${
+                    darkMode
+                      ? "bg-sky-950 border-gray-200 text-slate-50 focus:bg-sky-950 focus:border-gray-500"
+                      : "bg-gray-200 border-gray-200 text-gray-700 focus:bg-white focus:border-gray-500"
+                  } form-select block appearance-none w-full border py-3 px-4 pr-8 rounded leading-tight focus:outline-none`}
                   id="grid-state"
                   aria-label="In House or Third Party select"
                   value={serviceProvider}
@@ -157,13 +183,19 @@ export const AddService = () => {
             </div>
             <div className="w-full mt-5 mx-2">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className={`${
+                  darkMode ? "text-slate-50" : "text-gray-700"
+                } block uppercase tracking-wide text-xs font-bold mb-2`}
                 htmlFor="grid-state"
               >
                 Payment Schedule
               </label>
               <select
-                className="form-select block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className={`${
+                  darkMode
+                    ? "bg-sky-950 border-gray-200 text-slate-50 focus:bg-sky-950 focus:border-gray-500"
+                    : "bg-gray-200 border-gray-200 text-gray-700 focus:bg-white focus:border-gray-500"
+                } form-select block appearance-none w-full border py-3 px-4 pr-8 rounded leading-tight focus:outline-none`}
                 id="grid-state"
                 aria-label="Payment Schedule select"
                 value={paymentSchedule}
@@ -190,13 +222,19 @@ export const AddService = () => {
           <div className="flex flex-row mb-6 mt-5">
             <div className="w-full mb-6 mx-2 md:mb-0">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className={`${
+                  darkMode ? "text-slate-50" : "text-gray-700"
+                } block uppercase tracking-wide text-xs font-bold mb-2`}
                 htmlFor="grid-service-name"
               >
                 Service
               </label>
               <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                className={`${
+                  darkMode
+                    ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
+                    : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
+                } appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none`}
                 id="grid-service-name"
                 aria-label="Service name input"
                 type="text"
@@ -207,13 +245,19 @@ export const AddService = () => {
             </div>
             <div className="w-full mx-2">
               <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                className={`${
+                  darkMode ? "text-slate-50" : "text-gray-700"
+                } block uppercase tracking-wide text-xs font-bold mb-2`}
                 htmlFor="grid-service-cost"
               >
                 Cost
               </label>
               <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className={`${
+                  darkMode
+                    ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
+                    : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
+                } appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none`}
                 id="grid-service-cost"
                 min="0.01"
                 step="0.01"
@@ -228,13 +272,19 @@ export const AddService = () => {
 
           <div className="w-full mt-5 mx-2">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className={`${
+                darkMode ? "text-slate-50" : "text-gray-700"
+              } block uppercase tracking-wide text-xs font-bold mb-2`}
               htmlFor="grid-notes"
             >
               Notes
             </label>
             <textarea
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className={`${
+                darkMode
+                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950 focus:border-gray-500"
+                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
+              } appearance-none block w-full border rounded py-3 px-4 leading-tight focus:outline-none`}
               id="grid-notes"
               aria-label="Invoice notes section"
               //   type="text"

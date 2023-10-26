@@ -21,7 +21,7 @@ export const ClientsContainer = ({ clientData, clientContainer }) => {
     >
       <div
         className={`flex flex-row items-center justify-between border ${
-          darkMode ? "bg-sky-800 rounded-t-lg" : "rounded-lg"
+          darkMode ? "bg-sky-800 rounded-t-lg" : "rounded-t-lg"
         }`}
       >
         <div className="flex flex-row items-center">

@@ -21,7 +21,9 @@ export const DateSelector = ({ label, date, dateChangeHandler, className }) => {
         {label}
       </label>
       <DatePicker
-        className="border py-2 px-2 rounded"
+        className={`${
+          darkMode ? "text-slate-50 bg-sky-950" : "text-slate-700 bg-slate-50"
+        } border py-2 px-2 rounded`}
         selected={date}
         onChange={dateChangeHandler}
       />

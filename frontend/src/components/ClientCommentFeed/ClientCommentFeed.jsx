@@ -79,7 +79,11 @@ export const ClientCommentFeed = ({ clientId, comments }) => {
           type="text"
           aria-label="Comment input"
           placeholder="Write a comment"
-          className="border p-2 mb-2 rounded-md appearance-none block w-full bg-gray-200 text-gray-700 border-gray-200 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          className={`border p-2 mb-2 rounded-md appearance-none block w-full ${
+            darkMode
+              ? "bg-sky-950 text-slate-50 border-gray-700 focus:bg-sky-950 focus:border-gray-50"
+              : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
+          }  py-2 px-4 leading-tight focus:outline-none`}
           rows={3}
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
