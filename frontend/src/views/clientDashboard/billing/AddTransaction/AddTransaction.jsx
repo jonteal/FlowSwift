@@ -13,10 +13,16 @@ import { GET_CLIENT_PROJECTS } from "../../../../graphql/queries/projectQueries"
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
+import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
+import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
-const rootClass = "add-transaction";
+// STATE
+import { useContext } from "react";
+import { ThemeContext } from "../../../../context";
 
 export const AddTransaction = () => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   const { clientId } = useParams();
 
   const [paymentDate, setPaymentDate] = useState("");
@@ -88,13 +94,30 @@ export const AddTransaction = () => {
     setProjectId("");
   };
 
+  const transactionTypeOptions = [
+    {
+      label: "Incoming",
+      value: "incoming",
+      ariaLabel: "Incoming transaction",
+    },
+    {
+      label: "Outgoing",
+      value: "outgoing",
+      ariaLabel: "Outgoing transaction",
+    },
+  ];
+
   return (
-    <div className={`${rootClass}-container bg-slate-50 rounded-xl mx-2 w-1/2`}>
-      <h3 className={`${rootClass}-title pt-3 mt-2`}>Add Transaction</h3>
+    <DynamicContainer>
+      <h3 className="pt-3 mt-2">Add Transaction</h3>
 
       <div className="flex flex-row justify-between my-3 w-full px-4">
         <div className="flex flex-col w-full ml-2">
-          <label className="form-label block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          <label
+            className={`block uppercase tracking-wide ${
+              darkMode ? "text-slate-50" : "text-gray-700"
+            }  text-xs font-bold mb-2 mt-3`}
+          >
             Project Name
           </label>
           <select
@@ -125,65 +148,41 @@ export const AddTransaction = () => {
             />
           </div>
           <div className="w-5/12 px-2 mx-3">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-payment-party"
-            >
-              Payment Party
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-payment-party"
-              aria-label="Payment party input"
+            <DynamicInput
+              id="payment-party"
+              inputType="input"
               type="text"
+              label="Payment Party"
+              changeHandler={(e) => setPaymentParty(e.target.value)}
               placeholder="ex. Squarespace"
               value={paymentParty}
-              onChange={(e) => setPaymentParty(e.target.value)}
+              ariaLabel="Payment party input"
             />
           </div>
         </div>
         <div className="w-full px-2 mb-6 flex flex-row">
           <div className="flex flex-col w-1/2">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-transaction-amount"
-            >
-              Amount
-            </label>
-            <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              id="grid-transaction-amount"
+            <DynamicInput
+              id="transaction-amount"
+              inputType="input"
               type="number"
-              min="0.01"
-              step="0.01"
+              label="Amount"
+              changeHandler={(e) => setAmount(e.target.value)}
               placeholder="ex. 500"
-              aria-label="Transaction Amount input"
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              ariaLabel="Transaction Amount input"
             />
           </div>
 
           <div className="flex flex-col w-1/2 mx-2">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-transaction-type"
-            >
-              Type
-            </label>
-            <select
-              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 mx-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-transaction-type"
-              aria-label="Transaction type select"
+            <DynamicInput
+              id="transaction-type"
+              changeHandler={(e) => setIncomingOutgoing(e.target.value)}
               value={incomingOutgoing}
-              onChange={(e) => setIncomingOutgoing(e.target.value)}
-            >
-              <option aria-label="Incoming" value="incoming">
-                Incoming
-              </option>
-              <option aria-label="Outgoing" value="outgoing">
-                Outgoing
-              </option>
-            </select>
+              ariaLabel="Transaction type select"
+              selectOptions={transactionTypeOptions}
+            />
+
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <svg
                 className="fill-current h-4 w-4"
@@ -200,6 +199,6 @@ export const AddTransaction = () => {
           Submit
         </DynamicButton>
       </form>
-    </div>
+    </DynamicContainer>
   );
 };

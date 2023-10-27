@@ -48,11 +48,11 @@ export const AddInvoice = () => {
     update(cache, { data: { addInvoice } }) {
       const { clientInvoices } = cache.readQuery({
         query: GET_ALL_CLIENT_INVOICES,
-        variables: { clientId },
+        variables: { projectId, clientId },
       });
       cache.writeQuery({
         query: GET_ALL_CLIENT_INVOICES,
-        variables: { clientId },
+        variables: { projectId, clientId },
         data: { clientInvoices: [...clientInvoices, addInvoice] },
       });
     },

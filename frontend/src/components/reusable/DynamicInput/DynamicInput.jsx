@@ -55,7 +55,6 @@ export const DynamicInput = ({
         return (
           <select
             id={id}
-            placeholder={placeholder}
             onChange={changeHandler}
             value={value}
             className={`${
@@ -67,6 +66,7 @@ export const DynamicInput = ({
           >
             {selectOptions.map((option) => (
               <option
+                aria-label={option.ariaLabel}
                 value={option.value || option.id}
                 key={option.value || option.id}
               >
