@@ -11,13 +11,14 @@ import { GET_CLIENTS } from "../../../../graphql/queries/clientQueries";
 import { GET_USER } from "../../../../graphql/queries/userQueries";
 
 // COMPONENTS
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
+import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
+import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
+import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 
 // STATE
-import { useSelector } from "react-redux";
 import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { ThemeContext } from "../../../../context";
 
 export const AddProject = () => {
@@ -150,44 +151,45 @@ export const AddProject = () => {
             ))}
           </select>
           <form className="mt-4 mb-10" onSubmit={onSubmit}>
-            <div className="mb-3">
-              <div className="mb-3">
-                <label className="form-label">Title</label>
-                <input
-                  type="title"
-                  className="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="Name of your project..."
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </div>
+            <DynamicInput
+              id="project-title"
+              inputType="input"
+              type="text"
+              label="Title"
+              changeHandler={(e) => setTitle(e.target.value)}
+              placeholder="Name of your project..."
+              value={title}
+              ariaLabel="Project title"
+              className="mb-3"
+            />
 
-              <div className="mb-3">
-                <label className="form-label">Description</label>
-                <textarea
-                  className="form-control"
-                  id="description"
-                  rows="3"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
-              </div>
+            <DynamicInput
+              id="project-title"
+              inputType="textarea"
+              rows="3"
+              label="Description"
+              changeHandler={(e) => setDescription(e.target.value)}
+              placeholder="Description of your project..."
+              value={description}
+              ariaLabel="Project Description"
+              className="mb-3"
+            />
 
-              <label className="form-label">Status</label>
-              <select
-                id="status"
-                className="form-select"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option value="notStarted">Not Started</option>
-                <option value="inProgress">In Progress</option>
-                <option value="completed">Completed</option>
-                <option value="paused">Paused</option>
-                <option value="needsAttention">Needs Attention</option>
-              </select>
-            </div>
+            <DynamicInput
+              id="project-status"
+              inputType="select"
+              label="Status"
+              changeHandler={(e) => setStatus(e.target.value)}
+              value={status}
+              selectOptions={[
+                { value: "notStarted", label: "Not Started" },
+                { value: "inProgress", label: "In Progress" },
+                { value: "completed", label: "Completed" },
+                { value: "paused", label: "Paused" },
+                { value: "needsAttention", label: "Needs Attention" },
+              ]}
+              ariaLabel="Project status select"
+            />
 
             <DateSelector
               className="mb-3"
@@ -203,44 +205,41 @@ export const AddProject = () => {
               dateChangeHandler={handleDeadlineChange}
             />
 
-            <div className="mb-3">
-              <label className="form-label">Notes</label>
-              <textarea
-                className={`appearance-none block w-full ${
-                  darkMode
-                    ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950 focus:border-gray-500"
-                    : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
-                } border rounded py-3 px-4 leading-tight focus:outline-none`}
-                id="notes"
-                rows="3"
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-              ></textarea>
-            </div>
+            <DynamicInput
+              id="project-notes"
+              inputType="textarea"
+              label="Notes"
+              changeHandler={(e) => setNotes(e.target.value)}
+              placeholder="Notes for your project..."
+              value={notes}
+              className="mb-3"
+              row="3"
+              ariaLabel="Project notes"
+            />
 
-            <div className="mb-3">
-              <label className="form-label">Budget</label>
-              <input
-                type="clientBudget"
-                className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="What is the budget for this project?"
-                value={clientBudget}
-                onChange={(e) => setClientBudget(e.target.value)}
-              />
-            </div>
+            <DynamicInput
+              id="project-budget"
+              inputType="input"
+              type="number"
+              label="Budget"
+              changeHandler={(e) => setClientBudget(e.target.value)}
+              placeholder="ex. 5000"
+              value={clientBudget}
+              className="mb-3"
+              ariaLabel="Project budget"
+            />
 
-            <div className="mb-3">
-              <label className="form-label">Project Estimate</label>
-              <input
-                type="projectEstimate"
-                className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="What is the estimate for this project?"
-                value={projectEstimate}
-                onChange={(e) => setProjectEstimate(e.target.value)}
-              />
-            </div>
+            <DynamicInput
+              id="project-estimate"
+              inputType="input"
+              type="text"
+              label="Project Estimate"
+              changeHandler={(e) => setProjectEstimate(e.target.value)}
+              placeholder="ex. 4500"
+              value={projectEstimate}
+              className="mb-3"
+              ariaLabel="Project Estimate"
+            />
 
             <DynamicButton color="red" type="submit">
               Submit
