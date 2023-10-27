@@ -615,6 +615,7 @@ const mutation = new GraphQLObjectType({
     updateClient: {
       type: ClientType,
       args: {
+        organizationId: { type: new GraphQLNonNull(GraphQLID) },
         id: { type: new GraphQLNonNull(GraphQLID) },
         firstName: { type: GraphQLString },
         lastName: { type: GraphQLString },
@@ -639,6 +640,7 @@ const mutation = new GraphQLObjectType({
           args.id,
           {
             $set: {
+              organizationId: args.organizationId,
               firstName: args.firstName,
               lastName: args.lastName,
               phoneNumber: args.phoneNumber,

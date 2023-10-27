@@ -10,6 +10,10 @@ const GET_CLIENTS = gql`
       emailAddress
       companyName
       status
+      organization {
+        id
+        organizationName
+      }
     }
   }
 `;
@@ -24,6 +28,10 @@ const GET_CLIENTS_BY_STATUS = gql`
       emailAddress
       companyName
       status
+      organization {
+        id
+        organizationName
+      }
     }
   }
 `;
@@ -38,6 +46,10 @@ const GET_CLIENT = gql`
       emailAddress
       companyName
       status
+      organization {
+        id
+        organizationName
+      }
     }
   }
 `;
