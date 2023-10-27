@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../../../context";
+import { FormInput } from "../../../../components/reusable/FormInput/FormInput";
 
 export const AddKanbanTicket = () => {
   const theme = useContext(ThemeContext);
@@ -100,25 +101,17 @@ export const AddKanbanTicket = () => {
       <h1 className="text-lg text-left">New Ticket</h1>
       <form onSubmit={onSubmit}>
         <div>
-          <label
-            className={`block uppercase tracking-wide ${
-              darkMode ? "text-slate-50" : "text-gray-700"
-            }  text-xs font-bold mb-2 mt-3`}
-          >
-            Title
-          </label>
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+          <FormInput
             id="name"
+            inputType="input"
             type="text"
+            label="Title"
+            changeHandler={(e) => setTitle(e.target.value)}
             placeholder="Name of the ticket"
-            className={`appearance-none block w-full ${
-              darkMode
-                ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
-                : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
-            }  border  rounded py-2 px-3 mb-3 leading-tight focus:outline-none `}
+            value={title}
+            ariaLabel="Kanban ticket title"
           />
+
           <label
             className={`block uppercase tracking-wide ${
               darkMode ? "text-slate-50" : "text-gray-700"

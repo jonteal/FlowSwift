@@ -8,15 +8,21 @@ import { useMutation, useQuery } from "@apollo/client";
 import { ADD_PROJECT } from "../../../../graphql/mutations/projectMutations";
 import { GET_PROJECTS } from "../../../../graphql/queries/projectQueries";
 import { GET_CLIENTS } from "../../../../graphql/queries/clientQueries";
+import { GET_USER } from "../../../../graphql/queries/userQueries";
 
 // COMPONENTS
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
+
+// STATE
 import { useSelector } from "react-redux";
-import { GET_USER } from "../../../../graphql/queries/userQueries";
+import { useContext } from "react";
+import { ThemeContext } from "../../../../context";
 
 export const AddProject = () => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("notStarted");
@@ -200,7 +206,11 @@ export const AddProject = () => {
             <div className="mb-3">
               <label className="form-label">Notes</label>
               <textarea
-                className="form-control"
+                className={`appearance-none block w-full ${
+                  darkMode
+                    ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950 focus:border-gray-500"
+                    : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
+                } border rounded py-3 px-4 leading-tight focus:outline-none`}
                 id="notes"
                 rows="3"
                 value={notes}

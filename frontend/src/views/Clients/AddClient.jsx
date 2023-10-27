@@ -13,7 +13,13 @@ import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicBu
 import { GET_USER } from "../../graphql/queries/userQueries";
 import { Spinner } from "react-bootstrap";
 
+// STATE
+import { useContext } from "react";
+import { ThemeContext } from "../../context";
+
 export const AddClient = () => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -23,10 +29,6 @@ export const AddClient = () => {
   const [organizationId, setOrganizationId] = useState("");
 
   const { userInfo } = useSelector((state) => state.auth);
-
-  console.log("userInfo: ", userInfo);
-
-  console.log("organizationId", organizationId);
 
   const [addClient] = useMutation(ADD_CLIENT, {
     variables: {
@@ -61,7 +63,7 @@ export const AddClient = () => {
   });
 
   useEffect(() => {
-    if (userData.user.organizationId)
+    if (userData?.user?.organizationId)
       setOrganizationId(userData?.user?.organizationId);
   }, []);
 
@@ -104,13 +106,19 @@ export const AddClient = () => {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className={`${
+                darkMode ? "text-slate-50" : "text-gray-700"
+              } block uppercase tracking-wide text-xs font-bold mb-2`}
               htmlFor="grid-first-name"
             >
               First Name
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className={`${
+                darkMode
+                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
+                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
+              } appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none`}
               id="grid-first-name"
               aria-label="First name input"
               type="text"
@@ -121,13 +129,19 @@ export const AddClient = () => {
           </div>
           <div className="w-full md:w-1/2 px-3">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className={`${
+                darkMode ? "text-slate-50" : "text-gray-700"
+              } block uppercase tracking-wide text-xs font-bold mb-2`}
               htmlFor="grid-last-name"
             >
               Last Name
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className={`${
+                darkMode
+                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
+                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
+              } appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none`}
               id="grid-last-name"
               aria-label="Last name input"
               type="text"
@@ -140,13 +154,19 @@ export const AddClient = () => {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className={`${
+                darkMode ? "text-slate-50" : "text-gray-700"
+              } block uppercase tracking-wide text-xs font-bold mb-2`}
               htmlFor="grid-phone-number"
             >
               Phone Number
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              className={`${
+                darkMode
+                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
+                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
+              } appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none`}
               id="grid-phone-number"
               type="text"
               placeholder="479-523-1234"
@@ -157,13 +177,19 @@ export const AddClient = () => {
           </div>
           <div className="w-full md:w-1/2 px-3">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className={`${
+                darkMode ? "text-slate-50" : "text-gray-700"
+              } block uppercase tracking-wide text-xs font-bold mb-2`}
               htmlFor="grid-email-address"
             >
               Email Address
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className={`${
+                darkMode
+                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
+                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
+              } appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none`}
               id="grid-email-address"
               type="text"
               placeholder="jane@gmail.com"
@@ -177,13 +203,19 @@ export const AddClient = () => {
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className={`${
+                darkMode ? "text-slate-50" : "text-gray-700"
+              } block uppercase tracking-wide text-xs font-bold mb-2`}
               htmlFor="grid-company"
             >
               Company Name
             </label>
             <input
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+              className={`${
+                darkMode
+                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
+                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
+              } appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none`}
               id="grid-company"
               aria-label="Company Name input"
               type="text"
@@ -200,14 +232,20 @@ export const AddClient = () => {
         <div className="flex flex-wrap -mx-3 mb-3">
           <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              className={`${
+                darkMode ? "text-slate-50" : "text-gray-700"
+              } block uppercase tracking-wide text-xs font-bold mb-2`}
               htmlFor="grid-state"
             >
               Status
             </label>
             <div className="relative">
               <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                className={`${
+                  darkMode
+                    ? "bg-sky-950 border border-gray-200 text-slate-50 focus:bg-sky-950 focus:border-gray-500"
+                    : "bg-gray-200 border border-gray-200 text-gray-700 focus:bg-white focus:border-gray-500"
+                } block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-500`}
                 id="grid-state"
                 aria-label="Client Status select"
                 value={status}

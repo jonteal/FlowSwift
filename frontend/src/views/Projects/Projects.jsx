@@ -23,7 +23,7 @@ export const Projects = () => {
   if (error) return <p>There was an error loading the comment feed</p>;
 
   return (
-    <div className="flex flex-col">
+    <div className={`flex flex-col max-h-screen ${darkMode ? "" : ""}`}>
       <DynamicButton
         color="red"
         type="link"
