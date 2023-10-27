@@ -15,6 +15,7 @@ import { ADD_ORGANIZATION } from "../../../graphql/mutations/organizationMutatio
 // COMPONENTS
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicInput";
 
 import { useContext } from "react";
 import { ThemeContext } from "../../../context";
@@ -85,19 +86,18 @@ export const AddOrganization = () => {
             Please provide a name for your organization.
           </div>
         )}
-        <form className="mt-4 mb-10" onSubmit={onSubmit}>
-          <div className="mb-3">
-            <div className="mb-3">
-              <label className="form-label">Organization Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="organization-name"
-                placeholder="Name of your organization..."
-                value={organizationName}
-                onChange={(e) => setOrganizationName(e.target.value)}
-              />
-            </div>
+        <form className="mb-10" onSubmit={onSubmit}>
+          <div className="py-5">
+            <DynamicInput
+              id="organization-name"
+              inputType="input"
+              type="text"
+              label="Organization Name"
+              placeholder="Name of your organization..."
+              value={organizationName}
+              changeHandler={(e) => setOrganizationName(e.target.value)}
+              ariaLabel="Name of organization"
+            />
           </div>
 
           <DynamicButton color="red" type="submit">

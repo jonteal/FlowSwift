@@ -11,6 +11,7 @@ import { GET_CLIENT_PROJECTS } from "../../../../graphql/queries/projectQueries"
 
 // COMPONENTS
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
+import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
 
@@ -28,7 +29,6 @@ export const AddInvoice = () => {
   const [notes, setNotes] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [projectId, setProjectId] = useState("");
-  // const [isProjectInvoice, setIsProjectInvoice] = useState(false);
 
   const {
     loading: projectsLoading,
@@ -134,26 +134,15 @@ export const AddInvoice = () => {
             />
           </div>
           <div className="w-full md:w-1/2 px-3">
-            <label
-              className={`form-label block uppercase tracking-wide ${
-                darkMode ? "text-slate-50" : "text-slate-700"
-              }  text-xs font-bold mb-2`}
-              htmlFor="grid-invoice-number"
-            >
-              Invoice Number
-            </label>
-            <input
-              className={`${
-                darkMode
-                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950 focus:border-gray-500"
-                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
-              } appearance-none block w-full border rounded py-2 px-4 leading-tight focus:outline-none`}
-              id="grid-invoice-number"
-              aria-label="Invoice Number input"
+            <DynamicInput
+              id="invoice-number"
+              inputType="input"
               type="text"
+              label="Invoice Number"
+              changeHandler={(e) => setInvoiceNumber(e.target.value)}
               placeholder="ex. M12345"
               value={invoiceNumber}
-              onChange={(e) => setInvoiceNumber(e.target.value)}
+              ariaLabel="Invoice Number input"
             />
           </div>
         </div>
@@ -187,27 +176,15 @@ export const AddInvoice = () => {
             </div>
           </div>
           <div className="w-full">
-            <label
-              className={`form-label block uppercase tracking-wide ${
-                darkMode ? "text-slate-50" : "text-slate-700"
-              }  text-xs font-bold mb-2`}
-              htmlFor="grid-notes"
-            >
-              Notes
-            </label>
-            <textarea
-              className={`${
-                darkMode
-                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950 focus:border-gray-500"
-                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
-              } appearance-none block w-full border rounded py-3 px-4 leading-tight focus:outline-none`}
-              id="grid-notes"
-              aria-label="Invoice notes section"
-              //   type="text"
-              rows="3"
+            <DynamicInput
+              id="invoice-notes"
+              inputType="textarea"
+              label="Notes"
+              changeHandler={(e) => setNotes(e.target.value)}
               placeholder="Notes about this invoice"
               value={notes}
-              onChange={(e) => setNotes(e.target.value)}
+              rows="3"
+              ariaLabel="Invoice notes section"
             />
           </div>
         </div>

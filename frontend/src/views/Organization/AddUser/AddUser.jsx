@@ -46,8 +46,6 @@ export const AddUser = () => {
     variables: { organizationId },
   });
 
-  console.log("usersData: ", usersData);
-
   const [register, { isLoading }] = useRegisterMutation();
 
   if (usersLoading) return <Spinner />;

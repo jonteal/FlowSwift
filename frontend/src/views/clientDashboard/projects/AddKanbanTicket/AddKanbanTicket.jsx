@@ -1,26 +1,21 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
+import { useSelector } from "react-redux";
 
 // GRAPHQL
 import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
 import { ADD_TICKET } from "../../../../graphql/mutations/ticketMutations";
+import { GET_USER } from "../../../../graphql/queries/userQueries";
 
 // COMPONENTS
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
+import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
+import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
-import { GET_USER } from "../../../../graphql/queries/userQueries";
-import { useSelector } from "react-redux";
-
-// STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../../context";
-import { FormInput } from "../../../../components/reusable/FormInput/FormInput";
 
 export const AddKanbanTicket = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
   const { projectId } = useParams();
   const [title, setTitle] = useState("");
   const [typeOfTicket, setTypeOfTicket] = useState("userStory");
@@ -92,128 +87,98 @@ export const AddKanbanTicket = () => {
     setBlockedReason("");
   };
 
+  const ticketTypeOptions = [
+    { label: "User Story", value: "userStory" },
+    { label: "Defect", value: "defect" },
+  ];
+
+  const ticketStatusOptions = [
+    {
+      label: "Ready",
+      value: "pre",
+    },
+    {
+      label: "In Progress",
+      value: "middle",
+    },
+    {
+      label: "Done",
+      value: "old",
+    },
+  ];
+
   return (
-    <div
-      className={`${
-        darkMode ? "bg-sky-800" : "bg-slate-50"
-      }  mt-2 mx-2 p-3 rounded-xl`}
-    >
+    <DynamicContainer>
       <h1 className="text-lg text-left">New Ticket</h1>
       <form onSubmit={onSubmit}>
-        <div>
-          <FormInput
-            id="name"
-            inputType="input"
-            type="text"
-            label="Title"
-            changeHandler={(e) => setTitle(e.target.value)}
-            placeholder="Name of the ticket"
-            value={title}
-            ariaLabel="Kanban ticket title"
+        <DynamicInput
+          id="name"
+          inputType="input"
+          type="text"
+          label="Title"
+          changeHandler={(e) => setTitle(e.target.value)}
+          placeholder="Name of the ticket"
+          value={title}
+          ariaLabel="Kanban ticket title"
+        />
+
+        <DynamicInput
+          id="ticket-type"
+          inputType="select"
+          label="Ticket Type"
+          changeHandler={(e) => setTypeOfTicket(e.target.value)}
+          value={typeOfTicket}
+          selectOptions={ticketTypeOptions}
+          ariaLabel="Kanban ticket type select"
+        />
+
+        <DynamicInput
+          id="ticket-description"
+          inputType="textarea"
+          rows="3"
+          placeholder="Description about this ticket"
+          changeHandler={(e) => setDescription(e.target.value)}
+          value={description}
+          ariaLabel="Ticket type Description"
+        />
+
+        <DynamicInput
+          id="ticket-status"
+          inputType="select"
+          label="Status"
+          changeHandler={(e) => setStatus(e.target.value)}
+          value={status}
+          selectOptions={ticketStatusOptions}
+          ariaLabel="Ticket status select"
+        />
+
+        <div className="flex mb-4 flex-col items-start w-full">
+          <Checkbox
+            label="Is this story blocked?"
+            value={blocked}
+            setChangeHandler={() => setBlocked(!blocked)}
           />
 
-          <label
-            className={`block uppercase tracking-wide ${
-              darkMode ? "text-slate-50" : "text-gray-700"
-            }  text-xs font-bold my-4`}
-          >
-            Ticket Type
-          </label>
-          <select
-            id="type"
-            className={`${
-              darkMode
-                ? "bg-sky-950 text-slate-50"
-                : "bg-gray-200 text-gray-700"
-            } form-select mb-4`}
-            value={typeOfTicket}
-            onChange={(e) => setTypeOfTicket(e.target.value)}
-          >
-            <option value="userStory">User Story</option>
-            <option value="defect">Defect</option>
-          </select>
-          <label
-            className={`block uppercase tracking-wide ${
-              darkMode ? "text-slate-50" : "text-gray-700"
-            }  text-xs font-bold my-4`}
-          >
-            Description
-          </label>
-          <textarea
-            className={`appearance-none block w-full ${
-              darkMode
-                ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950 focus:border-gray-500"
-                : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
-            } border rounded py-3 px-4 leading-tight focus:outline-none `}
-            id="grid-notes"
-            aria-label="Ticket description section"
-            //   type="text"
-            rows="3"
-            placeholder="Description about this ticket"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <label
-            className={`block uppercase tracking-wide ${
-              darkMode ? "text-slate-50" : "text-gray-700"
-            }  text-xs font-bold my-4`}
-          >
-            Status
-          </label>
-          <select
-            id="status"
-            className={`${
-              darkMode
-                ? "bg-sky-950 text-slate-50"
-                : "bg-gray-200 text-gray-700"
-            } form-select mb-4`}
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          >
-            <option value="pre">Ready</option>
-            <option value="middle">In Progress</option>
-            <option value="old">Done</option>
-          </select>
-
-          <div className="flex mb-4 flex-col items-start w-full">
-            <Checkbox
-              label="Is this story blocked?"
-              value={blocked}
-              setChangeHandler={() => setBlocked(!blocked)}
-            />
-
-            {blocked && (
-              <div className="w-full">
-                <label
-                  className={`block uppercase tracking-wide ${
-                    darkMode ? "text-slate-50" : "text-gray-700"
-                  }  text-xs font-bold my-4 mb-2`}
-                >
-                  Description
-                </label>
-                <textarea
-                  className={`appearance-none block w-full ${
-                    darkMode
-                      ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950 focus:border-gray-500"
-                      : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
-                  } border rounded py-3 px-4 leading-tight focus:outline-none`}
-                  id="grid-notes"
-                  aria-label="Blocked reason section"
-                  //   type="text"
-                  rows="3"
-                  placeholder="Reason the story is blocked"
-                  value={blockedReason}
-                  onChange={(e) => setBlockedReason(e.target.value)}
-                />
-              </div>
-            )}
-          </div>
+          {blocked && (
+            <div className="w-full">
+              <DynamicInput
+                id="ticket-block-description"
+                inputType="textarea"
+                label="Description"
+                changeHandler={(e) => setBlockedReason(e.target.value)}
+                placeholder="Reason the story is blocked"
+                value={blockedReason}
+                rows="3"
+                ariaLabel="Blocked reason section"
+              />
+            </div>
+          )}
         </div>
 
         <DynamicButton color="red" type="submit">
           Submit
         </DynamicButton>
       </form>
-    </div>
+    </DynamicContainer>
   );
 };

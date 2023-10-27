@@ -2,7 +2,8 @@
 import { useContext } from "react";
 import { ThemeContext } from "../../../context";
 
-export const FormInput = ({
+export const DynamicInput = ({
+  id,
   inputType,
   type,
   label,
@@ -13,7 +14,6 @@ export const FormInput = ({
   className,
   rows,
   ariaLabel,
-  id,
 }) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
@@ -63,10 +63,14 @@ export const FormInput = ({
                 ? "bg-sky-950 text-slate-50"
                 : "bg-gray-200 text-gray-700"
             } form-select mb-4`}
+            aria-label={ariaLabel}
           >
             {selectOptions.map((option) => (
-              <option value={option.value} key={option.value}>
-                {option.label}
+              <option
+                value={option.value || option.id}
+                key={option.value || option.id}
+              >
+                {option.label || option.title}
               </option>
             ))}
           </select>
