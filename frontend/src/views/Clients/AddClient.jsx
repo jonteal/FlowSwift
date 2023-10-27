@@ -16,6 +16,8 @@ import { Spinner } from "react-bootstrap";
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../context";
+import { DynamicInput } from "../../components/reusable/DynamicInput/DynamicInput";
+import { DynamicContainer } from "../../components/reusable/DynamicContainer/DynamicContainer";
 
 export const AddClient = () => {
   const theme = useContext(ThemeContext);
@@ -99,190 +101,101 @@ export const AddClient = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <h3 className="font-semibold text-slate-800 text-lg my-3">Add Client</h3>
+    <DynamicContainer>
+      <div className="flex flex-col items-center">
+        <h3
+          className={`${
+            darkMode ? "text-slate-50" : "text-slate-800"
+          } font-semibold  text-lg my-3`}
+        >
+          Add Client
+        </h3>
 
-      <form className="w-full max-w-lg" onSubmit={onSubmit}>
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              className={`${
-                darkMode ? "text-slate-50" : "text-gray-700"
-              } block uppercase tracking-wide text-xs font-bold mb-2`}
-              htmlFor="grid-first-name"
-            >
-              First Name
-            </label>
-            <input
-              className={`${
-                darkMode
-                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
-                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
-              } appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none`}
-              id="grid-first-name"
-              aria-label="First name input"
+        <form className="w-full max-w-lg" onSubmit={onSubmit}>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <DynamicInput
+              id="client-first-name"
+              inputType="input"
               type="text"
+              label="First Name"
+              changeHandler={(e) => setFirstName(e.target.value)}
               placeholder="Jane"
               value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              className="w-full md:w-1/2 px-3"
+              ariaLabel="First name input"
             />
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label
-              className={`${
-                darkMode ? "text-slate-50" : "text-gray-700"
-              } block uppercase tracking-wide text-xs font-bold mb-2`}
-              htmlFor="grid-last-name"
-            >
-              Last Name
-            </label>
-            <input
-              className={`${
-                darkMode
-                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
-                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
-              } appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none`}
-              id="grid-last-name"
-              aria-label="Last name input"
+
+            <DynamicInput
+              id="client-last-name"
+              inputType="input"
               type="text"
+              label="Last Name"
+              changeHandler={(e) => setLastName(e.target.value)}
               placeholder="Doe"
               value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              className="w-full md:w-1/2 px-3"
+              ariaLabel="Last name input"
             />
           </div>
-        </div>
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              className={`${
-                darkMode ? "text-slate-50" : "text-gray-700"
-              } block uppercase tracking-wide text-xs font-bold mb-2`}
-              htmlFor="grid-phone-number"
-            >
-              Phone Number
-            </label>
-            <input
-              className={`${
-                darkMode
-                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
-                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
-              } appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none`}
-              id="grid-phone-number"
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <DynamicInput
+              id="client-phone-number"
+              inputType="input"
               type="text"
+              label="Phone Number"
+              changeHandler={(e) => setPhoneNumber(e.target.value)}
               placeholder="479-523-1234"
-              aria-label="Phone Number input"
               value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              className="w-full md:w-1/2 px-3 mb-6 md:mb-0"
+              ariaLabel="Phone Number input"
             />
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label
-              className={`${
-                darkMode ? "text-slate-50" : "text-gray-700"
-              } block uppercase tracking-wide text-xs font-bold mb-2`}
-              htmlFor="grid-email-address"
-            >
-              Email Address
-            </label>
-            <input
-              className={`${
-                darkMode
-                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
-                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
-              } appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none`}
-              id="grid-email-address"
-              type="text"
+
+            <DynamicInput
+              id="client-email-address"
+              inputType="input"
+              type="email"
+              label="Email Address"
+              changeHandler={(e) => setEmailAddress(e.target.value)}
               placeholder="jane@gmail.com"
-              aria-label="Email Address input"
               value={emailAddress}
-              onChange={(e) => setEmailAddress(e.target.value)}
+              className="w-full md:w-1/2 px-3"
+              ariaLabel="Email Address input"
             />
           </div>
-        </div>
 
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full px-3">
-            <label
-              className={`${
-                darkMode ? "text-slate-50" : "text-gray-700"
-              } block uppercase tracking-wide text-xs font-bold mb-2`}
-              htmlFor="grid-company"
-            >
-              Company Name
-            </label>
-            <input
-              className={`${
-                darkMode
-                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
-                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
-              } appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight focus:outline-none`}
-              id="grid-company"
-              aria-label="Company Name input"
-              type="text"
-              placeholder="Jane's Cafe"
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-            />
-            <p className="text-gray-600 text-xs italic">
-              Make it as long and as crazy as you'd like
-            </p>
-          </div>
-        </div>
+          <DynamicInput
+            id="client-company-name"
+            inputType="input"
+            type="text"
+            label="Company Name"
+            changeHandler={(e) => setCompanyName(e.target.value)}
+            placeholder="Jane's Cafe"
+            value={companyName}
+            className="w-full px-3"
+            ariaLabel="Company Name input"
+          />
 
-        <div className="flex flex-wrap -mx-3 mb-3">
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-              className={`${
-                darkMode ? "text-slate-50" : "text-gray-700"
-              } block uppercase tracking-wide text-xs font-bold mb-2`}
-              htmlFor="grid-state"
-            >
-              Status
-            </label>
-            <div className="relative">
-              <select
-                className={`${
-                  darkMode
-                    ? "bg-sky-950 border border-gray-200 text-slate-50 focus:bg-sky-950 focus:border-gray-500"
-                    : "bg-gray-200 border border-gray-200 text-gray-700 focus:bg-white focus:border-gray-500"
-                } block appearance-none w-full py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-500`}
-                id="grid-state"
-                aria-label="Client Status select"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option aria-label="Lead" value="lead">
-                  Lead
-                </option>
-                <option aria-label="Prospect" value="prospect">
-                  Prospect
-                </option>
-                <option aria-label="Current Client" value="current">
-                  Current
-                </option>
-                <option aria-label="Former Client" value="former">
-                  Former
-                </option>
-                <option aria-label="Cold Lead" value="cold">
-                  Cold
-                </option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg
-                  className="fill-current h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-        <DynamicButton color="red" type="submit">
-          Save
-        </DynamicButton>
-      </form>
-    </div>
+          <DynamicInput
+            id="client-status"
+            inputType="select"
+            label="Status"
+            changeHandler={(e) => setStatus(e.target.value)}
+            value={status}
+            selectOptions={[
+              { value: "lead", label: "Lead" },
+              { value: "prospect", label: "Prospect" },
+              { value: "current", label: "Current" },
+              { value: "former", label: "Former" },
+              { value: "cold", label: "Cold" },
+            ]}
+            className="w-full md:w-1/3 px-3 mb-6 md:mb-0 mt-5"
+            ariaLabel="Client Status select"
+          />
+          <DynamicButton color="red" type="submit">
+            Save
+          </DynamicButton>
+        </form>
+      </div>
+    </DynamicContainer>
   );
 };
