@@ -14,6 +14,8 @@ export const DynamicInput = ({
   className,
   rows,
   ariaLabel,
+  step = "",
+  min = "",
 }) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
@@ -24,6 +26,8 @@ export const DynamicInput = ({
           <input
             id={id}
             type={type}
+            step={step}
+            min={min}
             placeholder={placeholder}
             onChange={changeHandler}
             value={value}
