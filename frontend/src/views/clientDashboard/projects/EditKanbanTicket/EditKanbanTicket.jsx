@@ -13,6 +13,7 @@ import { UPDATE_TICKET } from "../../../../graphql/mutations/ticketMutations";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
+import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 
 export const EditKanbanTicket = () => {
   const { projectId, ticketId } = useParams();
@@ -85,7 +86,17 @@ export const EditKanbanTicket = () => {
       <div className="">
         <form onSubmit={onSubmit}>
           <div>
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-3">
+            <DynamicInput
+              id="edit-kanban-ticket-title"
+              inputType="input"
+              type="text"
+              label="Title"
+              changeHandler={(e) => setTitle(e.target.value)}
+              placeholder="Name of the ticket"
+              value={title}
+              ariaLabel="Edit kanban ticket title"
+            />
+            {/* <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-3">
               Title
             </label>
             <input
@@ -95,7 +106,7 @@ export const EditKanbanTicket = () => {
               type="text"
               placeholder="Name of the ticket"
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white"
-            />
+            /> */}
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-4">
               Description
             </label>
@@ -118,9 +129,9 @@ export const EditKanbanTicket = () => {
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
-              <option value="pre">Ready</option>
-              <option value="middle">In Progress</option>
-              <option value="old">Done</option>
+              <option value="ready">Ready</option>
+              <option value="inProgress">In Progress</option>
+              <option value="Done">Done</option>
             </select>
 
             <div className="flex mb-4 flex-col items-start w-full">

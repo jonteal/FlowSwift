@@ -14,7 +14,7 @@ const TicketSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["Ready", "In Progress", "Done"],
+    enum: ["ready", "inProgress", "done"],
   },
   blocked: {
     type: Boolean,

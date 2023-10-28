@@ -1312,12 +1312,12 @@ const mutation = new GraphQLObjectType({
           type: new GraphQLEnumType({
             name: "TicketStatus",
             values: {
-              pre: { value: "Ready" },
-              middle: { value: "In Progress" },
-              old: { value: "Done" },
+              ready: { value: "ready" },
+              inProgress: { value: "inProgress" },
+              done: { value: "done" },
             },
           }),
-          defaultValue: "Ready",
+          defaultValue: "ready",
         },
         blocked: { type: GraphQLBoolean },
         blockedReason: { type: GraphQLString },
@@ -1363,8 +1363,8 @@ const mutation = new GraphQLObjectType({
           type: new GraphQLEnumType({
             name: "TypeOfTicketUpdate",
             values: {
-              userStory: { value: "User Story" },
-              defect: { value: "Defect" },
+              userStory: { value: "userStory" },
+              defect: { value: "defect" },
             },
           }),
           defaultValue: "User Story",
@@ -1376,9 +1376,9 @@ const mutation = new GraphQLObjectType({
           type: new GraphQLEnumType({
             name: "TicketStatusUpdate",
             values: {
-              pre: { value: "Ready" },
-              middle: { value: "In Progress" },
-              old: { value: "Done" },
+              ready: { value: "ready" },
+              inProgress: { value: "inProgress" },
+              done: { value: "done" },
             },
           }),
         },

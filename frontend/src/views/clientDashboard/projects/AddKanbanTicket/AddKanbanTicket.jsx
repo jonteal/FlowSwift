@@ -95,15 +95,15 @@ export const AddKanbanTicket = () => {
   const ticketStatusOptions = [
     {
       label: "Ready",
-      value: "pre",
+      value: "ready",
     },
     {
       label: "In Progress",
-      value: "middle",
+      value: "inProgress",
     },
     {
       label: "Done",
-      value: "old",
+      value: "done",
     },
   ];
 

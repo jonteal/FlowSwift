@@ -147,32 +147,30 @@ export const AddTransaction = () => {
               dateChangeHandler={handleDateChange}
             />
           </div>
-          <div className="w-5/12 px-2 mx-3">
-            <DynamicInput
-              id="payment-party"
-              inputType="input"
-              type="text"
-              label="Payment Party"
-              changeHandler={(e) => setPaymentParty(e.target.value)}
-              placeholder="ex. Squarespace"
-              value={paymentParty}
-              ariaLabel="Payment party input"
-            />
-          </div>
+          <DynamicInput
+            id="payment-party"
+            inputType="input"
+            type="text"
+            label="Payment Party"
+            changeHandler={(e) => setPaymentParty(e.target.value)}
+            placeholder="ex. Squarespace"
+            value={paymentParty}
+            ariaLabel="Payment party input"
+            className="w-5/12 px-2 mx-3"
+          />
         </div>
         <div className="w-full px-2 mb-6 flex flex-row">
-          <div className="flex flex-col w-1/2">
-            <DynamicInput
-              id="transaction-amount"
-              inputType="input"
-              type="number"
-              label="Amount"
-              changeHandler={(e) => setAmount(e.target.value)}
-              placeholder="ex. 500"
-              value={amount}
-              ariaLabel="Transaction Amount input"
-            />
-          </div>
+          <DynamicInput
+            id="transaction-amount"
+            inputType="input"
+            type="number"
+            label="Amount"
+            changeHandler={(e) => setAmount(e.target.value)}
+            placeholder="ex. 500"
+            value={amount}
+            ariaLabel="Transaction Amount input"
+            className="flex flex-col w-1/2"
+          />
 
           <div className="flex flex-col w-1/2 mx-2">
             <DynamicInput

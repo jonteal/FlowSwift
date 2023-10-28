@@ -14,6 +14,7 @@ import { DateSelector } from "../../../../components/reusable/DateSelector/DateS
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../../../context";
+import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 
 export const EditProject = () => {
   const theme = useContext(ThemeContext);
@@ -92,74 +93,46 @@ export const EditProject = () => {
       }  px-10`}
     >
       <form onSubmit={onSubmit}>
-        <div className="mb-3">
-          <label
-            className={`block uppercase tracking-wide ${
-              darkMode ? "text-slate-50" : "text-gray-700"
-            }  text-xs font-bold my-4 mb-2`}
-          >
-            Title
-          </label>
-          <input
-            type="text"
-            className={`appearance-none block w-full ${
-              darkMode
-                ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
-                : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
-            }  border  rounded py-2 px-3 mb-3 leading-tight focus:outline-none `}
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
+        <DynamicInput
+          id="edit-project-title"
+          inputType="input"
+          type="text"
+          label="Title"
+          changeHandler={(e) => setTitle(e.target.value)}
+          value={title}
+          className="mb-3"
+          ariaLabel="Edit project title"
+        />
 
-        <div className="mb-3">
-          <label
-            className={`block uppercase tracking-wide ${
-              darkMode ? "text-slate-50" : "text-gray-700"
-            }  text-xs font-bold my-4 mb-2`}
-          >
-            Description
-          </label>
-          <textarea
-            className={`appearance-none block w-full ${
-              darkMode
-                ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950 focus:border-gray-500"
-                : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
-            } border rounded py-3 px-4 leading-tight focus:outline-none `}
-            id="description"
-            rows="3"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          ></textarea>
-        </div>
+        <DynamicInput
+          id="edit-project-description"
+          inputType="textarea"
+          label="Description"
+          changeHandler={(e) => setDescription(e.target.value)}
+          value={description}
+          className="mb-3"
+          ariaLabel="Edit Project description"
+          rows="3"
+        />
 
         <div className="flex flex-row w-full justify-around items-center">
-          <div className="flex-col">
-            <label
-              className={`block uppercase tracking-wide ${
-                darkMode ? "text-slate-50" : "text-gray-700"
-              }  text-xs font-bold my-4 mb-2`}
-            >
-              Status
-            </label>
-            <select
-              id="status"
-              className={`${
-                darkMode
-                  ? "bg-sky-950 text-slate-50"
-                  : "bg-gray-200 text-gray-700"
-              } form-select mb-4`}
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              <option value="notStarted">Not Started</option>
-              <option value="inProgress">In Progress</option>
-              <option value="completed">Completed</option>
-              <option value="paused">Paused</option>
-              <option value="needsAttention">Needs Attention</option>
-            </select>
-          </div>
+          <DynamicInput
+            id="edit-project-status"
+            inputType="select"
+            label="Status"
+            changeHandler={(e) => setStatus(e.target.value)}
+            value={status}
+            selectOptions={[
+              { value: "notStarted", label: "Not Started" },
+              { value: "inProgress", label: "In Progress" },
+              { value: "completed", label: "Completed" },
+              { value: "paused", label: "Paused" },
+              { value: "needsAttention", label: "Needs Attention" },
+            ]}
+            className="flex-col"
+            ariaLabel="Edit Project status"
+          />
+
           <DateSelector
             className=""
             label="Start Date"
@@ -175,71 +148,38 @@ export const EditProject = () => {
           />
         </div>
 
-        <div className="mb-3">
-          <label
-            className={`block uppercase tracking-wide ${
-              darkMode ? "text-slate-50" : "text-gray-700"
-            }  text-xs font-bold my-4 mb-2`}
-          >
-            Notes
-          </label>
-          <textarea
-            className={`appearance-none block w-full ${
-              darkMode
-                ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950 focus:border-gray-500"
-                : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white focus:border-gray-500"
-            } border rounded py-3 px-4 leading-tight focus:outline-none `}
-            id="notes"
-            rows="3"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-          ></textarea>
-        </div>
+        <DynamicInput
+          id="edit-project-notes"
+          inputType="textarea"
+          label="Notes"
+          changeHandler={(e) => setNotes(e.target.value)}
+          value={notes}
+          className="mb-3"
+          ariaLabel="Edit project notes"
+        />
 
         <div className="flex flex-row w-full justify-around items-center">
-          <div className="mb-3">
-            <label
-              className={`block uppercase tracking-wide ${
-                darkMode ? "text-slate-50" : "text-gray-700"
-              }  text-xs font-bold my-4 mb-2`}
-            >
-              Budget
-            </label>
-            <input
-              type="clientBudget"
-              className={`appearance-none block w-full ${
-                darkMode
-                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
-                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
-              }  border  rounded py-2 px-3 mb-3 leading-tight focus:outline-none `}
-              id="exampleFormControlInput1"
-              placeholder="What is the budget for this project?"
-              value={clientBudget}
-              onChange={(e) => setClientBudget(e.target.value)}
-            />
-          </div>
+          <DynamicInput
+            id="edit-project-budget"
+            inputType="input"
+            type="number"
+            label="Budget"
+            changeHandler={(e) => setClientBudget(e.target.value)}
+            value={clientBudget}
+            className="mb-3"
+            ariaLabel="Edit project budget"
+          />
 
-          <div className="mb-3">
-            <label
-              className={`block uppercase tracking-wide ${
-                darkMode ? "text-slate-50" : "text-gray-700"
-              }  text-xs font-bold my-4 mb-2`}
-            >
-              Project Estimate
-            </label>
-            <input
-              type="projectEstimate"
-              className={`appearance-none block w-full ${
-                darkMode
-                  ? "bg-sky-950 text-slate-50 border-gray-200 focus:bg-sky-950"
-                  : "bg-gray-200 text-gray-700 border-gray-200 focus:bg-white"
-              }  border rounded py-2 px-3 mb-3 leading-tight focus:outline-none `}
-              id="exampleFormControlInput1"
-              placeholder="What is the estimate for this project?"
-              value={projectEstimate}
-              onChange={(e) => setProjectEstimate(e.target.value)}
-            />
-          </div>
+          <DynamicInput
+            id="edit-project-estimate"
+            inputType="input"
+            type="number"
+            label="Project Estimate"
+            changeHandler={(e) => setProjectEstimate(e.target.value)}
+            value={projectEstimate}
+            className="mb-3"
+            ariaLabel="Edit project estimate"
+          />
         </div>
 
         <DynamicButton color="red" type="submit">
