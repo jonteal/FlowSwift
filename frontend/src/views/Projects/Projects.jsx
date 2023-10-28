@@ -36,7 +36,7 @@ export const Projects = () => {
         type="text"
         placeholder="Search..."
         onChange={(event) => setSearchTerm(event.target.value)}
-        className="searchBar w-40 border rounded-xl pl-3 py-1 ml-5"
+        className="searchBar w-40 border rounded-xl pl-3 py-1 ml-5 text-slate-700"
       />
 
       <p

@@ -13,10 +13,15 @@ import { DELETE_TICKET } from "../../../graphql/mutations/ticketMutations";
 import { GET_TICKETS } from "../../../graphql/queries/ticketQueries";
 
 import { ThemeContext } from "../../../context";
+import { useSelector } from "react-redux";
 
 export const Ticket = ({ ticket }) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
+  const size = useSelector((state) => state.ticket.size);
+
+  console.log("size", size);
+
   const { clientId, projectId } = useParams();
   const [isBlocked, setIsBlocked] = useState(ticket.blocked);
 
@@ -71,7 +76,9 @@ export const Ticket = ({ ticket }) => {
       </div>
       <p className="font-bold text-sm text-left my-2">{ticket.title}</p>
       <p className="text-left text-sm my-2">{ticket.description}</p>
-      <p className="text-left text-sm my-2">{ticket.size}</p>
+
+      {size && <p className="text-left text-sm my-2">{ticket.size}</p>}
+
       <p className="text-left text-sm my-2">Owned by: {ticket.user.name}</p>
       <p className="text-left text-sm my-2">Created: {ticket.createdAt}</p>
       {isBlocked && (
