@@ -20,7 +20,7 @@ export const AddKanbanTicket = () => {
   const [title, setTitle] = useState("");
   const [typeOfTicket, setTypeOfTicket] = useState("userStory");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState("pre");
+  const [status, setStatus] = useState("ready");
   const [blocked, setBlocked] = useState(false);
   const [blockedReason, setBlockedReason] = useState("");
   const { userInfo } = useSelector((state) => state.auth);
@@ -82,7 +82,7 @@ export const AddKanbanTicket = () => {
     setTitle("");
     setTypeOfTicket("userStory");
     setDescription("");
-    setStatus("pre");
+    setStatus("ready");
     setBlocked(!blocked);
     setBlockedReason("");
   };
@@ -160,18 +160,17 @@ export const AddKanbanTicket = () => {
           />
 
           {blocked && (
-            <div className="w-full">
-              <DynamicInput
-                id="ticket-block-description"
-                inputType="textarea"
-                label="Description"
-                changeHandler={(e) => setBlockedReason(e.target.value)}
-                placeholder="Reason the story is blocked"
-                value={blockedReason}
-                rows="3"
-                ariaLabel="Blocked reason section"
-              />
-            </div>
+            <DynamicInput
+              id="ticket-block-description"
+              inputType="textarea"
+              label="Description"
+              changeHandler={(e) => setBlockedReason(e.target.value)}
+              placeholder="Reason the story is blocked"
+              value={blockedReason}
+              rows="3"
+              ariaLabel="Blocked reason section"
+              className="w-full"
+            />
           )}
         </div>
 

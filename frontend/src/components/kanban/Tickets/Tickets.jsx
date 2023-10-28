@@ -1,14 +1,19 @@
+import { useQuery } from "@apollo/client";
+
+// GRAPHQL
+import { GET_TICKETS } from "../../graphql/queries/ticketQueries";
+
+// COMPONENTS
 import { Spinner } from "../Spinner/Spinner";
 import { Ticket } from "../Ticket/Ticket";
-
-import { useQuery } from "@apollo/client";
-import { GET_TICKETS } from "../../graphql/queries/ticketQueries";
 
 export const Tickets = () => {
   const { loading, error, data } = useQuery(GET_TICKETS);
 
   if (loading) return <Spinner />;
   if (error) return <p>Something went wrong...</p>;
+
+  console.log("data: ", data);
 
   return (
     <div>

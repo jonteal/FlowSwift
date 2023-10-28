@@ -87,18 +87,17 @@ export const AddOrganization = () => {
           </div>
         )}
         <form className="mb-10" onSubmit={onSubmit}>
-          <div className="py-5">
-            <DynamicInput
-              id="organization-name"
-              inputType="input"
-              type="text"
-              label="Organization Name"
-              placeholder="Name of your organization..."
-              value={organizationName}
-              changeHandler={(e) => setOrganizationName(e.target.value)}
-              ariaLabel="Name of organization"
-            />
-          </div>
+          <DynamicInput
+            id="organization-name"
+            inputType="input"
+            type="text"
+            label="Organization Name"
+            placeholder="Name of your organization..."
+            value={organizationName}
+            changeHandler={(e) => setOrganizationName(e.target.value)}
+            ariaLabel="Name of organization"
+            className="py-5"
+          />
 
           <DynamicButton color="red" type="submit">
             Submit

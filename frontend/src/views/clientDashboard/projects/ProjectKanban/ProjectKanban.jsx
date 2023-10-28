@@ -22,15 +22,15 @@ export const ProjectKanban = () => {
   const statusColumns = [
     {
       id: "Ready",
-      state: "Ready",
+      state: "ready",
     },
     {
       id: "In Progress",
-      state: "In Progress",
+      state: "inProgress",
     },
     {
       id: "Done",
-      state: "Done",
+      state: "done",
     },
   ];
 
