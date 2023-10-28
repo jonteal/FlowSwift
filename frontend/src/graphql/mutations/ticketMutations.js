@@ -4,7 +4,8 @@ const ADD_TICKET = gql`
   mutation AddTicket(
     $title: String!
     $typeOfTicket: TypeOfTicket!
-    $description: String!
+    $description: String
+    $size: String
     $status: TicketStatus!
     $blocked: Boolean!
     $blockedReason: String
@@ -15,6 +16,7 @@ const ADD_TICKET = gql`
       title: $title
       typeOfTicket: $typeOfTicket
       description: $description
+      size: $size
       status: $status
       blocked: $blocked
       blockedReason: $blockedReason
@@ -25,6 +27,7 @@ const ADD_TICKET = gql`
       title
       typeOfTicket
       description
+      size
       status
       blocked
       blockedReason
@@ -54,6 +57,7 @@ const UPDATE_TICKET = gql`
     $title: String
     $typeOfTicket: TypeOfTicketUpdate
     $description: String
+    $size: String
     $blocked: Boolean
     $blockedReason: String
     $status: TicketStatusUpdate
@@ -64,6 +68,7 @@ const UPDATE_TICKET = gql`
       title: $title
       typeOfTicket: $typeOfTicket
       description: $description
+      size: $size
       blocked: $blocked
       blockedReason: $blockedReason
       status: $status
@@ -73,9 +78,10 @@ const UPDATE_TICKET = gql`
       title
       typeOfTicket
       description
+      size
+      status
       blocked
       blockedReason
-      status
       project {
         id
       }

@@ -264,6 +264,7 @@ const TicketType = new GraphQLObjectType({
     title: { type: GraphQLString },
     typeOfTicket: { type: GraphQLString },
     description: { type: GraphQLString },
+    size: { type: GraphQLString },
     blocked: { type: GraphQLBoolean },
     blockedReason: { type: GraphQLString },
     status: { type: GraphQLString },
@@ -1307,7 +1308,7 @@ const mutation = new GraphQLObjectType({
           }),
           defaultValue: "User Story",
         },
-        description: { type: new GraphQLNonNull(GraphQLString) },
+        description: { type: GraphQLString },
         status: {
           type: new GraphQLEnumType({
             name: "TicketStatus",
@@ -1319,6 +1320,7 @@ const mutation = new GraphQLObjectType({
           }),
           defaultValue: "ready",
         },
+        size: { type: GraphQLString },
         blocked: { type: GraphQLBoolean },
         blockedReason: { type: GraphQLString },
         projectId: { type: new GraphQLNonNull(GraphQLID) },
@@ -1331,6 +1333,7 @@ const mutation = new GraphQLObjectType({
           typeOfTicket: args.typeOfTicket,
           description: args.description,
           status: args.status,
+          size: args.size,
           blocked: args.blocked,
           blockedReason: args.blockedReason,
           projectId: args.projectId,
@@ -1370,6 +1373,7 @@ const mutation = new GraphQLObjectType({
           defaultValue: "User Story",
         },
         description: { type: GraphQLString },
+        size: { type: GraphQLString },
         blocked: { type: GraphQLBoolean },
         blockedReason: { type: GraphQLString },
         status: {
@@ -1393,6 +1397,7 @@ const mutation = new GraphQLObjectType({
               title: args.title,
               typeOfTicket: args.typeOfTicket,
               description: args.description,
+              size: args.size,
               status: args.status,
               blocked: args.blocked,
               blockedReason: args.blockedReason,

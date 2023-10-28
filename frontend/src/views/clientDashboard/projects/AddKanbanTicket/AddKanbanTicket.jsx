@@ -4,8 +4,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useSelector } from "react-redux";
 
 // GRAPHQL
-import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
 import { ADD_TICKET } from "../../../../graphql/mutations/ticketMutations";
+import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
 import { GET_USER } from "../../../../graphql/queries/userQueries";
 
 // COMPONENTS
@@ -20,6 +20,7 @@ export const AddKanbanTicket = () => {
   const [title, setTitle] = useState("");
   const [typeOfTicket, setTypeOfTicket] = useState("userStory");
   const [description, setDescription] = useState("");
+  const [size, setSize] = useState("");
   const [status, setStatus] = useState("ready");
   const [blocked, setBlocked] = useState(false);
   const [blockedReason, setBlockedReason] = useState("");
@@ -31,6 +32,7 @@ export const AddKanbanTicket = () => {
       title,
       typeOfTicket,
       description,
+      size,
       blocked,
       projectId,
       status,
@@ -72,16 +74,18 @@ export const AddKanbanTicket = () => {
       title,
       typeOfTicket,
       description,
-      projectId,
+      size,
       status,
       blocked,
       blockedReason,
+      projectId,
       userId
     );
 
     setTitle("");
     setTypeOfTicket("userStory");
     setDescription("");
+    setSize("");
     setStatus("ready");
     setBlocked(!blocked);
     setBlockedReason("");
@@ -142,15 +146,30 @@ export const AddKanbanTicket = () => {
           ariaLabel="Ticket type Description"
         />
 
-        <DynamicInput
-          id="ticket-status"
-          inputType="select"
-          label="Status"
-          changeHandler={(e) => setStatus(e.target.value)}
-          value={status}
-          selectOptions={ticketStatusOptions}
-          ariaLabel="Ticket status select"
-        />
+        <div className="flex flex-row items-start justify-around">
+          <DynamicInput
+            id="ticket-status"
+            inputType="select"
+            label="Status"
+            changeHandler={(e) => setStatus(e.target.value)}
+            value={status}
+            selectOptions={ticketStatusOptions}
+            ariaLabel="Ticket status select"
+            className="w-1/2 mr-3"
+          />
+
+          <DynamicInput
+            id="size"
+            inputType="input"
+            type="number"
+            label="Size"
+            changeHandler={(e) => setSize(e.target.value)}
+            placeholder="Ticket Size"
+            value={size}
+            ariaLabel="Kanban ticket size"
+            className="w-1/2 ml-3"
+          />
+        </div>
 
         <div className="flex mb-4 flex-col items-start w-full">
           <Checkbox

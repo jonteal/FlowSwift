@@ -7,6 +7,7 @@ const GET_TICKETS = gql`
       title
       typeOfTicket
       description
+      size
       status
       blocked
       blockedReason
@@ -29,6 +30,7 @@ const GET_TICKET = gql`
       title
       typeOfTicket
       description
+      size
       status
       blocked
       blockedReason

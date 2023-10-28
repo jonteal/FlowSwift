@@ -16,6 +16,10 @@ const TicketSchema = new mongoose.Schema({
     type: String,
     enum: ["ready", "inProgress", "done"],
   },
+  size: {
+    type: Number,
+    trim: true,
+  },
   blocked: {
     type: Boolean,
   },
