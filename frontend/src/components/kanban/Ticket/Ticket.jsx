@@ -18,7 +18,10 @@ import { useSelector } from "react-redux";
 export const Ticket = ({ ticket }) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
-  const size = useSelector((state) => state.ticket.size);
+  const { size, description, createdDate, owner } = useSelector(
+    (state) => state.ticket
+  );
+  // const description = useSelector((state) => state.ticket.size);
 
   const { clientId, projectId } = useParams();
   const [isBlocked, setIsBlocked] = useState(ticket.blocked);
@@ -73,12 +76,18 @@ export const Ticket = ({ ticket }) => {
         </div>
       </div>
       <p className="font-bold text-sm text-left my-2">{ticket.title}</p>
-      <p className="text-left text-sm my-2">{ticket.description}</p>
+      {description && (
+        <p className="text-left text-sm my-2">{ticket.description}</p>
+      )}
 
       {size && <p className="text-left text-sm my-2">{ticket.size}</p>}
 
-      <p className="text-left text-sm my-2">Owned by: {ticket.user.name}</p>
-      <p className="text-left text-sm my-2">Created: {ticket.createdAt}</p>
+      {owner && (
+        <p className="text-left text-sm my-2">Owned by: {ticket.user.name}</p>
+      )}
+      {createdDate && (
+        <p className="text-left text-sm my-2">Created: {ticket.createdAt}</p>
+      )}
       {isBlocked && (
         <div className="bg-red-500 text-slate-50 text-sm rounded-2xl mt-2 py-1">
           {ticket.blockedReason || "Blocked"}

@@ -12,7 +12,16 @@ import { DynamicButton } from "../../../../components/reusable/DynamicButton/Dyn
 
 // STATE
 import { useDispatch, useSelector } from "react-redux";
-import { setSizeOff, setSizeOn } from "../../../../slices/ticketSlice";
+import {
+  setSizeOff,
+  setSizeOn,
+  setDescriptionOff,
+  setDescriptionOn,
+  setCreatedDateOff,
+  setCreatedDateOn,
+  setOwnerOff,
+  setOwnerOn,
+} from "../../../../slices/ticketSlice";
 import { FilterToggle } from "../../../../components/reusable/FilterToggle/FilterToggle";
 
 export const ProjectKanban = () => {
@@ -21,10 +30,24 @@ export const ProjectKanban = () => {
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
 
   const dispatch = useDispatch();
-  const size = useSelector((state) => state.ticket.size);
+  const { size, description, createdDate, owner } = useSelector(
+    (state) => state.ticket
+  );
 
   const handleSizeToggle = () => {
     size ? dispatch(setSizeOff()) : dispatch(setSizeOn());
+  };
+
+  const handleDescriptionToggle = () => {
+    description ? dispatch(setDescriptionOff()) : dispatch(setDescriptionOn());
+  };
+
+  const handleCreatedDateToggle = () => {
+    createdDate ? dispatch(setCreatedDateOff()) : dispatch(setCreatedDateOn());
+  };
+
+  const handleOwnerToggle = () => {
+    owner ? dispatch(setOwnerOff()) : dispatch(setOwnerOn());
   };
 
   const handleOpenFilters = () => {
@@ -41,6 +64,24 @@ export const ProjectKanban = () => {
 
   const filters = [
     { name: "Size", toggle: handleSizeToggle, value: size, isChecked: size },
+    {
+      name: "Description",
+      toggle: handleDescriptionToggle,
+      value: description,
+      isChecked: description,
+    },
+    {
+      name: "Created Date",
+      toggle: handleCreatedDateToggle,
+      value: createdDate,
+      isChecked: createdDate,
+    },
+    {
+      name: "Owner",
+      toggle: handleOwnerToggle,
+      value: owner,
+      isChecked: owner,
+    },
   ];
 
   const statusColumns = [
