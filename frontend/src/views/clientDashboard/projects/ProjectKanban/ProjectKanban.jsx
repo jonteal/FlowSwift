@@ -6,9 +6,10 @@ import { useQuery } from "@apollo/client";
 import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
 
 // COMPONENTS
-import { StatusColumn } from "../../../../components/kanban/StatusColumn/StatusColumn";
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
+import { FilterToggle } from "../../../../components/reusable/FilterToggle/FilterToggle";
+import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
+import { StatusColumn } from "../../../../components/kanban/StatusColumn/StatusColumn";
 
 // STATE
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +23,7 @@ import {
   setOwnerOff,
   setOwnerOn,
 } from "../../../../slices/ticketSlice";
-import { FilterToggle } from "../../../../components/reusable/FilterToggle/FilterToggle";
+import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
 
 export const ProjectKanban = () => {
   const { projectId } = useParams();
@@ -37,19 +38,15 @@ export const ProjectKanban = () => {
   const handleSizeToggle = () => {
     size ? dispatch(setSizeOff()) : dispatch(setSizeOn());
   };
-
   const handleDescriptionToggle = () => {
     description ? dispatch(setDescriptionOff()) : dispatch(setDescriptionOn());
   };
-
   const handleCreatedDateToggle = () => {
     createdDate ? dispatch(setCreatedDateOff()) : dispatch(setCreatedDateOn());
   };
-
   const handleOwnerToggle = () => {
     owner ? dispatch(setOwnerOff()) : dispatch(setOwnerOn());
   };
-
   const handleOpenFilters = () => {
     setIsFilterOptionsOpen(!isFilterOptionsOpen);
   };
@@ -123,24 +120,8 @@ export const ProjectKanban = () => {
           Filters
         </button>
       </div>
-      {isFilterOptionsOpen && (
-        <div className="border-slate-700 bg-slate-50 px-3 py-3 mx-2 my-2">
-          <ul>
-            {filters.map((filter) => (
-              <li key={filter.name}>
-                <div className="flex flex-row">
-                  <p className="mr-3">{filter.name}</p>
-                  <FilterToggle
-                    value={filter.value}
-                    toggleHandler={filter.toggle}
-                    isChecked={filter.isChecked}
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+
+      {isFilterOptionsOpen && <FiltersList filters={filters} />}
 
       <StatusColumn statusColumns={statusColumns} ticketData={ticketData} />
     </>
