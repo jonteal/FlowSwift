@@ -31,8 +31,6 @@ export const ClientList = () => {
   //   variables: { id: userData?.user.organizationId },
   // });
 
-  // console.log("organizationData: ", organizationData);
-
   const {
     loading: clientLoading,
     error: clientError,

@@ -13,8 +13,6 @@ export const Tickets = () => {
   if (loading) return <Spinner />;
   if (error) return <p>Something went wrong...</p>;
 
-  console.log("data: ", data);
-
   return (
     <div>
       {data.tickets.length > 0 ? (

@@ -20,8 +20,6 @@ export const Ticket = ({ ticket }) => {
   const darkMode = theme.state.darkMode;
   const size = useSelector((state) => state.ticket.size);
 
-  console.log("size", size);
-
   const { clientId, projectId } = useParams();
   const [isBlocked, setIsBlocked] = useState(ticket.blocked);
 

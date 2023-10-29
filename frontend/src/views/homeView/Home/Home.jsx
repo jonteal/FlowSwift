@@ -23,8 +23,6 @@ export const Home = () => {
     variables: { id: userInfo._id },
   });
 
-  console.log("userData: ", userData);
-
   const {
     loading: organizationsLoading,
     error: organizationsError,
@@ -46,13 +44,8 @@ export const Home = () => {
   if (organizationsError || userError || organizationError)
     return <p>There was an error...</p>;
 
-  console.log("organizationData: ", organizationData);
-  console.log("organizationsData: ", organizationsData);
-
   const isAdmin = userData.user.role === "admin";
   const isOwner = userData.user.role === "owner";
-
-  // console.log("userInfo: ", userInfo);
 
   const { name } = userInfo;
 

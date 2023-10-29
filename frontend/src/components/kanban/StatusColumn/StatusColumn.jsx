@@ -7,7 +7,6 @@ export const StatusColumn = ({ statusColumns, ticketData }) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
 
-  console.log("ticketData: ", ticketData);
   return (
     <div className="flex flex-row items-start ml-2">
       {statusColumns?.map((column) => (
