@@ -8,55 +8,101 @@ import {
 } from "react-router-dom";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import { Provider } from "react-redux";
-import { ThemeProvider } from "./context";
-import { App } from "./App.jsx";
-import { Home } from "./views/homeView/Home/Home";
-import { LoginScreen } from "./views/Auth/Login/LoginScreen.jsx";
-import { RegisterScreen } from "./views/Auth/Signup/RegisterScreen.jsx";
-import { ProfileScreen } from "./views/Settings/ProfileScreen";
-import { AddClient } from "./views/Clients/AddClient";
-import { PrivateRoute } from "./components/PrivateRoute";
-import { MainDashboard } from "./views/homeView/MainDashboard/MainDashboard";
-import { ClientView } from "./views/clientDashboard/ClientView/ClientView";
-import { ClientDashboard } from "./views/clientDashboard/profile/ClientDashboard/ClientDashboard";
-import { ClientBilling } from "./views/clientDashboard/billing/ClientBilling/ClientBilling";
-import { ClientProjects } from "./views/clientDashboard/projects/ClientProjects/ClientProjects";
-import { AddInvoice } from "./views/clientDashboard/billing/AddInvoice/AddInvoice";
-import { AddTransaction } from "./views/clientDashboard/billing/AddTransaction/AddTransaction";
-import { ProjectView } from "./views/clientDashboard/projects/ProjectView/ProjectView";
-import { ProjectProfile } from "./views/clientDashboard/projects/ProjectProfile/ProjectProfile";
-import { ProjectServices } from "./views/clientDashboard/projects/ProjectServices/ProjectServices";
-import { ProjectService } from "./views/clientDashboard/projects/ProjectService/ProjectService";
-import { EditService } from "./views/clientDashboard/projects/EditService/EditService";
-import { ProjectActivity } from "./views/clientDashboard/projects/ProjectActivity/ProjectActivity";
-import { ProjectFinancials } from "./views/clientDashboard/projects/ProjectFinancials/ProjectFinancials";
-import { ProjectKanban } from "./views/clientDashboard/projects/ProjectKanban/ProjectKanban";
-import { AddKanbanTicket } from "./views/clientDashboard/projects/AddKanbanTicket/AddKanbanTicket";
-import { EditKanbanTicket } from "./views/clientDashboard/projects/EditKanbanTicket/EditKanbanTicket";
-import { TicketView } from "./views/clientDashboard/projects/TicketView/TicketView";
-import { ProjectInvoices } from "./views/clientDashboard/projects/ProjectInvoices/ProjectInvoices";
-import { ProjectTransactions } from "./views/clientDashboard/projects/ProjectTransactions/ProjectTransactions";
-import { ProjectTransaction } from "./views/clientDashboard/projects/ProjectTransaction/ProjectTransaction";
-import { ProjectInvoice } from "./views/clientDashboard/projects/ProjectInvoice/ProjectInvoice";
-import { AddService } from "./views/clientDashboard/projects/AddService/AddService";
-import { EditProject } from "./views/clientDashboard/projects/EditProject/EditProject";
-import { EditClient } from "./views/homeView/EditClient/EditClient";
-import { ClientInvoices } from "./views/clientDashboard/billing/ClientInvoices/ClientInvoices";
-import { ClientTransactionsView } from "./views/clientDashboard/billing/ClientTransactionsView/ClientTransactionsView";
-import { AddProject } from "./views/clientDashboard/projects/AddProject/AddProject";
-import { Clients } from "./views/Clients/Clients";
-import { ClientsListByStatus } from "./views/Clients/ClientsListByStatus/ClientsListByStatus";
-import { Projects } from "./views/Projects/Projects";
-import { NotFound } from "./views/NotFound";
-import { Settings } from "./views/Settings/Settings";
-import { Documentation } from "./views/Settings/Documentation";
-import { AddUser } from "./views/Organization/AddUser/AddUser";
-import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganization";
 
-import store from "./store";
+// @ts-ignore
+import { ThemeProvider } from "./context.jsx";
+// @ts-ignore
+import { App } from "./App.jsx";
+// @ts-ignore
+import { Home } from "./views/homeView/Home/Home.jsx";
+// @ts-ignore
+import { LoginScreen } from "./views/Auth/Login/LoginScreen.jsx";
+// @ts-ignore
+import { RegisterScreen } from "./views/Auth/Signup/RegisterScreen.jsx";
+// @ts-ignore
+import { ProfileScreen } from "./views/Settings/ProfileScreen.jsx";
+// @ts-ignore
+import { AddClient } from "./views/Clients/AddClient.jsx";
+// @ts-ignore
+import { PrivateRoute } from "./components/PrivateRoute.jsx";
+// @ts-ignore
+import { MainDashboard } from "./views/homeView/MainDashboard/MainDashboard.jsx";
+// @ts-ignore
+import { ClientView } from "./views/clientDashboard/ClientView/ClientView.jsx";
+// @ts-ignore
+import { ClientDashboard } from "./views/clientDashboard/profile/ClientDashboard/ClientDashboard.jsx";
+// @ts-ignore
+import { ClientBilling } from "./views/clientDashboard/billing/ClientBilling/ClientBilling.jsx";
+// @ts-ignore
+import { ClientProjects } from "./views/clientDashboard/projects/ClientProjects/ClientProjects.jsx";
+// @ts-ignore
+import { AddInvoice } from "./views/clientDashboard/billing/AddInvoice/AddInvoice.jsx";
+// @ts-ignore
+import { AddTransaction } from "./views/clientDashboard/billing/AddTransaction/AddTransaction.jsx";
+// @ts-ignore
+import { ProjectView } from "./views/clientDashboard/projects/ProjectView/ProjectView.jsx";
+// @ts-ignore
+import { ProjectProfile } from "./views/clientDashboard/projects/ProjectProfile/ProjectProfile.jsx";
+// @ts-ignore
+import { ProjectServices } from "./views/clientDashboard/projects/ProjectServices/ProjectServices.jsx";
+// @ts-ignore
+import { ProjectService } from "./views/clientDashboard/projects/ProjectService/ProjectService.jsx";
+// @ts-ignore
+import { EditService } from "./views/clientDashboard/projects/EditService/EditService.jsx";
+// @ts-ignore
+import { ProjectActivity } from "./views/clientDashboard/projects/ProjectActivity/ProjectActivity.jsx";
+// @ts-ignore
+import { ProjectFinancials } from "./views/clientDashboard/projects/ProjectFinancials/ProjectFinancials.jsx";
+// @ts-ignore
+import { ProjectKanban } from "./views/clientDashboard/projects/ProjectKanban/ProjectKanban.jsx";
+// @ts-ignore
+import { AddKanbanTicket } from "./views/clientDashboard/projects/AddKanbanTicket/AddKanbanTicket.jsx";
+// @ts-ignore
+import { EditKanbanTicket } from "./views/clientDashboard/projects/EditKanbanTicket/EditKanbanTicket.jsx";
+// @ts-ignore
+import { TicketView } from "./views/clientDashboard/projects/TicketView/TicketView.jsx";
+// @ts-ignore
+import { ProjectInvoices } from "./views/clientDashboard/projects/ProjectInvoices/ProjectInvoices.jsx";
+// @ts-ignore
+import { ProjectTransactions } from "./views/clientDashboard/projects/ProjectTransactions/ProjectTransactions.jsx";
+// @ts-ignore
+import { ProjectTransaction } from "./views/clientDashboard/projects/ProjectTransaction/ProjectTransaction.jsx";
+// @ts-ignore
+import { ProjectInvoice } from "./views/clientDashboard/projects/ProjectInvoice/ProjectInvoice.jsx";
+// @ts-ignore
+import { AddService } from "./views/clientDashboard/projects/AddService/AddService.jsx";
+// @ts-ignore
+import { EditProject } from "./views/clientDashboard/projects/EditProject/EditProject.jsx";
+// @ts-ignore
+import { EditClient } from "./views/homeView/EditClient/EditClient.jsx";
+// @ts-ignore
+import { ClientInvoices } from "./views/clientDashboard/billing/ClientInvoices/ClientInvoices.jsx";
+// @ts-ignore
+import { ClientTransactionsView } from "./views/clientDashboard/billing/ClientTransactionsView/ClientTransactionsView.jsx";
+// @ts-ignore
+import { AddProject } from "./views/clientDashboard/projects/AddProject/AddProject.jsx";
+// @ts-ignore
+import { Clients } from "./views/Clients/Clients.jsx";
+// @ts-ignore
+import { ClientsListByStatus } from "./views/Clients/ClientsListByStatus/ClientsListByStatus.jsx";
+// @ts-ignore
+import { Projects } from "./views/Projects/Projects.jsx";
+// @ts-ignore
+import { NotFound } from "./views/NotFound.jsx";
+// @ts-ignore
+import { Settings } from "./views/Settings/Settings.jsx";
+// @ts-ignore
+import { Documentation } from "./views/Settings/Documentation.jsx";
+// @ts-ignore
+import { AddUser } from "./views/Organization/AddUser/AddUser.jsx";
+// @ts-ignore
+import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganization.jsx";
+// @ts-ignore
+import { Features } from "./views/Features/Features.jsx";
+// @ts-ignore
+import store from "./store.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import { Features } from "./views/Features/Features";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -208,7 +254,7 @@ const router = createBrowserRouter(
     </Route>
   )
 );
-
+// @ts-ignore
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <ThemeProvider>

@@ -3,7 +3,6 @@ import { BsFillSunFill, BsMoonFill } from "react-icons/bs";
 import { ThemeContext } from "../../../context";
 
 export const Toggle = () => {
-  // const theme employs ThemeContext with useContext hook
   const theme = useContext(ThemeContext);
 
   const handleClick = () => {
