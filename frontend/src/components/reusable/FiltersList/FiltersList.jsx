@@ -11,6 +11,7 @@ export const FiltersList = ({ filters }) => (
               value={filter.value}
               toggleHandler={filter.toggle}
               isChecked={filter.isChecked}
+              ariaLabel={filter.ariaLabel}
             />
           </div>
         </li>

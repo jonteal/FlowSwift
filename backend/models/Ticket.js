@@ -26,6 +26,9 @@ const TicketSchema = new mongoose.Schema({
   blockedReason: {
     type: String,
   },
+  ready: {
+    type: Boolean,
+  },
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Project",
