@@ -1,5 +1,6 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { Navigation } from "./components/Navigation/Navigation";
+import { SlFlag } from "react-icons/sl";
 import { ToastContainer } from "react-toastify";
 import { useContext } from "react";
 import { ThemeContext } from "./context";
@@ -18,6 +19,9 @@ export const App = () => {
       <Navigation />
       <ToastContainer />
       <Outlet />
+      <Link to="/features">
+        <SlFlag className="text-3xl text-red-500 bottom-0 fixed w-full h-10 right-0" />
+      </Link>
     </div>
   );
 };

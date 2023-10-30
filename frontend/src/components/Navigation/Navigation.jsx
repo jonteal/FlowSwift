@@ -4,16 +4,25 @@ import { Toggle } from "../reusable/Toggle/Toggle";
 import { Navbar, Nav, Container, NavDropdown, Badge } from "react-bootstrap";
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../../slices/usersApiSlice";
 import { logout } from "../../slices/authSlice";
+import { Notifications } from "../Notifications/Notifications";
+
+// STATE
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setNotificationsOff,
+  setNotificationsOn,
+} from "../../slices/featuresSlice";
 
 export const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const notifications = useSelector((state) => state.features.notifications);
 
   const [logoutApiCall] = useLogoutMutation();
 
@@ -39,6 +48,8 @@ export const Navigation = () => {
       <div>
         <Toggle />
       </div>
+
+      {notifications && <Notifications />}
 
       <MenuDrawer placement="end" />
     </div>

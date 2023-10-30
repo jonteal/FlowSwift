@@ -2,6 +2,7 @@ import { Ticket } from "../Ticket/Ticket";
 
 import { useContext } from "react";
 import { ThemeContext } from "../../../context";
+import { camelCaseToWords } from "../../../utils/format";
 
 export const StatusColumn = ({ statusColumns, ticketData }) => {
   const theme = useContext(ThemeContext);
@@ -19,7 +20,7 @@ export const StatusColumn = ({ statusColumns, ticketData }) => {
           }  w-1/2 mt-2 mr-2 rounded-lg h-auto min-h-screen `}
         >
           <div className="flex flex-row items-center mt-2">
-            <h5 className="font-extrabold">{column.state}</h5>
+            <h5 className="font-extrabold">{camelCaseToWords(column.state)}</h5>
             <p className="ml-3">
               (
               {

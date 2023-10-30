@@ -7,7 +7,7 @@ import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
 
 // COMPONENTS
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { FilterToggle } from "../../../../components/reusable/FilterToggle/FilterToggle";
+import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { StatusColumn } from "../../../../components/kanban/StatusColumn/StatusColumn";
 
@@ -23,7 +23,6 @@ import {
   setOwnerOff,
   setOwnerOn,
 } from "../../../../slices/ticketSlice";
-import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
 
 export const ProjectKanban = () => {
   const { projectId } = useParams();

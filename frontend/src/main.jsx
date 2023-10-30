@@ -56,6 +56,7 @@ import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganiz
 import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import { Features } from "./views/Features/Features";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -83,6 +84,7 @@ const router = createBrowserRouter(
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="" element={<PrivateRoute />}>
         <Route index={true} path="/" element={<Home />} />
+        <Route path="/features" element={<Features />} />
         <Route path="/settings" element={<Settings />}>
           <Route path="/settings/profile" element={<ProfileScreen />} />
           <Route path="/settings/documentation" element={<Documentation />} />
