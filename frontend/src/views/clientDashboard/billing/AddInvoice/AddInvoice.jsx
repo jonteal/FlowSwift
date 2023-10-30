@@ -133,18 +133,17 @@ export const AddInvoice = () => {
               dateChangeHandler={handleDateChange}
             />
           </div>
-          <div className="w-full md:w-1/2 px-3">
-            <DynamicInput
-              id="invoice-number"
-              inputType="input"
-              type="text"
-              label="Invoice Number"
-              changeHandler={(e) => setInvoiceNumber(e.target.value)}
-              placeholder="ex. M12345"
-              value={invoiceNumber}
-              ariaLabel="Invoice Number input"
-            />
-          </div>
+          <DynamicInput
+            id="invoice-number"
+            inputType="input"
+            type="text"
+            label="Invoice Number"
+            changeHandler={(e) => setInvoiceNumber(e.target.value)}
+            placeholder="ex. M12345"
+            value={invoiceNumber}
+            ariaLabel="Invoice Number input"
+            className="w-full md:w-1/2 px-3"
+          />
         </div>
         <div className="flex flex-wrap mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -175,18 +174,17 @@ export const AddInvoice = () => {
               />
             </div>
           </div>
-          <div className="w-full">
-            <DynamicInput
-              id="invoice-notes"
-              inputType="textarea"
-              label="Notes"
-              changeHandler={(e) => setNotes(e.target.value)}
-              placeholder="Notes about this invoice"
-              value={notes}
-              rows="3"
-              ariaLabel="Invoice notes section"
-            />
-          </div>
+          <DynamicInput
+            id="invoice-notes"
+            inputType="textarea"
+            label="Notes"
+            changeHandler={(e) => setNotes(e.target.value)}
+            placeholder="Notes about this invoice"
+            value={notes}
+            rows="3"
+            ariaLabel="Invoice notes section"
+            className="w-full"
+          />
         </div>
 
         <DynamicButton color="red" type="submit">
