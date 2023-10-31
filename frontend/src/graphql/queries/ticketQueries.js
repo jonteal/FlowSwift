@@ -11,6 +11,7 @@ const GET_TICKETS = gql`
       status
       blocked
       blockedReason
+      ready
       project {
         id
       }
@@ -34,6 +35,7 @@ const GET_TICKET = gql`
       status
       blocked
       blockedReason
+      ready
       project {
         id
       }

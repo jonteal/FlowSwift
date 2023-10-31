@@ -10,6 +10,8 @@ import ClientActivityCommentReply from "../models/ClientActivityCommentReply.js"
 import ProjectActivityCommentReply from "../models/ProjectActivityCommentReply.js";
 import Ticket from "../models/Ticket.js";
 import Organization from "../models/Organization.js";
+import Kanban from "../models/Kanban.js";
+import KanbanStatusColumn from "../models/KanbanStatusColumn.js";
 
 import {
   GraphQLObjectType,
@@ -52,7 +54,6 @@ const OrganizationType = new GraphQLObjectType({
   }),
 });
 
-// Client Type - TODO: change user to organization (org owns clients, not a single user)
 const ClientType = new GraphQLObjectType({
   name: "Client",
   fields: () => ({
@@ -92,6 +93,39 @@ const ProjectType = new GraphQLObjectType({
     deadline: { type: GraphQLString },
     clientBudget: { type: GraphQLString },
     projectEstimate: { type: GraphQLString },
+  }),
+});
+
+// Kanban Type
+const KanbanType = new GraphQLObjectType({
+  name: "Kanban",
+  fields: () => ({
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    description: { type: GraphQLString },
+    statusColumns: { type: GraphQLString },
+    project: {
+      type: ProjectType,
+      resolve(parent, args) {
+        return Project.findById(parent.projectId);
+      },
+    },
+  }),
+});
+
+// Kanban Status Column Type
+const KanbanStatusColumnType = new GraphQLObjectType({
+  name: "KanbanStatusColumn",
+  fields: () => ({
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    description: { type: GraphQLString },
+    kanban: {
+      type: KanbanType,
+      resolve(parent, args) {
+        return Kanban.findById(parent.kanbanId);
+      },
+    },
   }),
 });
 
@@ -358,6 +392,32 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return Project.findById(args.id);
+      },
+    },
+    kanbans: {
+      type: new GraphQLList(KanbanType),
+      resolve(parent, args) {
+        return Kanban.find();
+      },
+    },
+    kanban: {
+      type: KanbanType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Kanban.findById(args.id);
+      },
+    },
+    kanbanStatusColumns: {
+      type: new GraphQLList(KanbanStatusColumnType),
+      resolve(parent, args) {
+        return KanbanStatusColumnType.find();
+      },
+    },
+    kanbanStatusColumn: {
+      type: KanbanStatusColumnType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return KanbanStatusColumnType.findById(args.id);
       },
     },
     services: {
@@ -771,6 +831,126 @@ const mutation = new GraphQLObjectType({
               deadline: args.deadline,
               clientBudget: args.clientBudget,
               projectEstimate: args.projectEstimate,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+
+    // Add a Kanban
+    addKanban: {
+      type: KanbanType,
+      args: {
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        description: { type: GraphQLString },
+        statusColumns: { type: GraphQLString },
+        projectId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        const kanban = new Kanban({
+          title: args.title,
+          description: args.description,
+          statusColumns: args.statusColumns,
+          projectId: args.projectId,
+        });
+
+        return kanban.save();
+      },
+    },
+
+    // Delete an Kanban
+    deleteKanban: {
+      type: KanbanType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        Ticket.find({ projectId: args.id }).then((tickets) => {
+          tickets.forEach((ticket) => {
+            ticket.deleteOne();
+          });
+        });
+        return Kanban.findByIdAndRemove(args.id);
+      },
+    },
+
+    // Update a Kanban
+    updateKanban: {
+      type: KanbanType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        title: { type: GraphQLString },
+        description: { type: GraphQLString },
+        statusColumns: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Kanban.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              title: args.title,
+              description: args.description,
+              statusColumns: args.statusColumns,
+              projectId: args.projectId,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+
+    // Add a KanbanStatusColumn
+    addKanbanStatusColumn: {
+      type: KanbanStatusColumnType,
+      args: {
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        description: { type: GraphQLString },
+        kanbanId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        const kanbanStatusColumn = new Kanban({
+          title: args.title,
+          description: args.description,
+          kanbanId: args.kanbanId,
+        });
+
+        return kanbanStatusColumn.save();
+      },
+    },
+
+    // Delete an KanbanStatusColumn
+    deleteKanbanStatusColumn: {
+      type: KanbanStatusColumnType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        Ticket.find({ KanbanId: args.id }).then((tickets) => {
+          tickets.forEach((ticket) => {
+            ticket.deleteOne();
+          });
+        });
+        return KanbanStatusColumn.findByIdAndRemove(args.id);
+      },
+    },
+
+    // Update a KanbanStatusColumn
+    updateKanbanStatusColumn: {
+      type: KanbanStatusColumnType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        title: { type: GraphQLString },
+        description: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return KanbanStatusColumn.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              title: args.title,
+              description: args.description,
+              kanbanId: args.kanbanId,
             },
           },
           { new: true }

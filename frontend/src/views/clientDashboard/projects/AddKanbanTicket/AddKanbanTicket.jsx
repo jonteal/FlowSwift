@@ -24,6 +24,7 @@ export const AddKanbanTicket = () => {
   const [status, setStatus] = useState("ready");
   const [blocked, setBlocked] = useState(false);
   const [blockedReason, setBlockedReason] = useState("");
+  const [ready, setIsReady] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
   const [userId, setUserId] = useState(userInfo._id);
 
@@ -34,9 +35,10 @@ export const AddKanbanTicket = () => {
       description,
       size,
       blocked,
+      blockedReason,
+      ready,
       projectId,
       status,
-      blockedReason,
       userId,
     },
     update(cache, { data: { addTicket } }) {
@@ -78,6 +80,7 @@ export const AddKanbanTicket = () => {
       status,
       blocked,
       blockedReason,
+      ready,
       projectId,
       userId
     );
@@ -88,6 +91,7 @@ export const AddKanbanTicket = () => {
     setSize("");
     setStatus("ready");
     setBlocked(!blocked);
+    setIsReady(false);
     setBlockedReason("");
   };
 

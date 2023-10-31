@@ -9,6 +9,7 @@ const ADD_TICKET = gql`
     $status: TicketStatus!
     $blocked: Boolean!
     $blockedReason: String
+    $ready: Boolean
     $projectId: ID!
     $userId: ID
   ) {
@@ -20,6 +21,7 @@ const ADD_TICKET = gql`
       status: $status
       blocked: $blocked
       blockedReason: $blockedReason
+      ready: $ready
       projectId: $projectId
       userId: $userId
     ) {
@@ -31,6 +33,7 @@ const ADD_TICKET = gql`
       status
       blocked
       blockedReason
+      ready
       project {
         id
       }
@@ -60,6 +63,7 @@ const UPDATE_TICKET = gql`
     $size: String
     $blocked: Boolean
     $blockedReason: String
+    $ready: Boolean
     $status: TicketStatusUpdate
     $userId: ID
   ) {
@@ -70,6 +74,7 @@ const UPDATE_TICKET = gql`
       description: $description
       size: $size
       blocked: $blocked
+      ready: $ready
       blockedReason: $blockedReason
       status: $status
       userId: $userId
@@ -82,6 +87,7 @@ const UPDATE_TICKET = gql`
       status
       blocked
       blockedReason
+      ready
       project {
         id
       }
