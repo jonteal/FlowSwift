@@ -6,7 +6,6 @@ const GET_KANBANS = gql`
       id
       title
       description
-      statusColumns
       project {
         id
         title
@@ -21,7 +20,6 @@ const GET_KANBAN = gql`
       id
       title
       description
-      statusColumns
       project {
         id
         title

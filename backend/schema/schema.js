@@ -103,7 +103,6 @@ const KanbanType = new GraphQLObjectType({
     id: { type: GraphQLID },
     title: { type: GraphQLString },
     description: { type: GraphQLString },
-    statusColumns: { type: GraphQLString },
     project: {
       type: ProjectType,
       resolve(parent, args) {
@@ -118,7 +117,7 @@ const KanbanStatusColumnType = new GraphQLObjectType({
   name: "KanbanStatusColumn",
   fields: () => ({
     id: { type: GraphQLID },
-    title: { type: GraphQLString },
+    columnState: { type: GraphQLString },
     description: { type: GraphQLString },
     kanban: {
       type: KanbanType,
@@ -844,14 +843,12 @@ const mutation = new GraphQLObjectType({
       args: {
         title: { type: new GraphQLNonNull(GraphQLString) },
         description: { type: GraphQLString },
-        statusColumns: { type: GraphQLString },
         projectId: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
         const kanban = new Kanban({
           title: args.title,
           description: args.description,
-          statusColumns: args.statusColumns,
           projectId: args.projectId,
         });
 
@@ -866,6 +863,13 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
+        KanbanStatusColumn.find({ projectId: args.id }).then(
+          (kanbanStatusColumns) => {
+            kanbanStatusColumns.forEach((kanbanStatusColumn) => {
+              kanbanStatusColumn.deleteOne();
+            });
+          }
+        );
         Ticket.find({ projectId: args.id }).then((tickets) => {
           tickets.forEach((ticket) => {
             ticket.deleteOne();
@@ -882,7 +886,6 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
         title: { type: GraphQLString },
         description: { type: GraphQLString },
-        statusColumns: { type: GraphQLString },
       },
       resolve(parent, args) {
         return Kanban.findByIdAndUpdate(
@@ -891,7 +894,6 @@ const mutation = new GraphQLObjectType({
             $set: {
               title: args.title,
               description: args.description,
-              statusColumns: args.statusColumns,
               projectId: args.projectId,
             },
           },
@@ -904,13 +906,13 @@ const mutation = new GraphQLObjectType({
     addKanbanStatusColumn: {
       type: KanbanStatusColumnType,
       args: {
-        title: { type: new GraphQLNonNull(GraphQLString) },
+        columnState: { type: new GraphQLNonNull(GraphQLString) },
         description: { type: GraphQLString },
         kanbanId: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
         const kanbanStatusColumn = new Kanban({
-          title: args.title,
+          columnState: args.columnState,
           description: args.description,
           kanbanId: args.kanbanId,
         });
@@ -926,7 +928,7 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
-        Ticket.find({ KanbanId: args.id }).then((tickets) => {
+        Ticket.find({ kanbanId: args.id }).then((tickets) => {
           tickets.forEach((ticket) => {
             ticket.deleteOne();
           });
@@ -940,7 +942,7 @@ const mutation = new GraphQLObjectType({
       type: KanbanStatusColumnType,
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
-        title: { type: GraphQLString },
+        columnState: { type: GraphQLString },
         description: { type: GraphQLString },
       },
       resolve(parent, args) {
@@ -948,7 +950,7 @@ const mutation = new GraphQLObjectType({
           args.id,
           {
             $set: {
-              title: args.title,
+              columnState: args.columnState,
               description: args.description,
               kanbanId: args.kanbanId,
             },

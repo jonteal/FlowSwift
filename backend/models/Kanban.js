@@ -8,9 +8,6 @@ const KanbanSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    statusColumns: {
-      type: String,
-    },
     projectId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Project",

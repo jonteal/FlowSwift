@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const KanbanStatusColumnSchema = new mongoose.Schema(
   {
-    state: {
+    columnState: {
       type: String,
     },
     description: {

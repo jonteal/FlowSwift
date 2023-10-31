@@ -2,7 +2,14 @@ import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-export const DynamicButton = ({ link, type, children, className, color }) => {
+export const DynamicButton = ({
+  link,
+  type,
+  children,
+  className,
+  color,
+  clickHandler,
+}) => {
   const navigate = useNavigate();
   const handleBackNavigate = () => {
     navigate(-1);
@@ -26,6 +33,7 @@ export const DynamicButton = ({ link, type, children, className, color }) => {
       case "submit":
         return (
           <button
+            onClick={clickHandler}
             className={`rounded px-4 py-2 overflow-hidden group ${color} relative hover:ring-2 hover:ring-offset-2 transition-all ease-out duration-300`}
           >
             <span className="absolute right-0 w-8 h-32 -mt-12 transition-all duration-1000 transform translate-x-12 bg-white opacity-10 rotate-12 group-hover:-translate-x-40 ease"></span>
@@ -34,7 +42,10 @@ export const DynamicButton = ({ link, type, children, className, color }) => {
         );
       case "add":
         return (
-          <button className="relative inline-flex items-center justify-start px-4 py-2 overflow-hidden font-medium transition-all bg-red-500 rounded-xl group">
+          <button
+            onClick={clickHandler}
+            className="relative inline-flex items-center justify-start px-4 py-2 overflow-hidden font-medium transition-all bg-red-500 rounded-xl group"
+          >
             <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-red-700 rounded group-hover:-mr-4 group-hover:-mt-4">
               <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
             </span>
@@ -57,6 +68,7 @@ export const DynamicButton = ({ link, type, children, className, color }) => {
       case "delete":
         return (
           <button
+            onClick={clickHandler}
             className={`px-4 py-2 font-medium ${color} rounded-lg text-sm`}
           >
             {children}

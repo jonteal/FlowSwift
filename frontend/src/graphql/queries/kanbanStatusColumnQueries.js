@@ -4,7 +4,7 @@ const GET_KANBAN_STATUS_COLUMNS = gql`
   query getKanbanStatusColumns {
     kanbanStatusColumn {
       id
-      title
+      columnState
       description
       kanban {
         id
@@ -18,7 +18,7 @@ const GET_KANBAN_STATUS_COLUMN = gql`
   query getKanbanStatusColumn($id: ID) {
     kanbanStatusColumn(id: $id) {
       id
-      title
+      columnState
       description
       kanban {
         id

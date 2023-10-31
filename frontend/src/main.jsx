@@ -59,6 +59,7 @@ import "./index.css";
 import { Features } from "./views/Features/Features";
 import { NewKanban } from "./views/clientDashboard/projects/NewKanban/NewKanban";
 import { AddKanban } from "./views/clientDashboard/projects/NewKanban/AddKanban";
+import { KanbanView } from "./views/clientDashboard/projects/NewKanban/KanbanView";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -164,7 +165,7 @@ const router = createBrowserRouter(
             />
             <Route
               element={<KanbanView />}
-              path="/clients/:clientId/projects/:projectId/kanbans/:kanban"
+              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId"
             />
             <Route
               element={<AddKanbanTicket />}
