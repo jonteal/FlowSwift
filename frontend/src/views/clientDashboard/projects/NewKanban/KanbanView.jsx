@@ -15,6 +15,8 @@ import { Spinner } from "react-bootstrap";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
+import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
+import { Ticket } from "../../../../components/kanban/Ticket/Ticket";
 
 export const KanbanView = () => {
   const { kanbanId } = useParams();
@@ -32,6 +34,14 @@ export const KanbanView = () => {
     error: kanbanStatusColumnError,
     data: kanbanStatusColumnData,
   } = useQuery(GET_KANBAN_STATUS_COLUMNS, {
+    variables: { kanbanId },
+  });
+
+  const {
+    loading: ticketLoading,
+    error: ticketError,
+    data: ticketData,
+  } = useQuery(GET_TICKETS, {
     variables: { kanbanId },
   });
 
@@ -67,35 +77,38 @@ export const KanbanView = () => {
 
     addKanbanStatusColumn(columnState, columnDescription, kanbanId);
 
-    console.log("columnState: ", columnState);
-    console.log("columnDescription: ", columnDescription);
-    console.log("kanbanId: ", kanbanId);
-
     setColumnState("");
     setColumnDescription("");
   };
-
-  // console.log("data: ", data);
 
   if (loading) return <Spinner />;
   if (error) return <p>Failing to load kanban</p>;
 
   if (kanbanStatusColumnLoading) return <Spinner />;
   if (kanbanStatusColumnError) return <p>Failing to load columns</p>;
+  if (ticketLoading) return <Spinner />;
+  if (ticketError) return <p>Failing to load columns</p>;
+
+  console.log("ticketData: ", ticketData);
+  console.log("kanbanStatusColumnData: ", kanbanStatusColumnData);
 
   const { title, description } = data.kanban;
 
-  console.log("kanbanStatusColumnData: ", kanbanStatusColumnData);
-
   return (
     <DynamicContainer>
-      <DynamicButton
-        clickHandler={() => setIsAddingColumn(!isAddingColumn)}
-        type="add"
-        color="red"
-      >
-        Add Column
-      </DynamicButton>
+      <div className="flex flex-row justify-around">
+        <DynamicButton
+          clickHandler={() => setIsAddingColumn(!isAddingColumn)}
+          type="add"
+          color="red"
+        >
+          Add Column
+        </DynamicButton>
+
+        <DynamicButton type="link" link="addTicket" color="lightBlue">
+          Add Ticket
+        </DynamicButton>
+      </div>
 
       {isAddingColumn && (
         <div>
@@ -132,9 +145,20 @@ export const KanbanView = () => {
       <h1 className="text-lg font-bold mt-3">{title}</h1>
       <h2 className="text-base font-normal">{description}</h2>
 
-      <div className="border bg-slate-50 mt-2 ml-2">
+      <div className="border bg-slate-50 mt-2 ml-2 flex flex-row justify-around items-center">
         {kanbanStatusColumnData.kanbanStatusColumns.map((column) => (
-          <div>{column.columnState}</div>
+          <div key={column.id} className="border bg-slate-100 mx-2 w-full">
+            <h2 className="bold text-lg font-bold">{column.columnState}</h2>
+            <div className="border">
+              {ticketData.tickets
+                .filter((ticket) => ticket.status === column.id)
+                .map((ticket) => (
+                  <li key={ticket.id} className="w-full">
+                    <Ticket ticket={ticket} />
+                  </li>
+                ))}
+            </div>
+          </div>
         ))}
       </div>
     </DynamicContainer>

@@ -16,7 +16,7 @@ import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 
 export const EditKanbanTicket = () => {
-  const { projectId, ticketId } = useParams();
+  const { projectId, ticketId, kanbanId } = useParams();
 
   const {
     loading: ticketLoading,
@@ -40,7 +40,7 @@ export const EditKanbanTicket = () => {
       title,
       description,
       blocked,
-      projectId,
+      kanbanId,
       status,
       blockedReason,
     },
@@ -49,11 +49,11 @@ export const EditKanbanTicket = () => {
     update(cache, { data: { updateTicket } }) {
       const { tickets } = cache.readQuery({
         query: GET_TICKETS,
-        variables: { projectId },
+        variables: { kanbanId },
       });
       cache.writeQuery({
         query: GET_TICKETS,
-        variables: { projectId },
+        variables: { kanbanId },
         data: { tickets: [...tickets, updateTicket] },
       });
     },
@@ -73,7 +73,7 @@ export const EditKanbanTicket = () => {
       ticketId,
       title,
       description,
-      projectId,
+      kanbanId,
       status,
       blocked,
       blockedReason

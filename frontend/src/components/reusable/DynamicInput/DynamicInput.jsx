@@ -1,6 +1,7 @@
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../../context";
+import { capitalized } from "../../../utils/format";
 
 export const DynamicInput = ({
   id,
@@ -74,7 +75,9 @@ export const DynamicInput = ({
                 value={option.value || option.id}
                 key={option.value || option.id}
               >
-                {option.label || option.title}
+                {option.label ||
+                  option.title ||
+                  capitalized(option.columnState)}
               </option>
             ))}
           </select>

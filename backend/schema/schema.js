@@ -302,10 +302,10 @@ const TicketType = new GraphQLObjectType({
     blockedReason: { type: GraphQLString },
     ready: { type: GraphQLBoolean },
     status: { type: GraphQLString },
-    project: {
-      type: ProjectType,
+    kanban: {
+      type: KanbanType,
       resolve(parent, args) {
-        return Project.findById(parent.projectId);
+        return Kanban.findById(parent.kanbanId);
       },
     },
     user: {
@@ -543,9 +543,9 @@ const RootQuery = new GraphQLObjectType({
     },
     tickets: {
       type: new GraphQLList(TicketType),
-      args: { projectId: { type: GraphQLID } },
+      args: { kanbanId: { type: GraphQLID } },
       resolve(parent, args) {
-        return Ticket.find({ projectId: args.projectId });
+        return Ticket.find({ kanbanId: args.kanbanId });
       },
     },
     ticket: {
@@ -1494,22 +1494,23 @@ const mutation = new GraphQLObjectType({
           defaultValue: "User Story",
         },
         description: { type: GraphQLString },
-        status: {
-          type: new GraphQLEnumType({
-            name: "TicketStatus",
-            values: {
-              ready: { value: "ready" },
-              inProgress: { value: "inProgress" },
-              done: { value: "done" },
-            },
-          }),
-          defaultValue: "ready",
-        },
+        status: { type: GraphQLString },
+        // status: {
+        //   type: new GraphQLEnumType({
+        //     name: "TicketStatus",
+        //     values: {
+        //       ready: { value: "ready" },
+        //       inProgress: { value: "inProgress" },
+        //       done: { value: "done" },
+        //     },
+        //   }),
+        //   defaultValue: "ready",
+        // },
         size: { type: GraphQLString },
         blocked: { type: GraphQLBoolean },
         blockedReason: { type: GraphQLString },
         ready: { type: GraphQLBoolean },
-        projectId: { type: new GraphQLNonNull(GraphQLID) },
+        kanbanId: { type: new GraphQLNonNull(GraphQLID) },
         userId: { type: GraphQLID },
         createdAt: { type: GraphQLString },
       },
@@ -1523,7 +1524,7 @@ const mutation = new GraphQLObjectType({
           blocked: args.blocked,
           blockedReason: args.blockedReason,
           ready: args.ready,
-          projectId: args.projectId,
+          kanbanId: args.kanbanId,
           userId: args.userId,
           createdAt: args.createdAt,
         });
@@ -1564,16 +1565,18 @@ const mutation = new GraphQLObjectType({
         blocked: { type: GraphQLBoolean },
         blockedReason: { type: GraphQLString },
         ready: { type: GraphQLBoolean },
-        status: {
-          type: new GraphQLEnumType({
-            name: "TicketStatusUpdate",
-            values: {
-              ready: { value: "ready" },
-              inProgress: { value: "inProgress" },
-              done: { value: "done" },
-            },
-          }),
-        },
+        status: { type: GraphQLBoolean },
+        // status: {
+        //   type: new GraphQLEnumType({
+        //     name: "TicketStatusUpdate",
+        //     values: {
+        //       ready: { value: "ready" },
+        //       inProgress: { value: "inProgress" },
+        //       done: { value: "done" },
+        //     },
+        //   }),
+        // },
+        kanbanId: { type: GraphQLID },
         userId: { type: GraphQLID },
         createdAt: { type: GraphQLString },
       },
@@ -1589,6 +1592,7 @@ const mutation = new GraphQLObjectType({
               status: args.status,
               blocked: args.blocked,
               blockedReason: args.blockedReason,
+              kanbanId: args.kanbanId,
               ready: args.ready,
               userId: args.userId,
             },
