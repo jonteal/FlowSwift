@@ -169,15 +169,15 @@ const router = createBrowserRouter(
             />
             <Route
               element={<AddKanbanTicket />}
-              path="/clients/:clientId/projects/:projectId/kanban/addTicket"
+              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId/addTicket"
             />
             <Route
               element={<EditKanbanTicket />}
-              path="/clients/:clientId/projects/:projectId/kanban/:ticketId/edit"
+              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId/:ticketId/edit"
             />
             <Route
               element={<TicketView />}
-              path="/clients/:clientId/projects/:projectId/kanban/:ticketId"
+              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId/:ticketId"
             />
             <Route
               element={<ProjectInvoices />}

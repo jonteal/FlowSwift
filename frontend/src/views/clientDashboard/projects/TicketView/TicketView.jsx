@@ -15,7 +15,7 @@ import { useContext } from "react";
 export const TicketView = () => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
-  const { ticketId, clientId, projectId } = useParams();
+  const { ticketId, clientId, projectId, kanbanId } = useParams();
   const {
     loading: ticketLoading,
     error: ticketError,
@@ -52,7 +52,7 @@ export const TicketView = () => {
                 className="ml-5"
                 type="link"
                 color="lightBlue"
-                link={`/clients/${clientId}/projects/${projectId}/kanban/${id}/edit`}
+                link={`/clients/${clientId}/projects/${projectId}/kanbans/${kanbanId}/${id}/edit`}
               >
                 Edit
               </DynamicButton>

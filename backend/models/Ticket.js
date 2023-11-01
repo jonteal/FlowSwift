@@ -1,48 +1,44 @@
 import mongoose from "mongoose";
-import moment from "moment";
 
-const TicketSchema = new mongoose.Schema({
-  title: {
-    type: String,
+const TicketSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+    },
+    typeOfTicket: {
+      type: String,
+      enum: ["User Story", "Defect"],
+    },
+    description: {
+      type: String,
+    },
+    status: {
+      type: String,
+    },
+    size: {
+      type: Number,
+      trim: true,
+    },
+    blocked: {
+      type: Boolean,
+    },
+    blockedReason: {
+      type: String,
+    },
+    ready: {
+      type: Boolean,
+    },
+    kanbanId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Kanban",
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
-  typeOfTicket: {
-    type: String,
-    enum: ["User Story", "Defect"],
-  },
-  description: {
-    type: String,
-  },
-  status: {
-    type: String,
-    enum: ["ready", "inProgress", "done"],
-  },
-  size: {
-    type: Number,
-    trim: true,
-  },
-  blocked: {
-    type: Boolean,
-  },
-  blockedReason: {
-    type: String,
-  },
-  ready: {
-    type: Boolean,
-  },
-  projectId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Project",
-  },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-    get: (timeValue) => moment(timeValue).format("MM/DD/YYYY [at] hh:mm a"),
-  },
-});
+  { timestamps: true }
+);
 
 const Ticket = mongoose.model("Ticket", TicketSchema);
 
