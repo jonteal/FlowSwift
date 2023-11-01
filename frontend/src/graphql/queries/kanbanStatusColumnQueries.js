@@ -6,6 +6,7 @@ const GET_KANBAN_STATUS_COLUMNS = gql`
       id
       columnState
       columnDescription
+      position
       kanban {
         id
         title
@@ -20,6 +21,7 @@ const GET_KANBAN_STATUS_COLUMN = gql`
       id
       columnState
       columnDescription
+      position
       kanban {
         id
         title

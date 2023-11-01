@@ -1,13 +1,10 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
 import { GET_KANBAN } from "../../../../graphql/queries/kanbanQueries";
-import {
-  GET_KANBAN_STATUS_COLUMN,
-  GET_KANBAN_STATUS_COLUMNS,
-} from "../../../../graphql/queries/kanbanStatusColumnQueries";
+import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 import { ADD_KANBAN_STATUS_COLUMN } from "../../../../graphql/mutations/kanbanStatusColumnMutations";
 
 // COMPONENTS
@@ -17,13 +14,43 @@ import { DynamicContainer } from "../../../../components/reusable/DynamicContain
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
 import { Ticket } from "../../../../components/kanban/Ticket/Ticket";
+import { capitalized } from "../../../../utils/format";
+import { ThemeContext } from "../../../../context";
+import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
+
+// STATE
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setSizeOff,
+  setSizeOn,
+  setDescriptionOff,
+  setDescriptionOn,
+  setCreatedDateOff,
+  setCreatedDateOn,
+  setOwnerOff,
+  setOwnerOn,
+} from "../../../../slices/ticketSlice";
 
 export const KanbanView = () => {
   const { kanbanId } = useParams();
 
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
+
+  const dispatch = useDispatch();
+  const {
+    size,
+    description: ticketDescription,
+    createdDate,
+    owner,
+  } = useSelector((state) => state.ticket);
+
   const [isAddingColumn, setIsAddingColumn] = useState(false);
   const [columnState, setColumnState] = useState("");
   const [columnDescription, setColumnDescription] = useState("");
+  const [position, setPosition] = useState("");
+  // const [sortedColumns, setSortedColumns] = useState([]);
+  const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
 
   const { loading, error, data } = useQuery(GET_KANBAN, {
     variables: { id: kanbanId },
@@ -50,6 +77,7 @@ export const KanbanView = () => {
       columnState,
       columnDescription,
       kanbanId,
+      position,
     },
     update(cache, { data: { addKanbanStatusColumn } }) {
       const { kanbanStatusColumns } = cache.readQuery({
@@ -69,30 +97,104 @@ export const KanbanView = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    console.log("testing tsting tisting");
-
-    if (columnState === "") {
+    if (columnState === "" || position === "") {
       alert("Please add a state of column");
     }
 
-    addKanbanStatusColumn(columnState, columnDescription, kanbanId);
+    addKanbanStatusColumn(columnState, columnDescription, kanbanId, position);
 
     setColumnState("");
     setColumnDescription("");
+    setPosition("");
   };
 
-  if (loading) return <Spinner />;
-  if (error) return <p>Failing to load kanban</p>;
+  const handleSizeToggle = () => {
+    size ? dispatch(setSizeOff()) : dispatch(setSizeOn());
+  };
+  const handleDescriptionToggle = () => {
+    ticketDescription
+      ? dispatch(setDescriptionOff())
+      : dispatch(setDescriptionOn());
+  };
+  const handleCreatedDateToggle = () => {
+    createdDate ? dispatch(setCreatedDateOff()) : dispatch(setCreatedDateOn());
+  };
+  const handleOwnerToggle = () => {
+    owner ? dispatch(setOwnerOff()) : dispatch(setOwnerOn());
+  };
 
-  if (kanbanStatusColumnLoading) return <Spinner />;
-  if (kanbanStatusColumnError) return <p>Failing to load columns</p>;
-  if (ticketLoading) return <Spinner />;
-  if (ticketError) return <p>Failing to load columns</p>;
+  const handleOpenFilters = () => {
+    setIsFilterOptionsOpen(!isFilterOptionsOpen);
+  };
+
+  if (loading || kanbanStatusColumnLoading || ticketLoading) return <Spinner />;
+  if (error || kanbanStatusColumnError || ticketError)
+    return <p>There was a problem...</p>;
 
   console.log("ticketData: ", ticketData);
-  console.log("kanbanStatusColumnData: ", kanbanStatusColumnData);
+  console.log(
+    "kanbanStatusColumnData type: ",
+    typeof kanbanStatusColumnData.kanbanStatusColumns
+  );
+
+  console.log(
+    "kanbanStatusColumnData: ",
+    kanbanStatusColumnData.kanbanStatusColumns[0]
+  );
+
+  Object.freeze(kanbanStatusColumnData.kanbanStatusColumns);
+
+  const columnsCopy = [...kanbanStatusColumnData.kanbanStatusColumns];
+
+  const sortedColumns = columnsCopy.sort((a, b) => a.position - b.position);
+
+  console.log("sortedColumns: ", sortedColumns);
+
+  console.log("columnsCopy", columnsCopy);
 
   const { title, description } = data.kanban;
+
+  const kanbanTicketFilters = [
+    {
+      name: "Size",
+      toggle: handleSizeToggle,
+      value: size,
+      isChecked: size,
+      ariaLabel: "Size filter",
+    },
+    {
+      name: "Description",
+      toggle: handleDescriptionToggle,
+      value: ticketDescription,
+      isChecked: ticketDescription,
+      ariaLabel: "Description filter",
+    },
+    {
+      name: "Created Date",
+      toggle: handleCreatedDateToggle,
+      value: createdDate,
+      isChecked: createdDate,
+      ariaLabel: "Created Date filter",
+    },
+    {
+      name: "Owner",
+      toggle: handleOwnerToggle,
+      value: owner,
+      isChecked: owner,
+      ariaLabel: "Owner filter",
+    },
+  ];
+
+  // const sortedColumns = kanbanStatusColumnData.kanbanStatusColumns.sort(
+  //   (a, b) => a.position - b.position
+  // );
+
+  console.log(
+    "kanbanStatusColumnData.kanbanStatusColumns",
+    kanbanStatusColumnData.kanbanStatusColumns
+  );
+
+  // console.log("sortedColumns: ", sortedColumns);
 
   return (
     <DynamicContainer>
@@ -108,6 +210,13 @@ export const KanbanView = () => {
         <DynamicButton type="link" link="addTicket" color="lightBlue">
           Add Ticket
         </DynamicButton>
+
+        <button
+          className="border bg-sky-300 px-3 py-1 rounded-lg"
+          onClick={handleOpenFilters}
+        >
+          Filters
+        </button>
       </div>
 
       {isAddingColumn && (
@@ -135,21 +244,61 @@ export const KanbanView = () => {
               ariaLabel="Kanban Description"
             />
 
+            <DynamicInput
+              id="kanban-column-flow-position"
+              inputType="input"
+              type="number"
+              label="Flow State Position"
+              changeHandler={(e) => setPosition(e.target.value)}
+              placeholder="Position..."
+              value={position}
+              ariaLabel="Flow state position"
+            />
+
             <DynamicButton color="red" type="submit">
               Submit
             </DynamicButton>
+
+            <button
+              className="border bg-sky-300 px-3 py-1 rounded-lg"
+              onClick={handleOpenFilters}
+            >
+              Filters
+            </button>
           </form>
         </div>
       )}
 
+      {isFilterOptionsOpen && <FiltersList filters={kanbanTicketFilters} />}
+
       <h1 className="text-lg font-bold mt-3">{title}</h1>
       <h2 className="text-base font-normal">{description}</h2>
 
-      <div className="border bg-slate-50 mt-2 ml-2 flex flex-row justify-around items-center">
-        {kanbanStatusColumnData.kanbanStatusColumns.map((column) => (
-          <div key={column.id} className="border bg-slate-100 mx-2 w-full">
-            <h2 className="bold text-lg font-bold">{column.columnState}</h2>
-            <div className="border">
+      <div className="flex flex-row items-start ml-2">
+        {sortedColumns.map((column) => (
+          <div
+            key={column.id}
+            className={`flex flex-col items-center ${
+              darkMode
+                ? "bg-sky-800 border-slate-100"
+                : "bg-slate-300 border-slate-500"
+            }  w-1/2 mt-2 mr-2 rounded-lg h-auto min-h-screen `}
+          >
+            <div className="flex flex-row items-center mt-2">
+              <h5 className="font-extrabold">
+                {capitalized(column.columnState)}
+              </h5>
+              <p className="ml-3">
+                (
+                {
+                  ticketData.tickets.filter(
+                    (ticket) => ticket.status === column.id
+                  ).length
+                }
+                )
+              </p>
+            </div>
+            <ul className="list-none pl-0 w-full">
               {ticketData.tickets
                 .filter((ticket) => ticket.status === column.id)
                 .map((ticket) => (
@@ -157,7 +306,7 @@ export const KanbanView = () => {
                     <Ticket ticket={ticket} />
                   </li>
                 ))}
-            </div>
+            </ul>
           </div>
         ))}
       </div>

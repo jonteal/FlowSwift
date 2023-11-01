@@ -119,6 +119,7 @@ const KanbanStatusColumnType = new GraphQLObjectType({
     id: { type: GraphQLID },
     columnState: { type: GraphQLString },
     columnDescription: { type: GraphQLString },
+    position: { type: GraphQLString },
     kanban: {
       type: KanbanType,
       resolve(parent, args) {
@@ -910,12 +911,14 @@ const mutation = new GraphQLObjectType({
       args: {
         columnState: { type: new GraphQLNonNull(GraphQLString) },
         columnDescription: { type: GraphQLString },
+        position: { type: new GraphQLNonNull(GraphQLString) },
         kanbanId: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
         const kanbanStatusColumn = new KanbanStatusColumn({
           columnState: args.columnState,
           columnDescription: args.columnDescription,
+          position: args.position,
           kanbanId: args.kanbanId,
         });
 
@@ -946,6 +949,7 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
         columnState: { type: GraphQLString },
         columnDescription: { type: GraphQLString },
+        position: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve(parent, args) {
         return KanbanStatusColumn.findByIdAndUpdate(
@@ -955,6 +959,7 @@ const mutation = new GraphQLObjectType({
               columnState: args.columnState,
               columnDescription: args.columnDescription,
               kanbanId: args.kanbanId,
+              position: args.position,
             },
           },
           { new: true }
@@ -1495,17 +1500,6 @@ const mutation = new GraphQLObjectType({
         },
         description: { type: GraphQLString },
         status: { type: GraphQLString },
-        // status: {
-        //   type: new GraphQLEnumType({
-        //     name: "TicketStatus",
-        //     values: {
-        //       ready: { value: "ready" },
-        //       inProgress: { value: "inProgress" },
-        //       done: { value: "done" },
-        //     },
-        //   }),
-        //   defaultValue: "ready",
-        // },
         size: { type: GraphQLString },
         blocked: { type: GraphQLBoolean },
         blockedReason: { type: GraphQLString },
@@ -1566,16 +1560,6 @@ const mutation = new GraphQLObjectType({
         blockedReason: { type: GraphQLString },
         ready: { type: GraphQLBoolean },
         status: { type: GraphQLBoolean },
-        // status: {
-        //   type: new GraphQLEnumType({
-        //     name: "TicketStatusUpdate",
-        //     values: {
-        //       ready: { value: "ready" },
-        //       inProgress: { value: "inProgress" },
-        //       done: { value: "done" },
-        //     },
-        //   }),
-        // },
         kanbanId: { type: GraphQLID },
         userId: { type: GraphQLID },
         createdAt: { type: GraphQLString },

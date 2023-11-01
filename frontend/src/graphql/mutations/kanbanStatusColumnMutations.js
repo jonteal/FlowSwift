@@ -4,16 +4,19 @@ const ADD_KANBAN_STATUS_COLUMN = gql`
   mutation AddKanbanStatusColumn(
     $columnState: String!
     $columnDescription: String
+    $position: String!
     $kanbanId: ID!
   ) {
     addKanbanStatusColumn(
       columnState: $columnState
       columnDescription: $columnDescription
+      position: $position
       kanbanId: $kanbanId
     ) {
       id
       columnState
       columnDescription
+      position
       kanban {
         id
         title
@@ -35,15 +38,20 @@ const UPDATE_KANBAN_STATUS_COLUMN = gql`
     $id: ID!
     $columnState: String
     $columnDescription: String
+    $position: String
+    $kanbanId: ID!
   ) {
     updateKanbanStatusColumn(
       id: $id
       columnState: $columnState
       columnDescription: $columnDescription
+      position: $position
+      kanbanId: $kanbanId
     ) {
       id
       columnState
       columnDescription
+      position
       kanban {
         id
         title

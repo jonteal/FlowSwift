@@ -17,6 +17,7 @@ import { ThemeContext } from "../../../context";
 import { useSelector } from "react-redux";
 
 export const Ticket = ({ ticket }) => {
+  const { kanbanId } = useParams();
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   const { size, description, createdDate, owner } = useSelector(
@@ -37,7 +38,7 @@ export const Ticket = ({ ticket }) => {
 
   const [deleteTicket] = useMutation(DELETE_TICKET, {
     variables: { id: ticket.id },
-    refetchQueries: [{ query: GET_TICKETS, variables: { projectId } }],
+    refetchQueries: [{ query: GET_TICKETS, variables: { kanbanId } }],
   });
 
   return (
