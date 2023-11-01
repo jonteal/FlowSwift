@@ -395,8 +395,9 @@ const RootQuery = new GraphQLObjectType({
     },
     kanbans: {
       type: new GraphQLList(KanbanType),
+      args: { projectId: { type: GraphQLID } },
       resolve(parent, args) {
-        return Kanban.find();
+        return Kanban.find({ projectId: args.projectId });
       },
     },
     kanban: {
@@ -410,14 +411,14 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(KanbanStatusColumnType),
       args: { kanbanId: { type: GraphQLID } },
       resolve(parent, args) {
-        return KanbanStatusColumnType.find({ kanbanId: args.kanbanId });
+        return KanbanStatusColumn.find({ kanbanId: args.kanbanId });
       },
     },
     kanbanStatusColumn: {
       type: KanbanStatusColumnType,
-      args: { kanbanId: { type: GraphQLID } },
+      args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return KanbanStatusColumnType.findById(args.kanbanId);
+        return KanbanStatusColumn.findById(args.id);
       },
     },
     services: {

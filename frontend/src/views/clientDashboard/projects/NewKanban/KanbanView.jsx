@@ -27,6 +27,14 @@ export const KanbanView = () => {
     variables: { id: kanbanId },
   });
 
+  const {
+    loading: kanbanStatusColumnLoading,
+    error: kanbanStatusColumnError,
+    data: kanbanStatusColumnData,
+  } = useQuery(GET_KANBAN_STATUS_COLUMNS, {
+    variables: { kanbanId },
+  });
+
   const [addKanbanStatusColumn] = useMutation(ADD_KANBAN_STATUS_COLUMN, {
     variables: {
       columnState,
@@ -70,9 +78,14 @@ export const KanbanView = () => {
   // console.log("data: ", data);
 
   if (loading) return <Spinner />;
-  if (error) return <p>Something went wrong...</p>;
+  if (error) return <p>Failing to load kanban</p>;
+
+  if (kanbanStatusColumnLoading) return <Spinner />;
+  if (kanbanStatusColumnError) return <p>Failing to load columns</p>;
 
   const { title, description } = data.kanban;
+
+  console.log("kanbanStatusColumnData: ", kanbanStatusColumnData);
 
   return (
     <DynamicContainer>
@@ -118,6 +131,12 @@ export const KanbanView = () => {
 
       <h1 className="text-lg font-bold mt-3">{title}</h1>
       <h2 className="text-base font-normal">{description}</h2>
+
+      <div className="border bg-slate-50 mt-2 ml-2">
+        {kanbanStatusColumnData.kanbanStatusColumns.map((column) => (
+          <div>{column.columnState}</div>
+        ))}
+      </div>
     </DynamicContainer>
   );
 };

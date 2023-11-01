@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const GET_KANBANS = gql`
-  query getKanbans {
-    kanbans {
+  query getKanbans($projectId: ID) {
+    kanbans(projectId: $projectId) {
       id
       title
       description

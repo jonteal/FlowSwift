@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 const GET_KANBAN_STATUS_COLUMNS = gql`
   query getKanbanStatusColumns($kanbanId: ID) {
-    kanbanStatusColumn(kanbanId: $kanbanId) {
+    kanbanStatusColumns(kanbanId: $kanbanId) {
       id
       columnState
       columnDescription
@@ -15,8 +15,8 @@ const GET_KANBAN_STATUS_COLUMNS = gql`
 `;
 
 const GET_KANBAN_STATUS_COLUMN = gql`
-  query getKanbanStatusColumn($kanbanId: ID) {
-    kanbanStatusColumn(kanbanId: $kanbanId) {
+  query getKanbanStatusColumn($id: ID) {
+    kanbanStatusColumn(id: $id) {
       id
       columnState
       columnDescription
