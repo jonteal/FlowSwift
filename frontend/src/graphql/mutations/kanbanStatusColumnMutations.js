@@ -3,17 +3,17 @@ import { gql } from "@apollo/client";
 const ADD_KANBAN_STATUS_COLUMN = gql`
   mutation AddKanbanStatusColumn(
     $columnState: String!
-    $description: String
+    $columnDescription: String
     $kanbanId: ID!
   ) {
     addKanbanStatusColumn(
       columnState: $columnState
-      description: $description
+      columnDescription: $columnDescription
       kanbanId: $kanbanId
     ) {
       id
       columnState
-      description
+      columnDescription
       kanban {
         id
         title
@@ -34,16 +34,16 @@ const UPDATE_KANBAN_STATUS_COLUMN = gql`
   mutation UpdateKanbanStatusColumn(
     $id: ID!
     $columnState: String
-    $description: String
+    $columnDescription: String
   ) {
     updateKanbanStatusColumn(
       id: $id
       columnState: $columnState
-      description: $description
+      columnDescription: $columnDescription
     ) {
       id
       columnState
-      description
+      columnDescription
       kanban {
         id
         title

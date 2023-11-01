@@ -118,7 +118,7 @@ const KanbanStatusColumnType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     columnState: { type: GraphQLString },
-    description: { type: GraphQLString },
+    columnDescription: { type: GraphQLString },
     kanban: {
       type: KanbanType,
       resolve(parent, args) {
@@ -408,15 +408,16 @@ const RootQuery = new GraphQLObjectType({
     },
     kanbanStatusColumns: {
       type: new GraphQLList(KanbanStatusColumnType),
+      args: { kanbanId: { type: GraphQLID } },
       resolve(parent, args) {
-        return KanbanStatusColumnType.find();
+        return KanbanStatusColumnType.find({ kanbanId: args.kanbanId });
       },
     },
     kanbanStatusColumn: {
       type: KanbanStatusColumnType,
-      args: { id: { type: GraphQLID } },
+      args: { kanbanId: { type: GraphQLID } },
       resolve(parent, args) {
-        return KanbanStatusColumnType.findById(args.id);
+        return KanbanStatusColumnType.findById(args.kanbanId);
       },
     },
     services: {
@@ -907,13 +908,13 @@ const mutation = new GraphQLObjectType({
       type: KanbanStatusColumnType,
       args: {
         columnState: { type: new GraphQLNonNull(GraphQLString) },
-        description: { type: GraphQLString },
+        columnDescription: { type: GraphQLString },
         kanbanId: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
-        const kanbanStatusColumn = new Kanban({
+        const kanbanStatusColumn = new KanbanStatusColumn({
           columnState: args.columnState,
-          description: args.description,
+          columnDescription: args.columnDescription,
           kanbanId: args.kanbanId,
         });
 
@@ -943,7 +944,7 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
         columnState: { type: GraphQLString },
-        description: { type: GraphQLString },
+        columnDescription: { type: GraphQLString },
       },
       resolve(parent, args) {
         return KanbanStatusColumn.findByIdAndUpdate(
@@ -951,7 +952,7 @@ const mutation = new GraphQLObjectType({
           {
             $set: {
               columnState: args.columnState,
-              description: args.description,
+              columnDescription: args.columnDescription,
               kanbanId: args.kanbanId,
             },
           },

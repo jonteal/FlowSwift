@@ -25,7 +25,7 @@ export const NewKanban = () => {
         {data.kanbans.map((kanban) => (
           <Link
             to={`/clients/${clientId}/projects/${projectId}/kanbans/${kanban.id}`}
-            className="border w-1/4 rounded-lg h-20 flex flex-col items-center m-2"
+            className="border w-1/4 rounded-lg h-20 flex flex-col items-center m-2 bg-slate-50"
           >
             <p>{kanban.title}</p>
             <p>{kanban.description}</p>

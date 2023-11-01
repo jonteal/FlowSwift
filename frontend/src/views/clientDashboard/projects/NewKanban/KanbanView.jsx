@@ -21,7 +21,7 @@ export const KanbanView = () => {
 
   const [isAddingColumn, setIsAddingColumn] = useState(false);
   const [columnState, setColumnState] = useState("");
-  const [description, setDescription] = useState("");
+  const [columnDescription, setColumnDescription] = useState("");
 
   const { loading, error, data } = useQuery(GET_KANBAN, {
     variables: { id: kanbanId },
@@ -30,7 +30,7 @@ export const KanbanView = () => {
   const [addKanbanStatusColumn] = useMutation(ADD_KANBAN_STATUS_COLUMN, {
     variables: {
       columnState,
-      description,
+      columnDescription,
       kanbanId,
     },
     update(cache, { data: { addKanbanStatusColumn } }) {
@@ -51,26 +51,28 @@ export const KanbanView = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
+    console.log("testing tsting tisting");
+
     if (columnState === "") {
       alert("Please add a state of column");
     }
 
-    addKanbanStatusColumn(columnState, description, kanbanId);
+    addKanbanStatusColumn(columnState, columnDescription, kanbanId);
 
     console.log("columnState: ", columnState);
-    console.log("description: ", description);
+    console.log("columnDescription: ", columnDescription);
     console.log("kanbanId: ", kanbanId);
 
     setColumnState("");
-    setDescription("");
+    setColumnDescription("");
   };
 
-  console.log("data: ", data);
+  // console.log("data: ", data);
 
   if (loading) return <Spinner />;
   if (error) return <p>Something went wrong...</p>;
 
-  const { title, description: kanbanDescription } = data.kanban;
+  const { title, description } = data.kanban;
 
   return (
     <DynamicContainer>
@@ -101,9 +103,9 @@ export const KanbanView = () => {
               inputType="textarea"
               rows="2"
               label="Kanban Column Description"
-              changeHandler={(e) => setDescription(e.target.value)}
+              changeHandler={(e) => setColumnDescription(e.target.value)}
               placeholder="Describe your kanban"
-              value={description}
+              value={columnDescription}
               ariaLabel="Kanban Description"
             />
 
@@ -115,7 +117,7 @@ export const KanbanView = () => {
       )}
 
       <h1 className="text-lg font-bold mt-3">{title}</h1>
-      <h2 className="text-base font-normal">{kanbanDescription}</h2>
+      <h2 className="text-base font-normal">{description}</h2>
     </DynamicContainer>
   );
 };

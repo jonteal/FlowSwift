@@ -5,7 +5,7 @@ const KanbanStatusColumnSchema = new mongoose.Schema(
     columnState: {
       type: String,
     },
-    description: {
+    columnDescription: {
       type: String,
     },
     kanbanId: {
