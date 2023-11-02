@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
+
+import { BsFillGearFill } from "react-icons/bs";
 
 // GRAPHQL
 import { GET_KANBAN } from "../../../../graphql/queries/kanbanQueries";
@@ -49,7 +51,6 @@ export const KanbanView = () => {
   const [columnState, setColumnState] = useState("");
   const [columnDescription, setColumnDescription] = useState("");
   const [position, setPosition] = useState("");
-  // const [sortedColumns, setSortedColumns] = useState([]);
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
 
   const { loading, error, data } = useQuery(GET_KANBAN, {
@@ -131,26 +132,11 @@ export const KanbanView = () => {
   if (error || kanbanStatusColumnError || ticketError)
     return <p>There was a problem...</p>;
 
-  console.log("ticketData: ", ticketData);
-  console.log(
-    "kanbanStatusColumnData type: ",
-    typeof kanbanStatusColumnData.kanbanStatusColumns
-  );
-
-  console.log(
-    "kanbanStatusColumnData: ",
-    kanbanStatusColumnData.kanbanStatusColumns[0]
-  );
-
   Object.freeze(kanbanStatusColumnData.kanbanStatusColumns);
 
   const columnsCopy = [...kanbanStatusColumnData.kanbanStatusColumns];
 
   const sortedColumns = columnsCopy.sort((a, b) => a.position - b.position);
-
-  console.log("sortedColumns: ", sortedColumns);
-
-  console.log("columnsCopy", columnsCopy);
 
   const { title, description } = data.kanban;
 
@@ -185,20 +171,9 @@ export const KanbanView = () => {
     },
   ];
 
-  // const sortedColumns = kanbanStatusColumnData.kanbanStatusColumns.sort(
-  //   (a, b) => a.position - b.position
-  // );
-
-  console.log(
-    "kanbanStatusColumnData.kanbanStatusColumns",
-    kanbanStatusColumnData.kanbanStatusColumns
-  );
-
-  // console.log("sortedColumns: ", sortedColumns);
-
   return (
     <DynamicContainer>
-      <div className="flex flex-row justify-around">
+      <div className="flex flex-row justify-around items-start">
         <DynamicButton
           clickHandler={() => setIsAddingColumn(!isAddingColumn)}
           type="add"
@@ -217,6 +192,10 @@ export const KanbanView = () => {
         >
           Filters
         </button>
+
+        <Link to="edit">
+          <BsFillGearFill />
+        </Link>
       </div>
 
       {isAddingColumn && (

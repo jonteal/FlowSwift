@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 
 // ICONS
 import { AiOutlineStop } from "react-icons/ai";
@@ -82,7 +82,7 @@ export const Ticket = ({ ticket }) => {
           </button>
           <Link
             className="mr-2"
-            to={`/clients/${clientId}/projects/${projectId}/kanban/${ticket.id}`}
+            to={`/clients/${clientId}/projects/${projectId}/kanbans/${kanbanId}/${ticket.id}`}
           >
             <span className="text-sm">View</span>
           </Link>

@@ -1,5 +1,6 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+import { format } from "date-fns";
 
 // GRAPHQL
 import { GET_TICKET } from "../../../../graphql/queries/ticketQueries";
@@ -11,6 +12,7 @@ import { DynamicButton } from "../../../../components/reusable/DynamicButton/Dyn
 // STATE
 import { ThemeContext } from "../../../../context";
 import { useContext } from "react";
+import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 
 export const TicketView = () => {
   const theme = useContext(ThemeContext);
@@ -30,10 +32,29 @@ export const TicketView = () => {
     navigate(-1);
   };
 
+  const {
+    loading: kanbanStatusColumnLoading,
+    error: kanbanStatusColumnError,
+    data: kanbanStatusColumnData,
+  } = useQuery(GET_KANBAN_STATUS_COLUMNS, {
+    variables: { kanbanId },
+  });
+
+  if (kanbanStatusColumnLoading) return <Spinner />;
+  if (kanbanStatusColumnError) return <p>There was a problem...</p>;
+
   if (ticketLoading) return <Spinner />;
   if (ticketError) return <p>Something went wrong</p>;
 
   const { id, title, description, status, createdAt, user } = ticketData.ticket;
+  console.log(
+    "kanbanStatusColumnData.kanbanStatusColumns: ",
+    kanbanStatusColumnData.kanbanStatusColumns
+  );
+  console.log("status: ", status);
+  const ticketStatus = kanbanStatusColumnData.kanbanStatusColumns.find(
+    (column) => column.id === status
+  );
 
   return (
     <div className="h-screen border-slate-500 rounded-xl">
@@ -97,7 +118,7 @@ export const TicketView = () => {
                   Status
                 </p>
                 <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
-                  {status}
+                  {ticketStatus.columnState}
                 </p>
               </div>
               <div className="px-3 py-0 m-2">
@@ -122,7 +143,7 @@ export const TicketView = () => {
                   Created:
                 </p>
                 <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
-                  {createdAt}
+                  {format(createdAt, "MM/dd/yyyy")}
                 </p>
               </div>
             </div>
