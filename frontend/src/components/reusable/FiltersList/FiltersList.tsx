@@ -1,6 +1,18 @@
 import { FilterToggle } from "../FilterToggle/FilterToggle";
 
-export const FiltersList = ({ filters }) => (
+export type FiltersType = {
+  name: string,
+  toggle: () => void,
+  value: string,
+  isChecked: boolean,
+  ariaLabel: string,
+}
+
+type FiltersListProps = {
+  filters: FiltersType[]
+}
+
+export const FiltersList = ({ filters }: FiltersListProps) => (
   <div className="border-slate-700 bg-slate-200 px-3 py-3 mx-2 my-2 rounded-lg flex flex-row justify-start">
     {filters.map((filter) => (
       <div key={filter.name}>

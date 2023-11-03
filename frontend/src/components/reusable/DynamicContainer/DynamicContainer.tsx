@@ -2,7 +2,11 @@
 import { useContext } from "react";
 import { ThemeContext } from "../../../context/context";
 
-export const DynamicContainer = ({ children }) => {
+type DynamicContainerProps = {
+  children: React.ReactNode
+}
+
+export const DynamicContainer = ({ children }: DynamicContainerProps) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   return (

@@ -2,6 +2,15 @@ import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+type DynamicButtonProps = {
+  link: string,
+  type: string,
+  children: React.ReactNode,
+  className: string,
+  color: string,
+  clickHandler: () => void,
+}
+
 export const DynamicButton = ({
   link,
   type,
@@ -9,7 +18,7 @@ export const DynamicButton = ({
   className,
   color,
   clickHandler,
-}) => {
+}: DynamicButtonProps) => {
   const navigate = useNavigate();
   const handleBackNavigate = () => {
     navigate(-1);
@@ -28,7 +37,7 @@ export const DynamicButton = ({
       break;
   }
   // GET BUTTON
-  const renderButton = (type) => {
+  const renderButton = (type: string) => {
     switch (type) {
       case "submit":
         return (

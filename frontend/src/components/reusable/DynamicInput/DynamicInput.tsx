@@ -3,6 +3,31 @@ import { useContext } from "react";
 import { ThemeContext } from "../../../context/context";
 import { capitalized } from "../../../utils/format";
 
+type SelectOptions = {
+  ariaLabel: string,
+  value: string,
+  id: string,
+  label: string,
+  title: string,
+  columnState: string
+}
+
+type DynamicInputProps = {
+  id: string,
+  inputType: string,
+  type: string,
+  label?: string,
+  changeHandler: () => void,
+  placeholder?: string,
+  value: string | number,
+  selectOptions?: SelectOptions[],
+  className?: string,
+  rows?: number,
+  ariaLabel?: string,
+  step?: string,
+  min?: string,
+}
+
 export const DynamicInput = ({
   id,
   inputType,
@@ -17,10 +42,10 @@ export const DynamicInput = ({
   ariaLabel,
   step = "",
   min = "",
-}) => {
+}: DynamicInputProps) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
-  const renderInput = () => {
+  const renderInput = (type: string) => {
     switch (inputType) {
       case "input":
         return (
@@ -69,9 +94,9 @@ export const DynamicInput = ({
             } form-select mb-4`}
             aria-label={ariaLabel}
           >
-            {selectOptions.map((option) => (
+            {selectOptions?.map((option) => (
               <option
-                aria-label={option.ariaLabel}
+                aria-label={option?.ariaLabel}
                 value={option.value || option.id}
                 key={option.value || option.id}
               >
