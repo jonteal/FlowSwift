@@ -1,11 +1,12 @@
 import { useQuery } from "@apollo/client";
+
+// GRAPHQL
 import { GET_CLIENTS } from "../../../graphql/queries/clientQueries";
 import { GET_ALL_CLIENT_INVOICES } from "../../../graphql/queries/invoiceQueries";
 
 // COMPONENTS
 import { NewClientsThisMonth } from "../../../components/mainDashboard/NewClientsThisMonth/NewClientsThisMonth";
-import { TotalClients } from "../../../components/mainDashboard/TotalClients/TotalClients";
-// import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+// import { TotalClients } from "../../../components/mainDashboard/TotalClients/TotalClients";
 
 export const MainDashboard = () => {
   // This Month's Sales / Revenue
@@ -17,18 +18,22 @@ export const MainDashboard = () => {
     data: clientsData,
   } = useQuery(GET_CLIENTS);
 
+  console.log('clientsData', clientsData)
+
   const {
     loading: invoicesLoading,
     error: invoicesError,
     data: invoicesData,
   } = useQuery(GET_ALL_CLIENT_INVOICES);
 
+  console.log('invoicesData', invoicesData)
+
   //   if (clientLoading) return <Spinner />;
   if (clientError) return <p>There was an error loading the content</p>;
 
   return (
     <div className="bg-slate-200 h-screen flex flex-row">
-      {clientsData && <TotalClients clientsData={clientsData} />}
+      {/* {clientsData && <TotalClients clientsData={clientsData} />} */}
       <NewClientsThisMonth />
     </div>
   );

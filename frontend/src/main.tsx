@@ -100,8 +100,6 @@ import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganiz
 // @ts-ignore
 import { Features } from "./views/Features/Features.jsx";
 // @ts-ignore
-import { Features } from "./views/Features/Features";
-// @ts-ignore
 import { NewKanban } from "./views/clientDashboard/projects/NewKanban/NewKanban";
 // @ts-ignore
 import { AddKanban } from "./views/clientDashboard/projects/NewKanban/AddKanban";
