@@ -58,25 +58,34 @@ export const ProjectKanban = () => {
     variables: { projectId },
   });
 
-  const filters = [
-    { name: "Size", toggle: handleSizeToggle, value: size, isChecked: size },
+  const kanbanTicketFilters = [
+    {
+      name: "Size",
+      toggle: handleSizeToggle,
+      value: size,
+      isChecked: size,
+      ariaLabel: "Size filter",
+    },
     {
       name: "Description",
       toggle: handleDescriptionToggle,
       value: description,
       isChecked: description,
+      ariaLabel: "Description filter",
     },
     {
       name: "Created Date",
       toggle: handleCreatedDateToggle,
       value: createdDate,
       isChecked: createdDate,
+      ariaLabel: "Created Date filter",
     },
     {
       name: "Owner",
       toggle: handleOwnerToggle,
       value: owner,
       isChecked: owner,
+      ariaLabel: "Owner filter",
     },
   ];
 
@@ -120,7 +129,7 @@ export const ProjectKanban = () => {
         </button>
       </div>
 
-      {isFilterOptionsOpen && <FiltersList filters={filters} />}
+      {isFilterOptionsOpen && <FiltersList filters={kanbanTicketFilters} />}
 
       <StatusColumn statusColumns={statusColumns} ticketData={ticketData} />
     </>

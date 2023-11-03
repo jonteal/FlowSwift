@@ -1,5 +1,7 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+import moment from "moment";
+import { format, fromUnixTime } from "date-fns";
 
 // GRAPHQL
 import { GET_TICKET } from "../../../../graphql/queries/ticketQueries";
@@ -11,11 +13,12 @@ import { DynamicButton } from "../../../../components/reusable/DynamicButton/Dyn
 // STATE
 import { ThemeContext } from "../../../../context";
 import { useContext } from "react";
+import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 
 export const TicketView = () => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
-  const { ticketId, clientId, projectId } = useParams();
+  const { ticketId, clientId, projectId, kanbanId } = useParams();
   const {
     loading: ticketLoading,
     error: ticketError,
@@ -30,10 +33,25 @@ export const TicketView = () => {
     navigate(-1);
   };
 
+  const {
+    loading: kanbanStatusColumnLoading,
+    error: kanbanStatusColumnError,
+    data: kanbanStatusColumnData,
+  } = useQuery(GET_KANBAN_STATUS_COLUMNS, {
+    variables: { kanbanId },
+  });
+
+  if (kanbanStatusColumnLoading) return <Spinner />;
+  if (kanbanStatusColumnError) return <p>There was a problem...</p>;
+
   if (ticketLoading) return <Spinner />;
   if (ticketError) return <p>Something went wrong</p>;
 
   const { id, title, description, status, createdAt, user } = ticketData.ticket;
+
+  const ticketStatus = kanbanStatusColumnData.kanbanStatusColumns.find(
+    (column) => column.id === status
+  );
 
   return (
     <div className="h-screen border-slate-500 rounded-xl">
@@ -52,7 +70,7 @@ export const TicketView = () => {
                 className="ml-5"
                 type="link"
                 color="lightBlue"
-                link={`/clients/${clientId}/projects/${projectId}/kanban/${id}/edit`}
+                link={`/clients/${clientId}/projects/${projectId}/kanbans/${kanbanId}/${id}/edit`}
               >
                 Edit
               </DynamicButton>
@@ -97,7 +115,7 @@ export const TicketView = () => {
                   Status
                 </p>
                 <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
-                  {status}
+                  {ticketStatus.columnState}
                 </p>
               </div>
               <div className="px-3 py-0 m-2">
@@ -121,9 +139,9 @@ export const TicketView = () => {
                 >
                   Created:
                 </p>
-                <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
-                  {createdAt}
-                </p>
+                {/* <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
+                  {createdDate}
+                </p> */}
               </div>
             </div>
           </div>

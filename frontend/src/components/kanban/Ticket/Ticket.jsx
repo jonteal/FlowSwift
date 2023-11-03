@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 
 // ICONS
 import { AiOutlineStop } from "react-icons/ai";
 import { IoIosBug } from "react-icons/io";
 import { BsBookFill } from "react-icons/bs";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 // GRAPHQL
 import { DELETE_TICKET } from "../../../graphql/mutations/ticketMutations";
@@ -16,23 +17,28 @@ import { ThemeContext } from "../../../context";
 import { useSelector } from "react-redux";
 
 export const Ticket = ({ ticket }) => {
+  const { kanbanId } = useParams();
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   const { size, description, createdDate, owner } = useSelector(
     (state) => state.ticket
   );
-  // const description = useSelector((state) => state.ticket.size);
 
   const { clientId, projectId } = useParams();
   const [isBlocked, setIsBlocked] = useState(ticket.blocked);
+  const [isReady, setIsReady] = useState(ticket.ready);
 
   const handleBlockTicket = () => {
     setIsBlocked(!isBlocked);
   };
 
+  const handleTicketReady = () => {
+    setIsReady(!isReady);
+  };
+
   const [deleteTicket] = useMutation(DELETE_TICKET, {
     variables: { id: ticket.id },
-    refetchQueries: [{ query: GET_TICKETS, variables: { projectId } }],
+    refetchQueries: [{ query: GET_TICKETS, variables: { kanbanId } }],
   });
 
   return (
@@ -55,6 +61,16 @@ export const Ticket = ({ ticket }) => {
         </div>
         <div>
           <button
+            onClick={handleTicketReady}
+            className={`border ${
+              isReady ? "bg-green-600" : "bg-slate-200"
+            } rounded-full mr-3`}
+          >
+            <AiOutlineCheckCircle
+              className={`${isReady ? "text-slate-50" : "text-slate-700"}`}
+            />
+          </button>
+          <button
             onClick={handleBlockTicket}
             className={`border ${
               isBlocked ? "bg-red-600" : "bg-red-50"
@@ -66,7 +82,7 @@ export const Ticket = ({ ticket }) => {
           </button>
           <Link
             className="mr-2"
-            to={`/clients/${clientId}/projects/${projectId}/kanban/${ticket.id}`}
+            to={`/clients/${clientId}/projects/${projectId}/kanbans/${kanbanId}/${ticket.id}`}
           >
             <span className="text-sm">View</span>
           </Link>
@@ -75,15 +91,28 @@ export const Ticket = ({ ticket }) => {
           </button>
         </div>
       </div>
-      <p className="font-bold text-sm text-left my-2">{ticket.title}</p>
+      <p className="font-bold text-base text-sky-900 text-left my-2">
+        {ticket.title}
+      </p>
       {description && (
-        <p className="text-left text-sm my-2">{ticket.description}</p>
+        <p className="text-left text-base my-2">{ticket.description}</p>
       )}
 
-      {size && <p className="text-left text-sm my-2">{ticket.size}</p>}
+      {size && (
+        <div className="bg-sky-300 w-10 flex flex-row justify-center items-center rounded-sm">
+          <p className="text-left my-2 py-0 font-semibold text-sky-900 self-center text-base">
+            {ticket.size}
+          </p>
+        </div>
+      )}
 
       {owner && (
-        <p className="text-left text-sm my-2">Owned by: {ticket.user.name}</p>
+        <div className="flex flex-col">
+          <p className="text-left text-sm mt-2 font-light">Owned by:</p>
+          <p className="text-left text-sm my-0 font-semibold">
+            {ticket.user.name}
+          </p>
+        </div>
       )}
       {createdDate && (
         <p className="text-left text-sm my-2">Created: {ticket.createdAt}</p>

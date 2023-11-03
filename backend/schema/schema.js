@@ -10,6 +10,8 @@ import ClientActivityCommentReply from "../models/ClientActivityCommentReply.js"
 import ProjectActivityCommentReply from "../models/ProjectActivityCommentReply.js";
 import Ticket from "../models/Ticket.js";
 import Organization from "../models/Organization.js";
+import Kanban from "../models/Kanban.js";
+import KanbanStatusColumn from "../models/KanbanStatusColumn.js";
 
 import {
   GraphQLObjectType,
@@ -52,7 +54,6 @@ const OrganizationType = new GraphQLObjectType({
   }),
 });
 
-// Client Type - TODO: change user to organization (org owns clients, not a single user)
 const ClientType = new GraphQLObjectType({
   name: "Client",
   fields: () => ({
@@ -92,6 +93,39 @@ const ProjectType = new GraphQLObjectType({
     deadline: { type: GraphQLString },
     clientBudget: { type: GraphQLString },
     projectEstimate: { type: GraphQLString },
+  }),
+});
+
+// Kanban Type
+const KanbanType = new GraphQLObjectType({
+  name: "Kanban",
+  fields: () => ({
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    description: { type: GraphQLString },
+    project: {
+      type: ProjectType,
+      resolve(parent, args) {
+        return Project.findById(parent.projectId);
+      },
+    },
+  }),
+});
+
+// Kanban Status Column Type
+const KanbanStatusColumnType = new GraphQLObjectType({
+  name: "KanbanStatusColumn",
+  fields: () => ({
+    id: { type: GraphQLID },
+    columnState: { type: GraphQLString },
+    columnDescription: { type: GraphQLString },
+    position: { type: GraphQLString },
+    kanban: {
+      type: KanbanType,
+      resolve(parent, args) {
+        return Kanban.findById(parent.kanbanId);
+      },
+    },
   }),
 });
 
@@ -267,11 +301,12 @@ const TicketType = new GraphQLObjectType({
     size: { type: GraphQLString },
     blocked: { type: GraphQLBoolean },
     blockedReason: { type: GraphQLString },
+    ready: { type: GraphQLBoolean },
     status: { type: GraphQLString },
-    project: {
-      type: ProjectType,
+    kanban: {
+      type: KanbanType,
       resolve(parent, args) {
-        return Project.findById(parent.projectId);
+        return Kanban.findById(parent.kanbanId);
       },
     },
     user: {
@@ -357,6 +392,34 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return Project.findById(args.id);
+      },
+    },
+    kanbans: {
+      type: new GraphQLList(KanbanType),
+      args: { projectId: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Kanban.find({ projectId: args.projectId });
+      },
+    },
+    kanban: {
+      type: KanbanType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Kanban.findById(args.id);
+      },
+    },
+    kanbanStatusColumns: {
+      type: new GraphQLList(KanbanStatusColumnType),
+      args: { kanbanId: { type: GraphQLID } },
+      resolve(parent, args) {
+        return KanbanStatusColumn.find({ kanbanId: args.kanbanId });
+      },
+    },
+    kanbanStatusColumn: {
+      type: KanbanStatusColumnType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return KanbanStatusColumn.findById(args.id);
       },
     },
     services: {
@@ -481,9 +544,9 @@ const RootQuery = new GraphQLObjectType({
     },
     tickets: {
       type: new GraphQLList(TicketType),
-      args: { projectId: { type: GraphQLID } },
+      args: { kanbanId: { type: GraphQLID } },
       resolve(parent, args) {
-        return Ticket.find({ projectId: args.projectId });
+        return Ticket.find({ kanbanId: args.kanbanId });
       },
     },
     ticket: {
@@ -770,6 +833,133 @@ const mutation = new GraphQLObjectType({
               deadline: args.deadline,
               clientBudget: args.clientBudget,
               projectEstimate: args.projectEstimate,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+
+    // Add a Kanban
+    addKanban: {
+      type: KanbanType,
+      args: {
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        description: { type: GraphQLString },
+        projectId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        const kanban = new Kanban({
+          title: args.title,
+          description: args.description,
+          projectId: args.projectId,
+        });
+
+        return kanban.save();
+      },
+    },
+
+    // Delete an Kanban
+    deleteKanban: {
+      type: KanbanType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        KanbanStatusColumn.find({ projectId: args.id }).then(
+          (kanbanStatusColumns) => {
+            kanbanStatusColumns.forEach((kanbanStatusColumn) => {
+              kanbanStatusColumn.deleteOne();
+            });
+          }
+        );
+        Ticket.find({ projectId: args.id }).then((tickets) => {
+          tickets.forEach((ticket) => {
+            ticket.deleteOne();
+          });
+        });
+        return Kanban.findByIdAndRemove(args.id);
+      },
+    },
+
+    // Update a Kanban
+    updateKanban: {
+      type: KanbanType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        title: { type: GraphQLString },
+        description: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        return Kanban.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              title: args.title,
+              description: args.description,
+              projectId: args.projectId,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+
+    // Add a KanbanStatusColumn
+    addKanbanStatusColumn: {
+      type: KanbanStatusColumnType,
+      args: {
+        columnState: { type: new GraphQLNonNull(GraphQLString) },
+        columnDescription: { type: GraphQLString },
+        position: { type: new GraphQLNonNull(GraphQLString) },
+        kanbanId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        const kanbanStatusColumn = new KanbanStatusColumn({
+          columnState: args.columnState,
+          columnDescription: args.columnDescription,
+          position: args.position,
+          kanbanId: args.kanbanId,
+        });
+
+        return kanbanStatusColumn.save();
+      },
+    },
+
+    // Delete an KanbanStatusColumn
+    deleteKanbanStatusColumn: {
+      type: KanbanStatusColumnType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        Ticket.find({ kanbanId: args.id }).then((tickets) => {
+          tickets.forEach((ticket) => {
+            ticket.deleteOne();
+          });
+        });
+        return KanbanStatusColumn.findByIdAndRemove(args.id);
+      },
+    },
+
+    // Update a KanbanStatusColumn
+    updateKanbanStatusColumn: {
+      type: KanbanStatusColumnType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        columnState: { type: GraphQLString },
+        columnDescription: { type: GraphQLString },
+        position: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(parent, args) {
+        return KanbanStatusColumn.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              columnState: args.columnState,
+              columnDescription: args.columnDescription,
+              kanbanId: args.kanbanId,
+              position: args.position,
             },
           },
           { new: true }
@@ -1309,21 +1499,12 @@ const mutation = new GraphQLObjectType({
           defaultValue: "User Story",
         },
         description: { type: GraphQLString },
-        status: {
-          type: new GraphQLEnumType({
-            name: "TicketStatus",
-            values: {
-              ready: { value: "ready" },
-              inProgress: { value: "inProgress" },
-              done: { value: "done" },
-            },
-          }),
-          defaultValue: "ready",
-        },
+        status: { type: GraphQLString },
         size: { type: GraphQLString },
         blocked: { type: GraphQLBoolean },
         blockedReason: { type: GraphQLString },
-        projectId: { type: new GraphQLNonNull(GraphQLID) },
+        ready: { type: GraphQLBoolean },
+        kanbanId: { type: new GraphQLNonNull(GraphQLID) },
         userId: { type: GraphQLID },
         createdAt: { type: GraphQLString },
       },
@@ -1336,7 +1517,8 @@ const mutation = new GraphQLObjectType({
           size: args.size,
           blocked: args.blocked,
           blockedReason: args.blockedReason,
-          projectId: args.projectId,
+          ready: args.ready,
+          kanbanId: args.kanbanId,
           userId: args.userId,
           createdAt: args.createdAt,
         });
@@ -1376,16 +1558,9 @@ const mutation = new GraphQLObjectType({
         size: { type: GraphQLString },
         blocked: { type: GraphQLBoolean },
         blockedReason: { type: GraphQLString },
-        status: {
-          type: new GraphQLEnumType({
-            name: "TicketStatusUpdate",
-            values: {
-              ready: { value: "ready" },
-              inProgress: { value: "inProgress" },
-              done: { value: "done" },
-            },
-          }),
-        },
+        ready: { type: GraphQLBoolean },
+        status: { type: GraphQLBoolean },
+        kanbanId: { type: GraphQLID },
         userId: { type: GraphQLID },
         createdAt: { type: GraphQLString },
       },
@@ -1401,6 +1576,8 @@ const mutation = new GraphQLObjectType({
               status: args.status,
               blocked: args.blocked,
               blockedReason: args.blockedReason,
+              kanbanId: args.kanbanId,
+              ready: args.ready,
               userId: args.userId,
             },
           },

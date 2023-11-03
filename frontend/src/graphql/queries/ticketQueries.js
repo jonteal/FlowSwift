@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 const GET_TICKETS = gql`
-  query getTickets($projectId: ID) {
-    tickets(projectId: $projectId) {
+  query getTickets($kanbanId: ID) {
+    tickets(kanbanId: $kanbanId) {
       id
       title
       typeOfTicket
@@ -11,7 +11,8 @@ const GET_TICKETS = gql`
       status
       blocked
       blockedReason
-      project {
+      ready
+      kanban {
         id
       }
       user {
@@ -34,7 +35,8 @@ const GET_TICKET = gql`
       status
       blocked
       blockedReason
-      project {
+      ready
+      kanban {
         id
       }
       user {

@@ -16,7 +16,7 @@ import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 
 export const EditKanbanTicket = () => {
-  const { projectId, ticketId } = useParams();
+  const { ticketId, kanbanId } = useParams();
 
   const {
     loading: ticketLoading,
@@ -40,7 +40,7 @@ export const EditKanbanTicket = () => {
       title,
       description,
       blocked,
-      projectId,
+      kanbanId,
       status,
       blockedReason,
     },
@@ -49,11 +49,11 @@ export const EditKanbanTicket = () => {
     update(cache, { data: { updateTicket } }) {
       const { tickets } = cache.readQuery({
         query: GET_TICKETS,
-        variables: { projectId },
+        variables: { kanbanId },
       });
       cache.writeQuery({
         query: GET_TICKETS,
-        variables: { projectId },
+        variables: { kanbanId },
         data: { tickets: [...tickets, updateTicket] },
       });
     },
@@ -73,7 +73,7 @@ export const EditKanbanTicket = () => {
       ticketId,
       title,
       description,
-      projectId,
+      kanbanId,
       status,
       blocked,
       blockedReason
@@ -96,17 +96,6 @@ export const EditKanbanTicket = () => {
               value={title}
               ariaLabel="Edit kanban ticket title"
             />
-            {/* <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-3">
-              Title
-            </label>
-            <input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              id="name"
-              type="text"
-              placeholder="Name of the ticket"
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-3 mb-3 leading-tight focus:outline-none focus:bg-white"
-            /> */}
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mt-4">
               Description
             </label>

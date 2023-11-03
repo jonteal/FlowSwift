@@ -66,7 +66,7 @@ export const ClientList = () => {
   ];
 
   return (
-    <div>
+    <>
       <div className="flex flex-row">
         <FaUserAlt className="mr-5" />
         <h5 className="mb-3">Total Records ({clientData?.clients.length})</h5>
@@ -80,6 +80,6 @@ export const ClientList = () => {
           />
         ))}
       </ul>
-    </div>
+    </>
   );
 };

@@ -19,9 +19,9 @@ export const App = () => {
       <Navigation />
       <ToastContainer />
       <Outlet />
-      <Link to="/features">
+      {/* <Link to="/features">
         <SlFlag className="text-3xl text-red-500 bottom-0 fixed w-full h-10 right-0" />
-      </Link>
+      </Link> */}
     </div>
   );
 };

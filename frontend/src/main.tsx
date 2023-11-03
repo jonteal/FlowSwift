@@ -100,7 +100,18 @@ import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganiz
 // @ts-ignore
 import { Features } from "./views/Features/Features.jsx";
 // @ts-ignore
+import { Features } from "./views/Features/Features";
+// @ts-ignore
+import { NewKanban } from "./views/clientDashboard/projects/NewKanban/NewKanban";
+// @ts-ignore
+import { AddKanban } from "./views/clientDashboard/projects/NewKanban/AddKanban";
+// @ts-ignore
+import { KanbanView } from "./views/clientDashboard/projects/NewKanban/KanbanView";
+// @ts-ignore
+import { KanbanEdit } from "./views/clientDashboard/projects/NewKanban/KanbanEdit";
+// @ts-ignore
 import store from "./store.js";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -199,16 +210,32 @@ const router = createBrowserRouter(
               path="/clients/:clientId/projects/:projectId/kanban"
             />
             <Route
+              element={<NewKanban />}
+              path="/clients/:clientId/projects/:projectId/kanbans"
+            />
+            <Route
+              element={<AddKanban />}
+              path="/clients/:clientId/projects/:projectId/kanbans/build"
+            />
+            <Route
+              element={<KanbanView />}
+              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId"
+            />
+            <Route
+              element={<KanbanEdit />}
+              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId/edit"
+            />
+            <Route
               element={<AddKanbanTicket />}
-              path="/clients/:clientId/projects/:projectId/kanban/addTicket"
+              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId/addTicket"
             />
             <Route
               element={<EditKanbanTicket />}
-              path="/clients/:clientId/projects/:projectId/kanban/:ticketId/edit"
+              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId/:ticketId/edit"
             />
             <Route
               element={<TicketView />}
-              path="/clients/:clientId/projects/:projectId/kanban/:ticketId"
+              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId/:ticketId"
             />
             <Route
               element={<ProjectInvoices />}

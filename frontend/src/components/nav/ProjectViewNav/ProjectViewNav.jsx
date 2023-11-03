@@ -69,7 +69,7 @@ export const ProjectViewNav = () => {
             <GiMoneyStack className="text-green-500" />
             <p className="text-base leading-4">Financials</p>
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="kanban"
             className={`flex justify-start items-center space-x-2 ${
               darkMode
@@ -79,6 +79,17 @@ export const ProjectViewNav = () => {
           >
             <PiKanbanLight className="text-purple-500" />
             <p className="text-base leading-4">Kanban</p>
+          </NavLink> */}
+          <NavLink
+            to="kanbans"
+            className={`flex justify-start items-center space-x-2 ${
+              darkMode
+                ? "text-slate-50 focus:bg-sky-950 hover:bg-sky-300 hover:text-slate-600 transition ease-in-out delay-50 duration-200"
+                : "text-slate-600 focus:bg-sky-600 hover:text-white hover:bg-sky-300 transition ease-in-out delay-50 duration-200"
+            }   rounded my-1 px-3 py-2 w-full md:w-30`}
+          >
+            <PiKanbanLight className="text-purple-500" />
+            <p className="text-base leading-4">Kanbans</p>
           </NavLink>
         </div>
       </div>

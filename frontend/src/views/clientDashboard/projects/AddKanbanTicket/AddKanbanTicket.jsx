@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { useSelector } from "react-redux";
@@ -14,16 +14,18 @@ import { DynamicContainer } from "../../../../components/reusable/DynamicContain
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
+import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 
 export const AddKanbanTicket = () => {
-  const { projectId } = useParams();
+  const { kanbanId } = useParams();
   const [title, setTitle] = useState("");
   const [typeOfTicket, setTypeOfTicket] = useState("userStory");
   const [description, setDescription] = useState("");
   const [size, setSize] = useState("");
-  const [status, setStatus] = useState("ready");
+  const [status, setStatus] = useState("");
   const [blocked, setBlocked] = useState(false);
   const [blockedReason, setBlockedReason] = useState("");
+  const [ready, setIsReady] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
   const [userId, setUserId] = useState(userInfo._id);
 
@@ -34,19 +36,20 @@ export const AddKanbanTicket = () => {
       description,
       size,
       blocked,
-      projectId,
-      status,
       blockedReason,
+      ready,
+      kanbanId,
+      status,
       userId,
     },
     update(cache, { data: { addTicket } }) {
       const { tickets } = cache.readQuery({
         query: GET_TICKETS,
-        variables: { projectId },
+        variables: { kanbanId },
       });
       cache.writeQuery({
         query: GET_TICKETS,
-        variables: { projectId },
+        variables: { kanbanId },
         data: { tickets: [...tickets, addTicket] },
       });
     },
@@ -60,8 +63,26 @@ export const AddKanbanTicket = () => {
     variables: { id: userInfo._id },
   });
 
+  const {
+    loading: kanbanStatusColumnLoading,
+    error: kanbanStatusColumnError,
+    data: kanbanStatusColumnData,
+  } = useQuery(GET_KANBAN_STATUS_COLUMNS, {
+    variables: { kanbanId },
+  });
+
+  useEffect(() => {
+    setStatus(kanbanStatusColumnData?.kanbanStatusColumns[0]?.id);
+  }, [kanbanStatusColumnData]);
+
   if (userLoading) return <Spinner />;
   if (userError) return <p>There was an error..</p>;
+  if (kanbanStatusColumnLoading) return <Spinner />;
+  if (kanbanStatusColumnError) return <p>Failing to load columns</p>;
+
+  const ticketStatusOptionsNew = kanbanStatusColumnData.kanbanStatusColumns;
+
+  console.log("ticketStatusOptionsNew[0].id", ticketStatusOptionsNew[0].id);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -78,7 +99,8 @@ export const AddKanbanTicket = () => {
       status,
       blocked,
       blockedReason,
-      projectId,
+      ready,
+      kanbanId,
       userId
     );
 
@@ -86,8 +108,9 @@ export const AddKanbanTicket = () => {
     setTypeOfTicket("userStory");
     setDescription("");
     setSize("");
-    setStatus("ready");
+    setStatus("");
     setBlocked(!blocked);
+    setIsReady(false);
     setBlockedReason("");
   };
 
@@ -153,7 +176,8 @@ export const AddKanbanTicket = () => {
             label="Status"
             changeHandler={(e) => setStatus(e.target.value)}
             value={status}
-            selectOptions={ticketStatusOptions}
+            defaultValue={ticketStatusOptionsNew[0].id}
+            selectOptions={ticketStatusOptionsNew}
             ariaLabel="Ticket status select"
             className="w-1/2 mr-3"
           />
