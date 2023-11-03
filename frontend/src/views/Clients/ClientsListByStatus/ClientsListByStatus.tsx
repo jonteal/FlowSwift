@@ -12,6 +12,8 @@ import { GET_CLIENTS_BY_STATUS } from "../../../graphql/queries/clientQueries";
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 import Table from "react-bootstrap/esm/Table";
 
+import { ClientType } from "../types";
+
 export const ClientsListByStatus = () => {
   const { status } = useParams();
   const [isExpanded, setIsExpanded] = useState(false);
@@ -25,6 +27,8 @@ export const ClientsListByStatus = () => {
     error: clientError,
     data: clientData,
   } = useQuery(GET_CLIENTS_BY_STATUS, { variables: { status } });
+
+  console.log('clientData: ', clientData)
 
   if (clientLoading) return <Spinner />;
   if (clientError)
@@ -75,7 +79,7 @@ export const ClientsListByStatus = () => {
               </tr>
             </thead>
             <tbody>
-              {clientData.clientsByStatus.map((client, index) => (
+              {clientData.clientsByStatus.map((client: ClientType, index: number) => (
                 <tr key={client.id}>
                   <td className="text-slate-700 font-light text-left border pl-2 pr-2">
                     {index + 1}

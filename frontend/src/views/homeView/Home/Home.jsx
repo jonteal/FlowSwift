@@ -1,14 +1,20 @@
 import { useSelector } from "react-redux";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { useQuery } from "@apollo/client";
+
+// GRAPHQL
 import {
   GET_ORGANIZATION,
   GET_ORGANIZATIONS,
 } from "../../../graphql/queries/organizationQueries";
-import { useQuery } from "@apollo/client";
-import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 import { GET_USER } from "../../../graphql/queries/userQueries";
+
+// COMPONENTS
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+
+// STATE
+import { useContext } from "react";
+import { ThemeContext } from "../../../context";
 
 export const Home = () => {
   const theme = useContext(ThemeContext);
@@ -48,10 +54,6 @@ export const Home = () => {
   const isOwner = userData.user.role === "owner";
 
   const { name } = userInfo;
-
-  // let organizationName = "";
-
-  // const { organizationName } = organizationsData.organizations[0];
 
   return (
     <div className={`${darkMode ? "bg-sky-800" : "bg-slate-50"} h-screen`}>
