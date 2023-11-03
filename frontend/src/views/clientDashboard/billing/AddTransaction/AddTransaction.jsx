@@ -18,7 +18,7 @@ import { DynamicContainer } from "../../../../components/reusable/DynamicContain
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../../../context";
+import { ThemeContext } from "../../../../context/context";
 
 export const AddTransaction = () => {
   const theme = useContext(ThemeContext);

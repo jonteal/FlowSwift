@@ -5,7 +5,7 @@ import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanSta
 import { ADD_KANBAN_STATUS_COLUMN } from "../../../../graphql/mutations/kanbanStatusColumnMutations";
 import { Spinner } from "react-bootstrap";
 import { useContext, useState } from "react";
-import { ThemeContext } from "../../../../context";
+import { ThemeContext } from "../../../../context/context";
 import { capitalized } from "../../../../utils/format";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";

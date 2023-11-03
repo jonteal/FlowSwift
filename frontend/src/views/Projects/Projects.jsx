@@ -12,7 +12,7 @@ import { Switch } from "../../components/reusable/Switch/Switch";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { ThemeContext } from "../../context/context";
 import { ProjectsTableItem } from "../../components/ProjectsTableItem/ProjectsTableItem";
 
 export const Projects = () => {

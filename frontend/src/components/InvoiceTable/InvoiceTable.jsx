@@ -7,7 +7,7 @@ import { InvoiceTableItem } from "../dashboardBilling/InvoiceTableItem/InvoiceTa
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { ThemeContext } from "../../context/context";
 
 export const InvoiceTable = ({ invoices, shortList }) => {
   const theme = useContext(ThemeContext);

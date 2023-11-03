@@ -13,7 +13,7 @@ import { DateSelector } from "../../../../components/reusable/DateSelector/DateS
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../../../context";
+import { ThemeContext } from "../../../../context/context";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 
 export const EditProject = () => {

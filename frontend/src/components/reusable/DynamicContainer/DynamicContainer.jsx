@@ -1,6 +1,6 @@
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 
 export const DynamicContainer = ({ children }) => {
   const theme = useContext(ThemeContext);

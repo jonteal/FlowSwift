@@ -22,7 +22,7 @@ import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { ThemeContext } from "../../context/context";
 import { useSelector } from "react-redux";
 
 export const Comment = ({ comment, type }) => {

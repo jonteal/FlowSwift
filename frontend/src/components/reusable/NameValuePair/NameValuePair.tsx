@@ -1,7 +1,14 @@
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { ReactNode, useContext } from "react";
+import { ThemeContext } from "../../../context/context";
 
-export const NameValuePair = ({ name, value, type, children }) => {
+export type NameValuePairProps = {
+  name: string,
+  value: string,
+  type: string,
+  children: ReactNode | null
+}
+
+export const NameValuePair = ({ name, value, type, children }: NameValuePairProps) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   return (

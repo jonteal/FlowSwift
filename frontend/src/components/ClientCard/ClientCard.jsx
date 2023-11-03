@@ -8,12 +8,12 @@ import { GET_CLIENTS } from "../../graphql/queries/clientQueries";
 
 // COMPONENTS
 import { DeleteModal } from "../modals/DeleteModal/DeleteModal";
-import { NameValuePair } from "../../components/reusable/NameValuePair/NameValuePair";
+import { NameValuePair } from "../reusable/NameValuePair/NameValuePair";
 import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { ThemeContext } from "../../context/context";
 
 export const ClientCard = ({ clientData }) => {
   const theme = useContext(ThemeContext);

@@ -13,7 +13,7 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 import { DELETE_TICKET } from "../../../graphql/mutations/ticketMutations";
 import { GET_TICKETS } from "../../../graphql/queries/ticketQueries";
 
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 import { useSelector } from "react-redux";
 
 export const Ticket = ({ ticket }) => {

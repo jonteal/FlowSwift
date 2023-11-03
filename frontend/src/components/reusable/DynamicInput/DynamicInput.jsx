@@ -1,6 +1,6 @@
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 import { capitalized } from "../../../utils/format";
 
 export const DynamicInput = ({

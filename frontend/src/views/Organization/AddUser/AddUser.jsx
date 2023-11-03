@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

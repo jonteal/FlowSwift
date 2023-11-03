@@ -10,7 +10,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import { Provider } from "react-redux";
 
 // @ts-ignore
-import { ThemeProvider } from "./context.jsx";
+import { ThemeContextProvider } from "./context/context.js";
 // @ts-ignore
 import { App } from "./App.jsx";
 // @ts-ignore
@@ -282,12 +282,12 @@ const router = createBrowserRouter(
 // @ts-ignore
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <ThemeProvider>
+    <ThemeContextProvider>
       <ApolloProvider client={client}>
         <React.StrictMode>
           <RouterProvider router={router} />
         </React.StrictMode>
       </ApolloProvider>
-    </ThemeProvider>
+      </ThemeContextProvider>
   </Provider>
 );

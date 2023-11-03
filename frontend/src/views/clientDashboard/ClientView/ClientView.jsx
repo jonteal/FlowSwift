@@ -10,7 +10,7 @@ import { ClientViewNav } from "../../../components/dashboardMain/ClientViewNav/C
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 
 import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 
 export const ClientView = () => {
   const theme = useContext(ThemeContext);

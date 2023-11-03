@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { RiExpandRightLine, RiExpandLeftLine } from "react-icons/ri";
 
 import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 
 export const ClientViewNav = () => {
   const theme = useContext(ThemeContext);

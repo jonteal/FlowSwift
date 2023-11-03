@@ -1,7 +1,7 @@
 import { Ticket } from "../Ticket/Ticket";
 
 import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 import { camelCaseToWords } from "../../../utils/format";
 
 export const StatusColumn = ({ statusColumns, ticketData }) => {

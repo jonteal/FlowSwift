@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { ClientTable } from "../ClientTable/ClientTable";
 import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { ThemeContext } from "../../context/context";
 
 export const ClientsContainer = ({ clientData, clientContainer }) => {
   const theme = useContext(ThemeContext);

@@ -11,7 +11,7 @@ import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 
 // STATE
-import { ThemeContext } from "../../../../context";
+import { ThemeContext } from "../../../../context/context";
 import { useContext } from "react";
 import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 

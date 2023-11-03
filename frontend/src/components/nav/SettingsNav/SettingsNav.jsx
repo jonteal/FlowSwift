@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 
 // STATE
 import { useContext, useState } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 import { RiExpandLeftLine, RiExpandRightLine } from "react-icons/ri";
 import { FaCreditCard, FaTable, FaWindowMaximize } from "react-icons/fa";
 

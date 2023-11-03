@@ -3,7 +3,7 @@ import { Navigation } from "./components/Navigation/Navigation";
 import { SlFlag } from "react-icons/sl";
 import { ToastContainer } from "react-toastify";
 import { useContext } from "react";
-import { ThemeContext } from "./context";
+import { ThemeContext } from "./context/context";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 

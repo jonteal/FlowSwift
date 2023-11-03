@@ -15,7 +15,7 @@ import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicI
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 import { useSelector } from "react-redux";
 import { useUpdateUserMutation } from "../../../slices/usersApiSlice";
 

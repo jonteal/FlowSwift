@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 
 export const DateSelector = ({ label, date, dateChangeHandler, className }) => {
   const theme = useContext(ThemeContext);

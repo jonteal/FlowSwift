@@ -16,7 +16,7 @@ import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../../../context";
+import { ThemeContext } from "../../../../context/context";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 

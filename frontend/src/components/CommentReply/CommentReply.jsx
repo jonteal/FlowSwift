@@ -12,7 +12,7 @@ import { GET_PROJECT_ACTIVITY_COMMENT_REPLIES } from "../../graphql/queries/proj
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { ThemeContext } from "../../context/context";
 
 export const CommentReply = ({ reply, formattedDate, type, commentId }) => {
   const theme = useContext(ThemeContext);

@@ -13,7 +13,7 @@ import { Comment } from "../Comment/Comment";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { ThemeContext } from "../../context/context";
 import { useSelector } from "react-redux";
 
 export const ClientCommentFeed = ({ clientId, comments }) => {

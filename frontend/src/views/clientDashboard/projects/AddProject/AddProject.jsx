@@ -19,7 +19,7 @@ import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 // STATE
 import { useContext } from "react";
 import { useSelector } from "react-redux";
-import { ThemeContext } from "../../../../context";
+import { ThemeContext } from "../../../../context/context";
 
 export const AddProject = () => {
   const theme = useContext(ThemeContext);

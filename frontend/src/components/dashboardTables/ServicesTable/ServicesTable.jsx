@@ -12,7 +12,7 @@ import { capitalized } from "../../../utils/format";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 
 export const ServicesTable = ({ services, type }) => {
   const theme = useContext(ThemeContext);

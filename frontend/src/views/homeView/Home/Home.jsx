@@ -14,7 +14,7 @@ import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 
 export const Home = () => {
   const theme = useContext(ThemeContext);

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { FaRegEye } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { ThemeContext } from "../../context";
+import { ThemeContext } from "../../context/context";
 import { camelCaseToWords } from "../../utils/format";
 
 export const ProjectsTableItem = ({ project, index }) => {

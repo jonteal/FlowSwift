@@ -5,7 +5,7 @@ import { PiKanbanLight } from "react-icons/pi";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 
 export const KanbanCard = ({ kanban }) => {
   const { clientId, projectId } = useParams();

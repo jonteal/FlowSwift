@@ -2,7 +2,7 @@ import { BsArrowUpSquare, BsArrowDownSquare } from "react-icons/bs";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 
 export const ClientTransactionItem = ({ transaction }) => {
   const theme = useContext(ThemeContext);

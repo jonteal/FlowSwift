@@ -15,7 +15,7 @@ import { StatusBadge } from "../../../../components/reusable/StatusBadge/StatusB
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../../../context";
+import { ThemeContext } from "../../../../context/context";
 
 export const ProjectProfile = () => {
   const theme = useContext(ThemeContext);

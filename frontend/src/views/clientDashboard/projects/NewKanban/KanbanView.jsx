@@ -17,7 +17,7 @@ import { DynamicInput } from "../../../../components/reusable/DynamicInput/Dynam
 import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
 import { Ticket } from "../../../../components/kanban/Ticket/Ticket";
 import { capitalized } from "../../../../utils/format";
-import { ThemeContext } from "../../../../context";
+import { ThemeContext } from "../../../../context/context";
 import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
 
 // STATE

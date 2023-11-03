@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 
 export const ProjectViewNav = () => {
   const theme = useContext(ThemeContext);

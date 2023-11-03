@@ -2,7 +2,7 @@ import Table from "react-bootstrap/Table";
 import { FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { ThemeContext } from "../../context/context";
 
 export const ClientTable = ({ clients, clientContainer }) => {
   const theme = useContext(ThemeContext);

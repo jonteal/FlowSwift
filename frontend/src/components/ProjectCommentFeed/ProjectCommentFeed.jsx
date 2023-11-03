@@ -14,7 +14,7 @@ import { Comment } from "../Comment/Comment";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { ThemeContext } from "../../context/context";
 
 export const ProjectCommentFeed = ({ projectId, comments }) => {
   const theme = useContext(ThemeContext);

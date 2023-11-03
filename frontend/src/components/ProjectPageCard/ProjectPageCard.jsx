@@ -5,7 +5,7 @@ import { FaProjectDiagram } from "react-icons/fa";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { ThemeContext } from "../../context/context";
 
 export const ProjectPageCard = ({ project }) => {
   const theme = useContext(ThemeContext);

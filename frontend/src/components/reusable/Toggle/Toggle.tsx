@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { BsFillSunFill, BsMoonFill } from "react-icons/bs";
-import { ThemeContext } from "../../../context";
+import { ThemeContext } from "../../../context/context";
 
 export const Toggle = () => {
   const theme = useContext(ThemeContext);

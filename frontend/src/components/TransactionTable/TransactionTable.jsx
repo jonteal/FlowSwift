@@ -7,7 +7,12 @@ import { ClientTransactionItem } from "../dashboardBilling/ClientTransactionItem
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { ThemeContext } from "../../context/context";
+
+// export type TransactionTableProps = {
+//   transactions: ,
+//   shortList:
+// }
 
 export const TransactionTable = ({ transactions, shortList }) => {
   const theme = useContext(ThemeContext);
