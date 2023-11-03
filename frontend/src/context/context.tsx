@@ -1,6 +1,5 @@
 // Employing the createContext property and useReducer hook go establish darkMode
 import { createContext, useReducer, Dispatch } from "react";
-import { theme } from "./theme";
 
 type ThemeContextProviderProps = {
   children: React.ReactNode
