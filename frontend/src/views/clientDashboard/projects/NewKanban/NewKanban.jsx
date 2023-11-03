@@ -1,8 +1,13 @@
 import { Link, useParams } from "react-router-dom";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { GET_KANBANS } from "../../../../graphql/queries/kanbanQueries";
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { useQuery } from "@apollo/client";
+
+// GRAPHQL
+import { GET_KANBANS } from "../../../../graphql/queries/kanbanQueries";
+
+// COMPONENTS
+import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
+import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
+import { KanbanCard } from "../../../../components/kanban/KanbanCard/KanbanCard";
 
 export const NewKanban = () => {
   const { projectId, clientId } = useParams();
@@ -14,7 +19,6 @@ export const NewKanban = () => {
   if (loading) return <Spinner />;
   if (error) return <p>Something went wrong...</p>;
 
-  console.log("data: ", data);
   return (
     <div className="mx-2">
       <DynamicButton color="red" type="link" link="build" className="my-3">
@@ -25,10 +29,8 @@ export const NewKanban = () => {
         {data.kanbans.map((kanban) => (
           <Link
             to={`/clients/${clientId}/projects/${projectId}/kanbans/${kanban.id}`}
-            className="border w-1/4 rounded-lg h-20 flex flex-col items-center m-2 bg-slate-50"
           >
-            <p>{kanban.title}</p>
-            <p>{kanban.description}</p>
+            <KanbanCard key={kanban.id} kanban={kanban} />
           </Link>
         ))}
       </div>

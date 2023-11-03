@@ -1,6 +1,7 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { format } from "date-fns";
+import moment from "moment";
+import { format, fromUnixTime } from "date-fns";
 
 // GRAPHQL
 import { GET_TICKET } from "../../../../graphql/queries/ticketQueries";
@@ -47,11 +48,7 @@ export const TicketView = () => {
   if (ticketError) return <p>Something went wrong</p>;
 
   const { id, title, description, status, createdAt, user } = ticketData.ticket;
-  console.log(
-    "kanbanStatusColumnData.kanbanStatusColumns: ",
-    kanbanStatusColumnData.kanbanStatusColumns
-  );
-  console.log("status: ", status);
+
   const ticketStatus = kanbanStatusColumnData.kanbanStatusColumns.find(
     (column) => column.id === status
   );
@@ -142,9 +139,9 @@ export const TicketView = () => {
                 >
                   Created:
                 </p>
-                <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
-                  {format(createdAt, "MM/dd/yyyy")}
-                </p>
+                {/* <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
+                  {createdDate}
+                </p> */}
               </div>
             </div>
           </div>

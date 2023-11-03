@@ -69,7 +69,7 @@ export const ProjectViewNav = () => {
             <GiMoneyStack className="text-green-500" />
             <p className="text-base leading-4">Financials</p>
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="kanban"
             className={`flex justify-start items-center space-x-2 ${
               darkMode
@@ -79,7 +79,7 @@ export const ProjectViewNav = () => {
           >
             <PiKanbanLight className="text-purple-500" />
             <p className="text-base leading-4">Kanban</p>
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="kanbans"
             className={`flex justify-start items-center space-x-2 ${

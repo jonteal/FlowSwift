@@ -25,6 +25,15 @@ export const ClientsContainer = ({ clientData, clientContainer }) => {
         }`}
       >
         <div className="flex flex-row items-center">
+          <span className="mx-2">
+            (
+            {
+              clientData.clients.filter(
+                (client) => client.status === clientContainer.state
+              ).length
+            }
+            )
+          </span>
           <h5 className="text-base py-2 pl-2">{clientContainer.state}</h5>
           {isExpanded ? (
             <FaChevronUp onClick={handleClick} className="ml-1" />
