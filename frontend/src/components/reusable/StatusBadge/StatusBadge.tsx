@@ -8,8 +8,8 @@ import { camelCaseToWords } from "../../../utils/format";
 
 export type StatusBadgeProps = {
   status: string,
-  position: string,
-  className: string
+  position?: string,
+  className?: string
 }
 
 export const StatusBadge = ({ status, position, className }: StatusBadgeProps) => {
@@ -60,7 +60,7 @@ export const StatusBadge = ({ status, position, className }: StatusBadgeProps) =
 
   return (
     <div
-      className={`flex flex-row w-full ${getPosition(position)} ${className}`}
+      className={`flex flex-row w-full ${getPosition(position || "")} ${className}`}
     >
       <div
         className={`${statusColor} rounded-lg flex flex-row items-center py-1 px-2`}

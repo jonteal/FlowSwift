@@ -6,8 +6,14 @@ import { FaProjectDiagram } from "react-icons/fa";
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../context/context";
+import { ProjectType } from "../../views/Projects/types";
 
-export const ProjectPageCard = ({ project }) => {
+
+type ProjectPageCardProps = {
+  project: ProjectType
+}
+
+export const ProjectPageCard = ({ project }: ProjectPageCardProps) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   const { title, status, client } = project;
