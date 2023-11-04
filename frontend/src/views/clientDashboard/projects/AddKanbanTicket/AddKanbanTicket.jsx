@@ -75,14 +75,10 @@ export const AddKanbanTicket = () => {
     setStatus(kanbanStatusColumnData?.kanbanStatusColumns[0]?.id);
   }, [kanbanStatusColumnData]);
 
-  if (userLoading) return <Spinner />;
-  if (userError) return <p>There was an error..</p>;
-  if (kanbanStatusColumnLoading) return <Spinner />;
-  if (kanbanStatusColumnError) return <p>Failing to load columns</p>;
+  if (userLoading || kanbanStatusColumnLoading) return <Spinner />;
+  if (userError || kanbanStatusColumnError) return <p>There was an error..</p>;
 
   const ticketStatusOptionsNew = kanbanStatusColumnData.kanbanStatusColumns;
-
-  console.log("ticketStatusOptionsNew[0].id", ticketStatusOptionsNew[0].id);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -117,21 +113,6 @@ export const AddKanbanTicket = () => {
   const ticketTypeOptions = [
     { label: "User Story", value: "userStory" },
     { label: "Defect", value: "defect" },
-  ];
-
-  const ticketStatusOptions = [
-    {
-      label: "Ready",
-      value: "ready",
-    },
-    {
-      label: "In Progress",
-      value: "inProgress",
-    },
-    {
-      label: "Done",
-      value: "done",
-    },
   ];
 
   return (

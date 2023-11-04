@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
@@ -14,6 +14,7 @@ import { DynamicButton } from "../../../../components/reusable/DynamicButton/Dyn
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
+import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 
 export const EditKanbanTicket = () => {
   const { ticketId, kanbanId } = useParams();
@@ -59,8 +60,23 @@ export const EditKanbanTicket = () => {
     },
   });
 
-  if (ticketLoading) return <Spinner />;
-  if (ticketError) return <p>Something went wrong</p>;
+  const {
+    loading: kanbanStatusColumnLoading,
+    error: kanbanStatusColumnError,
+    data: kanbanStatusColumnData,
+  } = useQuery(GET_KANBAN_STATUS_COLUMNS, {
+    variables: { kanbanId },
+  });
+
+  useEffect(() => {
+    setStatus(kanbanStatusColumnData?.kanbanStatusColumns[0]?.id);
+  }, [kanbanStatusColumnData]);
+
+  if (ticketLoading || kanbanStatusColumnLoading) return <Spinner />;
+  if (ticketError || kanbanStatusColumnError)
+    return <p>Something went wrong</p>;
+
+  const ticketStatusOptionsNew = kanbanStatusColumnData.kanbanStatusColumns;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -109,19 +125,18 @@ export const EditKanbanTicket = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold my-4">
-              Status
-            </label>
-            <select
-              id="status"
-              className="form-select mb-4"
+
+            <DynamicInput
+              id="ticket-status"
+              inputType="select"
+              label="Status"
+              changeHandler={(e) => setStatus(e.target.value)}
               value={status}
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              <option value="ready">Ready</option>
-              <option value="inProgress">In Progress</option>
-              <option value="Done">Done</option>
-            </select>
+              defaultValue={ticketStatusOptionsNew[0].id}
+              selectOptions={ticketStatusOptionsNew}
+              ariaLabel="Ticket status select"
+              className="w-1/2 mr-3"
+            />
 
             <div className="flex mb-4 flex-col items-start w-full">
               <Checkbox

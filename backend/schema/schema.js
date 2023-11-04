@@ -1559,7 +1559,7 @@ const mutation = new GraphQLObjectType({
         blocked: { type: GraphQLBoolean },
         blockedReason: { type: GraphQLString },
         ready: { type: GraphQLBoolean },
-        status: { type: GraphQLBoolean },
+        status: { type: GraphQLString },
         kanbanId: { type: GraphQLID },
         userId: { type: GraphQLID },
         createdAt: { type: GraphQLString },

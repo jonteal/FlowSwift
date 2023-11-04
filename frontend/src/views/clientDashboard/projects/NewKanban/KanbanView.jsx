@@ -3,11 +3,15 @@ import { Link, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
 import { BsFillGearFill } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
 
 // GRAPHQL
 import { GET_KANBAN } from "../../../../graphql/queries/kanbanQueries";
 import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
-import { ADD_KANBAN_STATUS_COLUMN } from "../../../../graphql/mutations/kanbanStatusColumnMutations";
+import {
+  ADD_KANBAN_STATUS_COLUMN,
+  DELETE_KANBAN_STATUS_COLUMN,
+} from "../../../../graphql/mutations/kanbanStatusColumnMutations";
 
 // COMPONENTS
 import { Spinner } from "react-bootstrap";
@@ -32,6 +36,7 @@ import {
   setOwnerOff,
   setOwnerOn,
 } from "../../../../slices/ticketSlice";
+import { DeleteColumn } from "./DeleteColumn";
 
 export const KanbanView = () => {
   const { kanbanId } = useParams();
@@ -52,6 +57,9 @@ export const KanbanView = () => {
   const [columnDescription, setColumnDescription] = useState("");
   const [position, setPosition] = useState("");
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
+  const [columnId, setColumnId] = useState("");
+
+  console.log("columnId: ", columnId);
 
   const { loading, error, data } = useQuery(GET_KANBAN, {
     variables: { id: kanbanId },
@@ -93,6 +101,13 @@ export const KanbanView = () => {
         },
       });
     },
+  });
+
+  const [deleteKanbanStatusColumn] = useMutation(DELETE_KANBAN_STATUS_COLUMN, {
+    variables: { id: columnId },
+    refetchQueries: [
+      { query: GET_KANBAN_STATUS_COLUMNS, variables: { kanbanId } },
+    ],
   });
 
   const onSubmit = (e) => {
@@ -261,21 +276,31 @@ export const KanbanView = () => {
               darkMode
                 ? "bg-sky-800 border-slate-100"
                 : "bg-slate-300 border-slate-500"
-            }  w-1/2 mt-2 mr-2 rounded-lg h-auto min-h-screen `}
+            } w-full mt-2 mr-2 rounded-lg h-auto min-h-screen `}
           >
-            <div className="flex flex-row items-center mt-2">
-              <h5 className="font-extrabold">
-                {capitalized(column.columnState)}
-              </h5>
-              <p className="ml-3">
-                (
-                {
-                  ticketData.tickets.filter(
-                    (ticket) => ticket.status === column.id
-                  ).length
-                }
-                )
-              </p>
+            <div className="flex flex-row mt-2">
+              {/* <FaEdit className="self-start text-lg w-full" /> */}
+              <div className="flex flex-row items-center w-full">
+                <h5 className="font-extrabold w-full">
+                  {capitalized(column.columnState)}
+                </h5>
+                <p className="ml-3">
+                  (
+                  {
+                    ticketData.tickets.filter(
+                      (ticket) => ticket.status === column.id
+                    ).length
+                  }
+                  )
+                </p>
+              </div>
+              <div className="w-full border-red-500 bg-orange-300">
+                <DeleteColumn
+                  subject="Status Column"
+                  columnId={column.id}
+                  kanbanId={kanbanId}
+                />
+              </div>
             </div>
             <ul className="list-none pl-0 w-full">
               {ticketData.tickets

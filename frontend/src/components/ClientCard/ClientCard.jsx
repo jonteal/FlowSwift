@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
+
+// UTILS
 import { formatPhoneNumber } from "../../utils/format";
 
 // GRAPHQL
@@ -10,14 +12,9 @@ import { GET_CLIENTS } from "../../graphql/queries/clientQueries";
 import { DeleteModal } from "../modals/DeleteModal/DeleteModal";
 import { NameValuePair } from "../../components/reusable/NameValuePair/NameValuePair";
 import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
-
-// STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { DynamicContainer } from "../reusable/DynamicContainer/DynamicContainer";
 
 export const ClientCard = ({ clientData }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
   const navigate = useNavigate();
   const {
     id,
@@ -36,12 +33,8 @@ export const ClientCard = ({ clientData }) => {
   });
 
   return (
-    <div
-      className={`mt-1  ${
-        darkMode ? "bg-sky-800" : "bg-slate-50"
-      } w-full rounded-xl`}
-    >
-      <div className="flex flex-row items-center justify-end pt-3 pr-2">
+    <DynamicContainer>
+      <div className="flex flex-row items-center justify-end pt-2 pr-2">
         <DynamicButton
           type="link"
           color="lightBlue"
@@ -50,7 +43,7 @@ export const ClientCard = ({ clientData }) => {
         >
           Edit
         </DynamicButton>
-        <DeleteModal subject="Client" deleteClient={deleteClient} />
+        <DeleteModal subject="Client" deleteItem={deleteClient} />
       </div>
       <div className="h-screen px-3">
         <NameValuePair type="header" name="Company" value={companyName} />
@@ -66,6 +59,6 @@ export const ClientCard = ({ clientData }) => {
 
         <NameValuePair name="Client Status" value={status} />
       </div>
-    </div>
+    </DynamicContainer>
   );
 };
