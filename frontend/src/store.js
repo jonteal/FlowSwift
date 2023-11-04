@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { apiSlice } from "./slices/apiSlice";
 import authReducer from "./slices/authSlice";
 import ticketSlice from "./slices/ticketSlice";
 import featuresSlice from "./slices/featuresSlice";
-import { apiSlice } from "./slices/apiSlice";
+import projectsSlice from "./slices/projectsSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     ticket: ticketSlice,
     features: featuresSlice,
+    projects: projectsSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

@@ -57,35 +57,35 @@ export const ProjectsTableItem = ({ project, index }) => {
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
+        } font-light text-left border pl-2 hidden md:block`}
       >
         {project.startDate}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
+        } font-light text-left border pl-2 hidden md:block`}
       >
         {project.deadline}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
+        } font-light text-left border pl-2 hidden md:block`}
       >
         {project.clientBudget}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
+        } font-light text-left border pl-2 hidden md:block`}
       >
         {project.projectEstimate}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
+        } font-light text-left border pl-2 hidden md:block`}
       >
         <Link
           to={`/clients/${project.client.id}/projects/${project.id}/profile`}
@@ -98,7 +98,7 @@ export const ProjectsTableItem = ({ project, index }) => {
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
+        } font-light text-left border pl-2 hidden md:block`}
       >
         {/* <button>
         <FaRegTrashAlt className="text-red-500" />

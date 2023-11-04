@@ -14,16 +14,22 @@ import { Switch } from "../../components/reusable/Switch/Switch";
 import { useContext } from "react";
 import { ThemeContext } from "../../context";
 import { ProjectsTableItem } from "../../components/ProjectsTableItem/ProjectsTableItem";
+import { useDispatch, useSelector } from "react-redux";
+
+import { setGridViewOn, setGridViewOff } from "../../slices/projectsSlice";
 
 export const Projects = () => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   const { loading, error, data } = useQuery(GET_PROJECTS);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isGridView, setGridView] = useState(true);
 
-  const handleViewChange = () => {
-    setGridView(!isGridView);
+  const dispatch = useDispatch();
+
+  const { gridView } = useSelector((state) => state.projects);
+
+  const handleGridViewToggle = () => {
+    gridView ? dispatch(setGridViewOff()) : dispatch(setGridViewOn());
   };
 
   if (loading) return <Spinner />;
@@ -43,7 +49,7 @@ export const Projects = () => {
           className="searchBar w-40 border rounded-xl pl-2 ml-5 mt-3 text-slate-700"
         />
 
-        <Switch isChecked={isGridView} changeHandler={handleViewChange} />
+        <Switch isChecked={gridView} changeHandler={handleGridViewToggle} />
       </div>
 
       <p
@@ -54,8 +60,8 @@ export const Projects = () => {
         Total Projects: {data.projects.length}
       </p>
 
-      {isGridView ? (
-        <div className="flex flex-row flex-wrap mx-auto">
+      {gridView ? (
+        <div className="flex md:flex-row flex-wrap mx-auto flex-col">
           {data.projects
             .filter((val) => {
               if (searchTerm === "") {
@@ -83,28 +89,28 @@ export const Projects = () => {
             ))}
         </div>
       ) : (
-        <div className="flex flex-wrap px-20 flex-col w-full">
-          <table className="table-auto">
-            <thead>
-              <tr>
+        <div className="flex justify-center items-center px-1 md:px-20 flex-col w-full">
+          <table className="table-auto w-full mx-2">
+            <thead className="w-full">
+              <tr className="w-full">
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-auto text-left pl-2 border`}
+                  } w-1/12 md:w-auto text-left pl-2 border`}
                 >
                   #
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border`}
+                  } w-3/12 md:w-2/12 text-left pl-2 border`}
                 >
                   Project Name
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border`}
+                  } w-3/12 md:w-2/12 text-left pl-2 border`}
                 >
                   Client
                 </th>
@@ -118,35 +124,35 @@ export const Projects = () => {
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border`}
+                  } w-2/12 text-left pl-2 border hidden md:block`}
                 >
                   Start Date
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-3/12 text-left pl-2 border`}
+                  } w-3/12 text-left pl-2 border hidden md:block`}
                 >
                   Deadline
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border`}
+                  } w-2/12 text-left pl-2 border hidden md:block`}
                 >
                   Client Budget
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border`}
+                  } w-2/12 text-left pl-2 border hidden md:block`}
                 >
                   Project Estimate
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border`}
+                  } w-2/12 text-left pl-2 border hidden md:block`}
                 ></th>
               </tr>
             </thead>
