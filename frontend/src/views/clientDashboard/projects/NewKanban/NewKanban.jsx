@@ -28,6 +28,7 @@ export const NewKanban = () => {
       <div className="mt-5 flex flex-row flex-wrap">
         {data.kanbans.map((kanban) => (
           <Link
+            key={kanban.id}
             to={`/clients/${clientId}/projects/${projectId}/kanbans/${kanban.id}`}
           >
             <KanbanCard key={kanban.id} kanban={kanban} />

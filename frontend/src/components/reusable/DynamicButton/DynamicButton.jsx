@@ -9,6 +9,7 @@ export const DynamicButton = ({
   className,
   color,
   clickHandler,
+  disabled,
 }) => {
   const navigate = useNavigate();
   const handleBackNavigate = () => {
@@ -33,6 +34,7 @@ export const DynamicButton = ({
       case "submit":
         return (
           <button
+            disabled={disabled}
             onClick={clickHandler}
             className={`rounded px-4 py-2 overflow-hidden group ${color} relative hover:ring-2 hover:ring-offset-2 transition-all ease-out duration-300`}
           >
@@ -43,6 +45,7 @@ export const DynamicButton = ({
       case "add":
         return (
           <button
+            disabled={disabled}
             onClick={clickHandler}
             className="relative inline-flex items-center justify-start px-4 py-2 overflow-hidden font-medium transition-all bg-red-500 rounded-xl group"
           >
@@ -68,6 +71,7 @@ export const DynamicButton = ({
       case "delete":
         return (
           <button
+            disabled={disabled}
             onClick={clickHandler}
             className={`px-4 py-2 font-medium ${color} rounded-lg text-sm`}
           >
@@ -77,6 +81,7 @@ export const DynamicButton = ({
       case "back":
         return (
           <button
+            disabled={disabled}
             onClick={handleBackNavigate}
             className={`px-4 py-2 font-medium ${color} rounded-lg text-sm`}
           >

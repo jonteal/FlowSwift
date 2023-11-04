@@ -20,6 +20,7 @@ import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 import { ThemeContext } from "../../../../context";
+import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 export const AddProject = () => {
   const theme = useContext(ThemeContext);
@@ -110,11 +111,7 @@ export const AddProject = () => {
     setProjectEstimate("");
   };
 
-  const {
-    loading: userLoading,
-    error: userError,
-    data: userData,
-  } = useQuery(GET_USER, {
+  const { data: userData } = useQuery(GET_USER, {
     variables: { id: userInfo._id },
   });
 
@@ -126,9 +123,9 @@ export const AddProject = () => {
   if (error) return <p>There was an error loading the content</p>;
 
   return (
-    <div>
+    <DynamicContainer className="w-full">
       {!loading && !error && (
-        <div className="w-3/5 mx-auto">
+        <div className="w-full mx-auto">
           {alertOn && (
             <div className="alert alert-danger mt-3" role="alert">
               Please provide a title, description, and status!
@@ -247,6 +244,6 @@ export const AddProject = () => {
           </form>
         </div>
       )}
-    </div>
+    </DynamicContainer>
   );
 };

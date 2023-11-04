@@ -121,6 +121,10 @@ const router = createBrowserRouter(
             element={<AddTransaction />}
           />
           <Route
+            path="/clients/:clientId/projects/addProject"
+            element={<AddProject />}
+          />
+          <Route
             path="/clients/:clientId/projects/:projectId"
             element={<ProjectView />}
           >
@@ -220,7 +224,6 @@ const router = createBrowserRouter(
             element={<ClientTransactionsView />}
           />
         </Route>
-        <Route path="/addProject" element={<AddProject />} />
         <Route path="/clients/list/:status" element={<ClientsListByStatus />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="*" element={<NotFound />} />

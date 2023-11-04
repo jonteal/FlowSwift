@@ -42,14 +42,7 @@ export const Projects = () => {
           onChange={(event) => setSearchTerm(event.target.value)}
           className="searchBar w-40 border rounded-xl pl-2 ml-5 mt-3 text-slate-700"
         />
-        <DynamicButton
-          color="red"
-          type="link"
-          link="/addProject"
-          className="mx-2 mt-4"
-        >
-          Add Project
-        </DynamicButton>
+
         <Switch isChecked={isGridView} changeHandler={handleViewChange} />
       </div>
 
@@ -97,63 +90,63 @@ export const Projects = () => {
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  }  font-light w-auto text-left pl-2 border`}
+                  } w-auto text-left pl-2 border`}
                 >
                   #
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  }  font-light w-2/12 text-left pl-2 border`}
+                  } w-2/12 text-left pl-2 border`}
                 >
                   Project Name
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  }  font-light w-2/12 text-left pl-2 border`}
+                  } w-2/12 text-left pl-2 border`}
                 >
                   Client
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  }  font-light w-2/12 text-left pl-2 border`}
+                  } w-2/12 text-left pl-2 border`}
                 >
                   Status
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  }  font-light w-2/12 text-left pl-2 border`}
+                  } w-2/12 text-left pl-2 border`}
                 >
                   Start Date
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  }  font-light w-3/12 text-left pl-2 border`}
+                  } w-3/12 text-left pl-2 border`}
                 >
                   Deadline
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  }  font-light w-2/12 text-left pl-2 border`}
+                  } w-2/12 text-left pl-2 border`}
                 >
                   Client Budget
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  }  font-light w-2/12 text-left pl-2 border`}
+                  } w-2/12 text-left pl-2 border`}
                 >
                   Project Estimate
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  }  font-light w-2/12 text-left pl-2 border`}
+                  } w-2/12 text-left pl-2 border`}
                 ></th>
               </tr>
             </thead>

@@ -35,9 +35,20 @@ export const ClientProjects = () => {
           </p>
         </div>
       ) : (
-        projectsData.clientProjects.map((project) => (
-          <ProjectPageCard key={project.id} project={project} />
-        ))
+        <div className="flex flex-col">
+          <DynamicButton
+            color="red"
+            link={`/clients/${clientId}/projects/addProject`}
+            type="link"
+          >
+            Add Project
+          </DynamicButton>
+          <div className="flex flex-row flex-wrap mt-3">
+            {projectsData.clientProjects.map((project) => (
+              <ProjectPageCard key={project.id} project={project} />
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

@@ -9,7 +9,7 @@ export const DynamicContainer = ({ children }) => {
     <div
       className={`${
         darkMode ? "bg-sky-800" : "bg-slate-50"
-      }  mt-2 mx-2 p-3 rounded-xl`}
+      }  mt-2 mx-2 p-3 rounded-xl w-full`}
     >
       {children}
     </div>

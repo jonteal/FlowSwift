@@ -59,8 +59,6 @@ export const KanbanView = () => {
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
   const [columnId, setColumnId] = useState("");
 
-  console.log("columnId: ", columnId);
-
   const { loading, error, data } = useQuery(GET_KANBAN, {
     variables: { id: kanbanId },
   });
@@ -103,13 +101,6 @@ export const KanbanView = () => {
     },
   });
 
-  const [deleteKanbanStatusColumn] = useMutation(DELETE_KANBAN_STATUS_COLUMN, {
-    variables: { id: columnId },
-    refetchQueries: [
-      { query: GET_KANBAN_STATUS_COLUMNS, variables: { kanbanId } },
-    ],
-  });
-
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -146,6 +137,8 @@ export const KanbanView = () => {
   if (loading || kanbanStatusColumnLoading || ticketLoading) return <Spinner />;
   if (error || kanbanStatusColumnError || ticketError)
     return <p>There was a problem...</p>;
+
+  const hasStatusColumn = kanbanStatusColumnData.kanbanStatusColumns.length > 0;
 
   Object.freeze(kanbanStatusColumnData.kanbanStatusColumns);
 
@@ -197,9 +190,11 @@ export const KanbanView = () => {
           Add Column
         </DynamicButton>
 
-        <DynamicButton type="link" link="addTicket" color="lightBlue">
-          Add Ticket
-        </DynamicButton>
+        {hasStatusColumn && (
+          <DynamicButton type="link" link="addTicket" color="lightBlue">
+            Add Ticket
+          </DynamicButton>
+        )}
 
         <button
           className="border bg-sky-300 px-3 py-1 rounded-lg"
@@ -267,6 +262,12 @@ export const KanbanView = () => {
 
       <h1 className="text-lg font-bold mt-3">{title}</h1>
       <h2 className="text-base font-normal">{description}</h2>
+
+      {!hasStatusColumn && (
+        <p className="italic mt-5 border bg-green-300 rounded-xl w-3/4 mx-auto">
+          Add a flow state column prior to adding stories
+        </p>
+      )}
 
       <div className="flex flex-row items-start ml-2">
         {sortedColumns.map((column) => (
