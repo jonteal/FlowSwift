@@ -27,7 +27,7 @@ export const DeleteColumn = ({ deleteFn, subject, kanbanId, columnId }) => {
   });
 
   return (
-    <>
+    <div className="w-full">
       <FaRegTrashAlt
         className="text-red-500 cursor-pointer w-full"
         onClick={handleShow}
@@ -61,6 +61,6 @@ export const DeleteColumn = ({ deleteFn, subject, kanbanId, columnId }) => {
           </div>
         </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
 };

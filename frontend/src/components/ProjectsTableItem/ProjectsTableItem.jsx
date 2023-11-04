@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaRegEye } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../context";
@@ -7,6 +7,25 @@ import { camelCaseToWords } from "../../utils/format";
 export const ProjectsTableItem = ({ project, index }) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
+
+  const [statusColor, setStatusColor] = useState("");
+
+  const status = project.status;
+
+  useEffect(() => {
+    if (status === "notStarted") {
+      setStatusColor("bg-yellow-500");
+    } else if (status === "inProgress") {
+      setStatusColor("bg-green-600");
+    } else if (status === "completed") {
+      setStatusColor("bg-sky-600");
+    } else if (status === "paused") {
+      setStatusColor("bg-red-600");
+    } else if (status === "needsAttention") {
+      setStatusColor("bg-orange-500");
+    }
+  }, [status]);
+
   return (
     <tr key={project.id}>
       <td
@@ -31,9 +50,7 @@ export const ProjectsTableItem = ({ project, index }) => {
         {project.client.firstName}
       </td>
       <td
-        className={`${
-          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
+        className={`font-base text-slate-50 text-left border pl-2 ${statusColor}`}
       >
         {camelCaseToWords(project.status)}
       </td>

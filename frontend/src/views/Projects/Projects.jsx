@@ -26,19 +26,21 @@ export const Projects = () => {
     setGridView(!isGridView);
   };
 
-  console.log("isGridView: ", isGridView);
-
   if (loading) return <Spinner />;
   if (error) return <p>There was an error loading the comment feed</p>;
 
   return (
-    <div className={`flex flex-col max-h-screen ${darkMode ? "" : ""}`}>
+    <div
+      className={`flex flex-col h-screen ${
+        darkMode ? "bg-sky-800" : "bg-slate-50"
+      }`}
+    >
       <div className="flex flex-row justify-around mb-10">
         <input
           type="text"
           placeholder="Search..."
           onChange={(event) => setSearchTerm(event.target.value)}
-          className="searchBar w-40 border rounded-xl pl-3 py-1 ml-5 text-slate-700"
+          className="searchBar w-40 border rounded-xl pl-2 ml-5 mt-3 text-slate-700"
         />
         <DynamicButton
           color="red"
@@ -187,31 +189,6 @@ export const Projects = () => {
                 ))}
             </tbody>
           </table>
-          {/* {data.projects
-            .filter((val) => {
-              if (searchTerm === "") {
-                return val;
-              } else if (
-                val?.client.firstName
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase())
-              ) {
-                return val;
-              } else if (
-                val?.title.toLowerCase().includes(searchTerm.toLowerCase())
-              ) {
-                return val;
-              } else if (
-                val?.client.lastName
-                  .toLowerCase()
-                  .includes(searchTerm.toLowerCase())
-              ) {
-                return val;
-              }
-            })
-            .map((project) => (
-              <ProjectsTableItem key={project.id} project={project} />
-            ))} */}
         </div>
       )}
     </div>

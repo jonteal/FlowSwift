@@ -278,23 +278,23 @@ export const KanbanView = () => {
                 : "bg-slate-300 border-slate-500"
             } w-full mt-2 mr-2 rounded-lg h-auto min-h-screen `}
           >
-            <div className="flex flex-row mt-2">
-              {/* <FaEdit className="self-start text-lg w-full" /> */}
-              <div className="flex flex-row items-center w-full">
-                <h5 className="font-extrabold w-full">
-                  {capitalized(column.columnState)}
-                </h5>
-                <p className="ml-3">
-                  (
-                  {
-                    ticketData.tickets.filter(
-                      (ticket) => ticket.status === column.id
-                    ).length
-                  }
-                  )
-                </p>
-              </div>
-              <div className="w-full border-red-500 bg-orange-300">
+            <div className="flex flex-col mt-2 w-full">
+              <div className="w-full border-red-50 flex flex-row items-center justify-between">
+                <FaEdit className="self-start text-lg w-full cursor-pointer" />
+                <div className="flex flex-row items-center w-full">
+                  <h5 className="font-extrabold w-full">
+                    {capitalized(column.columnState)}
+                  </h5>
+                  <p className="ml-2">
+                    (
+                    {
+                      ticketData.tickets.filter(
+                        (ticket) => ticket.status === column.id
+                      ).length
+                    }
+                    )
+                  </p>
+                </div>
                 <DeleteColumn
                   subject="Status Column"
                   columnId={column.id}
