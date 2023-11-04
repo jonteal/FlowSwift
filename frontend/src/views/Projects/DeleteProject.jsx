@@ -13,7 +13,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
 
-export const DeleteProject = ({ subject, projectId, children }) => {
+export const DeleteProject = ({ subject, projectId, children, clientId }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -21,15 +21,11 @@ export const DeleteProject = ({ subject, projectId, children }) => {
 
   const [deleteProject] = useMutation(DELETE_PROJECT, {
     variables: { id: projectId },
-    refetchQueries: [{ query: GET_PROJECTS }],
+    refetchQueries: [{ query: GET_PROJECTS, variables: { clientId } }],
   });
 
   return (
     <div className="w-full">
-      {/* <FaRegTrashAlt
-        className="text-red-500 cursor-pointer w-full"
-        onClick={handleShow}
-      /> */}
       <div onClick={handleShow}>{children}</div>
 
       <Modal

@@ -25,6 +25,8 @@ export const DynamicButton = ({
         "bg-green-500 hover:from-green-500 hover:to-green-400 hover:ring-green-400 hover:bg-gradient-to-r";
     case "lightBlue":
       color = "bg-blue-50 hover:bg-blue-100 hover:text-blue-600 text-blue-500";
+    case "blue":
+      color = "bg-blue-500 hover:bg-blue-100 hover:text-blue-600 text-blue-50";
     default:
       break;
   }
