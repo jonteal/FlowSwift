@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
@@ -6,16 +6,13 @@ import { GET_PROJECTS } from "../../graphql/queries/projectQueries";
 
 // COMPONENTS
 import { Spinner } from "../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
 import { ProjectPageCard } from "../../components/ProjectPageCard/ProjectPageCard";
 import { Switch } from "../../components/reusable/Switch/Switch";
 
 // STATE
-import { useContext } from "react";
 import { ThemeContext } from "../../context";
 import { ProjectsTableItem } from "../../components/ProjectsTableItem/ProjectsTableItem";
 import { useDispatch, useSelector } from "react-redux";
-
 import { setGridViewOn, setGridViewOff } from "../../slices/projectsSlice";
 
 export const Projects = () => {
@@ -89,7 +86,7 @@ export const Projects = () => {
             ))}
         </div>
       ) : (
-        <div className="flex justify-center items-center px-1 md:px-20 flex-col w-full">
+        <div className="flex justify-center items-center px-20 flex-col w-full">
           <table className="table-auto w-full mx-2">
             <thead className="w-full">
               <tr className="w-full">
@@ -124,35 +121,40 @@ export const Projects = () => {
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border hidden md:block`}
+                  } w-2/12 text-left pl-2 border`}
                 >
                   Start Date
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-3/12 text-left pl-2 border hidden md:block`}
+                  } w-3/12 text-left pl-2 border`}
                 >
                   Deadline
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border hidden md:block`}
+                  } w-2/12 text-left pl-2 border`}
                 >
                   Client Budget
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border hidden md:block`}
+                  } w-2/12 text-left pl-2 border`}
                 >
                   Project Estimate
                 </th>
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border hidden md:block`}
+                  } w-2/12 text-left pl-2 border`}
+                ></th>
+                <th
+                  className={`${
+                    darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                  } w-2/12 text-left pl-2 border`}
                 ></th>
               </tr>
             </thead>

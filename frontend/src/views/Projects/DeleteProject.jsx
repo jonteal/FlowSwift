@@ -5,33 +5,32 @@ import { useMutation } from "@apollo/client";
 import { FaRegTrashAlt } from "react-icons/fa";
 
 // GRAPHQL
-import { DELETE_KANBAN_STATUS_COLUMN } from "../../../../graphql/mutations/kanbanStatusColumnMutations";
-import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
+import { DELETE_PROJECT } from "../../graphql/mutations/projectMutations";
+import { GET_PROJECTS } from "../../graphql/queries/projectQueries";
 
 // COMPONENTS
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
+import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
 
-export const DeleteColumn = ({ subject, kanbanId, columnId }) => {
+export const DeleteProject = ({ subject, projectId, children }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [deleteKanbanStatusColumn] = useMutation(DELETE_KANBAN_STATUS_COLUMN, {
-    variables: { id: columnId },
-    refetchQueries: [
-      { query: GET_KANBAN_STATUS_COLUMNS, variables: { kanbanId } },
-    ],
+  const [deleteProject] = useMutation(DELETE_PROJECT, {
+    variables: { id: projectId },
+    refetchQueries: [{ query: GET_PROJECTS }],
   });
 
   return (
     <div className="w-full">
-      <FaRegTrashAlt
+      {/* <FaRegTrashAlt
         className="text-red-500 cursor-pointer w-full"
         onClick={handleShow}
-      />
+      /> */}
+      <div onClick={handleShow}>{children}</div>
 
       <Modal
         show={show}
@@ -54,7 +53,7 @@ export const DeleteColumn = ({ subject, kanbanId, columnId }) => {
           >
             Close
           </Button>
-          <div onClick={deleteKanbanStatusColumn}>
+          <div onClick={deleteProject}>
             <DynamicButton color="red" type="delete">
               Delete
             </DynamicButton>

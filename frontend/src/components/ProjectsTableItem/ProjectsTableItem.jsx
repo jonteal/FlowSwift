@@ -3,6 +3,8 @@ import { FaRegEye } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../context";
 import { camelCaseToWords } from "../../utils/format";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { DeleteProject } from "../../views/Projects/DeleteProject";
 
 export const ProjectsTableItem = ({ project, index }) => {
   const theme = useContext(ThemeContext);
@@ -57,35 +59,35 @@ export const ProjectsTableItem = ({ project, index }) => {
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2 hidden md:block`}
+        } font-light text-left border pl-2`}
       >
         {project.startDate}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2 hidden md:block`}
+        } font-light text-left border pl-2`}
       >
         {project.deadline}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2 hidden md:block`}
+        } font-light text-left border pl-2`}
       >
         {project.clientBudget}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2 hidden md:block`}
+        } font-light text-left border pl-2`}
       >
         {project.projectEstimate}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2 hidden md:block`}
+        } font-light text-left border pl-2`}
       >
         <Link
           to={`/clients/${project.client.id}/projects/${project.id}/profile`}
@@ -98,11 +100,11 @@ export const ProjectsTableItem = ({ project, index }) => {
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2 hidden md:block`}
+        } font-light text-left border`}
       >
-        {/* <button>
-        <FaRegTrashAlt className="text-red-500" />
-      </button> */}
+        <DeleteProject subject="Project" projectId={project.id}>
+          <FaRegTrashAlt className="text-red-500 self-center mx-1" />
+        </DeleteProject>
       </td>
     </tr>
   );
