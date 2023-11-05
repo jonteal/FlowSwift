@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+import { useState } from "react";
 
 // GRAPHQL
 import { GET_ALL_CLIENT_INVOICES } from "../../../../graphql/queries/invoiceQueries";
@@ -14,10 +14,11 @@ import { BilledThisMonth } from "../../../../components/dashboardBilling/BilledT
 import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
 
 // STATE
-import { useSelector } from "react-redux";
-
-// UTILS
-import { clientBillingFilters } from "./filters";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setBilledThisMonthOn,
+  setBilledThisMonthOff,
+} from "../../../../slices/clientBilling";
 
 // import { TotalBilledCard }from "../../../../components/dashboardBilling/TotalBilledCard/TotalBilledCard";
 // import { BudgetRemaining } from "../../../../components/dashboardBilling/BudgetRemaining/BudgetRemaining";
@@ -26,7 +27,15 @@ export const ClientBilling = () => {
   const { clientId } = useParams();
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
 
+  const dispatch = useDispatch();
+
   const { billedThisMonth } = useSelector((state) => state.clientBilling);
+
+  const handleBilledThisMonthToggle = () => {
+    billedThisMonth
+      ? dispatch(setBilledThisMonthOff())
+      : dispatch(setBilledThisMonthOn());
+  };
 
   const {
     loading: invoicesLoading,
@@ -48,12 +57,23 @@ export const ClientBilling = () => {
   if (invoicesError || transactionsError)
     return <p>There was a problem loading the client transactions...</p>;
 
+  const clientBillingFilters = [
+    {
+      name: "Billed This Month",
+      toggle: handleBilledThisMonthToggle,
+      value: billedThisMonth,
+      isChecked: billedThisMonth,
+      ariaLabel: "Billed This Month filter",
+    },
+  ];
+
   // const budgetRemaining = budgetsTotalSum - invoicesTotalSum;
+  // const billedThisMonth = 50;
 
   return (
     <div className="w-full flex flex-col">
       <button
-        className="border bg-sky-300 px-4 py-2 rounded-lg"
+        className="border bg-sky-600 px-4 py-2 rounded-lg mb-3 w-1/3 ml-3"
         onClick={handleOpenFilters}
       >
         Filters

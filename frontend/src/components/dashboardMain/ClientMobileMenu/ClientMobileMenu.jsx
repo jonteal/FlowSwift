@@ -1,57 +1,57 @@
-import { useState } from "react";
-import { FaTable, FaWindowMaximize, FaCreditCard } from "react-icons/fa";
+import { useContext, useState } from "react";
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import { FaCreditCard, FaTable, FaWindowMaximize } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
 import { NavLink } from "react-router-dom";
-import { RiExpandRightLine, RiExpandLeftLine } from "react-icons/ri";
-
-import { useContext } from "react";
 import { ThemeContext } from "../../../context";
 
-export const ClientViewNav = () => {
+export const ClientMobileMenu = () => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
-  const [isOpen, setIsOpen] = useState(true);
+  const [show, setShow] = useState(false);
 
-  const handleNavCollapse = () => {
-    setIsOpen(!isOpen);
-  };
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
-    <div
-      id="Main"
-      className={`transform xl:translate-x-0 ease-in-out transition duration-500 flex justify-start items-start h-screen border w-full ${
-        darkMode ? "bg-sky-800" : "bg-slate-50"
-      }  flex-col mx-0 md:ml-2 rounded-xl ${!isOpen ? "sm:w-10" : "sm:w-64"}`}
-    >
-      <div
-        onClick={handleNavCollapse}
-        className={`${
-          !isOpen ? "block" : "hidden"
-        } w-full flex flex-row justify-center`}
-      >
-        <RiExpandRightLine
-          className={`mt-2 text-lg ${
-            darkMode ? "text-slate-50" : "text-slate-800"
-          }`}
-        />
-      </div>
-      <div
-        className={`flex flex-col justify-start items-center px-6 w-full ${
-          !isOpen ? "hidden" : ""
-        }`}
-      >
-        <div
-          id="menu1"
-          className="flex justify-start flex-col w-full md:w-auto items-start pb-1 "
+    <div className={`${darkMode ? "bg-sky-950" : "bg-slate-50"}`}>
+      <div className="flex flex-row justify-start">
+        <Button
+          variant="primary"
+          className={`${
+            darkMode
+              ? "border-slate-50 text-slate-50"
+              : "border-sky-900 text-sky-900"
+          } text-3xl self-start ml-4 mb-3`}
+          onClick={handleShow}
         >
-          <div className="flex flex-row w-full justify-end">
-            <RiExpandLeftLine
-              onClick={handleNavCollapse}
-              className={`mt-2 text-lg   ${
-                darkMode ? "text-slate-50" : "text-slate-800"
-              }`}
-            />
-          </div>
+          &#9776;
+        </Button>
+      </div>
+
+      <Offcanvas
+        className={`${darkMode ? "bg-sky-900" : "bg-slate-50"}`}
+        show={show}
+        onHide={handleClose}
+        placement="top"
+      >
+        <Offcanvas.Header>
+          <Offcanvas.Title
+            className={`${darkMode ? "text-slate-50" : "text-sky-900"}`}
+          >
+            Client
+          </Offcanvas.Title>
+          <MdClose
+            onClick={handleClose}
+            className={`${
+              darkMode ? "text-slate-50" : "text-sky-900"
+            } text-3xl`}
+          />
+        </Offcanvas.Header>
+        <Offcanvas.Body>
           <NavLink
+            onClick={handleClose}
             to="dashboard"
             className={`flex justify-start items-center space-x-6 ${
               darkMode
@@ -63,6 +63,7 @@ export const ClientViewNav = () => {
             <p className="text-base leading-4">Dashboard</p>
           </NavLink>
           <NavLink
+            onClick={handleClose}
             to="projects"
             className={`flex justify-start items-center space-x-6 ${
               darkMode
@@ -74,6 +75,7 @@ export const ClientViewNav = () => {
             <p className="text-base leading-4">Projects</p>
           </NavLink>
           <NavLink
+            onClick={handleClose}
             to="billing"
             className={`flex justify-start items-center space-x-6 ${
               darkMode
@@ -84,8 +86,8 @@ export const ClientViewNav = () => {
             <FaCreditCard className="text-green-500" />
             <p className="text-base leading-4">Billing</p>
           </NavLink>
-        </div>
-      </div>
+        </Offcanvas.Body>
+      </Offcanvas>
     </div>
   );
 };

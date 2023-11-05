@@ -7,6 +7,7 @@ import { GET_CLIENT } from "../../../graphql/queries/clientQueries";
 
 // COMPONENTS
 import { ClientViewNav } from "../../../components/dashboardMain/ClientViewNav/ClientViewNav";
+import { ClientMobileMenu } from "../../../components/dashboardMain/ClientMobileMenu/ClientMobileMenu";
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 
 import { useContext } from "react";
@@ -38,7 +39,12 @@ export const ClientView = () => {
           }`}
         >
           <div className="h-auto min-h-full mt-4 rounded-md flex flex-col md:flex-row">
-            <ClientViewNav clientData={clientData} />
+            <div className="hidden md:block">
+              <ClientViewNav clientData={clientData} />
+            </div>
+            <div className="block md:hidden">
+              <ClientMobileMenu />
+            </div>
             <Outlet />
           </div>
         </div>

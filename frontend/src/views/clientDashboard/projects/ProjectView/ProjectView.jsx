@@ -6,6 +6,7 @@ import { GET_PROJECT } from "../../../../graphql/queries/projectQueries";
 
 // COMPONENTS
 import { ProjectViewNav } from "../../../../components/nav/ProjectViewNav/ProjectViewNav";
+import { ProjectMobileMenu } from "../../../../components/nav/ProjectMobileMenu/ProjectMobileMenu";
 
 export const ProjectView = () => {
   const { id } = useParams();
@@ -23,7 +24,12 @@ export const ProjectView = () => {
 
   return (
     <div className="w-full">
-      <ProjectViewNav projectData={projectData} />
+      <div className="hidden md:block">
+        <ProjectViewNav projectData={projectData} />
+      </div>
+      <div className="block md:hidden">
+        <ProjectMobileMenu />
+      </div>
       <Outlet />
     </div>
   );
