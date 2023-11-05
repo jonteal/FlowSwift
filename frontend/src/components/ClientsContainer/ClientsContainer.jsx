@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
+// ICONS
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+
+// COMPONENTS
 import { ClientTable } from "../ClientTable/ClientTable";
+
+// STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../context";
 
@@ -17,14 +23,14 @@ export const ClientsContainer = ({ clientData, clientContainer }) => {
   return (
     <div
       key={clientContainer.id}
-      className="mb-7 border-slate-400 p-2 rounded-md"
+      className="mb-7 border-slate-400 p-2 rounded-md overflow-x-scroll	"
     >
       <div
-        className={`flex flex-row items-center justify-between border ${
+        className={`flex flex-row items-center justify-between border overflow-x-scroll	 ${
           darkMode ? "bg-sky-800 rounded-t-lg" : "rounded-t-lg"
         }`}
       >
-        <div className="flex flex-row items-center">
+        <div className="flex flex-row items-center overflow-x-scroll">
           <span className="mx-2">
             (
             {

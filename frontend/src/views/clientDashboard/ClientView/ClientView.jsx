@@ -37,7 +37,7 @@ export const ClientView = () => {
             darkMode ? "bg-sky-950" : "bg-slate-200"
           }`}
         >
-          <div className="h-auto min-h-full mt-4 rounded-md flex flex-row">
+          <div className="h-auto min-h-full mt-4 rounded-md flex flex-col md:flex-row">
             <ClientViewNav clientData={clientData} />
             <Outlet />
           </div>

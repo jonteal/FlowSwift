@@ -9,7 +9,7 @@ export const ClientTable = ({ clients, clientContainer }) => {
   const darkMode = theme.state.darkMode;
 
   return (
-    <table className="table-auto">
+    <table className="table-auto overflow-x-scroll">
       <thead>
         <tr>
           <th

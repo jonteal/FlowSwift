@@ -33,7 +33,7 @@ export const ClientCard = ({ clientData }) => {
   });
 
   return (
-    <DynamicContainer>
+    <DynamicContainer className="h-auto">
       <div className="flex flex-row items-center justify-end pt-2 pr-2">
         <DynamicButton
           type="link"
@@ -45,7 +45,7 @@ export const ClientCard = ({ clientData }) => {
         </DynamicButton>
         <DeleteModal subject="Client" deleteItem={deleteClient} />
       </div>
-      <div className="h-screen px-3">
+      <div className="h-auto md:h-screen px-3">
         <NameValuePair type="header" name="Company" value={companyName} />
 
         <NameValuePair name="Contact" value={`${firstName} ${lastName}`} />

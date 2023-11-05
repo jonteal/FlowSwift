@@ -9,19 +9,15 @@ import { Spinner } from "../../components/reusable/Spinner/Spinner";
 import { Switch } from "../../components/reusable/Switch/Switch";
 import { ProjectPageCard } from "../../components/ProjectPageCard/ProjectPageCard";
 import { ProjectsTableItem } from "../../components/ProjectsTableItem/ProjectsTableItem";
+import { FiltersList } from "../../components/reusable/FiltersList/FiltersList";
 
 // STATE
 import { ThemeContext } from "../../context";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setGridViewOn,
-  setGridViewOff,
-  setStatusBadgeOff,
-  setStatusBadgeOn,
-  setClientNameOff,
-  setClientNameOn,
-} from "../../slices/projectsSlice";
-import { FiltersList } from "../../components/reusable/FiltersList/FiltersList";
+import { setGridViewOn, setGridViewOff } from "../../slices/projectsSlice";
+
+// UTILS
+import { projectCardFilters } from "./filters";
 
 export const Projects = () => {
   const theme = useContext(ThemeContext);
@@ -32,20 +28,10 @@ export const Projects = () => {
 
   const dispatch = useDispatch();
 
-  const { gridView, statusBadge, clientName } = useSelector(
-    (state) => state.projects
-  );
+  const { gridView } = useSelector((state) => state.projects);
 
   const handleGridViewToggle = () => {
     gridView ? dispatch(setGridViewOff()) : dispatch(setGridViewOn());
-  };
-
-  const handleStatusBadgeToggle = () => {
-    statusBadge ? dispatch(setStatusBadgeOff()) : dispatch(setStatusBadgeOn());
-  };
-
-  const handleClientNameToggle = () => {
-    clientName ? dispatch(setClientNameOff()) : dispatch(setClientNameOn());
   };
 
   const handleOpenFilters = () => {
@@ -54,23 +40,6 @@ export const Projects = () => {
 
   if (loading) return <Spinner />;
   if (error) return <p>There was an error loading the comment feed</p>;
-
-  const projectCardFilters = [
-    {
-      name: "Status Badge",
-      toggle: handleStatusBadgeToggle,
-      value: statusBadge,
-      isChecked: statusBadge,
-      ariaLabel: "Status Badge filter",
-    },
-    {
-      name: "Client Name",
-      toggle: handleClientNameToggle,
-      value: clientName,
-      isChecked: clientName,
-      ariaLabel: "Client Name filter",
-    },
-  ];
 
   return (
     <div

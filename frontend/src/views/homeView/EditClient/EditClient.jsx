@@ -97,7 +97,7 @@ export const EditClient = () => {
       {!clientLoading && !clientError && (
         <div className="mt-2">
           <form onSubmit={onSubmit}>
-            <div className="flex flex-row w-full justify-around items-center">
+            <div className="flex flex-col md:flex-row w-full justify-around items-center">
               <DynamicInput
                 id="edit-client-first-name"
                 inputType="input"
@@ -121,7 +121,7 @@ export const EditClient = () => {
               />
             </div>
 
-            <div className="flex flex-row w-full justify-around items-center">
+            <div className="flex flex-col md:flex-row w-full justify-around items-center">
               <DynamicInput
                 id="edit-client-company"
                 inputType="input"
@@ -145,7 +145,7 @@ export const EditClient = () => {
               />
             </div>
 
-            <div className="flex flex-row w-full justify-around items-center">
+            <div className="flex flex-col md:flex-row w-full justify-around items-center">
               <DynamicInput
                 id="edit-client-email-address"
                 inputType="input"

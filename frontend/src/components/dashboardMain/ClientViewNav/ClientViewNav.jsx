@@ -14,12 +14,13 @@ export const ClientViewNav = () => {
   const handleNavCollapse = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <div
       id="Main"
-      className={`transform xl:translate-x-0 ease-in-out transition duration-500 flex justify-start items-start h-screen border w-full ${
+      className={`transform xl:translate-x-0 ease-in-out transition duration-500 flex justify-start items-start h-auto md:h-screen border w-full ${
         darkMode ? "bg-sky-800" : "bg-slate-50"
-      }  flex-col ml-2 rounded-xl ${!isOpen ? "sm:w-10" : "sm:w-64"}`}
+      }  flex-col mx-0 md:ml-2 rounded-xl ${!isOpen ? "sm:w-10" : "sm:w-64"}`}
     >
       <div
         onClick={handleNavCollapse}

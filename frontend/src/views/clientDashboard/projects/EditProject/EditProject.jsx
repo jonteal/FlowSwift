@@ -10,11 +10,11 @@ import { GET_PROJECT } from "../../../../graphql/queries/projectQueries";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
+import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../../../context";
-import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 
 export const EditProject = () => {
   const theme = useContext(ThemeContext);
@@ -115,7 +115,7 @@ export const EditProject = () => {
           rows="3"
         />
 
-        <div className="flex flex-row w-full justify-around items-center">
+        <div className="flex flex-col md:flex-row w-full justify-around items-center">
           <DynamicInput
             id="edit-project-status"
             inputType="select"
@@ -129,19 +129,19 @@ export const EditProject = () => {
               { value: "paused", label: "Paused" },
               { value: "needsAttention", label: "Needs Attention" },
             ]}
-            className="flex-col"
+            className="flex-col w-full"
             ariaLabel="Edit Project status"
           />
 
           <DateSelector
-            className=""
+            className="w-full mb-3"
             label="Start Date"
             date={startDate}
             dateChangeHandler={handleStartDateChange}
           />
 
           <DateSelector
-            className=""
+            className="w-full mb-3"
             label="Deadline"
             date={deadline}
             dateChangeHandler={handleDeadlineChange}
@@ -154,11 +154,11 @@ export const EditProject = () => {
           label="Notes"
           changeHandler={(e) => setNotes(e.target.value)}
           value={notes}
-          className="mb-3"
+          className="mb-3 w-full"
           ariaLabel="Edit project notes"
         />
 
-        <div className="flex flex-row w-full justify-around items-center">
+        <div className="flex flex-col md:flex-row w-full justify-around items-center">
           <DynamicInput
             id="edit-project-budget"
             inputType="input"
@@ -166,7 +166,7 @@ export const EditProject = () => {
             label="Budget"
             changeHandler={(e) => setClientBudget(e.target.value)}
             value={clientBudget}
-            className="mb-3"
+            className="mb-3 w-full"
             ariaLabel="Edit project budget"
           />
 
@@ -177,7 +177,7 @@ export const EditProject = () => {
             label="Project Estimate"
             changeHandler={(e) => setProjectEstimate(e.target.value)}
             value={projectEstimate}
-            className="mb-3"
+            className="mb-3 w-full"
             ariaLabel="Edit project estimate"
           />
         </div>

@@ -66,12 +66,12 @@ export const ClientList = () => {
   ];
 
   return (
-    <>
+    <div className="overflow-x-scroll	">
       <div className="flex flex-row">
         <FaUserAlt className="mr-5" />
         <h5 className="mb-3">Total Records ({clientData?.clients.length})</h5>
       </div>
-      <ul>
+      <ul className="overflow-x-scroll">
         {clientContainers.map((clientContainer) => (
           <ClientsContainer
             key={clientContainer.id}
@@ -80,6 +80,6 @@ export const ClientList = () => {
           />
         ))}
       </ul>
-    </>
+    </div>
   );
 };

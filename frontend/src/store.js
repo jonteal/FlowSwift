@@ -4,6 +4,7 @@ import authReducer from "./slices/authSlice";
 import ticketSlice from "./slices/ticketSlice";
 import featuresSlice from "./slices/featuresSlice";
 import projectsSlice from "./slices/projectsSlice";
+import clientBilling from "./slices/clientBilling";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     ticket: ticketSlice,
     features: featuresSlice,
     projects: projectsSlice,
+    clientBilling: clientBilling,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
