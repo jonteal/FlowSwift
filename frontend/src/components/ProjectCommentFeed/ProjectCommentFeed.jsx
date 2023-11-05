@@ -92,7 +92,7 @@ export const ProjectCommentFeed = ({ projectId, comments }) => {
           onChange={(e) => setCommentText(e.target.value)}
         />
         <div className="w-1/2 text-left mt-2">
-          <DynamicButton color="red" type="submit">
+          <DynamicButton color="blue" type="submit">
             Save
           </DynamicButton>
         </div>

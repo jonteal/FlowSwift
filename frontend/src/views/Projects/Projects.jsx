@@ -6,31 +6,71 @@ import { GET_PROJECTS } from "../../graphql/queries/projectQueries";
 
 // COMPONENTS
 import { Spinner } from "../../components/reusable/Spinner/Spinner";
-import { ProjectPageCard } from "../../components/ProjectPageCard/ProjectPageCard";
 import { Switch } from "../../components/reusable/Switch/Switch";
+import { ProjectPageCard } from "../../components/ProjectPageCard/ProjectPageCard";
+import { ProjectsTableItem } from "../../components/ProjectsTableItem/ProjectsTableItem";
 
 // STATE
 import { ThemeContext } from "../../context";
-import { ProjectsTableItem } from "../../components/ProjectsTableItem/ProjectsTableItem";
 import { useDispatch, useSelector } from "react-redux";
-import { setGridViewOn, setGridViewOff } from "../../slices/projectsSlice";
+import {
+  setGridViewOn,
+  setGridViewOff,
+  setStatusBadgeOff,
+  setStatusBadgeOn,
+  setClientNameOff,
+  setClientNameOn,
+} from "../../slices/projectsSlice";
+import { FiltersList } from "../../components/reusable/FiltersList/FiltersList";
 
 export const Projects = () => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   const { loading, error, data } = useQuery(GET_PROJECTS);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
 
   const dispatch = useDispatch();
 
-  const { gridView } = useSelector((state) => state.projects);
+  const { gridView, statusBadge, clientName } = useSelector(
+    (state) => state.projects
+  );
 
   const handleGridViewToggle = () => {
     gridView ? dispatch(setGridViewOff()) : dispatch(setGridViewOn());
   };
 
+  const handleStatusBadgeToggle = () => {
+    statusBadge ? dispatch(setStatusBadgeOff()) : dispatch(setStatusBadgeOn());
+  };
+
+  const handleClientNameToggle = () => {
+    clientName ? dispatch(setClientNameOff()) : dispatch(setClientNameOn());
+  };
+
+  const handleOpenFilters = () => {
+    setIsFilterOptionsOpen(!isFilterOptionsOpen);
+  };
+
   if (loading) return <Spinner />;
   if (error) return <p>There was an error loading the comment feed</p>;
+
+  const projectCardFilters = [
+    {
+      name: "Status Badge",
+      toggle: handleStatusBadgeToggle,
+      value: statusBadge,
+      isChecked: statusBadge,
+      ariaLabel: "Status Badge filter",
+    },
+    {
+      name: "Client Name",
+      toggle: handleClientNameToggle,
+      value: clientName,
+      isChecked: clientName,
+      ariaLabel: "Client Name filter",
+    },
+  ];
 
   return (
     <div
@@ -46,8 +86,16 @@ export const Projects = () => {
           className="searchBar w-40 border rounded-xl pl-2 ml-5 mt-3 text-slate-700"
         />
 
+        <button
+          className="border bg-sky-300 px-4 py-2 rounded-lg"
+          onClick={handleOpenFilters}
+        >
+          Filters
+        </button>
+
         <Switch isChecked={gridView} changeHandler={handleGridViewToggle} />
       </div>
+      {isFilterOptionsOpen && <FiltersList filters={projectCardFilters} />}
 
       <p
         className={`block uppercase tracking-wide ${

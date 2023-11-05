@@ -57,7 +57,6 @@ export const KanbanView = () => {
   const [columnDescription, setColumnDescription] = useState("");
   const [position, setPosition] = useState("");
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
-  const [columnId, setColumnId] = useState("");
 
   const { loading, error, data } = useQuery(GET_KANBAN, {
     variables: { id: kanbanId },

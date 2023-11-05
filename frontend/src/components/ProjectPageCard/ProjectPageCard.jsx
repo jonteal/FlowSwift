@@ -6,10 +6,14 @@ import { FaProjectDiagram } from "react-icons/fa";
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../context";
+import { useSelector } from "react-redux";
 
 export const ProjectPageCard = ({ project }) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
+
+  const { statusBadge, clientName } = useSelector((state) => state.projects);
+
   const { title, status, client } = project;
   return (
     <Link to={`/clients/${project.client.id}/projects/${project.id}/profile`}>
@@ -24,13 +28,17 @@ export const ProjectPageCard = ({ project }) => {
           <FaProjectDiagram className="mr-2" />
           <h2 className="my-2 font-bold">{title}</h2>
         </div>
-        <div className="flex flex-row items-center">
-          <BsPersonCircle className="mr-2" />
-          <p className="my-2">{client.firstName + " " + client.lastName}</p>
-        </div>
-        <div className="my-2">
-          <StatusBadge status={status} />
-        </div>
+        {clientName && (
+          <div className="flex flex-row items-center">
+            <BsPersonCircle className="mr-2" />
+            <p className="my-2">{client.firstName + " " + client.lastName}</p>
+          </div>
+        )}
+        {statusBadge && (
+          <div className="my-2">
+            <StatusBadge status={status} />
+          </div>
+        )}
       </div>
     </Link>
   );

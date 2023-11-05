@@ -93,8 +93,7 @@ export const EditClient = () => {
   if (clientError) return <p>There was an error...</p>;
 
   return (
-    <DynamicContainer>
-      {/* <div className="mx-auto"> */}
+    <DynamicContainer className="w-full">
       {!clientLoading && !clientError && (
         <div className="mt-2">
           <form onSubmit={onSubmit}>
@@ -106,7 +105,7 @@ export const EditClient = () => {
                 label="First Name"
                 changeHandler={(e) => setFirstName(e.target.value)}
                 value={firstName}
-                className="mb-3 mr-3"
+                className="mb-10 mr-10 w-full"
                 ariaLabel="Client First Name edit input"
               />
 
@@ -117,69 +116,72 @@ export const EditClient = () => {
                 label="Last Name"
                 changeHandler={(e) => setLastName(e.target.value)}
                 value={lastName}
-                className="mb-3 ml-3"
+                className="mb-10 mr-10 w-full"
                 ariaLabel="Client Last Name edit input"
               />
             </div>
 
-            <DynamicInput
-              id="edit-client-company"
-              inputType="input"
-              type="text"
-              label="Company Name"
-              changeHandler={(e) => setCompanyName(e.target.value)}
-              value={companyName}
-              className="mb-3"
-              ariaLabel="Client Company Name edit input"
-            />
+            <div className="flex flex-row w-full justify-around items-center">
+              <DynamicInput
+                id="edit-client-company"
+                inputType="input"
+                type="text"
+                label="Company Name"
+                changeHandler={(e) => setCompanyName(e.target.value)}
+                value={companyName}
+                className="mb-10 mr-10 w-full"
+                ariaLabel="Client Company Name edit input"
+              />
 
-            <DynamicInput
-              id="edit-client-phone-number"
-              inputType="input"
-              type="text"
-              label="Phone Number"
-              changeHandler={(e) => setPhoneNumber(e.target.value)}
-              value={phoneNumber}
-              className="mb-3"
-              ariaLabel="Client Phone Number edit input"
-            />
+              <DynamicInput
+                id="edit-client-phone-number"
+                inputType="input"
+                type="text"
+                label="Phone Number"
+                changeHandler={(e) => setPhoneNumber(e.target.value)}
+                value={phoneNumber}
+                className="mb-10 mr-10 w-full"
+                ariaLabel="Client Phone Number edit input"
+              />
+            </div>
 
-            <DynamicInput
-              id="edit-client-email-address"
-              inputType="input"
-              type="email"
-              label="Email Address"
-              changeHandler={(e) => setEmailAddress(e.target.value)}
-              value={emailAddress}
-              className="mb-3"
-              ariaLabel="Client Email Address edit input"
-            />
+            <div className="flex flex-row w-full justify-around items-center">
+              <DynamicInput
+                id="edit-client-email-address"
+                inputType="input"
+                type="email"
+                label="Email Address"
+                changeHandler={(e) => setEmailAddress(e.target.value)}
+                value={emailAddress}
+                className="mb-10 mr-10 w-full"
+                ariaLabel="Client Email Address edit input"
+              />
 
-            <DynamicInput
-              id="edit-client-status"
-              inputType="select"
-              label="Client Status"
-              changeHandler={(e) => setStatus(e.target.value)}
-              value={status}
-              selectOptions={[
-                { value: "lead", label: "Lead" },
-                { value: "prospect", label: "Prospect" },
-                { value: "current", label: "Current" },
-                { value: "former", label: "Former" },
-                { value: "cold", label: "Cold" },
-              ]}
-              className="mb-3"
-            />
+              <DynamicInput
+                id="edit-client-status"
+                inputType="select"
+                label="Client Status"
+                changeHandler={(e) => setStatus(e.target.value)}
+                value={status}
+                selectOptions={[
+                  { value: "lead", label: "Lead" },
+                  { value: "prospect", label: "Prospect" },
+                  { value: "current", label: "Current" },
+                  { value: "former", label: "Former" },
+                  { value: "cold", label: "Cold" },
+                ]}
+                className="mb-10 mr-10 w-full"
+              />
+            </div>
 
             <div onClick={onSubmit}>
-              <DynamicButton color="red" type="submit">
+              <DynamicButton color="blue" type="submit">
                 Submit
               </DynamicButton>
             </div>
           </form>
         </div>
       )}
-      {/* </div> */}
     </DynamicContainer>
   );
 };
