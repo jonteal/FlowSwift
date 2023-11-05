@@ -66,7 +66,7 @@ export const ProjectCommentFeed = ({ projectId, comments }) => {
     <div
       className={`rounded-xl ${
         darkMode ? "bg-sky-800" : "bg-slate-50"
-      }  ml-2 mr-5 mt-3 px-3 pb-2 w-full`}
+      } mx-0 md:ml-2 md:mr-5 mt-3 px-3 pb-2 w-full`}
     >
       <form className="flex flex-col" onSubmit={onSubmit}>
         <label

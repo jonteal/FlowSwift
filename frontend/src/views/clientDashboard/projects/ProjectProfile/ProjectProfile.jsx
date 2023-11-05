@@ -52,12 +52,12 @@ export const ProjectProfile = () => {
   } = projectData.project;
 
   return (
-    <div className="px-0 flex flex-col w-full">
+    <div className="px-0 flex flex-col w-full h-screen">
       <div className="flex flex-row">
         <div
           className={`rounded-xl transform xl:translate-x-0 ease-in-out transition duration-500  ${
             darkMode ? "bg-sky-800" : "bg-slate-50"
-          } mx-2 mt-3 p-2 w-full`}
+          } mx-0 md:mx-2 mt-3 p-2 w-full`}
         >
           <div className="w-full flex flex-row items-center justify-end">
             <DynamicButton

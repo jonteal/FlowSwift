@@ -25,7 +25,7 @@ export const NewKanban = () => {
         New Kanban
       </DynamicButton>
 
-      <div className="mt-5 flex flex-row flex-wrap">
+      <div className="mt-5 flex flex-col md:flex-row items-center flex-wrap">
         {data.kanbans.map((kanban) => (
           <Link
             key={kanban.id}

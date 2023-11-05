@@ -10,7 +10,7 @@ export const FiltersList = ({ filters }) => {
     <div
       className={`${
         darkMode ? "bg-sky-950 text-slate-100" : "bg-slate-200 text-slate-700"
-      } border-slate-700 px-3 py-3 mx-2 my-2 rounded-lg flex flex-row justify-start`}
+      } border-slate-700 px-3 py-3 mx-2 my-2 rounded-lg flex flex-col md:flex-row justify-start`}
     >
       {filters.map((filter) => (
         <div key={filter.name}>

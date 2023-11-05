@@ -1,14 +1,20 @@
-import { useSelector } from "react-redux";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { useQuery } from "@apollo/client";
+
+// GRAPHQL
 import {
   GET_ORGANIZATION,
   GET_ORGANIZATIONS,
 } from "../../../graphql/queries/organizationQueries";
-import { useQuery } from "@apollo/client";
-import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 import { GET_USER } from "../../../graphql/queries/userQueries";
+
+// COMPONENTS
+import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+
+// STATE
+import { useContext } from "react";
+import { useSelector } from "react-redux";
+import { ThemeContext } from "../../../context";
 
 export const Home = () => {
   const theme = useContext(ThemeContext);
@@ -54,7 +60,7 @@ export const Home = () => {
   // const { organizationName } = organizationsData.organizations[0];
 
   return (
-    <div className={`${darkMode ? "bg-sky-800" : "bg-slate-50"} h-screen`}>
+    <div className={`${darkMode ? "bg-sky-950" : "bg-slate-50"} h-screen`}>
       <h1 className="font-semibold text-3xl pt-5">Welcome back, {name}!</h1>
 
       {isOwner && (

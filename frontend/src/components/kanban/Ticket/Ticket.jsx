@@ -91,7 +91,11 @@ export const Ticket = ({ ticket }) => {
           </button>
         </div>
       </div>
-      <p className="font-bold text-base text-sky-900 text-left my-2">
+      <p
+        className={`${
+          darkMode ? "text-slate-50" : "text-sky-900"
+        } font-bold text-base  text-left my-2`}
+      >
         {ticket.title}
       </p>
       {description && (

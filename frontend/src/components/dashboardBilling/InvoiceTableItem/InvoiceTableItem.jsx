@@ -7,7 +7,7 @@ import { ThemeContext } from "../../../context";
 export const InvoiceTableItem = ({ invoice }) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
-  const { date, invoiceNumber, amount, project } = invoice;
+  const { date, invoiceNumber, amount } = invoice;
 
   return (
     <div className="flex flex-row justify-between my-3">
@@ -28,12 +28,6 @@ export const InvoiceTableItem = ({ invoice }) => {
             # {invoiceNumber}
           </p>
         </div>
-        {/* <div className="flex flex-col">
-          <p>{`${project.title ? "Project: " : "Reason: "}`}</p>
-          <p className="text-left text-slate-500 text-sm mx-3">
-            {project.title}
-          </p>
-        </div> */}
       </div>
       <div className="flex flex-row items-center">
         <p

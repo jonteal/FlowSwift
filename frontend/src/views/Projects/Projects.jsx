@@ -9,6 +9,7 @@ import { Spinner } from "../../components/reusable/Spinner/Spinner";
 import { Switch } from "../../components/reusable/Switch/Switch";
 import { ProjectPageCard } from "../../components/ProjectPageCard/ProjectPageCard";
 import { ProjectsTableItem } from "../../components/ProjectsTableItem/ProjectsTableItem";
+import { FiltersList } from "../../components/reusable/FiltersList/FiltersList";
 
 // STATE
 import { ThemeContext } from "../../context";
@@ -21,8 +22,6 @@ import {
   setClientNameOff,
   setClientNameOn,
 } from "../../slices/projectsSlice";
-
-import { FiltersList } from "../../components/reusable/FiltersList/FiltersList";
 
 export const Projects = () => {
   const theme = useContext(ThemeContext);
@@ -88,7 +87,7 @@ export const Projects = () => {
         />
 
         <button
-          className="border bg-sky-300 px-4 py-2 rounded-lg"
+          className="border bg-sky-500 px-4 py-2 rounded-lg"
           onClick={handleOpenFilters}
         >
           Filters

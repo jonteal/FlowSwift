@@ -1,4 +1,3 @@
-import Table from "react-bootstrap/Table";
 import { FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useContext } from "react";

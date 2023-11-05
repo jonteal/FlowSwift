@@ -179,7 +179,7 @@ export const KanbanView = () => {
   ];
 
   return (
-    <DynamicContainer>
+    <DynamicContainer className="h-screen">
       <div className="flex flex-row justify-around items-start">
         <DynamicButton
           clickHandler={() => setIsAddingColumn(!isAddingColumn)}
@@ -268,13 +268,13 @@ export const KanbanView = () => {
         </p>
       )}
 
-      <div className="flex flex-row items-start ml-2">
+      <div className="flex flex-col md:flex-row h-auto md:h-screen items-start ml-2">
         {sortedColumns.map((column) => (
           <div
             key={column.id}
             className={`flex flex-col items-center ${
               darkMode
-                ? "bg-sky-800 border-slate-100"
+                ? "bg-sky-900 border-slate-100"
                 : "bg-slate-300 border-slate-500"
             } w-full mt-2 mr-2 rounded-lg h-auto min-h-screen `}
           >

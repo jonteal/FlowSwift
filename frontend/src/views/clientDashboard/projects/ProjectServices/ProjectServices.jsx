@@ -16,7 +16,7 @@ export const ProjectServices = () => {
   if (servicesError) return <p>There was an error loading services...</p>;
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-screen">
       <ServicesTable
         type="In House"
         services={servicesData.services.filter(

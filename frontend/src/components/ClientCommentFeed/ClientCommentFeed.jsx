@@ -63,7 +63,7 @@ export const ClientCommentFeed = ({ clientId, comments }) => {
     <div
       className={`rounded-xl ${
         darkMode ? "bg-sky-800" : "bg-slate-50"
-      }  mx-2 px-3 mt-1 w-full`}
+      } mx-0 md:mx-2 px-3 mt-1 w-full`}
     >
       <form onSubmit={onSubmit}>
         <label

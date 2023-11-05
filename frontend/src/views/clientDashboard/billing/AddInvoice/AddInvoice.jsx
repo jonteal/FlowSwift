@@ -90,7 +90,7 @@ export const AddInvoice = () => {
     <div
       className={`${
         darkMode ? "bg-sky-800" : "bg-slate-50"
-      } flex flex-col items-center rounded-xl mx-2 mt-2 px-3`}
+      } flex flex-col items-center rounded-xl mx-2 mt-2 px-3 h-screen`}
     >
       <h3 className="font-semibold text-lg mt-2">Add Invoice</h3>
       <div className="flex flex-row justify-between my-3 w-full px-4">
@@ -187,7 +187,7 @@ export const AddInvoice = () => {
           />
         </div>
 
-        <DynamicButton color="red" type="submit">
+        <DynamicButton color="blue" type="submit">
           Submit
         </DynamicButton>
       </form>

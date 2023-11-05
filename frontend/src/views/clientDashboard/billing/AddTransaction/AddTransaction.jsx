@@ -156,7 +156,7 @@ export const AddTransaction = () => {
             placeholder="ex. Squarespace"
             value={paymentParty}
             ariaLabel="Payment party input"
-            className="w-5/12 px-2 mx-3"
+            className="w-full md:w-5/12 px-2 mx-3"
           />
         </div>
         <div className="w-full px-2 mb-6 flex flex-row">
@@ -169,7 +169,7 @@ export const AddTransaction = () => {
             placeholder="ex. 500"
             value={amount}
             ariaLabel="Transaction Amount input"
-            className="flex flex-col w-1/2"
+            className="flex flex-col w-full md:w-1/2"
           />
 
           <div className="flex flex-col w-1/2 mx-2">

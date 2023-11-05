@@ -12,7 +12,7 @@ export const App = () => {
   const darkMode = theme.state.darkMode;
   return (
     <div
-      className={`transform xl:translate-x-0 ease-in-out transition duration-500 ${
+      className={`transform xl:translate-x-0 ease-in-out transition duration-500 h-screen ${
         darkMode ? "bg-sky-950 max-h-max	" : "white"
       } ${darkMode ? "text-sky-50" : "text-slate-900"}`}
     >

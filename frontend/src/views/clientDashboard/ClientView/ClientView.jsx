@@ -10,6 +10,7 @@ import { ClientViewNav } from "../../../components/dashboardMain/ClientViewNav/C
 import { ClientMobileMenu } from "../../../components/dashboardMain/ClientMobileMenu/ClientMobileMenu";
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 
+// STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../../context";
 

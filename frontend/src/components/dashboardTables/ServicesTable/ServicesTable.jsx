@@ -23,7 +23,7 @@ export const ServicesTable = ({ services, type }) => {
     <div
       className={`rounded-xl ${
         darkMode ? "bg-sky-800" : "bg-slate-50"
-      }  mx-2 mt-3 px-3 w-full`}
+      } mx-0 md:mx-2 mt-3 px-3 w-full`}
     >
       <div className="flex flex-row justify-between items-center py-3">
         <div className="flex flex-row items-center">

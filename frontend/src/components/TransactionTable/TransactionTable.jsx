@@ -20,12 +20,14 @@ export const TransactionTable = ({ transactions, shortList }) => {
     <div
       className={`${
         darkMode ? "bg-sky-800" : "bg-slate-50"
-      } w-full rounded-xl mx-2 py-2 mt-3 md:mt-0`}
+      } w-full rounded-xl mx-0 md:mx-2 py-2 md:mt-0`}
     >
       <div className="flex flex-row justify-between items-start">
         <div className="flex flex-row items-center mx-1">
           <GrTransaction
-            className={`ml-2 text-lg ${darkMode ? "text-slate-50" : ""}`}
+            className={`ml-2 text-lg ${
+              darkMode ? "text-slate-50" : "text-sky-900"
+            }`}
           />
           <h2
             className={`text-left ${

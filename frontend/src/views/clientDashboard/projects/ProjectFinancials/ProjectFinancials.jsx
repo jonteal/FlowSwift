@@ -46,15 +46,20 @@ export const ProjectFinancials = () => {
   const budgetUsed = (invoiceSum / projectData.project.clientBudget) * 100;
 
   return (
-    <div className="mt-2">
+    <div className="mt-2 h-screen">
       <div className="flex flex-col w-full">
         <div className="w-full mx-2 my-3">
           <h2 className="text-left my-2">Budget Used</h2>
           <ProgressBarComponent now={budgetUsed} />
         </div>
-        <div className="flex flex-row w-full">
-          <div className="flex flex-col w-full items-start mr-2">
-            <DynamicButton className="mx-2 mb-3" link="invoices" type="link">
+        <div className="flex flex-col md:flex-row w-full">
+          <div className="flex flex-col w-full items-start mx-0 md:mr-2">
+            <DynamicButton
+              className="mx-2 mb-3"
+              link="invoices"
+              type="link"
+              color="blue"
+            >
               View All Invoices
             </DynamicButton>
 
@@ -63,9 +68,10 @@ export const ProjectFinancials = () => {
               invoices={invoicesData.projectInvoices}
             />
           </div>
-          <div className="flex flex-col w-full items-start ml-2">
+          <div className="flex flex-col w-full items-start mx-0 md:mr-2 mt-4">
             <DynamicButton
               link="transactions"
+              color="blue"
               type="link"
               className="mx-2 mb-3"
             >
