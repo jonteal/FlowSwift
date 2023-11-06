@@ -1,30 +1,28 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
 import { BsFillGearFill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
+import { BiArrowToBottom, BiArrowToTop } from "react-icons/bi";
 
 // GRAPHQL
 import { GET_KANBAN } from "../../../../graphql/queries/kanbanQueries";
 import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
-import {
-  ADD_KANBAN_STATUS_COLUMN,
-  DELETE_KANBAN_STATUS_COLUMN,
-} from "../../../../graphql/mutations/kanbanStatusColumnMutations";
+import { ADD_KANBAN_STATUS_COLUMN } from "../../../../graphql/mutations/kanbanStatusColumnMutations";
+import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
 
 // COMPONENTS
 import { Spinner } from "react-bootstrap";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
-import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
 import { Ticket } from "../../../../components/kanban/Ticket/Ticket";
-import { capitalized } from "../../../../utils/format";
-import { ThemeContext } from "../../../../context";
 import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
+import { DeleteColumn } from "./DeleteColumn";
 
 // STATE
+import { ThemeContext } from "../../../../context";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSizeOff,
@@ -36,7 +34,9 @@ import {
   setOwnerOff,
   setOwnerOn,
 } from "../../../../slices/ticketSlice";
-import { DeleteColumn } from "./DeleteColumn";
+
+// UTILS
+import { capitalized } from "../../../../utils/format";
 
 export const KanbanView = () => {
   const { kanbanId } = useParams();
@@ -57,6 +57,7 @@ export const KanbanView = () => {
   const [columnDescription, setColumnDescription] = useState("");
   const [position, setPosition] = useState("");
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
+  const [collapseColumn, setCollapseColumn] = useState(false);
 
   const { loading, error, data } = useQuery(GET_KANBAN, {
     variables: { id: kanbanId },
@@ -131,6 +132,10 @@ export const KanbanView = () => {
 
   const handleOpenFilters = () => {
     setIsFilterOptionsOpen(!isFilterOptionsOpen);
+  };
+
+  const handleCollapseColumn = () => {
+    setCollapseColumn(!collapseColumn);
   };
 
   if (loading || kanbanStatusColumnLoading || ticketLoading) return <Spinner />;
@@ -276,11 +281,23 @@ export const KanbanView = () => {
               darkMode
                 ? "bg-sky-900 border-slate-100"
                 : "bg-slate-300 border-slate-500"
-            } w-full mt-2 mr-2 rounded-lg h-auto min-h-screen `}
+            } w-full mt-2 mr-2 rounded-lg ${
+              collapseColumn ? "h-10" : "h-auto"
+            } md:min-h-screen `}
           >
             <div className="flex flex-col mt-2 w-full">
               <div className="w-full border-red-50 flex flex-row items-center justify-between">
-                <FaEdit className="self-start text-lg w-full cursor-pointer" />
+                <div className="w-full flex flex-row items-start">
+                  <BiArrowToBottom
+                    onClick={handleCollapseColumn}
+                    className={`text-4xl top-0 cursor-pointer ${
+                      collapseColumn
+                        ? "rotate-180 transform transition ease-in-out delay-50 duration-200"
+                        : ""
+                    } `}
+                  />
+                  <FaEdit className="self-start text-lg w-full cursor-pointer" />
+                </div>
                 <div className="flex flex-row items-center w-full">
                   <h5 className="font-extrabold w-full">
                     {capitalized(column.columnState)}
@@ -302,7 +319,11 @@ export const KanbanView = () => {
                 />
               </div>
             </div>
-            <ul className="list-none pl-0 w-full">
+            <ul
+              className={`${
+                collapseColumn ? "hidden" : ""
+              } list-none pl-0 w-full`}
+            >
               {ticketData.tickets
                 .filter((ticket) => ticket.status === column.id)
                 .map((ticket) => (

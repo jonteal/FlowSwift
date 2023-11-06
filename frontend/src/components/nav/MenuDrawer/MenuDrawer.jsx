@@ -51,30 +51,35 @@ export const MenuDrawer = ({ name, ...props }) => {
             <Fragment>
               <div className="nav-links flex flex-col">
                 <Link
+                  onClick={handleClose}
                   className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
                   to="/"
                 >
                   Home
                 </Link>
                 <Link
+                  onClick={handleClose}
                   className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
                   to="dashboard"
                 >
                   My Dashboard
                 </Link>
                 <Link
+                  onClick={handleClose}
                   className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
                   to="clients"
                 >
                   Clients
                 </Link>
                 <Link
+                  onClick={handleClose}
                   className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
                   to="projects"
                 >
                   Projects
                 </Link>
                 <Link
+                  onClick={handleClose}
                   className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
                   to="settings"
                 >

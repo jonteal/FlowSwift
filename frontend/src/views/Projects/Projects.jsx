@@ -75,7 +75,7 @@ export const Projects = () => {
   return (
     <div
       className={`flex flex-col h-screen ${
-        darkMode ? "bg-sky-800" : "bg-slate-50"
+        darkMode ? "bg-sky-950" : "bg-slate-50"
       }`}
     >
       <div className="flex flex-row justify-around mb-10">
@@ -87,7 +87,7 @@ export const Projects = () => {
         />
 
         <button
-          className="border bg-sky-500 px-4 py-2 rounded-lg"
+          className="border bg-sky-600 px-4 py-2 rounded-lg"
           onClick={handleOpenFilters}
         >
           Filters

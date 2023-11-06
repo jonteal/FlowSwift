@@ -16,7 +16,7 @@ export const ProjectViewNav = () => {
   return (
     <div
       id="Main"
-      className={`transform xl:translate-x-0 ease-in-out transition duration-500 flex justify-start items-start h-10 border w-full ${
+      className={`transform xl:translate-x-0 ease-in-out transition duration-500 flex justify-start items-start h-10 border w-11/12 ${
         darkMode ? "bg-sky-800" : "bg-slate-50"
       } flex-row ml-2 pr-10 rounded-xl`}
     >

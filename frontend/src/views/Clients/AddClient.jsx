@@ -191,7 +191,7 @@ export const AddClient = () => {
             className="w-full md:w-1/3 px-3 mb-6 md:mb-0 mt-5"
             ariaLabel="Client Status select"
           />
-          <DynamicButton color="red" type="submit">
+          <DynamicButton color="blue" type="submit">
             Save
           </DynamicButton>
         </form>
