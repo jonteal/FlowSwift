@@ -73,7 +73,7 @@ export const ClientBilling = () => {
   return (
     <div className="w-full flex flex-col">
       <button
-        className="border bg-sky-600 px-4 py-2 rounded-lg mb-3 w-1/3 ml-3"
+        className="border bg-sky-600 text-slate-50 px-4 py-2 rounded-lg mb-3 w-1/6 ml-3"
         onClick={handleOpenFilters}
       >
         Filters
@@ -88,8 +88,14 @@ export const ClientBilling = () => {
         {/* <BudgetRemaining budgetRemaining={budgetRemaining} /> */}
       </div>
       <div className="w-full flex flex-col md:flex-row items-center">
-        <InvoiceTable invoices={invoicesData.clientInvoices} />
-        <TransactionTable transactions={transactionsData.clientTransactions} />
+        <div className="md:mx-2 w-full mb-2">
+          <InvoiceTable invoices={invoicesData.clientInvoices} />
+        </div>
+        <div className="md:mx-2 w-full mb-2">
+          <TransactionTable
+            transactions={transactionsData.clientTransactions}
+          />
+        </div>
       </div>
     </div>
   );

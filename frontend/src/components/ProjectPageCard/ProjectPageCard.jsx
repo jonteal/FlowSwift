@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { StatusBadge } from "../reusable/StatusBadge/StatusBadge";
-import { BsPersonCircle } from "react-icons/bs";
+import { BsPersonCircle, BsFillCalendarDateFill } from "react-icons/bs";
 import { FaProjectDiagram } from "react-icons/fa";
 
 // STATE
@@ -12,12 +12,29 @@ export const ProjectPageCard = ({ project }) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
 
-  const { statusBadge, clientName } = useSelector((state) => state.projects);
+  const {
+    statusBadge,
+    clientName,
+    description: projectDescription,
+    budget,
+    estimate,
+    dates,
+  } = useSelector((state) => state.projects);
 
-  const { title, status, client } = project;
+  const {
+    title,
+    status,
+    client,
+    description,
+    clientBudget,
+    projectEstimate,
+    startDate,
+    deadline,
+  } = project;
   return (
     <Link to={`/clients/${project.client.id}/projects/${project.id}/profile`}>
       <div
+        draggable
         className={`border w-72 my-0 md:my-2 rounded-xl shadow-md p-3 mx-2 transform xl:translate-x-0 ease-in-out transition duration-500  ${
           darkMode
             ? "bg-sky-700 hover:bg-sky-600 transition ease-in-out delay-50 duration-200"
@@ -37,6 +54,49 @@ export const ProjectPageCard = ({ project }) => {
         {statusBadge && (
           <div className="my-2">
             <StatusBadge status={status} />
+          </div>
+        )}
+        {projectDescription && (
+          <div className="my-2">
+            <p className="my-2">{description}</p>
+          </div>
+        )}
+        <div className="flex flex-row items-center">
+          {budget && (
+            <div className="my-2 mr-5 flex flex-col">
+              <p
+                className={`${
+                  darkMode ? "text-slate-100" : "text-slate-600"
+                } font-light text-left text-sm`}
+              >
+                Budget
+              </p>
+              <p className="my-2">$ {clientBudget}</p>
+            </div>
+          )}
+          {estimate && (
+            <div className="my-2 ml-5 flex flex-col">
+              <p
+                className={`${
+                  darkMode ? "text-slate-100" : "text-slate-600"
+                } font-light text-left text-sm`}
+              >
+                Project Estimate
+              </p>
+              <p className="my-2">$ {projectEstimate}</p>
+            </div>
+          )}
+        </div>
+        {dates && (
+          <div className="flex flex-row justify-between items-center">
+            <div className="flex flex-row items-center mr-2">
+              <BsFillCalendarDateFill className="mr-2" />
+              <p className="my-2">{startDate ? startDate : "No Start Date"}</p>
+            </div>
+            <div>-</div>
+            <div className="flex flex-row items-center ml-2">
+              <p className="my-2">{deadline ? deadline : "No deadline"}</p>
+            </div>
           </div>
         )}
       </div>

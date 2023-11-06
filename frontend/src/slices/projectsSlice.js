@@ -4,6 +4,10 @@ const initialState = {
   gridView: true,
   statusBadge: true,
   clientName: true,
+  description: true,
+  budget: true,
+  estimate: true,
+  dates: true,
 };
 
 const projectsSlice = createSlice({
@@ -28,6 +32,30 @@ const projectsSlice = createSlice({
     setClientNameOn(state) {
       state.clientName = true;
     },
+    setDescriptionOff(state) {
+      state.description = false;
+    },
+    setDescriptionOn(state) {
+      state.description = true;
+    },
+    setBudgetOff(state) {
+      state.budget = false;
+    },
+    setBudgetOn(state) {
+      state.budget = true;
+    },
+    setEstimateOff(state) {
+      state.estimate = false;
+    },
+    setEstimateOn(state) {
+      state.estimate = true;
+    },
+    setDatesOff(state) {
+      state.dates = false;
+    },
+    setDatesOn(state) {
+      state.dates = true;
+    },
   },
 });
 
@@ -38,6 +66,14 @@ export const {
   setStatusBadgeOn,
   setClientNameOff,
   setClientNameOn,
+  setDescriptionOff,
+  setDescriptionOn,
+  setBudgetOff,
+  setBudgetOn,
+  setEstimateOff,
+  setEstimateOn,
+  setDatesOff,
+  setDatesOn,
 } = projectsSlice.actions;
 
 export default projectsSlice.reducer;

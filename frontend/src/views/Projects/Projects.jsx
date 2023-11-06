@@ -21,6 +21,14 @@ import {
   setStatusBadgeOn,
   setClientNameOff,
   setClientNameOn,
+  setDescriptionOff,
+  setDescriptionOn,
+  setBudgetOn,
+  setBudgetOff,
+  setDatesOff,
+  setDatesOn,
+  setEstimateOff,
+  setEstimateOn,
 } from "../../slices/projectsSlice";
 
 export const Projects = () => {
@@ -32,9 +40,15 @@ export const Projects = () => {
 
   const dispatch = useDispatch();
 
-  const { gridView, statusBadge, clientName } = useSelector(
-    (state) => state.projects
-  );
+  const {
+    gridView,
+    statusBadge,
+    clientName,
+    description,
+    budget,
+    estimate,
+    dates,
+  } = useSelector((state) => state.projects);
 
   const handleGridViewToggle = () => {
     gridView ? dispatch(setGridViewOff()) : dispatch(setGridViewOn());
@@ -46,6 +60,22 @@ export const Projects = () => {
 
   const handleClientNameToggle = () => {
     clientName ? dispatch(setClientNameOff()) : dispatch(setClientNameOn());
+  };
+
+  const handleDescriptionToggle = () => {
+    description ? dispatch(setDescriptionOff()) : dispatch(setDescriptionOn());
+  };
+
+  const handleBudgetToggle = () => {
+    budget ? dispatch(setBudgetOff()) : dispatch(setBudgetOn());
+  };
+
+  const handleEstimateToggle = () => {
+    estimate ? dispatch(setEstimateOff()) : dispatch(setEstimateOn());
+  };
+
+  const handleDatesToggle = () => {
+    dates ? dispatch(setDatesOff()) : dispatch(setDatesOn());
   };
 
   const handleOpenFilters = () => {
@@ -70,6 +100,34 @@ export const Projects = () => {
       isChecked: clientName,
       ariaLabel: "Client Name filter",
     },
+    {
+      name: "Description",
+      toggle: handleDescriptionToggle,
+      value: description,
+      isChecked: description,
+      ariaLabel: "Project Description filter",
+    },
+    {
+      name: "Budget",
+      toggle: handleBudgetToggle,
+      value: budget,
+      isChecked: budget,
+      ariaLabel: "Project Budget filter",
+    },
+    {
+      name: "Dates",
+      toggle: handleDatesToggle,
+      value: dates,
+      isChecked: dates,
+      ariaLabel: "Project Dates filter",
+    },
+    {
+      name: "Project Estimate",
+      toggle: handleEstimateToggle,
+      value: estimate,
+      isChecked: estimate,
+      ariaLabel: "Project Estimate filter",
+    },
   ];
 
   return (
@@ -87,7 +145,7 @@ export const Projects = () => {
         />
 
         <button
-          className="border bg-sky-600 px-4 py-2 rounded-lg"
+          className="border bg-sky-500 text-slate-50 px-4 py-1 mb-4 w-1/12 rounded-lg mt-3 mr-2"
           onClick={handleOpenFilters}
         >
           Filters

@@ -18,6 +18,14 @@ import {
   setStatusBadgeOn,
   setClientNameOff,
   setClientNameOn,
+  setDescriptionOff,
+  setDescriptionOn,
+  setBudgetOn,
+  setBudgetOff,
+  setDatesOff,
+  setDatesOn,
+  setEstimateOff,
+  setEstimateOn,
 } from "../../../../slices/projectsSlice";
 
 export const ClientProjects = () => {
@@ -26,9 +34,15 @@ export const ClientProjects = () => {
 
   const dispatch = useDispatch();
 
-  const { gridView, statusBadge, clientName } = useSelector(
-    (state) => state.projects
-  );
+  const {
+    gridView,
+    statusBadge,
+    clientName,
+    description,
+    budget,
+    dates,
+    estimate,
+  } = useSelector((state) => state.projects);
 
   const handleGridViewToggle = () => {
     gridView ? dispatch(setGridViewOff()) : dispatch(setGridViewOn());
@@ -40,6 +54,22 @@ export const ClientProjects = () => {
 
   const handleClientNameToggle = () => {
     clientName ? dispatch(setClientNameOff()) : dispatch(setClientNameOn());
+  };
+
+  const handleDescriptionToggle = () => {
+    description ? dispatch(setDescriptionOff()) : dispatch(setDescriptionOn());
+  };
+
+  const handleBudgetToggle = () => {
+    budget ? dispatch(setBudgetOff()) : dispatch(setBudgetOn());
+  };
+
+  const handleEstimateToggle = () => {
+    estimate ? dispatch(setEstimateOff()) : dispatch(setEstimateOn());
+  };
+
+  const handleDatesToggle = () => {
+    dates ? dispatch(setDatesOff()) : dispatch(setDatesOn());
   };
 
   const handleOpenFilters = () => {
@@ -72,6 +102,34 @@ export const ClientProjects = () => {
       isChecked: clientName,
       ariaLabel: "Client Name filter",
     },
+    {
+      name: "Description",
+      toggle: handleDescriptionToggle,
+      value: description,
+      isChecked: description,
+      ariaLabel: "Project Description filter",
+    },
+    {
+      name: "Budget",
+      toggle: handleBudgetToggle,
+      value: budget,
+      isChecked: budget,
+      ariaLabel: "Project Budget filter",
+    },
+    {
+      name: "Dates",
+      toggle: handleDatesToggle,
+      value: dates,
+      isChecked: dates,
+      ariaLabel: "Project Dates filter",
+    },
+    {
+      name: "Project Estimate",
+      toggle: handleEstimateToggle,
+      value: estimate,
+      isChecked: estimate,
+      ariaLabel: "Project Estimate filter",
+    },
   ];
 
   return (
@@ -87,14 +145,7 @@ export const ClientProjects = () => {
         </div>
       ) : (
         <div className="flex flex-col">
-          <div className="flex flex-row">
-            <button
-              className="border bg-sky-500 px-4 py-1 mb-4 w-1/2 rounded-lg mr-2"
-              onClick={handleOpenFilters}
-            >
-              Filters
-            </button>
-
+          <div className="flex flex-row justify-start items-start">
             <DynamicButton
               color="red"
               link={`/clients/${clientId}/projects/addProject`}
@@ -103,8 +154,20 @@ export const ClientProjects = () => {
             >
               Add Project
             </DynamicButton>
+            {projectsData.clientProjects.length > 0 && (
+              <button
+                className="border bg-sky-500 text-slate-50 px-4 py-1 mb-4 rounded-lg mx-2"
+                onClick={handleOpenFilters}
+              >
+                Filters
+              </button>
+            )}
           </div>
-          {isFilterOptionsOpen && <FiltersList filters={projectCardFilters} />}
+          <div>
+            {isFilterOptionsOpen && (
+              <FiltersList filters={projectCardFilters} />
+            )}
+          </div>
           <div className="flex flex-col items-center md:flex-row flex-wrap mt-3">
             {projectsData.clientProjects.map((project) => (
               <ProjectPageCard key={project.id} project={project} />

@@ -32,7 +32,7 @@ export const TransactionTable = ({ transactions, shortList }) => {
           <h2
             className={`text-left ${
               darkMode ? "text-slate-50" : "text-slate-700"
-            }  text-lg mx-2`}
+            } text-lg mx-2`}
           >
             Transactions
           </h2>
