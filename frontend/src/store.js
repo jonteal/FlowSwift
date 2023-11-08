@@ -5,6 +5,8 @@ import ticketSlice from "./slices/ticketSlice";
 import featuresSlice from "./slices/featuresSlice";
 import projectsSlice from "./slices/projectsSlice";
 import clientBilling from "./slices/clientBilling";
+import clientsListSlice from "./slices/clientsListSlice";
+// import settingsSlice from "./slices/settingsSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ const store = configureStore({
     features: featuresSlice,
     projects: projectsSlice,
     clientBilling: clientBilling,
+    clientsList: clientsListSlice,
+    // settings: settingsSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

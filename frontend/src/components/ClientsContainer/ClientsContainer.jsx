@@ -16,6 +16,10 @@ export const ClientsContainer = ({ clientData, clientContainer }) => {
   const darkMode = theme.state.darkMode;
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const clientCount = clientData.clients.filter(
+    (client) => client.status === clientContainer.state
+  ).length;
+
   const handleClick = () => {
     setIsExpanded(!isExpanded);
   };
@@ -31,15 +35,7 @@ export const ClientsContainer = ({ clientData, clientContainer }) => {
         }`}
       >
         <div className="flex flex-row items-center overflow-x-scroll">
-          <span className="mx-2">
-            (
-            {
-              clientData.clients.filter(
-                (client) => client.status === clientContainer.state
-              ).length
-            }
-            )
-          </span>
+          <span className="mx-2">({clientCount})</span>
           <h5 className="text-base py-2 pl-2">{clientContainer.state}</h5>
           {isExpanded ? (
             <FaChevronUp onClick={handleClick} className="ml-1" />

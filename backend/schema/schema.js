@@ -12,6 +12,7 @@ import Ticket from "../models/Ticket.js";
 import Organization from "../models/Organization.js";
 import Kanban from "../models/Kanban.js";
 import KanbanStatusColumn from "../models/KanbanStatusColumn.js";
+import UserSettings from "../models/Settings.js";
 
 import {
   GraphQLObjectType,
@@ -23,6 +24,21 @@ import {
   GraphQLEnumType,
   GraphQLBoolean,
 } from "graphql";
+
+// User Settings
+const UserSettingsType = new GraphQLObjectType({
+  name: "UserSettings",
+  fields: () => ({
+    id: { type: GraphQLID },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      },
+    },
+    projectCardStatusBadge: { type: GraphQLBoolean },
+  }),
+});
 
 // User Type
 const UserType = new GraphQLObjectType({
@@ -339,6 +355,13 @@ const RootQuery = new GraphQLObjectType({
         return User.findById(args.id);
       },
     },
+    userSettings: {
+      type: UserSettingsType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return UserSettings.findById(args.id);
+      },
+    },
     organizations: {
       type: new GraphQLList(OrganizationType),
       args: { userId: { type: GraphQLID } },
@@ -563,6 +586,44 @@ const RootQuery = new GraphQLObjectType({
 const mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
+    // Add User Settings
+    addUserSettings: {
+      type: UserSettingsType,
+      args: {
+        userId: { type: new GraphQLNonNull(GraphQLID) },
+        projectCardStatusBadge: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        const userSettings = new userSettings({
+          projectCardStatusBadge: args.projectCardStatusBadge,
+          userId: args.userId,
+        });
+
+        return userSettings.save();
+      },
+    },
+
+    // Update User Settings
+    updateUserSettings: {
+      type: UserSettingsType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        projectCardStatusBadge: { type: GraphQLString },
+        userId: { type: GraphQLID },
+      },
+      resolve(parent, args) {
+        return UserSettings.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              userId: args.userId,
+              projectCardStatusBadge: args.projectCardStatusBadge,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
     // Add Organization
     addOrganization: {
       type: OrganizationType,
@@ -606,7 +667,7 @@ const mutation = new GraphQLObjectType({
         userId: { type: GraphQLID },
       },
       resolve(parent, args) {
-        return Client.findByIdAndUpdate(
+        return Organization.findByIdAndUpdate(
           args.id,
           {
             $set: {

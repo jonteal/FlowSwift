@@ -34,7 +34,6 @@ export const ProjectPageCard = ({ project }) => {
   return (
     <Link to={`/clients/${project.client.id}/projects/${project.id}/profile`}>
       <div
-        draggable
         className={`border w-72 my-0 md:my-2 rounded-xl shadow-md p-3 mx-2 transform xl:translate-x-0 ease-in-out transition duration-500  ${
           darkMode
             ? "bg-sky-700 hover:bg-sky-600 transition ease-in-out delay-50 duration-200"

@@ -132,9 +132,19 @@ export const AddProject = () => {
             </div>
           )}
 
-          <label className="form-label mt-8">Client Name</label>
+          <label
+            className={`block uppercase tracking-wide ${
+              darkMode ? "text-slate-50" : "text-gray-700"
+            }  text-xs font-bold mb-2 mt-3`}
+          >
+            Client Name
+          </label>
           <select
-            className="form-select"
+            className={`${
+              darkMode
+                ? "bg-sky-950 text-slate-50"
+                : "bg-gray-200 text-gray-700"
+            } form-select mb-4`}
             aria-label="Default select example"
             id="clientId"
             value={clientId}
