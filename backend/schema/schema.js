@@ -104,6 +104,12 @@ const ProjectType = new GraphQLObjectType({
         return Client.findById(parent.clientId);
       },
     },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      },
+    },
     createdAt: { type: GraphQLString },
     startDate: { type: GraphQLString },
     deadline: { type: GraphQLString },
@@ -800,6 +806,7 @@ const mutation = new GraphQLObjectType({
           defaultValue: "notStarted",
         },
         clientId: { type: new GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLID },
         startDate: { type: GraphQLString },
         deadline: { type: GraphQLString },
         clientBudget: { type: GraphQLString },
@@ -812,6 +819,7 @@ const mutation = new GraphQLObjectType({
           status: args.status,
           notes: args.notes,
           clientId: args.clientId,
+          userId: args.userId,
           startDate: args.startDate,
           deadline: args.deadline,
           clientBudget: args.clientBudget,
@@ -875,6 +883,7 @@ const mutation = new GraphQLObjectType({
             },
           }),
         },
+        userId: { type: GraphQLID },
         startDate: { type: GraphQLString },
         deadline: { type: GraphQLString },
         clientBudget: { type: GraphQLString },
@@ -890,6 +899,7 @@ const mutation = new GraphQLObjectType({
               status: args.status,
               notes: args.notes,
               clientId: args.clientId,
+              userId: args.userId,
               startDate: args.startDate,
               deadline: args.deadline,
               clientBudget: args.clientBudget,

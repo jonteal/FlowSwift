@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { ADD_TICKET } from "../../../../graphql/mutations/ticketMutations";
 import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
 import { GET_USER } from "../../../../graphql/queries/userQueries";
+import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 
 // COMPONENTS
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
@@ -14,7 +15,6 @@ import { DynamicContainer } from "../../../../components/reusable/DynamicContain
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
-import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 
 export const AddKanbanTicket = () => {
   const { kanbanId } = useParams();

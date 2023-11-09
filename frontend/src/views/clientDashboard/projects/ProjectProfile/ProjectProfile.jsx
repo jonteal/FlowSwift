@@ -12,6 +12,7 @@ import { DELETE_PROJECT } from "../../../../graphql/mutations/projectMutations";
 import { NameValuePair } from "../../../../components/reusable/NameValuePair/NameValuePair";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { StatusBadge } from "../../../../components/reusable/StatusBadge/StatusBadge";
+import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
 import { useContext } from "react";
@@ -40,6 +41,8 @@ export const ProjectProfile = () => {
   if (projectLoading) return <p>Loading...</p>;
   if (projectError) return <p>There was an error loading project...</p>;
 
+  console.log("projectData: ", projectData);
+
   const {
     title,
     description,
@@ -49,10 +52,11 @@ export const ProjectProfile = () => {
     deadline,
     clientBudget,
     projectEstimate,
+    user,
   } = projectData.project;
 
   return (
-    <div className="px-0 flex flex-col w-full h-screen">
+    <DynamicContainer>
       <div className="flex flex-row">
         <div
           className={`rounded-xl transform xl:translate-x-0 ease-in-out transition duration-500  ${
@@ -88,9 +92,10 @@ export const ProjectProfile = () => {
               name="Project Estimate"
               value={`$ ${projectEstimate}`}
             />
+            <NameValuePair name="Project Manager" value={user.name} />
           </>
         </div>
       </div>
-    </div>
+    </DynamicContainer>
   );
 };

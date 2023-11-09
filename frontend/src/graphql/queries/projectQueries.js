@@ -18,6 +18,10 @@ const GET_PROJECTS = gql`
       deadline
       clientBudget
       projectEstimate
+      user {
+        _id
+        name
+      }
     }
   }
 `;
@@ -34,6 +38,10 @@ const GET_CLIENT_PROJECTS = gql`
         id
         firstName
         lastName
+      }
+      user {
+        _id
+        name
       }
       createdAt
       startDate
@@ -56,6 +64,10 @@ const GET_PROJECT = gql`
         id
         firstName
         lastName
+      }
+      user {
+        _id
+        name
       }
       createdAt
       startDate

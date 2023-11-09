@@ -19,6 +19,10 @@ const ProjectSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Client",
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   startDate: {
     type: String,
     get: (timeValue) => moment(timeValue).format("MM/DD/YYYY"),

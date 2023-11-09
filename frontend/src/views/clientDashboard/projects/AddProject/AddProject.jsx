@@ -8,7 +8,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { ADD_PROJECT } from "../../../../graphql/mutations/projectMutations";
 import { GET_PROJECTS } from "../../../../graphql/queries/projectQueries";
 import { GET_CLIENTS } from "../../../../graphql/queries/clientQueries";
-import { GET_USER } from "../../../../graphql/queries/userQueries";
+import { GET_USER, GET_USERS } from "../../../../graphql/queries/userQueries";
 
 // COMPONENTS
 import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
@@ -37,6 +37,9 @@ export const AddProject = () => {
   const [alertOn, setAlertOn] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
   const [organizationId, setOrganizationId] = useState("");
+  const [userId, setUserId] = useState("");
+
+  console.log("userId: ", userId);
 
   const [addProject] = useMutation(ADD_PROJECT, {
     variables: {
@@ -49,6 +52,7 @@ export const AddProject = () => {
       notes,
       clientBudget,
       projectEstimate,
+      userId,
     },
     update(cache, { data: { addProject } }) {
       const { projects } = cache.readQuery({ query: GET_PROJECTS });
@@ -88,6 +92,8 @@ export const AddProject = () => {
       );
     }
 
+    // console.log("userId: ", userId);
+
     addProject(
       title,
       description,
@@ -97,7 +103,8 @@ export const AddProject = () => {
       deadline,
       notes,
       clientBudget,
-      projectEstimate
+      projectEstimate,
+      userId
     );
 
     setTitle("");
@@ -109,11 +116,18 @@ export const AddProject = () => {
     setNotes("");
     setClientBudget("");
     setProjectEstimate("");
+    setUserId("");
   };
 
   const { data: userData } = useQuery(GET_USER, {
     variables: { id: userInfo._id },
   });
+
+  const { data: allUsers } = useQuery(GET_USERS, {
+    variables: { id: organizationId },
+  });
+
+  console.log("allUsers: ", allUsers);
 
   useEffect(() => {
     setOrganizationId(userData?.user?.organizationId);
@@ -154,6 +168,32 @@ export const AddProject = () => {
             {data.clients.map((client) => (
               <option key={client.id} value={client.id}>
                 {client.firstName + " " + client.lastName}
+              </option>
+            ))}
+          </select>
+
+          <label
+            className={`block uppercase tracking-wide ${
+              darkMode ? "text-slate-50" : "text-gray-700"
+            }  text-xs font-bold mb-2 mt-3`}
+          >
+            Project Owner (Optional)
+          </label>
+          <select
+            className={`${
+              darkMode
+                ? "bg-sky-950 text-slate-50"
+                : "bg-gray-200 text-gray-700"
+            } form-select mb-4`}
+            aria-label="Project Owner Select"
+            id="userId"
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
+          >
+            <option value="">Select Employee</option>
+            {allUsers?.users?.map((user) => (
+              <option key={user._id} value={user._id}>
+                {user.name}
               </option>
             ))}
           </select>
