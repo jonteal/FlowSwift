@@ -2,16 +2,19 @@ import { useQuery } from "@apollo/client";
 
 // GRAPHQL
 import { GET_CLIENTS } from "../../../graphql/queries/clientQueries";
+import { GET_USER } from "../../../graphql/queries/userQueries";
+import { GET_ORGANIZATION } from "../../../graphql/queries/organizationQueries";
 
 // COMPONENTS
 import { ClientsContainer } from "../../../components/ClientsContainer/ClientsContainer";
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { FiltersList } from "../../../components/reusable/FiltersList/FiltersList";
+import { ChartContainer } from "../../../components/ChartContainer/ChartContainer";
 
 import { FaUserAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_USER } from "../../../graphql/queries/userQueries";
-import { GET_ORGANIZATION } from "../../../graphql/queries/organizationQueries";
-import { ChartContainer } from "../../../components/ChartContainer/ChartContainer";
+
+// STATE
 import {
   setChartsOff,
   setChartsOn,
@@ -23,7 +26,6 @@ import {
   setLineChartOn,
 } from "../../../slices/clientsListSlice";
 import { useState } from "react";
-import { FiltersList } from "../../../components/reusable/FiltersList/FiltersList";
 
 export const ClientList = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -42,14 +44,6 @@ export const ClientList = () => {
   } = useQuery(GET_USER, {
     variables: { id: userInfo._id },
   });
-
-  // const {
-  //   loading: organizationLoading,
-  //   error: organizationError,
-  //   data: organizationData,
-  // } = useQuery(GET_ORGANIZATION, {
-  //   variables: { id: userData?.user.organizationId },
-  // });
 
   const {
     loading: clientLoading,

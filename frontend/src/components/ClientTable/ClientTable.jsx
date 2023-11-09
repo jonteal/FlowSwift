@@ -2,6 +2,7 @@ import { FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "../../context";
+import { DropdownComponent } from "../reusable/DropdownComponent/DropdownComponent";
 
 export const ClientTable = ({ clients, clientContainer }) => {
   const theme = useContext(ThemeContext);
@@ -14,61 +15,61 @@ export const ClientTable = ({ clients, clientContainer }) => {
           <th
             className={`${
               darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            }  font-light w-auto text-left pl-2 border`}
+            } w-auto text-left pl-2 border font-semibold`}
           >
             #
           </th>
           <th
             className={`${
               darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            }  font-light w-2/12 text-left pl-2 border`}
+            } font-semibold w-2/12 text-left pl-2 border`}
           >
             First Name
           </th>
           <th
             className={`${
               darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            }  font-light w-2/12 text-left pl-2 border`}
+            } font-semibold w-2/12 text-left pl-2 border`}
           >
             Last Name
           </th>
           <th
             className={`${
               darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            }  font-light w-2/12 text-left pl-2 border`}
+            } font-semibold w-2/12 text-left pl-2 border`}
           >
             Phone Number
           </th>
           <th
             className={`${
               darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            }  font-light w-2/12 text-left pl-2 border`}
+            } font-semibold w-2/12 text-left pl-2 border`}
           >
             Email Address
           </th>
           <th
             className={`${
               darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            }  font-light w-3/12 text-left pl-2 border`}
+            } font-semibold w-3/12 text-left pl-2 border`}
           >
             Company
           </th>
           <th
             className={`${
               darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            }  font-light w-2/12 text-left pl-2 border`}
+            } font-semibold w-2/12 text-left pl-2 border`}
           >
             Status
           </th>
           <th
             className={`${
               darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            }  font-light w-2/12 text-left pl-2 border`}
+            } font-semibold w-2/12 text-left pl-2 border`}
           ></th>
           <th
             className={`${
               darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            }  font-light w-2/12 text-left pl-2 border`}
+            } font-semibold w-2/12 text-left pl-2 border`}
           ></th>
         </tr>
       </thead>
@@ -144,9 +145,7 @@ export const ClientTable = ({ clients, clientContainer }) => {
                   darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
                 }  font-light text-left border pl-2`}
               >
-                {/* <button>
-                  <FaRegTrashAlt className="text-red-500" />
-                </button> */}
+                <DropdownComponent />
               </td>
             </tr>
           ))}

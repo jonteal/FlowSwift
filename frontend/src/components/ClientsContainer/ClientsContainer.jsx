@@ -10,6 +10,7 @@ import { ClientTable } from "../ClientTable/ClientTable";
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../context";
+import { AccordionComponent } from "../AccordionComponent/AccordionComponent";
 
 export const ClientsContainer = ({ clientData, clientContainer }) => {
   const theme = useContext(ThemeContext);
@@ -20,16 +21,12 @@ export const ClientsContainer = ({ clientData, clientContainer }) => {
     (client) => client.status === clientContainer.state
   ).length;
 
-  const handleClick = () => {
-    setIsExpanded(!isExpanded);
-  };
-
   return (
     <div
       key={clientContainer.id}
       className="mb-7 border-slate-400 p-2 rounded-md overflow-x-scroll	"
     >
-      <div
+      {/* <div
         className={`flex flex-row items-center justify-between border overflow-x-scroll	 ${
           darkMode ? "bg-sky-800 rounded-t-lg" : "rounded-t-lg"
         }`}
@@ -46,7 +43,17 @@ export const ClientsContainer = ({ clientData, clientContainer }) => {
         <Link className="mr-3" to={`list/${clientContainer.state}`}>
           View All
         </Link>
-      </div>
+      </div> */}
+
+      <AccordionComponent
+        isExpanded={isExpanded}
+        clientCount={clientCount}
+        clients={clientData.clients}
+        container={clientContainer}
+        containerState={clientContainer.state}
+        linkLabel="View All"
+        link={`list/${clientContainer.state}`}
+      />
 
       {isExpanded && (
         <ClientTable
