@@ -1,15 +1,19 @@
-import { useContext, useEffect, useState } from "react";
-import { ThemeContext } from "../../../context";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import { useQuery } from "@apollo/client";
+import { useContext, useState } from "react";
 import { useRegisterMutation } from "../../../slices/usersApiSlice";
+
+// GRAPHQL
+import { GET_USERS } from "../../../graphql/queries/userQueries";
+import { GET_ORGANIZATIONS } from "../../../graphql/queries/organizationQueries";
+
+// COMPONENTS
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 import FormContainer from "../../../components/FormContainer";
 import { Form, Spinner } from "react-bootstrap";
-import { GET_ORGANIZATIONS } from "../../../graphql/queries/organizationQueries";
-import { useQuery } from "@apollo/client";
-import { GET_USERS } from "../../../graphql/queries/userQueries";
+
+// STATE
+import { useSelector } from "react-redux";
+import { ThemeContext } from "../../../context";
 // import { setCredentials } from "../../../slices/authSlice";
 
 export const AddUser = () => {
@@ -48,11 +52,8 @@ export const AddUser = () => {
 
   const [register, { isLoading }] = useRegisterMutation();
 
-  if (usersLoading) return <Spinner />;
-  if (usersError) return <p>There was an error...</p>;
-
-  if (organizationsLoading) return <Spinner />;
-  if (organizationsError) return <p>There was an error...</p>;
+  if (usersLoading || organizationsLoading) return <Spinner />;
+  if (usersError || organizationsError) return <p>There was an error...</p>;
 
   const potentialManagers = usersData.users.filter(
     (user) =>
@@ -62,7 +63,6 @@ export const AddUser = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      // toast.error("Passwords do not match");
       console.log("passwords do not match");
     } else {
       try {
@@ -77,7 +77,6 @@ export const AddUser = () => {
         }).unwrap();
         refetchOnMount;
       } catch (error) {
-        // toast.error(err.data.message || err.error);
         console.log("Error: ", error);
       }
     }

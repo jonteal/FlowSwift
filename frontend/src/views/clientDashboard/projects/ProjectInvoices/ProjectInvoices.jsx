@@ -1,7 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { InvoiceTable } from "../../../../components/InvoiceTable/InvoiceTable";
+
+// GRAPHQL
 import { GET_PROJECT_INVOICES } from "../../../../graphql/queries/invoiceQueries";
+
+// COMPONENTS
+import { InvoiceTable } from "../../../../components/InvoiceTable/InvoiceTable";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 
 export const ProjectInvoices = () => {

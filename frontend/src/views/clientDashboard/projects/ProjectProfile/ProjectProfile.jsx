@@ -92,7 +92,7 @@ export const ProjectProfile = () => {
               name="Project Estimate"
               value={`$ ${projectEstimate}`}
             />
-            <NameValuePair name="Project Manager" value={user.name} />
+            <NameValuePair name="Project Manager" value={user?.name} />
           </>
         </div>
       </div>

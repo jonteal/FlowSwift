@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
-
-import { ADD_KANBAN } from "../../../../graphql/mutations/kanbanMutations";
-import { GET_KANBANS } from "../../../../graphql/queries/kanbanQueries";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
+
+// GRAPHQL
+import { ADD_KANBAN } from "../../../../graphql/mutations/kanbanMutations";
+import { GET_KANBANS } from "../../../../graphql/queries/kanbanQueries";
+
+// COMPONENTS
+import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
+import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 export const AddKanban = () => {

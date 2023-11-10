@@ -1,7 +1,9 @@
-import { InvoiceTable } from "../../../../components/InvoiceTable/InvoiceTable";
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 // GRAPHQL
 import { GET_ALL_CLIENT_INVOICES } from "../../../../graphql/queries/invoiceQueries";
+
+// COMPONENTS
+import { InvoiceTable } from "../../../../components/InvoiceTable/InvoiceTable";
+import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 
 export const ClientInvoices = () => {
   const { clientId } = useParams();

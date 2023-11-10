@@ -9,6 +9,8 @@ import { ProjectPageCard } from "../../../../components/ProjectPageCard/ProjectP
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
+
+// STATE
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import {

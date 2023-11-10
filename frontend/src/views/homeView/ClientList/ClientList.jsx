@@ -12,7 +12,6 @@ import { FiltersList } from "../../../components/reusable/FiltersList/FiltersLis
 import { ChartContainer } from "../../../components/ChartContainer/ChartContainer";
 
 import { FaUserAlt } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
 
 // STATE
 import {
@@ -25,6 +24,7 @@ import {
   setLineChartOff,
   setLineChartOn,
 } from "../../../slices/clientsListSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 export const ClientList = () => {

@@ -1,14 +1,22 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_KANBAN } from "../../../../graphql/queries/kanbanQueries";
 import { useParams } from "react-router-dom";
+
+// GRAPHQL
+import { GET_KANBAN } from "../../../../graphql/queries/kanbanQueries";
 import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 import { ADD_KANBAN_STATUS_COLUMN } from "../../../../graphql/mutations/kanbanStatusColumnMutations";
+
+// COMPONENTS
 import { Spinner } from "react-bootstrap";
-import { useContext, useState } from "react";
-import { ThemeContext } from "../../../../context";
-import { capitalized } from "../../../../utils/format";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
+
+// STATE
+import { useContext, useState } from "react";
+import { ThemeContext } from "../../../../context";
+
+// UTILS
+import { capitalized } from "../../../../utils/format";
 
 export const KanbanEdit = () => {
   const { kanbanId } = useParams();

@@ -1,23 +1,20 @@
-import { useEffect, useState } from "react";
-
-// LIBRARIES
+import { useEffect, useState, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
 import { ADD_CLIENT } from "../../graphql/mutations/clientMutations";
 import { GET_CLIENTS } from "../../graphql/queries/clientQueries";
-import { useSelector } from "react-redux";
+import { GET_USER } from "../../graphql/queries/userQueries";
 
 // COMPONENTS
 import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
-import { GET_USER } from "../../graphql/queries/userQueries";
 import { Spinner } from "react-bootstrap";
-
-// STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../context";
 import { DynamicInput } from "../../components/reusable/DynamicInput/DynamicInput";
 import { DynamicContainer } from "../../components/reusable/DynamicContainer/DynamicContainer";
+
+// STATE
+import { ThemeContext } from "../../context";
+import { useSelector } from "react-redux";
 
 export const AddClient = () => {
   const theme = useContext(ThemeContext);

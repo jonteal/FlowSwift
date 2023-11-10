@@ -1,4 +1,6 @@
 import { useQuery } from "@apollo/client";
+
+// GRAPHQL
 import { GET_CLIENTS } from "../../../graphql/queries/clientQueries";
 import { GET_ALL_CLIENT_INVOICES } from "../../../graphql/queries/invoiceQueries";
 

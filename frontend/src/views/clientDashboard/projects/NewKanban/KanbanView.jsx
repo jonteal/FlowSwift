@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
-import { BsFillGearFill } from "react-icons/bs";
-import { FaEdit } from "react-icons/fa";
+// ICONS
+// import { BsFillGearFill } from "react-icons/bs";
+// import { FaEdit } from "react-icons/fa";
 import { BiArrowToBottom, BiArrowToTop } from "react-icons/bi";
 
 // GRAPHQL
@@ -207,9 +208,9 @@ export const KanbanView = () => {
           Filters
         </button>
 
-        <Link to="edit">
+        {/* <Link to="edit">
           <BsFillGearFill />
-        </Link>
+        </Link> */}
       </div>
 
       {isAddingColumn && (
@@ -296,7 +297,7 @@ export const KanbanView = () => {
                         : ""
                     } `}
                   />
-                  <FaEdit className="self-start text-lg w-full cursor-pointer" />
+                  {/* <FaEdit className="self-start text-lg w-full cursor-pointer" /> */}
                 </div>
                 <div className="flex flex-row items-center w-full">
                   <h5 className="font-extrabold w-full">

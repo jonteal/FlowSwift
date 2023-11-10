@@ -2,13 +2,13 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
-// COMPONENTS
-import { ClientCard } from "../../../../components/ClientCard/ClientCard";
-import { ClientCommentFeed } from "../../../../components/ClientCommentFeed/ClientCommentFeed";
-
 // GRAPHQL
 import { GET_CLIENT } from "../../../../graphql/queries/clientQueries";
 import { GET_CLIENT_ACTIVITY_COMMENTS } from "../../../../graphql/queries/clientActivityCommentQueries";
+
+// COMPONENTS
+import { ClientCard } from "../../../../components/ClientCard/ClientCard";
+import { ClientCommentFeed } from "../../../../components/ClientCommentFeed/ClientCommentFeed";
 
 export const ClientDashboard = () => {
   const { clientId } = useParams();

@@ -8,13 +8,13 @@ import {
   GET_TICKETS,
 } from "../../../../graphql/queries/ticketQueries";
 import { UPDATE_TICKET } from "../../../../graphql/mutations/ticketMutations";
+import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 
 // COMPONENTS
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
-import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 
 export const EditKanbanTicket = () => {
   const { ticketId, kanbanId } = useParams();
