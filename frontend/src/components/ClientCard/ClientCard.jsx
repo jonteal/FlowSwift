@@ -1,21 +1,13 @@
-import { useNavigate } from "react-router-dom";
-import { useMutation } from "@apollo/client";
-
-// UTILS
-import { formatPhoneNumber } from "../../utils/format";
-
-// GRAPHQL
-import { DELETE_CLIENT } from "../../graphql/mutations/clientMutations";
-import { GET_CLIENTS } from "../../graphql/queries/clientQueries";
-
 // COMPONENTS
 import { DeleteModal } from "../modals/DeleteModal/DeleteModal";
 import { NameValuePair } from "../../components/reusable/NameValuePair/NameValuePair";
 import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import { DynamicContainer } from "../reusable/DynamicContainer/DynamicContainer";
 
+// UTILS
+import { formatPhoneNumber } from "../../utils/format";
+
 export const ClientCard = ({ clientData }) => {
-  const navigate = useNavigate();
   const {
     id,
     companyName,
@@ -24,13 +16,8 @@ export const ClientCard = ({ clientData }) => {
     phoneNumber,
     emailAddress,
     status,
+    organization,
   } = clientData.client;
-
-  const [deleteClient] = useMutation(DELETE_CLIENT, {
-    variables: { id },
-    onCompleted: () => navigate(`/clients`),
-    refetchQueries: [{ query: GET_CLIENTS }],
-  });
 
   return (
     <DynamicContainer className="h-auto">
@@ -43,7 +30,11 @@ export const ClientCard = ({ clientData }) => {
         >
           Edit
         </DynamicButton>
-        <DeleteModal subject="Client" deleteItem={deleteClient} />
+        <DeleteModal
+          organizationId={organization.id}
+          clientId={id}
+          subject="Client"
+        />
       </div>
       <div className="h-auto md:h-screen px-3">
         <NameValuePair type="header" name="Company" value={companyName} />

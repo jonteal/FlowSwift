@@ -1,10 +1,26 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+
+// GRAPHQL
+import { DELETE_CLIENT } from "../../../graphql/mutations/clientMutations";
+import { GET_CLIENTS } from "../../../graphql/queries/clientQueries";
+
+// COMPONENTS
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
 
-export const DeleteModal = ({ deleteFn, subject }) => {
+export const DeleteModal = ({ subject, clientId, organizationId }) => {
+  const navigate = useNavigate();
+
   const [show, setShow] = useState(false);
+
+  const [deleteClient] = useMutation(DELETE_CLIENT, {
+    variables: { id: clientId },
+    onCompleted: () => navigate(`/clients`),
+    refetchQueries: [{ query: GET_CLIENTS, variables: { organizationId } }],
+  });
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -38,8 +54,8 @@ export const DeleteModal = ({ deleteFn, subject }) => {
           >
             Close
           </Button>
-          <div onClick={deleteFn}>
-            <DynamicButton color="red" type="delete">
+          <div onClick={deleteClient}>
+            <DynamicButton clickHandler={handleClose} color="red" type="delete">
               Delete
             </DynamicButton>
           </div>

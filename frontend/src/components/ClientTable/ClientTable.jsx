@@ -1,8 +1,14 @@
-import { FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
+// ICONS
+import { FaRegEye } from "react-icons/fa";
+
+// COMPONENTS
+import { DeleteModal } from "../../components/modals/DeleteModal/DeleteModal";
+
+// STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../context";
-import { DropdownComponent } from "../reusable/DropdownComponent/DropdownComponent";
 
 export const ClientTable = ({ clients, clientContainer }) => {
   const theme = useContext(ThemeContext);
@@ -145,7 +151,11 @@ export const ClientTable = ({ clients, clientContainer }) => {
                   darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
                 }  font-light text-left border pl-2`}
               >
-                <DropdownComponent />
+                <DeleteModal
+                  subject="Client"
+                  organizationId={client.organization.id}
+                  clientId={client.id}
+                />
               </td>
             </tr>
           ))}
