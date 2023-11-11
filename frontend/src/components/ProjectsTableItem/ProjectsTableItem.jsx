@@ -33,40 +33,42 @@ export const ProjectsTableItem = ({ project, index }) => {
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2 pr-2`}
+        } font-light text-left border pl-2 pr-2`}
       >
         {index + 1}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
+        } font-light text-left border pl-2`}
       >
         {project.title}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
+        } font-light text-left border pl-2`}
       >
         {project.client.firstName}
       </td>
       <td
-        className={`font-base text-slate-50 text-left border pl-2 ${statusColor}`}
+        className={`${
+          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+        } ${statusColor} font-light text-left border pl-2`}
       >
         {camelCaseToWords(project.status)}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2`}
+        }  font-light text-left border pl-2`}
       >
         {project.startDate}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2`}
+        }  font-light text-left border pl-2`}
       >
         {project.deadline}
       </td>
@@ -80,14 +82,14 @@ export const ProjectsTableItem = ({ project, index }) => {
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2`}
+        }  font-light text-left border pl-2`}
       >
         {project.projectEstimate}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2`}
+        }  font-light text-left border pl-2`}
       >
         <Link
           to={`/clients/${project.client.id}/projects/${project.id}/profile`}
@@ -100,7 +102,7 @@ export const ProjectsTableItem = ({ project, index }) => {
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border`}
+        }  font-light text-left border pl-2`}
       >
         <DeleteProject subject="Project" projectId={project.id}>
           <FaRegTrashAlt className="text-red-500 self-center mx-1" />

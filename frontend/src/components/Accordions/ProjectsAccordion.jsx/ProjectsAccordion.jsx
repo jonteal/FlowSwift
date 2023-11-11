@@ -8,24 +8,25 @@ import { Link } from "react-router-dom";
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../../context";
+import { ProjectsTable } from "../../ProjectsTable/ProjectsTable";
 
 export const ProjectsAccordion = ({
-  projectCount,
-  containerState,
   linkLabel,
   link,
   projects,
-  container,
+  searchTerm,
 }) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const projectCount = projects.length;
+
   const handleClick = () => {
     setIsExpanded(!isExpanded);
   };
   return (
-    <Accordion defaultActiveKey="0" alwaysOpen={false}>
+    <Accordion defaultActiveKey="0" alwaysOpen={false} className="w-full">
       <Accordion.Item
         className={`${darkMode ? "bg-sky-950" : ""}`}
         eventKey="0"
@@ -40,7 +41,7 @@ export const ProjectsAccordion = ({
         >
           <div className="flex flex-row items-center justify-between w-full">
             <p className={`${darkMode ? "text-slate-50" : "text-slate-900"} `}>
-              ({projectCount}) {containerState}
+              ({projectCount})
             </p>
             {link && linkLabel && (
               <Link
@@ -55,11 +56,7 @@ export const ProjectsAccordion = ({
           </div>
         </Accordion.Header>
         <Accordion.Body>
-          {/* <ClientTable
-            key={container.id}
-            clientContainer={container}
-            clients={clients}
-          /> */}
+          <ProjectsTable searchTerm={searchTerm} projects={projects} />
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>

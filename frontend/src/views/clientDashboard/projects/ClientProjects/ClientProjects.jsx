@@ -10,6 +10,7 @@ import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
 import { Switch } from "../../../../components/reusable/Switch/Switch";
+import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
 import { useDispatch, useSelector } from "react-redux";
@@ -32,6 +33,7 @@ import {
 } from "../../../../slices/projectsSlice";
 import { ThemeContext } from "../../../../context";
 import { ProjectsTableItem } from "../../../../components/ProjectsTableItem/ProjectsTableItem";
+import { ProjectsAccordion } from "../../../../components/Accordions/ProjectsAccordion.jsx/ProjectsAccordion";
 
 export const ClientProjects = () => {
   const theme = useContext(ThemeContext);
@@ -141,7 +143,7 @@ export const ClientProjects = () => {
   ];
 
   return (
-    <div className="flex flex-row flex-wrap h-screen justify-center">
+    <DynamicContainer className="w-full">
       {projectsData.clientProjects.length === 0 ? (
         <div className="rounded-xl bg-slate-50 mx-2 py-3 px-4 w-full">
           <DynamicButton
@@ -156,7 +158,7 @@ export const ClientProjects = () => {
           </p>
         </div>
       ) : (
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           <div className="flex flex-row justify-between items-start">
             <DynamicButton
               color="red"
@@ -189,7 +191,7 @@ export const ClientProjects = () => {
               <FiltersList filters={projectCardFilters} />
             )}
           </div>
-          <div className="flex flex-col items-center md:flex-row flex-wrap mt-3">
+          <div className="flex flex-col items-center md:flex-row flex-wrap mt-3 w-full p-3">
             {gridView ? (
               <div className="flex md:flex-row flex-wrap mx-auto flex-col">
                 {projectsData.clientProjects
@@ -221,137 +223,14 @@ export const ClientProjects = () => {
                   ))}
               </div>
             ) : (
-              <div className="flex justify-center items-center px-20 flex-col w-full">
-                <table className="table-auto w-full mx-2">
-                  <thead className="w-full">
-                    <tr className="w-full">
-                      <th
-                        className={`${
-                          darkMode
-                            ? "bg-sky-900 text-slate-50"
-                            : "text-slate-700"
-                        } w-1/12 md:w-auto text-left pl-2 border`}
-                      >
-                        #
-                      </th>
-                      <th
-                        className={`${
-                          darkMode
-                            ? "bg-sky-900 text-slate-50"
-                            : "text-slate-700"
-                        } w-3/12 md:w-2/12 text-left pl-2 border`}
-                      >
-                        Project Name
-                      </th>
-                      <th
-                        className={`${
-                          darkMode
-                            ? "bg-sky-900 text-slate-50"
-                            : "text-slate-700"
-                        } w-3/12 md:w-2/12 text-left pl-2 border`}
-                      >
-                        Client
-                      </th>
-                      <th
-                        className={`${
-                          darkMode
-                            ? "bg-sky-900 text-slate-50"
-                            : "text-slate-700"
-                        } w-2/12 text-left pl-2 border`}
-                      >
-                        Status
-                      </th>
-                      <th
-                        className={`${
-                          darkMode
-                            ? "bg-sky-900 text-slate-50"
-                            : "text-slate-700"
-                        } w-2/12 text-left pl-2 border`}
-                      >
-                        Start Date
-                      </th>
-                      <th
-                        className={`${
-                          darkMode
-                            ? "bg-sky-900 text-slate-50"
-                            : "text-slate-700"
-                        } w-3/12 text-left pl-2 border`}
-                      >
-                        Deadline
-                      </th>
-                      <th
-                        className={`${
-                          darkMode
-                            ? "bg-sky-900 text-slate-50"
-                            : "text-slate-700"
-                        } w-2/12 text-left pl-2 border`}
-                      >
-                        Client Budget
-                      </th>
-                      <th
-                        className={`${
-                          darkMode
-                            ? "bg-sky-900 text-slate-50"
-                            : "text-slate-700"
-                        } w-2/12 text-left pl-2 border`}
-                      >
-                        Project Estimate
-                      </th>
-                      <th
-                        className={`${
-                          darkMode
-                            ? "bg-sky-900 text-slate-50"
-                            : "text-slate-700"
-                        } w-2/12 text-left pl-2 border`}
-                      ></th>
-                      <th
-                        className={`${
-                          darkMode
-                            ? "bg-sky-900 text-slate-50"
-                            : "text-slate-700"
-                        } w-2/12 text-left pl-2 border`}
-                      ></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {projectsData.clientProjects
-                      .filter((val) => {
-                        if (searchTerm === "") {
-                          return val;
-                        } else if (
-                          val?.client.firstName
-                            .toLowerCase()
-                            .includes(searchTerm.toLowerCase())
-                        ) {
-                          return val;
-                        } else if (
-                          val?.title
-                            .toLowerCase()
-                            .includes(searchTerm.toLowerCase())
-                        ) {
-                          return val;
-                        } else if (
-                          val?.client.lastName
-                            .toLowerCase()
-                            .includes(searchTerm.toLowerCase())
-                        ) {
-                          return val;
-                        }
-                      })
-                      .map((project, index) => (
-                        <ProjectsTableItem
-                          index={index}
-                          key={project.id}
-                          project={project}
-                        />
-                      ))}
-                  </tbody>
-                </table>
-              </div>
+              <ProjectsAccordion
+                searchTerm={searchTerm}
+                projects={projectsData.clientProjects}
+              />
             )}
           </div>
         </div>
       )}
-    </div>
+    </DynamicContainer>
   );
 };
