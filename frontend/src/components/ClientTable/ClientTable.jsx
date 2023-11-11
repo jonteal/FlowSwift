@@ -5,6 +5,7 @@ import { FaRegEye } from "react-icons/fa";
 
 // COMPONENTS
 import { DeleteModal } from "../../components/modals/DeleteModal/DeleteModal";
+import { EditClientModal } from "../modals/EditClientModal/EditClientModal";
 
 // STATE
 import { useContext } from "react";
@@ -145,6 +146,17 @@ export const ClientTable = ({ clients, clientContainer }) => {
                     } mr-2`}
                   />
                 </Link>
+              </td>
+              <td
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                }  font-light text-left border pl-2`}
+              >
+                <EditClientModal
+                  subject="Client"
+                  organizationId={client.organization.id}
+                  client={client}
+                />
               </td>
               <td
                 className={`${

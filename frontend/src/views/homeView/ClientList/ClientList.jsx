@@ -25,9 +25,13 @@ import {
   setLineChartOn,
 } from "../../../slices/clientsListSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ThemeContext } from "../../../context";
 
 export const ClientList = () => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
+
   const { userInfo } = useSelector((state) => state.auth);
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
 
@@ -37,11 +41,7 @@ export const ClientList = () => {
     (state) => state.clientsList
   );
 
-  const {
-    loading: userLoading,
-    error: userError,
-    data: userData,
-  } = useQuery(GET_USER, {
+  const { data: userData } = useQuery(GET_USER, {
     variables: { id: userInfo._id },
   });
 
@@ -131,7 +131,9 @@ export const ClientList = () => {
   ];
 
   return (
-    <div className="overflow-x-scroll">
+    <div
+      className={`${darkMode ? "bg-sky-950" : "bg-slate-50"} overflow-x-scroll`}
+    >
       <button
         className="border bg-sky-500 text-slate-50 px-4 py-1 mb-4 w-1/12 rounded-lg mt-3 mr-2"
         onClick={handleOpenFilters}

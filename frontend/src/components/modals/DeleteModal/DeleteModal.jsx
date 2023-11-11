@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 
+// ICONS
+import { FaRegTrashAlt } from "react-icons/fa";
+
 // GRAPHQL
 import { DELETE_CLIENT } from "../../../graphql/mutations/clientMutations";
 import { GET_CLIENTS } from "../../../graphql/queries/clientQueries";
@@ -27,10 +30,8 @@ export const DeleteModal = ({ subject, clientId, organizationId }) => {
 
   return (
     <>
-      <div onClick={handleShow}>
-        <DynamicButton color="red" type="delete">
-          Delete
-        </DynamicButton>
+      <div className="flex justify-center" onClick={handleShow}>
+        <FaRegTrashAlt className="text-red-500 self-center" />
       </div>
 
       <Modal
