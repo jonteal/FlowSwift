@@ -6,7 +6,10 @@ import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
 import { ADD_PROJECT } from "../../../../graphql/mutations/projectMutations";
-import { GET_PROJECTS } from "../../../../graphql/queries/projectQueries";
+import {
+  GET_CLIENT_PROJECTS,
+  GET_PROJECTS,
+} from "../../../../graphql/queries/projectQueries";
 import { GET_CLIENTS } from "../../../../graphql/queries/clientQueries";
 import { GET_USER, GET_USERS } from "../../../../graphql/queries/userQueries";
 
@@ -15,12 +18,12 @@ import { DateSelector } from "../../../../components/reusable/DateSelector/DateS
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
+import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 import { ThemeContext } from "../../../../context";
-import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 export const AddProject = () => {
   const theme = useContext(ThemeContext);
@@ -39,8 +42,6 @@ export const AddProject = () => {
   const [organizationId, setOrganizationId] = useState("");
   const [userId, setUserId] = useState("");
 
-  console.log("userId: ", userId);
-
   const [addProject] = useMutation(ADD_PROJECT, {
     variables: {
       title,
@@ -55,13 +56,18 @@ export const AddProject = () => {
       userId,
     },
     update(cache, { data: { addProject } }) {
-      const { projects } = cache.readQuery({ query: GET_PROJECTS });
+      const { projects } = cache.readQuery({
+        query: GET_CLIENT_PROJECTS,
+        variables: { clientId },
+      });
       cache.writeQuery({
-        query: GET_PROJECTS,
+        query: GET_CLIENT_PROJECTS,
         data: { projects: [...projects, addProject] },
       });
     },
   });
+
+  console.log("organizationId: ", organizationId);
 
   const { loading, error, data } = useQuery(GET_CLIENTS, {
     variables: { organizationId },
@@ -91,8 +97,6 @@ export const AddProject = () => {
         </div>
       );
     }
-
-    // console.log("userId: ", userId);
 
     addProject(
       title,
@@ -126,8 +130,6 @@ export const AddProject = () => {
   const { data: allUsers } = useQuery(GET_USERS, {
     variables: { id: organizationId },
   });
-
-  console.log("allUsers: ", allUsers);
 
   useEffect(() => {
     setOrganizationId(userData?.user?.organizationId);

@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client";
 // GRAPHQL
 import { GET_CLIENTS } from "../../../graphql/queries/clientQueries";
 import { GET_USER } from "../../../graphql/queries/userQueries";
-import { GET_ORGANIZATION } from "../../../graphql/queries/organizationQueries";
 
 // COMPONENTS
 import { ClientsContainer } from "../../../components/ClientsContainer/ClientsContainer";
@@ -27,6 +26,9 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useContext } from "react";
 import { ThemeContext } from "../../../context";
+
+// UTILS
+import { clientContainers } from "../../Clients/constants";
 
 export const ClientList = () => {
   const theme = useContext(ThemeContext);
@@ -75,29 +77,6 @@ export const ClientList = () => {
 
   if (clientLoading) return <Spinner />;
   if (clientError) return <p>Something went wrong...</p>;
-
-  const clientContainers = [
-    {
-      id: "lead",
-      state: "Lead",
-    },
-    {
-      id: "prospect",
-      state: "Prospect",
-    },
-    {
-      id: "current",
-      state: "Current",
-    },
-    {
-      id: "former",
-      state: "Former",
-    },
-    {
-      id: "cold",
-      state: "Cold",
-    },
-  ];
 
   const clientListChartsFilters = [
     {

@@ -1,8 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
-// ICONS
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 // COMPONENTS
 import { ClientTable } from "../ClientTable/ClientTable";
@@ -10,7 +6,7 @@ import { ClientTable } from "../ClientTable/ClientTable";
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../context";
-import { AccordionComponent } from "../AccordionComponent/AccordionComponent";
+import { ClientsAccordion } from "../Accordions/ClientsAccordion/ClientsAccordion";
 
 export const ClientsContainer = ({ clientData, clientContainer }) => {
   const theme = useContext(ThemeContext);
@@ -26,26 +22,7 @@ export const ClientsContainer = ({ clientData, clientContainer }) => {
       key={clientContainer.id}
       className="mb-7 border-slate-400 p-2 rounded-md overflow-x-scroll	"
     >
-      {/* <div
-        className={`flex flex-row items-center justify-between border overflow-x-scroll	 ${
-          darkMode ? "bg-sky-800 rounded-t-lg" : "rounded-t-lg"
-        }`}
-      >
-        <div className="flex flex-row items-center overflow-x-scroll">
-          <span className="mx-2">({clientCount})</span>
-          <h5 className="text-base py-2 pl-2">{clientContainer.state}</h5>
-          {isExpanded ? (
-            <FaChevronUp onClick={handleClick} className="ml-1" />
-          ) : (
-            <FaChevronDown onClick={handleClick} className="ml-1" />
-          )}
-        </div>
-        <Link className="mr-3" to={`list/${clientContainer.state}`}>
-          View All
-        </Link>
-      </div> */}
-
-      <AccordionComponent
+      <ClientsAccordion
         isExpanded={isExpanded}
         clientCount={clientCount}
         clients={clientData.clients}

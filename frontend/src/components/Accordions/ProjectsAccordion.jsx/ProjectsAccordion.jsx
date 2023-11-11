@@ -1,18 +1,20 @@
 import { useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import { Link } from "react-router-dom";
-import { ClientTable } from "../ClientTable/ClientTable";
+
+// COMPONENTS
+// import { ClientTable } from "../../ClientTable/ClientTable";
 
 // STATE
 import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { ThemeContext } from "../../../context";
 
-export const AccordionComponent = ({
-  clientCount,
+export const ProjectsAccordion = ({
+  projectCount,
   containerState,
   linkLabel,
   link,
-  clients,
+  projects,
   container,
 }) => {
   const theme = useContext(ThemeContext);
@@ -22,7 +24,6 @@ export const AccordionComponent = ({
   const handleClick = () => {
     setIsExpanded(!isExpanded);
   };
-
   return (
     <Accordion defaultActiveKey="0" alwaysOpen={false}>
       <Accordion.Item
@@ -39,24 +40,26 @@ export const AccordionComponent = ({
         >
           <div className="flex flex-row items-center justify-between w-full">
             <p className={`${darkMode ? "text-slate-50" : "text-slate-900"} `}>
-              ({clientCount}) {containerState}
+              ({projectCount}) {containerState}
             </p>
-            <Link
-              className={`${
-                darkMode ? "text-slate-50" : "text-slate-900"
-              } mr-3`}
-              to={link}
-            >
-              {linkLabel}
-            </Link>
+            {link && linkLabel && (
+              <Link
+                className={`${
+                  darkMode ? "text-slate-50" : "text-slate-900"
+                } mr-3`}
+                to={link}
+              >
+                {linkLabel}
+              </Link>
+            )}
           </div>
         </Accordion.Header>
         <Accordion.Body>
-          <ClientTable
+          {/* <ClientTable
             key={container.id}
             clientContainer={container}
             clients={clients}
-          />
+          /> */}
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>
