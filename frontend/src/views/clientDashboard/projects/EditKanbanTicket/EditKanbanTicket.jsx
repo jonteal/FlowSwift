@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
@@ -9,6 +9,7 @@ import {
 } from "../../../../graphql/queries/ticketQueries";
 import { UPDATE_TICKET } from "../../../../graphql/mutations/ticketMutations";
 import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
+import { GET_USER, GET_USERS } from "../../../../graphql/queries/userQueries";
 
 // COMPONENTS
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
@@ -16,7 +17,13 @@ import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 
+// STATE
+import { ThemeContext } from "../../../../context";
+import { useSelector } from "react-redux";
+
 export const EditKanbanTicket = () => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   const { ticketId, kanbanId } = useParams();
 
   const {
@@ -34,6 +41,9 @@ export const EditKanbanTicket = () => {
   const [status, setStatus] = useState(ticket?.status);
   const [blocked, setBlocked] = useState(ticket?.blocked);
   const [blockedReason, setBlockedReason] = useState(ticket?.blockedReason);
+  const { userInfo } = useSelector((state) => state.auth);
+  const [userId, setUserId] = useState(ticket?.userId);
+  const [organizationId, setOrganizationId] = useState(ticket?.organizationId);
 
   const [updateTicket] = useMutation(UPDATE_TICKET, {
     variables: {
@@ -44,6 +54,7 @@ export const EditKanbanTicket = () => {
       kanbanId,
       status,
       blockedReason,
+      userId,
     },
     refetchQueries: [{ query: GET_TICKET, variables: { ticketId } }],
 
@@ -61,12 +72,28 @@ export const EditKanbanTicket = () => {
   });
 
   const {
+    loading: userLoading,
+    error: userError,
+    data: userData,
+  } = useQuery(GET_USER, {
+    variables: { id: userInfo._id },
+  });
+
+  const { data: allUsers } = useQuery(GET_USERS, {
+    variables: { id: organizationId },
+  });
+
+  const {
     loading: kanbanStatusColumnLoading,
     error: kanbanStatusColumnError,
     data: kanbanStatusColumnData,
   } = useQuery(GET_KANBAN_STATUS_COLUMNS, {
     variables: { kanbanId },
   });
+
+  useEffect(() => {
+    setOrganizationId(userData?.user?.organizationId);
+  }, [userData?.user?.organizationId]);
 
   useEffect(() => {
     setStatus(kanbanStatusColumnData?.kanbanStatusColumns[0]?.id);
@@ -92,7 +119,8 @@ export const EditKanbanTicket = () => {
       kanbanId,
       status,
       blocked,
-      blockedReason
+      blockedReason,
+      userId
     );
   };
 
@@ -100,6 +128,29 @@ export const EditKanbanTicket = () => {
     <div className="bg-slate-50 mt-2 mx-2 p-3 rounded-xl">
       <h1 className="text-lg text-left">Update Ticket</h1>
       <div className="">
+        <label
+          className={`block uppercase tracking-wide ${
+            darkMode ? "text-slate-50" : "text-gray-700"
+          }  text-xs font-bold mb-2 mt-3`}
+        >
+          Ticket Owner
+        </label>
+        <select
+          className={`${
+            darkMode ? "bg-sky-950 text-slate-50" : "bg-gray-200 text-gray-700"
+          } form-select mb-4`}
+          aria-label="Project Owner Select"
+          id="userId"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
+        >
+          {/* <option value="">Select Ticket Owner</option> */}
+          {allUsers?.users?.map((user) => (
+            <option key={user._id} value={user._id}>
+              {user.name}
+            </option>
+          ))}
+        </select>
         <form onSubmit={onSubmit}>
           <div>
             <DynamicInput
