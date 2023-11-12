@@ -21,7 +21,7 @@ export const ClientCard = ({ clientData }) => {
 
   return (
     <DynamicContainer className="h-auto">
-      <div className="flex flex-row items-center justify-end pt-2 pr-2">
+      <div className="flex flex-row items-center justify-end pr-2">
         <DynamicButton
           type="link"
           color="lightBlue"

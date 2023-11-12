@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 // LIBRARIES
 import { useMutation, useQuery } from "@apollo/client";
@@ -18,8 +18,11 @@ import { DateSelector } from "../../../../components/reusable/DateSelector/DateS
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../../../context";
+import { PageHeadline } from "../../../../components/reusable/PageHeadline/PageHeadline";
 
 export const AddInvoice = () => {
+  const navigate = useNavigate();
+
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   const { clientId } = useParams();
@@ -29,6 +32,7 @@ export const AddInvoice = () => {
   const [notes, setNotes] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [projectId, setProjectId] = useState("");
+  const [submitType, setSubmitType] = useState("");
 
   const {
     loading: projectsLoading,
@@ -55,6 +59,9 @@ export const AddInvoice = () => {
         variables: { projectId, clientId },
         data: { clientInvoices: [...clientInvoices, addInvoice] },
       });
+    },
+    onCompleted: () => {
+      if (submitType === "return") navigate(`/clients/${clientId}/dashboard`);
     },
   });
 
@@ -92,7 +99,7 @@ export const AddInvoice = () => {
         darkMode ? "bg-sky-800" : "bg-slate-50"
       } flex flex-col items-center rounded-xl mx-2 mt-2 px-3 h-screen`}
     >
-      <h3 className="font-semibold text-lg mt-2">Add Invoice</h3>
+      <PageHeadline>Add Invoice</PageHeadline>
       <div className="flex flex-row justify-between my-3 w-full px-4">
         <div className="flex flex-col w-full ml-2">
           <label
@@ -187,8 +194,15 @@ export const AddInvoice = () => {
           />
         </div>
 
+        <DynamicButton
+          onClick={() => setSubmitType("return")}
+          color="blue"
+          type="submit"
+        >
+          Save
+        </DynamicButton>
         <DynamicButton color="blue" type="submit">
-          Submit
+          Save and Add Another
         </DynamicButton>
       </form>
     </div>

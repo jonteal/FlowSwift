@@ -33,7 +33,7 @@ export const ClientDashboard = () => {
   if (clientActivityCommentsError) return <p>There was an error...</p>;
 
   return (
-    <div className="w-full flex md:flex-row flex-col h-screen">
+    <div className="w-full flex md:flex-row flex-col md:items-start h-screen">
       <div className="w-full mx-0 md:mx-2 rounded-xl">
         {!clientLoading && !clientError && (
           <ClientCard clientData={clientData} />

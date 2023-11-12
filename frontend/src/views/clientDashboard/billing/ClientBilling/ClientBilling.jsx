@@ -87,7 +87,7 @@ export const ClientBilling = () => {
         )}
         {/* <BudgetRemaining budgetRemaining={budgetRemaining} /> */}
       </div>
-      <div className="w-full flex flex-col md:flex-row items-center">
+      <div className="w-full flex flex-col md:flex-row items-start">
         <div className="md:mx-2 w-full mb-2">
           <InvoiceTable invoices={invoicesData.clientInvoices} />
         </div>

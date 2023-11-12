@@ -19,6 +19,7 @@ import { DynamicContainer } from "../../../../components/reusable/DynamicContain
 // STATE
 import { useContext } from "react";
 import { ThemeContext } from "../../../../context";
+import { PageHeadline } from "../../../../components/reusable/PageHeadline/PageHeadline";
 
 export const AddTransaction = () => {
   const theme = useContext(ThemeContext);
@@ -109,7 +110,7 @@ export const AddTransaction = () => {
 
   return (
     <DynamicContainer>
-      <h3 className="pt-3 mt-2">Add Transaction</h3>
+      <PageHeadline>Add Transaction</PageHeadline>
 
       <div className="flex flex-row justify-between my-3 w-full px-4">
         <div className="flex flex-col w-full ml-2">
