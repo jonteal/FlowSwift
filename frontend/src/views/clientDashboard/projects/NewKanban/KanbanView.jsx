@@ -189,13 +189,9 @@ export const KanbanView = () => {
     },
   ];
 
-  const handleColumnHorizontalCollapse = () => {
-    setIsColumnHorizontallyCollapsed(!isColumnHorizontallyCollapsed);
-    console.log(
-      "isColumnHorizontallyCollapsed: ",
-      isColumnHorizontallyCollapsed
-    );
-  };
+  // const handleColumnHorizontalCollapse = () => {
+  //   setIsColumnHorizontallyCollapsed(!isColumnHorizontallyCollapsed);
+  // };
 
   return (
     <DynamicContainer className="h-screen">
@@ -290,10 +286,10 @@ export const KanbanView = () => {
       <div className="flex flex-col md:flex-row h-auto md:h-screen items-start ml-2">
         {sortedColumns.map((column) => (
           <div className="flex flex-row w-full">
-            <PiArrowsOutLineHorizontalBold
+            {/* <PiArrowsOutLineHorizontalBold
               onClick={handleColumnHorizontalCollapse}
               className="text-slate-900 text-lg"
-            />
+            /> */}
             <div
               key={column.id}
               className={`flex flex-col items-center ${
@@ -302,14 +298,14 @@ export const KanbanView = () => {
                   : "bg-slate-300 border-slate-500"
               } w-full mt-2 mr-2 rounded-lg ${
                 collapseColumn ? "h-10" : "h-auto"
-              } md:min-h-screen `}
+              } md:min-h-screen ${isColumnHorizontallyCollapsed ? "w-0" : ""}`}
             >
               <div className="flex flex-col mt-2 w-full">
                 <div className="w-full border-red-50 flex flex-row items-center justify-between">
                   <div className="w-full flex flex-row items-start">
                     <BiArrowToBottom
                       onClick={handleCollapseColumn}
-                      className={`text-4xl top-0 cursor-pointer ${
+                      className={`text-2xl top-0 cursor-pointer ${
                         collapseColumn
                           ? "rotate-180 transform transition ease-in-out delay-50 duration-200"
                           : ""
@@ -338,6 +334,7 @@ export const KanbanView = () => {
                   />
                 </div>
               </div>
+
               <ul
                 className={`${
                   collapseColumn ? "hidden" : ""

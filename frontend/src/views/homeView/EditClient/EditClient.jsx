@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 
 // GRAPHQL
@@ -13,6 +13,7 @@ import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicI
 import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
 
 export const EditClient = () => {
+  const navigate = useNavigate();
   const { clientId } = useParams();
 
   const {
@@ -61,6 +62,7 @@ export const EditClient = () => {
       status,
       organizationId,
     },
+    onCompleted: () => navigate(`/clients/${clientId}/dashboard`),
     refetchQueries: [
       {
         query: GET_CLIENT,
