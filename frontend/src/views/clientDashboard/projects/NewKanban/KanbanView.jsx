@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@apollo/client";
 // ICONS
 // import { BsFillGearFill } from "react-icons/bs";
 // import { FaEdit } from "react-icons/fa";
+import { PiArrowsOutLineHorizontalBold } from "react-icons/pi";
 import { BiArrowToBottom, BiArrowToTop } from "react-icons/bi";
 
 // GRAPHQL
@@ -38,6 +39,8 @@ import {
 
 // UTILS
 import { capitalized } from "../../../../utils/format";
+import { Body } from "../../../../components/reusable/Body/Body";
+import { SectionHeadline } from "../../../../components/reusable/SectionHeadline/SectionHeadline";
 
 export const KanbanView = () => {
   const { kanbanId } = useParams();
@@ -59,6 +62,8 @@ export const KanbanView = () => {
   const [position, setPosition] = useState("");
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
   const [collapseColumn, setCollapseColumn] = useState(false);
+  const [isColumnHorizontallyCollapsed, setIsColumnHorizontallyCollapsed] =
+    useState(false);
 
   const { loading, error, data } = useQuery(GET_KANBAN, {
     variables: { id: kanbanId },
@@ -184,6 +189,14 @@ export const KanbanView = () => {
     },
   ];
 
+  const handleColumnHorizontalCollapse = () => {
+    setIsColumnHorizontallyCollapsed(!isColumnHorizontallyCollapsed);
+    console.log(
+      "isColumnHorizontallyCollapsed: ",
+      isColumnHorizontallyCollapsed
+    );
+  };
+
   return (
     <DynamicContainer className="h-screen">
       <div className="flex flex-row justify-around items-start">
@@ -265,8 +278,8 @@ export const KanbanView = () => {
 
       {isFilterOptionsOpen && <FiltersList filters={kanbanTicketFilters} />}
 
-      <h1 className="text-lg font-bold mt-3">{title}</h1>
-      <h2 className="text-base font-normal">{description}</h2>
+      <SectionHeadline>{title}</SectionHeadline>
+      <Body>{description}</Body>
 
       {!hasStatusColumn && (
         <p className="italic mt-5 border bg-green-300 rounded-xl w-3/4 mx-auto">
@@ -276,63 +289,69 @@ export const KanbanView = () => {
 
       <div className="flex flex-col md:flex-row h-auto md:h-screen items-start ml-2">
         {sortedColumns.map((column) => (
-          <div
-            key={column.id}
-            className={`flex flex-col items-center ${
-              darkMode
-                ? "bg-sky-900 border-slate-100"
-                : "bg-slate-300 border-slate-500"
-            } w-full mt-2 mr-2 rounded-lg ${
-              collapseColumn ? "h-10" : "h-auto"
-            } md:min-h-screen `}
-          >
-            <div className="flex flex-col mt-2 w-full">
-              <div className="w-full border-red-50 flex flex-row items-center justify-between">
-                <div className="w-full flex flex-row items-start">
-                  <BiArrowToBottom
-                    onClick={handleCollapseColumn}
-                    className={`text-4xl top-0 cursor-pointer ${
-                      collapseColumn
-                        ? "rotate-180 transform transition ease-in-out delay-50 duration-200"
-                        : ""
-                    } `}
-                  />
-                  {/* <FaEdit className="self-start text-lg w-full cursor-pointer" /> */}
-                </div>
-                <div className="flex flex-row items-center w-full">
-                  <h5 className="font-extrabold w-full">
-                    {capitalized(column.columnState)}
-                  </h5>
-                  <p className="ml-2">
-                    (
-                    {
-                      ticketData.tickets.filter(
-                        (ticket) => ticket.status === column.id
-                      ).length
-                    }
-                    )
-                  </p>
-                </div>
-                <DeleteColumn
-                  subject="Status Column"
-                  columnId={column.id}
-                  kanbanId={kanbanId}
-                />
-              </div>
-            </div>
-            <ul
-              className={`${
-                collapseColumn ? "hidden" : ""
-              } list-none pl-0 w-full`}
+          <div className="flex flex-row w-full">
+            <PiArrowsOutLineHorizontalBold
+              onClick={handleColumnHorizontalCollapse}
+              className="text-slate-900 text-lg"
+            />
+            <div
+              key={column.id}
+              className={`flex flex-col items-center ${
+                darkMode
+                  ? "bg-sky-900 border-slate-100"
+                  : "bg-slate-300 border-slate-500"
+              } w-full mt-2 mr-2 rounded-lg ${
+                collapseColumn ? "h-10" : "h-auto"
+              } md:min-h-screen `}
             >
-              {ticketData.tickets
-                .filter((ticket) => ticket.status === column.id)
-                .map((ticket) => (
-                  <li key={ticket.id} className="w-full">
-                    <Ticket ticket={ticket} />
-                  </li>
-                ))}
-            </ul>
+              <div className="flex flex-col mt-2 w-full">
+                <div className="w-full border-red-50 flex flex-row items-center justify-between">
+                  <div className="w-full flex flex-row items-start">
+                    <BiArrowToBottom
+                      onClick={handleCollapseColumn}
+                      className={`text-4xl top-0 cursor-pointer ${
+                        collapseColumn
+                          ? "rotate-180 transform transition ease-in-out delay-50 duration-200"
+                          : ""
+                      } `}
+                    />
+                    {/* <FaEdit className="self-start text-lg w-full cursor-pointer" /> */}
+                  </div>
+                  <div className="flex flex-row items-center w-full">
+                    <h5 className="font-extrabold w-full">
+                      {capitalized(column.columnState)}
+                    </h5>
+                    <p className="ml-2">
+                      (
+                      {
+                        ticketData.tickets.filter(
+                          (ticket) => ticket.status === column.id
+                        ).length
+                      }
+                      )
+                    </p>
+                  </div>
+                  <DeleteColumn
+                    subject="Status Column"
+                    columnId={column.id}
+                    kanbanId={kanbanId}
+                  />
+                </div>
+              </div>
+              <ul
+                className={`${
+                  collapseColumn ? "hidden" : ""
+                } list-none pl-0 w-full`}
+              >
+                {ticketData.tickets
+                  .filter((ticket) => ticket.status === column.id)
+                  .map((ticket) => (
+                    <li key={ticket.id} className="w-full">
+                      <Ticket ticket={ticket} />
+                    </li>
+                  ))}
+              </ul>
+            </div>
           </div>
         ))}
       </div>
