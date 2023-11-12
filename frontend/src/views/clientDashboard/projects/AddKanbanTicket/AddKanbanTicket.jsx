@@ -1,22 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
-import { useSelector } from "react-redux";
 
 // GRAPHQL
 import { ADD_TICKET } from "../../../../graphql/mutations/ticketMutations";
-import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
-import { GET_USER } from "../../../../graphql/queries/userQueries";
 import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
+import { GET_USER, GET_USERS } from "../../../../graphql/queries/userQueries";
+import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
 
 // COMPONENTS
+import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
+
+// STATE
+import { useSelector } from "react-redux";
+import { ThemeContext } from "../../../../context";
 
 export const AddKanbanTicket = () => {
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   const { kanbanId } = useParams();
   const [title, setTitle] = useState("");
   const [typeOfTicket, setTypeOfTicket] = useState("userStory");
@@ -28,6 +33,7 @@ export const AddKanbanTicket = () => {
   const [ready, setIsReady] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
   const [userId, setUserId] = useState(userInfo._id);
+  const [organizationId, setOrganizationId] = useState("");
 
   const [addTicket] = useMutation(ADD_TICKET, {
     variables: {
@@ -63,6 +69,10 @@ export const AddKanbanTicket = () => {
     variables: { id: userInfo._id },
   });
 
+  const { data: allUsers } = useQuery(GET_USERS, {
+    variables: { id: organizationId },
+  });
+
   const {
     loading: kanbanStatusColumnLoading,
     error: kanbanStatusColumnError,
@@ -70,6 +80,10 @@ export const AddKanbanTicket = () => {
   } = useQuery(GET_KANBAN_STATUS_COLUMNS, {
     variables: { kanbanId },
   });
+
+  useEffect(() => {
+    setOrganizationId(userData?.user?.organizationId);
+  }, [userData?.user?.organizationId]);
 
   useEffect(() => {
     setStatus(kanbanStatusColumnData?.kanbanStatusColumns[0]?.id);
@@ -108,6 +122,7 @@ export const AddKanbanTicket = () => {
     setBlocked(!blocked);
     setIsReady(false);
     setBlockedReason("");
+    setUserId("");
   };
 
   const ticketTypeOptions = [
@@ -118,6 +133,29 @@ export const AddKanbanTicket = () => {
   return (
     <DynamicContainer>
       <h1 className="text-lg text-left">New Ticket</h1>
+      <label
+        className={`block uppercase tracking-wide ${
+          darkMode ? "text-slate-50" : "text-gray-700"
+        }  text-xs font-bold mb-2 mt-3`}
+      >
+        Ticket Owner
+      </label>
+      <select
+        className={`${
+          darkMode ? "bg-sky-950 text-slate-50" : "bg-gray-200 text-gray-700"
+        } form-select mb-4`}
+        aria-label="Project Owner Select"
+        id="userId"
+        value={userId}
+        onChange={(e) => setUserId(e.target.value)}
+      >
+        <option value="">Select Ticket Owner</option>
+        {allUsers?.users?.map((user) => (
+          <option key={user._id} value={user._id}>
+            {user.name}
+          </option>
+        ))}
+      </select>
       <form onSubmit={onSubmit}>
         <DynamicInput
           id="name"

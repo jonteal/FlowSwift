@@ -6,10 +6,7 @@ import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
 import { ADD_PROJECT } from "../../../../graphql/mutations/projectMutations";
-import {
-  GET_CLIENT_PROJECTS,
-  GET_PROJECTS,
-} from "../../../../graphql/queries/projectQueries";
+import { GET_CLIENT_PROJECTS } from "../../../../graphql/queries/projectQueries";
 import { GET_CLIENTS } from "../../../../graphql/queries/clientQueries";
 import { GET_USER, GET_USERS } from "../../../../graphql/queries/userQueries";
 
@@ -66,8 +63,6 @@ export const AddProject = () => {
       });
     },
   });
-
-  console.log("organizationId: ", organizationId);
 
   const { loading, error, data } = useQuery(GET_CLIENTS, {
     variables: { organizationId },

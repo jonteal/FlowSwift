@@ -1,5 +1,4 @@
 import { Link, useParams } from "react-router-dom";
-// import { StatusBadge } from "../reusable/StatusBadge/StatusBadge";
 import { MdOutlineDescription } from "react-icons/md";
 import { PiKanbanLight } from "react-icons/pi";
 
@@ -17,7 +16,7 @@ export const KanbanCard = ({ kanban }) => {
       to={`/clients/${clientId}/projects/${projectId}/kanbans/${kanban.id}`}
     >
       <div
-        className={`border w-72 my-2 rounded-xl border-t-green-700 shadow-md p-3 mx-2 transform xl:translate-x-0 ease-in-out transition duration-500  ${
+        className={`h-auto border w-72 my-2 rounded-xl border-t-green-700 shadow-md p-3 mx-2 transform xl:translate-x-0 ease-in-out transition duration-500 ${
           darkMode
             ? "bg-sky-700 hover:bg-sky-600 transition ease-in-out delay-50 duration-200"
             : "bg-slate-50 hover:bg-slate-100 transition ease-in-out delay-50 duration-200"
@@ -31,9 +30,6 @@ export const KanbanCard = ({ kanban }) => {
           <MdOutlineDescription className="mr-2" />
           <p className="my-2">{description}</p>
         </div>
-        {/* <div className="my-2">
-        <StatusBadge status={status} />
-      </div> */}
       </div>
     </Link>
   );

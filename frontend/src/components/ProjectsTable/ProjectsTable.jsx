@@ -8,7 +8,7 @@ export const ProjectsTable = ({ projects, searchTerm }) => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
   return (
-    <div className="border w-full mx-10 flex flex-col">
+    <div className="border w-full flex flex-col">
       <table className="table-auto overflow-x-scroll">
         <thead>
           <tr>
