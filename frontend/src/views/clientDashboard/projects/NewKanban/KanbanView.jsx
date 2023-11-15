@@ -2,12 +2,6 @@ import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
-// ICONS
-// import { BsFillGearFill } from "react-icons/bs";
-// import { FaEdit } from "react-icons/fa";
-import { PiArrowsOutLineHorizontalBold } from "react-icons/pi";
-import { BiArrowToBottom, BiArrowToTop } from "react-icons/bi";
-
 // GRAPHQL
 import { GET_KANBAN } from "../../../../graphql/queries/kanbanQueries";
 import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
@@ -19,9 +13,10 @@ import { Spinner } from "react-bootstrap";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
-import { Ticket } from "../../../../components/kanban/Ticket/Ticket";
 import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
-import { DeleteColumn } from "./DeleteColumn";
+import { Body } from "../../../../components/reusable/Body/Body";
+import { SectionHeadline } from "../../../../components/reusable/SectionHeadline/SectionHeadline";
+import { KanbanColumn } from "../../../../components/kanban/KanbanColumn/KanbanColumn";
 
 // STATE
 import { ThemeContext } from "../../../../context";
@@ -36,12 +31,6 @@ import {
   setOwnerOff,
   setOwnerOn,
 } from "../../../../slices/ticketSlice";
-
-// UTILS
-import { capitalized } from "../../../../utils/format";
-import { Body } from "../../../../components/reusable/Body/Body";
-import { SectionHeadline } from "../../../../components/reusable/SectionHeadline/SectionHeadline";
-import { KanbanColumn } from "../../../../components/kanban/KanbanColumn/KanbanColumn";
 
 export const KanbanView = () => {
   const { kanbanId } = useParams();
