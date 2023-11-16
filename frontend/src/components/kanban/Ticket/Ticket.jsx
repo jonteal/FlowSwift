@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 
 // ICONS
 import { AiOutlineStop } from "react-icons/ai";
@@ -10,30 +10,103 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 
 // GRAPHQL
-import { DELETE_TICKET } from "../../../graphql/mutations/ticketMutations";
+import {
+  DELETE_TICKET,
+  UPDATE_TICKET,
+} from "../../../graphql/mutations/ticketMutations";
 import { GET_TICKETS } from "../../../graphql/queries/ticketQueries";
 
+// STATE
 import { ThemeContext } from "../../../context";
 import { useSelector } from "react-redux";
+import { DynamicInput } from "../../reusable/DynamicInput/DynamicInput";
+import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
+import { UnblockTicketModal } from "../../modals/UnblockTicketModal/UnblockTickModal";
 
 export const Ticket = ({ ticket }) => {
-  const { kanbanId } = useParams();
+  const { kanbanId, clientId, projectId } = useParams();
+
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
-  const { size, description, createdDate, owner } = useSelector(
-    (state) => state.ticket
-  );
 
-  const { clientId, projectId } = useParams();
-  const [isBlocked, setIsBlocked] = useState(ticket.blocked);
-  const [isReady, setIsReady] = useState(ticket.ready);
+  const {
+    size,
+    description: ticketDescription,
+    createdDate,
+    owner,
+  } = useSelector((state) => state.ticket);
+
+  const [title, setTitle] = useState(ticket.title);
+  const [description, setDescription] = useState(ticket.title);
+  const [status, setStatus] = useState(ticket.status);
+  const [blocked, setBlocked] = useState(ticket.blocked);
+  const [blockedReason, setBlockedReason] = useState(ticket.blockedReason);
+  const [ready, setReady] = useState(ticket.ready);
+  const [userId, setUserId] = useState(ticket.userId);
+  const [ticketId, setTicketId] = useState(ticket.id);
+  const [editBlockedReason, setEditBlockedReason] = useState(false);
+  const [show, setShow] = useState(false);
+
+  // const handleShow = () => setShow(true);
+
+  const [updateTicket] = useMutation(UPDATE_TICKET, {
+    variables: {
+      id: ticketId,
+      title,
+      description,
+      blocked,
+      kanbanId,
+      status,
+      blockedReason,
+      userId,
+    },
+    refetchQueries: [{ query: GET_TICKETS, variables: { kanbanId } }],
+    update(cache, { data: { updateTicket } }) {
+      const { tickets } = cache.readQuery({
+        query: GET_TICKETS,
+        variables: { kanbanId },
+      });
+      cache.writeQuery({
+        query: GET_TICKETS,
+        variables: { kanbanId },
+        data: { tickets: [...tickets, updateTicket] },
+      });
+    },
+  });
 
   const handleBlockTicket = () => {
-    setIsBlocked(!isBlocked);
+    if (blocked) {
+      // open unblock modal
+      setShow(true);
+      setBlocked(false);
+    } else {
+      setEditBlockedReason(true);
+      setBlocked(true);
+      setReady(false);
+    }
   };
 
   const handleTicketReady = () => {
-    setIsReady(!isReady);
+    setReady(!ready);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (blockedReason === "") {
+      setBlockedReason("Blocked");
+    }
+
+    updateTicket(
+      ticketId,
+      title,
+      description,
+      kanbanId,
+      status,
+      blocked,
+      blockedReason,
+      userId
+    );
   };
 
   const [deleteTicket] = useMutation(DELETE_TICKET, {
@@ -63,21 +136,21 @@ export const Ticket = ({ ticket }) => {
           <button
             onClick={handleTicketReady}
             className={`border ${
-              isReady ? "bg-green-600" : "bg-slate-200"
+              ready ? "bg-green-600" : "bg-slate-200"
             } rounded-full mr-3`}
           >
             <AiOutlineCheckCircle
-              className={`${isReady ? "text-slate-50" : "text-slate-700"}`}
+              className={`${ready ? "text-slate-50" : "text-slate-700"}`}
             />
           </button>
           <button
             onClick={handleBlockTicket}
             className={`border ${
-              isBlocked ? "bg-red-600" : "bg-red-50"
+              blocked ? "bg-red-600" : "bg-red-50"
             } rounded-full mr-3`}
           >
             <AiOutlineStop
-              className={`${isBlocked ? "text-slate-50" : "text-slate-700"}`}
+              className={`${blocked ? "text-slate-50" : "text-slate-700"}`}
             />
           </button>
           <Link
@@ -98,7 +171,7 @@ export const Ticket = ({ ticket }) => {
       >
         {ticket.title}
       </p>
-      {description && (
+      {ticketDescription && (
         <p className="text-left text-base my-2">{ticket.description}</p>
       )}
 
@@ -121,11 +194,30 @@ export const Ticket = ({ ticket }) => {
       {createdDate && (
         <p className="text-left text-sm my-2">Created: {ticket.createdAt}</p>
       )}
-      {isBlocked && (
+      {editBlockedReason && (
+        <form onSubmit={onSubmit} className="flex flex-col">
+          <DynamicInput
+            id="edit-block-input"
+            inputType="textarea"
+            label="Blocked Reason"
+            changeHandler={(e) => setBlockedReason(e.target.value)}
+            placeholder="Reason story is blocked"
+            value={blockedReason}
+            rows="3"
+            ariaLabel="Block story input"
+          />
+          <DynamicButton type="submit" color="blue">
+            Save
+          </DynamicButton>
+        </form>
+      )}
+      {blocked && (
         <div className="bg-red-500 text-slate-50 text-sm rounded-2xl mt-2 py-1">
           {ticket.blockedReason || "Blocked"}
         </div>
       )}
+
+      <UnblockTicketModal show={show} ticket={ticket} />
     </div>
   );
 };
