@@ -22,6 +22,8 @@ import { useSelector } from "react-redux";
 import { DynamicInput } from "../../reusable/DynamicInput/DynamicInput";
 import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
 import { UnblockTicketModal } from "../../modals/UnblockTicketModal/UnblockTickModal";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 export const Ticket = ({ ticket }) => {
   const { kanbanId, clientId, projectId } = useParams();
@@ -46,8 +48,7 @@ export const Ticket = ({ ticket }) => {
   const [ticketId, setTicketId] = useState(ticket.id);
   const [editBlockedReason, setEditBlockedReason] = useState(false);
   const [show, setShow] = useState(false);
-
-  // const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const [updateTicket] = useMutation(UPDATE_TICKET, {
     variables: {
@@ -76,8 +77,8 @@ export const Ticket = ({ ticket }) => {
 
   const handleBlockTicket = () => {
     if (blocked) {
-      // open unblock modal
       setShow(true);
+      console.log("show: ", show);
       setBlocked(false);
     } else {
       setEditBlockedReason(true);
@@ -191,9 +192,11 @@ export const Ticket = ({ ticket }) => {
           </p>
         </div>
       )}
+
       {createdDate && (
         <p className="text-left text-sm my-2">Created: {ticket.createdAt}</p>
       )}
+
       {editBlockedReason && (
         <form onSubmit={onSubmit} className="flex flex-col">
           <DynamicInput
@@ -211,13 +214,42 @@ export const Ticket = ({ ticket }) => {
           </DynamicButton>
         </form>
       )}
+
       {blocked && (
         <div className="bg-red-500 text-slate-50 text-sm rounded-2xl mt-2 py-1">
           {ticket.blockedReason || "Blocked"}
         </div>
       )}
 
-      <UnblockTicketModal show={show} ticket={ticket} />
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        {/* <Modal.Header closeButton>
+        <Modal.Title>Delete=== {subject}</Modal.Title>
+      </Modal.Header> */}
+        <Modal.Body>{`Unblock ticket?`}</Modal.Body>
+        <Modal.Footer>
+          <Button
+            className="border bg-slate-500"
+            variant="secondary"
+            onClick={handleClose}
+          >
+            Close
+          </Button>
+          <form onSubmit={onSubmit}>
+            <DynamicButton
+              clickHandler={handleClose}
+              color="blue"
+              type="submit"
+            >
+              Yes
+            </DynamicButton>
+          </form>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

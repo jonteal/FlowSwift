@@ -5,8 +5,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
 
-export const UnblockTicketModal = ({ ticket, unblockTicket }) => {
-  const [show, setShow] = useState(false);
+export const UnblockTicketModal = ({ ticket, unblockTicket, modalOpen }) => {
+  const [show, setShow] = useState(modalOpen);
   const handleClose = () => setShow(false);
 
   const [title, setTitle] = useState(ticket.title);
