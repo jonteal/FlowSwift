@@ -1,23 +1,27 @@
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import moment from "moment";
-import { format, fromUnixTime } from "date-fns";
 
 // GRAPHQL
 import { GET_TICKET } from "../../../../graphql/queries/ticketQueries";
+import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 
 // COMPONENTS
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
+import { NameValuePair } from "../../../../components/reusable/NameValuePair/NameValuePair";
+import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
 import { ThemeContext } from "../../../../context";
 import { useContext } from "react";
-import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
+import { useSelector } from "react-redux";
 
 export const TicketView = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  // const theme = useContext(ThemeContext);
+  // const darkMode = theme.state.darkMode;
+
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { ticketId, clientId, projectId, kanbanId } = useParams();
   const {
     loading: ticketLoading,
@@ -26,12 +30,6 @@ export const TicketView = () => {
   } = useQuery(GET_TICKET, {
     variables: { id: ticketId },
   });
-
-  const navigate = useNavigate();
-
-  const handleBackNavigate = () => {
-    navigate(-1);
-  };
 
   const {
     loading: kanbanStatusColumnLoading,
@@ -47,14 +45,25 @@ export const TicketView = () => {
   if (ticketLoading) return <Spinner />;
   if (ticketError) return <p>Something went wrong</p>;
 
-  const { id, title, description, status, createdAt, user } = ticketData.ticket;
+  const {
+    id,
+    title,
+    description,
+    status,
+    createdAt,
+    user,
+    blocked,
+    blockedReason,
+    ready,
+    typeOfTicket,
+  } = ticketData.ticket;
 
   const ticketStatus = kanbanStatusColumnData.kanbanStatusColumns.find(
     (column) => column.id === status
   );
 
   return (
-    <div className="h-screen border-slate-500 rounded-xl">
+    <DynamicContainer className="mt-2">
       {!ticketLoading && !ticketError && (
         <div
           className={`h-screen ${
@@ -76,77 +85,38 @@ export const TicketView = () => {
               </DynamicButton>
             </div>
 
+            <div className="flex flex-col items-start justify-start mt-3">
+              <h3>Status</h3>
+              <div className="flex flex-row mt-2">
+                <DynamicButton type="primary" className="mr-2">
+                  Ready
+                </DynamicButton>
+                <DynamicButton type="primary">Blocked</DynamicButton>
+              </div>
+            </div>
+
+            <div className="flex flex-row justify-start mt-4">
+              <h3>Description</h3>
+            </div>
+
             <div
               className={`${
                 darkMode ? "bg-sky-950" : ""
-              } mt-5 flex flex-col items-start border rounded-xl py-3`}
+              } mt-2 flex flex-col items-start border rounded-xl py-3 pl-3`}
             >
-              <div className="px-3 py-0 m-2">
-                <p
-                  className={`${
-                    darkMode ? "text-slate-50" : "text-slate-600"
-                  }  font-bold text-left text-sm mb-1`}
-                >
-                  Title
-                </p>
-                <p className="text-slate-800 font-normal text-left text-lg border px-3 py-1 rounded-md bg-slate-50">
-                  {title}
-                </p>
-              </div>
-              <div className="px-3 py-0 m-2 w-full">
-                <p
-                  className={`${
-                    darkMode ? "text-slate-50" : "text-slate-600"
-                  }  font-bold text-left text-sm mb-1`}
-                >
-                  Description
-                </p>
+              <NameValuePair name="Title" value={title} />
 
-                <p className="border w-full h-auto text-left pl-2 px-3 py-1 rounded-md bg-slate-50">
-                  {description}
-                </p>
-              </div>
-              <div className="px-3 py-0 m-2">
-                <p
-                  className={`${
-                    darkMode ? "text-slate-50" : "text-slate-600"
-                  }  font-bold text-left text-sm mb-1`}
-                >
-                  Status
-                </p>
-                <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
-                  {ticketStatus.columnState}
-                </p>
-              </div>
-              <div className="px-3 py-0 m-2">
-                <p
-                  className={`${
-                    darkMode ? "text-slate-50" : "text-slate-600"
-                  }  font-bold text-left text-sm mb-1`}
-                >
-                  Owned by:
-                </p>
-                <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
-                  {user.name}
-                </p>
-              </div>
+              <NameValuePair name="Description" value={description} />
 
-              <div className="px-3 py-0 m-2">
-                <p
-                  className={`${
-                    darkMode ? "text-slate-50" : "text-slate-600"
-                  }  font-bold text-left text-sm mb-1`}
-                >
-                  Created:
-                </p>
-                {/* <p className="text-slate-800 font-normal text-left text-base border px-3 py-1 rounded-md bg-slate-50">
-                  {createdDate}
-                </p> */}
-              </div>
+              <NameValuePair name="Status" value={ticketStatus.columnState} />
+
+              <NameValuePair name="Owned by: " value={user.name} />
+
+              {/* <NameValuePair name="Created: " value={createdAt} /> */}
             </div>
           </div>
         </div>
       )}
-    </div>
+    </DynamicContainer>
   );
 };

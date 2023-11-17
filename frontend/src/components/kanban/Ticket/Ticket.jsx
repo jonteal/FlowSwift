@@ -48,7 +48,23 @@ export const Ticket = ({ ticket }) => {
   const [ticketId, setTicketId] = useState(ticket.id);
   const [editBlockedReason, setEditBlockedReason] = useState(false);
   const [show, setShow] = useState(false);
+  const [actionType, setActionType] = useState(false);
+
   const handleClose = () => setShow(false);
+
+  const handleNoSubmitModalClose = () => {
+    console.log("test");
+    if (ready === true) {
+      setReady(true);
+    } else if (ready === true) {
+      setReady(false);
+    } else if (blocked === true) {
+      setBlocked(true);
+      console.log("blocked: ", blocked);
+      setReady(false);
+    }
+    setShow(false);
+  };
 
   const [updateTicket] = useMutation(UPDATE_TICKET, {
     variables: {
@@ -60,6 +76,7 @@ export const Ticket = ({ ticket }) => {
       status,
       blockedReason,
       userId,
+      ready,
     },
     refetchQueries: [{ query: GET_TICKETS, variables: { kanbanId } }],
     update(cache, { data: { updateTicket } }) {
@@ -81,15 +98,25 @@ export const Ticket = ({ ticket }) => {
       setBlocked(false);
       setBlockedReason("");
       setEditBlockedReason(false);
+      setActionType("unblock");
     } else {
       setEditBlockedReason(true);
       setBlocked(true);
       setReady(false);
+      setActionType("block");
     }
   };
 
   const handleTicketReady = () => {
+    setShow(true);
+    setBlocked(false);
     setReady(!ready);
+    setBlockedReason("");
+    if (ready) {
+      setActionType("notReady");
+    } else {
+      setActionType("ready");
+    }
   };
 
   const onSubmit = (e) => {
@@ -107,7 +134,8 @@ export const Ticket = ({ ticket }) => {
       status,
       blocked,
       blockedReason,
-      userId
+      userId,
+      ready
     );
     setEditBlockedReason(false);
   };
@@ -116,6 +144,21 @@ export const Ticket = ({ ticket }) => {
     variables: { id: ticket.id },
     refetchQueries: [{ query: GET_TICKETS, variables: { kanbanId } }],
   });
+
+  const renderModalBody = () => {
+    switch (actionType) {
+      case "unblock":
+        return "Unblock ticket?";
+      case "block":
+        return "Block ticket?";
+      case "notReady":
+        return "Ticket is not ready.";
+      case "ready":
+        return "Ticket is ready.";
+      default:
+        break;
+    }
+  };
 
   return (
     <div
@@ -229,15 +272,12 @@ export const Ticket = ({ ticket }) => {
         backdrop="static"
         keyboard={false}
       >
-        {/* <Modal.Header closeButton>
-        <Modal.Title>Delete=== {subject}</Modal.Title>
-      </Modal.Header> */}
-        <Modal.Body>{`Unblock ticket?`}</Modal.Body>
+        <Modal.Body>{renderModalBody(actionType)}</Modal.Body>
         <Modal.Footer>
           <Button
             className="border bg-slate-500"
             variant="secondary"
-            onClick={handleClose}
+            onClick={handleNoSubmitModalClose}
           >
             Close
           </Button>

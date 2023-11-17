@@ -32,17 +32,18 @@ import {
   setEstimateOn,
 } from "../../../../slices/projectsSlice";
 import { ThemeContext } from "../../../../context";
-import { ProjectsTableItem } from "../../../../components/ProjectsTableItem/ProjectsTableItem";
 import { ProjectsAccordion } from "../../../../components/Accordions/ProjectsAccordion.jsx/ProjectsAccordion";
 
 export const ClientProjects = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  // const theme = useContext(ThemeContext);
+  // const darkMode = theme.state.darkMode;
   const { clientId } = useParams();
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   const dispatch = useDispatch();
+
+  const { darkMode } = useSelector((state) => state.theme);
 
   const {
     gridView,

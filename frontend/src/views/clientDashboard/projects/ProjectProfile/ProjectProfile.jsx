@@ -41,8 +41,6 @@ export const ProjectProfile = () => {
   if (projectLoading) return <p>Loading...</p>;
   if (projectError) return <p>There was an error loading project...</p>;
 
-  console.log("projectData: ", projectData);
-
   const {
     title,
     description,
@@ -56,7 +54,7 @@ export const ProjectProfile = () => {
   } = projectData.project;
 
   return (
-    <DynamicContainer>
+    <DynamicContainer className="mt-2">
       <div className="flex flex-row">
         <div
           className={`rounded-xl transform xl:translate-x-0 ease-in-out transition duration-500  ${

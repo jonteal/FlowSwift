@@ -6,6 +6,7 @@ import featuresSlice from "./slices/featuresSlice";
 import projectsSlice from "./slices/projectsSlice";
 import clientBilling from "./slices/clientBilling";
 import clientsListSlice from "./slices/clientsListSlice";
+import themeSlice from "./slices/themeSlice";
 // import settingsSlice from "./slices/settingsSlice";
 
 const store = configureStore({
@@ -17,6 +18,7 @@ const store = configureStore({
     projects: projectsSlice,
     clientBilling: clientBilling,
     clientsList: clientsListSlice,
+    theme: themeSlice,
     // settings: settingsSlice,
   },
   middleware: (getDefaultMiddleware) =>

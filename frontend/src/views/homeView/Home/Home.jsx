@@ -12,14 +12,11 @@ import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 
 // STATE
-import { useContext } from "react";
 import { useSelector } from "react-redux";
-import { ThemeContext } from "../../../context";
 
 export const Home = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
   const { userInfo } = useSelector((state) => state.auth);
+  const { darkMode } = useSelector((state) => state.theme);
 
   const {
     loading: userLoading,

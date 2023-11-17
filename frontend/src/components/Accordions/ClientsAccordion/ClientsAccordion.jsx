@@ -1,13 +1,12 @@
-import { useState } from "react";
-import Accordion from "react-bootstrap/Accordion";
 import { Link } from "react-router-dom";
 
 // COMPONENTS
 import { ClientTable } from "../../ClientTable/ClientTable";
+import Accordion from "react-bootstrap/Accordion";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export const ClientsAccordion = ({
   clientCount,
@@ -17,8 +16,8 @@ export const ClientsAccordion = ({
   clients,
   container,
 }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleClick = () => {
