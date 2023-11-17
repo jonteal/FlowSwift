@@ -11,12 +11,11 @@ import { ClientMobileMenu } from "../../../components/dashboardMain/ClientMobile
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { useSelector } from "react-redux";
 
 export const ClientView = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { clientId } = useParams();
 
   const {

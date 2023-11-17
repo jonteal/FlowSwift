@@ -1,9 +1,9 @@
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+// STATE
+import { useSelector } from "react-redux";
 
 export const NameValuePair = ({ name, value, type, children }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   return (
     <div className="flex flex-col ml-2 my-3">
       <p

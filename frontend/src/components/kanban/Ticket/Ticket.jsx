@@ -1,4 +1,3 @@
-import { useContext, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 
@@ -16,20 +15,20 @@ import {
 } from "../../../graphql/mutations/ticketMutations";
 import { GET_TICKETS } from "../../../graphql/queries/ticketQueries";
 
-// STATE
-import { ThemeContext } from "../../../context";
-import { useSelector } from "react-redux";
+// COMPONENTS
 import { DynamicInput } from "../../reusable/DynamicInput/DynamicInput";
 import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
-import { UnblockTicketModal } from "../../modals/UnblockTicketModal/UnblockTickModal";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+
+// STATE
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export const Ticket = ({ ticket }) => {
   const { kanbanId, clientId, projectId } = useParams();
 
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   const {
     size,

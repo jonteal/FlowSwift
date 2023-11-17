@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 // LIBRARIES
 import { useMutation } from "@apollo/client";
 
@@ -12,13 +10,12 @@ import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import { Comment } from "../Comment/Comment";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export const ClientCommentFeed = ({ clientId, comments }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const [commentText, setCommentText] = useState("");
   const { userInfo } = useSelector((state) => state.auth);
   const [userId, setUserId] = useState(userInfo._id);

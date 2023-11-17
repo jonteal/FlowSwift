@@ -1,4 +1,6 @@
 import { Link, useParams } from "react-router-dom";
+
+// ICONS
 import { TbFileInvoice } from "react-icons/tb";
 
 // COMPONENTS
@@ -6,12 +8,11 @@ import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import { InvoiceTableItem } from "../dashboardBilling/InvoiceTableItem/InvoiceTableItem";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { useSelector } from "react-redux";
 
 export const InvoiceTable = ({ invoices, shortList }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { clientId, projectId } = useParams();
 
   const filteredList = shortList ? invoices : invoices.slice(0, 5);

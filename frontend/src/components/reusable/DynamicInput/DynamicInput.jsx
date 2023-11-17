@@ -1,6 +1,7 @@
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { useSelector } from "react-redux";
+
+// UTILS
 import { capitalized } from "../../../utils/format";
 
 export const DynamicInput = ({
@@ -18,8 +19,8 @@ export const DynamicInput = ({
   step = "",
   min = "",
 }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const renderInput = () => {
     switch (inputType) {
       case "input":

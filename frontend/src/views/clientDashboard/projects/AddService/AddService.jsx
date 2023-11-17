@@ -13,16 +13,15 @@ import { GET_SERVICES } from "../../../../graphql/queries/serviceQueries";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
 import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
-
-// STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../../context";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
+// STATE
+import { useSelector } from "react-redux";
+
 export const AddService = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { projectId } = useParams();
 
   const [service, setService] = useState("");
@@ -103,7 +102,7 @@ export const AddService = () => {
   };
 
   return (
-    <DynamicContainer>
+    <DynamicContainer className="mt-2">
       <div>
         {alertOn && (
           <div className="alert alert-danger mt-3" role="alert">

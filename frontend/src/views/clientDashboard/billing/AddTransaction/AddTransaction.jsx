@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 // LIBRARIES
@@ -15,15 +14,15 @@ import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
-
-// STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../../context";
 import { PageHeadline } from "../../../../components/reusable/PageHeadline/PageHeadline";
 
+// STATE
+import { useState } from "react";
+import { useSelector } from "react-redux";
+
 export const AddTransaction = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { clientId } = useParams();
 
   const [paymentDate, setPaymentDate] = useState("");

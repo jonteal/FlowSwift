@@ -9,13 +9,11 @@ import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { NameValuePair } from "../../../../components/reusable/NameValuePair/NameValuePair";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../../context";
+import { useSelector } from "react-redux";
 
 export const ProjectInvoice = () => {
   const { invoiceId } = useParams();
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   const {
     loading: invoiceLoading,

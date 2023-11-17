@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
@@ -13,12 +12,12 @@ import { DateSelector } from "../../../../components/reusable/DateSelector/DateS
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../../context";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export const EditProject = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { projectId } = useParams();
 
   const {

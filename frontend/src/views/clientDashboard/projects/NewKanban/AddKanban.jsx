@@ -49,7 +49,7 @@ export const AddKanban = () => {
   };
 
   return (
-    <DynamicContainer>
+    <DynamicContainer className="mt-2">
       <form onSubmit={onSubmit}>
         <DynamicInput
           id="kanban-title"

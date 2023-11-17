@@ -1,12 +1,14 @@
+// COMPONENTS
 import { Ticket } from "../Ticket/Ticket";
 
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+// STATE
+import { useSelector } from "react-redux";
+
+// UTILS
 import { camelCaseToWords } from "../../../utils/format";
 
 export const StatusColumn = ({ statusColumns, ticketData }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   return (
     <div className="flex flex-row items-start ml-2">

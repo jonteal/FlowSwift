@@ -1,17 +1,16 @@
+import { NavLink } from "react-router-dom";
+
+// ICONS
 import { BsFillPersonVcardFill, BsActivity } from "react-icons/bs";
 import { MdElectricalServices } from "react-icons/md";
 import { GiMoneyStack } from "react-icons/gi";
 import { PiKanbanLight } from "react-icons/pi";
 
-import { NavLink } from "react-router-dom";
-
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { useSelector } from "react-redux";
 
 export const ProjectViewNav = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   return (
     <div

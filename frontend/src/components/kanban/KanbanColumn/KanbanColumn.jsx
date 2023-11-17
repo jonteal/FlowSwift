@@ -2,25 +2,22 @@
 import { PiArrowsOutLineHorizontalBold } from "react-icons/pi";
 
 // COLUMNS
+import { Ticket } from "../Ticket/Ticket";
 import { DeleteColumn } from "../../../views/clientDashboard/projects/NewKanban/DeleteColumn";
 
 // STATE
-import { useState, useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+
+// UTILS
 import { capitalized } from "../../../utils/format";
-import { Ticket } from "../Ticket/Ticket";
 
 export const KanbanColumn = ({ column, ticketData }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   const [collapseColumn, setCollapseColumn] = useState(false);
   const [isColumnHorizontallyCollapsed, setIsColumnHorizontallyCollapsed] =
     useState(false);
-
-  const handleCollapseColumn = () => {
-    setCollapseColumn(!collapseColumn);
-  };
 
   const handleColumnHorizontalCollapse = () => {
     setIsColumnHorizontallyCollapsed(!isColumnHorizontallyCollapsed);
@@ -40,16 +37,6 @@ export const KanbanColumn = ({ column, ticketData }) => {
         } w-full mt-2 mr-2 rounded-lg md:min-h-screen `}
       >
         <div className="w-full border-red-50 flex flex-row items-center justify-between">
-          {/* <div className="w-full flex flex-row items-start">
-              <BiArrowToBottom
-                onClick={handleCollapseColumn}
-                className={`text-2xl top-0 cursor-pointer ${
-                  collapseColumn
-                    ? "rotate-180 transform transition ease-in-out delay-50 duration-200"
-                    : ""
-                } `}
-              />
-            </div> */}
           {!isColumnHorizontallyCollapsed && (
             <div className="flex flex-row items-center justify-start w-full mt-2">
               <h5 className="font-extrabold ml-3">

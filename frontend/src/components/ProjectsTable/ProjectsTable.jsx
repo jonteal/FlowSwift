@@ -1,12 +1,11 @@
 import { ProjectsTableItem } from "../ProjectsTableItem/ProjectsTableItem";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { useSelector } from "react-redux";
 
 export const ProjectsTable = ({ projects, searchTerm }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   return (
     <div className="border w-full flex flex-col">
       <table className="table-auto overflow-x-scroll">

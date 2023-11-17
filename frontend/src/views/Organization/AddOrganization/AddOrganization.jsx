@@ -18,14 +18,11 @@ import { DynamicButton } from "../../../components/reusable/DynamicButton/Dynami
 import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicInput";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
 import { useSelector } from "react-redux";
 import { useUpdateUserMutation } from "../../../slices/usersApiSlice";
 
 export const AddOrganization = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   const { userInfo } = useSelector((state) => state.auth);
 

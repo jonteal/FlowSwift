@@ -15,12 +15,11 @@ import { StatusBadge } from "../../../../components/reusable/StatusBadge/StatusB
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../../context";
+import { useSelector } from "react-redux";
 
 export const ProjectProfile = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { projectId, clientId } = useParams();
   const navigate = useNavigate();
 

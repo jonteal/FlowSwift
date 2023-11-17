@@ -1,10 +1,9 @@
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { useSelector } from "react-redux";
 
 export const Body = ({ children, className }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   return (
     <p
       className={`${

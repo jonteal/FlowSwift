@@ -1,10 +1,11 @@
-import { useContext } from "react";
+// COMPONENTS
 import { FilterToggle } from "../FilterToggle/FilterToggle";
-import { ThemeContext } from "../../../context";
+
+// STATE
+import { useSelector } from "react-redux";
 
 export const FiltersList = ({ filters }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   return (
     <div

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
@@ -12,7 +12,6 @@ import { ProjectsTableItem } from "../../components/ProjectsTableItem/ProjectsTa
 import { FiltersList } from "../../components/reusable/FiltersList/FiltersList";
 
 // STATE
-import { ThemeContext } from "../../context";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setGridViewOn,
@@ -32,8 +31,8 @@ import {
 } from "../../slices/projectsSlice";
 
 export const Projects = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { loading, error, data } = useQuery(GET_PROJECTS);
   const [searchTerm, setSearchTerm] = useState("");
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);

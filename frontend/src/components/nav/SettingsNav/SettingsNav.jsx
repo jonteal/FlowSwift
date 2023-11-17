@@ -1,19 +1,15 @@
-// import { BsFillPersonVcardFill, BsActivity } from "react-icons/bs";
-// import { MdElectricalServices } from "react-icons/md";
-// import { GiMoneyStack } from "react-icons/gi";
-// import { PiKanbanLight } from "react-icons/pi";
-
 import { NavLink } from "react-router-dom";
 
-// STATE
-import { useContext, useState } from "react";
-import { ThemeContext } from "../../../context";
+// ICONS
 import { RiExpandLeftLine, RiExpandRightLine } from "react-icons/ri";
-import { FaCreditCard, FaTable, FaWindowMaximize } from "react-icons/fa";
+import { FaWindowMaximize } from "react-icons/fa";
+
+// STATE
+import { useSelector } from "react-redux";
 
 export const SettingsNav = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const [isOpen, setIsOpen] = useState(true);
 
   const handleNavCollapse = () => {

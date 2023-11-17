@@ -18,13 +18,11 @@ import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
-import { useContext } from "react";
 import { useSelector } from "react-redux";
-import { ThemeContext } from "../../../../context";
 
 export const AddProject = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("notStarted");

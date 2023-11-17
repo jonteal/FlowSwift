@@ -4,15 +4,17 @@ import { useQuery } from "@apollo/client";
 import { GET_CLIENTS } from "../../../graphql/queries/clientQueries";
 import { GET_USER } from "../../../graphql/queries/userQueries";
 
+// ICONS
+import { FaUserAlt } from "react-icons/fa";
+
 // COMPONENTS
 import { ClientsContainer } from "../../../components/ClientsContainer/ClientsContainer";
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 import { FiltersList } from "../../../components/reusable/FiltersList/FiltersList";
 import { ChartContainer } from "../../../components/ChartContainer/ChartContainer";
 
-import { FaUserAlt } from "react-icons/fa";
-
 // STATE
+import { useState } from "react";
 import {
   setChartsOff,
   setChartsOn,
@@ -24,15 +26,12 @@ import {
   setLineChartOn,
 } from "../../../slices/clientsListSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useContext } from "react";
-import { ThemeContext } from "../../../context";
 
 // UTILS
 import { clientContainers } from "../../Clients/constants";
 
 export const ClientList = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   const { userInfo } = useSelector((state) => state.auth);
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);

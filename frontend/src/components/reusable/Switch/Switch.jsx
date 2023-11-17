@@ -1,15 +1,12 @@
-import { useContext } from "react";
-
 // ICONS
 import { FaRectangleList } from "react-icons/fa6";
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 
 // STATE
-import { ThemeContext } from "../../../context";
+import { useSelector } from "react-redux";
 
 export const Switch = ({ changeHandler, isChecked }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   return (
     <label

@@ -12,8 +12,8 @@ import { DynamicInput } from "../../../../components/reusable/DynamicInput/Dynam
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
-import { useContext, useState } from "react";
-import { ThemeContext } from "../../../../context";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 // UTILS
 import { capitalized } from "../../../../utils/format";
@@ -21,8 +21,7 @@ import { capitalized } from "../../../../utils/format";
 export const KanbanEdit = () => {
   const { kanbanId } = useParams();
 
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   const { loading, error, data } = useQuery(GET_KANBAN, {
     variables: { id: kanbanId },

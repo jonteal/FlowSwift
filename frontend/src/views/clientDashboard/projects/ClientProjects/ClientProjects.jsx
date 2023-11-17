@@ -11,10 +11,11 @@ import { DynamicButton } from "../../../../components/reusable/DynamicButton/Dyn
 import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
 import { Switch } from "../../../../components/reusable/Switch/Switch";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
+import { ProjectsAccordion } from "../../../../components/Accordions/ProjectsAccordion.jsx/ProjectsAccordion";
 
 // STATE
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import {
   setGridViewOn,
   setGridViewOff,
@@ -31,12 +32,8 @@ import {
   setEstimateOff,
   setEstimateOn,
 } from "../../../../slices/projectsSlice";
-import { ThemeContext } from "../../../../context";
-import { ProjectsAccordion } from "../../../../components/Accordions/ProjectsAccordion.jsx/ProjectsAccordion";
 
 export const ClientProjects = () => {
-  // const theme = useContext(ThemeContext);
-  // const darkMode = theme.state.darkMode;
   const { clientId } = useParams();
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");

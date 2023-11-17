@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
@@ -21,13 +20,12 @@ import { Spinner } from "../reusable/Spinner/Spinner";
 import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export const Comment = ({ comment, type }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { clientId, projectId } = useParams();
 
   const [addReply, setAddReply] = useState(false);

@@ -1,14 +1,21 @@
-import { useContext, useEffect, useState } from "react";
-import { FaRegEye } from "react-icons/fa6";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ThemeContext } from "../../context";
-import { camelCaseToWords } from "../../utils/format";
+
+// ICONS
+import { FaRegEye } from "react-icons/fa6";
 import { FaRegTrashAlt } from "react-icons/fa";
+
+// COMPONENTS
 import { DeleteProject } from "../../views/Projects/DeleteProject";
 
+// STATE
+import { useSelector } from "react-redux";
+
+// UTILS
+import { camelCaseToWords } from "../../utils/format";
+
 export const ProjectsTableItem = ({ project, index }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   const [statusColor, setStatusColor] = useState("");
 

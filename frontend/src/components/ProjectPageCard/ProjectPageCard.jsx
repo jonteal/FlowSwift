@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
-import { StatusBadge } from "../reusable/StatusBadge/StatusBadge";
+
+// ICONS
 import { BsPersonCircle, BsFillCalendarDateFill } from "react-icons/bs";
 import { FaProjectDiagram } from "react-icons/fa";
 
+// COMPONENTS
+import { StatusBadge } from "../reusable/StatusBadge/StatusBadge";
+
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../context";
 import { useSelector } from "react-redux";
 
 export const ProjectPageCard = ({ project }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   const {
     statusBadge,

@@ -8,15 +8,16 @@ import { FaRegEye } from "react-icons/fa";
 // COMPONENTS
 import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
 import Table from "react-bootstrap/Table";
-import { capitalized } from "../../../utils/format";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { useSelector } from "react-redux";
+
+// UTILS
+import { capitalized } from "../../../utils/format";
 
 export const ServicesTable = ({ services, type }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { clientId, projectId } = useParams();
 
   return (

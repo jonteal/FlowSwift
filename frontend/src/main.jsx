@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import { Provider } from "react-redux";
-import { ThemeProvider } from "./context";
 import { App } from "./App.jsx";
 import { Home } from "./views/homeView/Home/Home";
 import { LoginScreen } from "./views/Auth/Login/LoginScreen.jsx";
@@ -52,15 +51,15 @@ import { Settings } from "./views/Settings/Settings";
 import { Documentation } from "./views/Settings/Documentation";
 import { AddUser } from "./views/Organization/AddUser/AddUser";
 import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganization";
-
-import store from "./store";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./index.css";
 import { Features } from "./views/Features/Features";
 import { NewKanban } from "./views/clientDashboard/projects/NewKanban/NewKanban";
 import { AddKanban } from "./views/clientDashboard/projects/NewKanban/AddKanban";
 import { KanbanView } from "./views/clientDashboard/projects/NewKanban/KanbanView";
 import { KanbanEdit } from "./views/clientDashboard/projects/NewKanban/KanbanEdit";
+
+import store from "./store";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -234,12 +233,10 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <ThemeProvider>
-      <ApolloProvider client={client}>
-        <React.StrictMode>
-          <RouterProvider router={router} />
-        </React.StrictMode>
-      </ApolloProvider>
-    </ThemeProvider>
+    <ApolloProvider client={client}>
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    </ApolloProvider>
   </Provider>
 );

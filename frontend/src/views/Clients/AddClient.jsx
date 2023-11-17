@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
@@ -13,12 +13,11 @@ import { DynamicInput } from "../../components/reusable/DynamicInput/DynamicInpu
 import { DynamicContainer } from "../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
-import { ThemeContext } from "../../context";
 import { useSelector } from "react-redux";
 
 export const AddClient = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");

@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-import { useContext, useState } from "react";
 import { useRegisterMutation } from "../../../slices/usersApiSlice";
 
 // GRAPHQL
@@ -12,13 +11,13 @@ import FormContainer from "../../../components/FormContainer";
 import { Form, Spinner } from "react-bootstrap";
 
 // STATE
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import { ThemeContext } from "../../../context";
+
 // import { setCredentials } from "../../../slices/authSlice";
 
 export const AddUser = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   const { userInfo } = useSelector((state) => state.auth);
 

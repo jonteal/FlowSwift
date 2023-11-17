@@ -1,4 +1,3 @@
-import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
@@ -19,7 +18,7 @@ import { SectionHeadline } from "../../../../components/reusable/SectionHeadline
 import { KanbanColumn } from "../../../../components/kanban/KanbanColumn/KanbanColumn";
 
 // STATE
-import { ThemeContext } from "../../../../context";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSizeOff,
@@ -35,8 +34,7 @@ import {
 export const KanbanView = () => {
   const { kanbanId } = useParams();
 
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   const dispatch = useDispatch();
   const {

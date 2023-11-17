@@ -3,12 +3,10 @@ import Accordion from "react-bootstrap/Accordion";
 import { Link } from "react-router-dom";
 
 // COMPONENTS
-// import { ClientTable } from "../../ClientTable/ClientTable";
+import { ProjectsTable } from "../../ProjectsTable/ProjectsTable";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
-import { ProjectsTable } from "../../ProjectsTable/ProjectsTable";
+import { useSelector } from "react-redux";
 
 export const ProjectsAccordion = ({
   linkLabel,
@@ -16,8 +14,8 @@ export const ProjectsAccordion = ({
   projects,
   searchTerm,
 }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const [isExpanded, setIsExpanded] = useState(false);
 
   const projectCount = projects.length;

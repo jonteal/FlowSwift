@@ -1,4 +1,6 @@
 import { Link, useParams } from "react-router-dom";
+
+// ICONS
 import { GrTransaction } from "react-icons/gr";
 
 // COMPONENTS
@@ -6,12 +8,11 @@ import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import { ClientTransactionItem } from "../dashboardBilling/ClientTransactionItem/ClientTransactionItem";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { useSelector } from "react-redux";
 
 export const TransactionTable = ({ transactions, shortList }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { clientId, projectId } = useParams();
 
   const filteredList = shortList ? transactions : transactions.slice(0, 5);

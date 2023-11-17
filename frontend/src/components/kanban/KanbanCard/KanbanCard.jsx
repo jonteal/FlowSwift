@@ -1,15 +1,17 @@
 import { Link, useParams } from "react-router-dom";
+
+// ICONS
 import { MdOutlineDescription } from "react-icons/md";
 import { PiKanbanLight } from "react-icons/pi";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { useSelector } from "react-redux";
 
 export const KanbanCard = ({ kanban }) => {
   const { clientId, projectId } = useParams();
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { title, description } = kanban;
   return (
     <Link

@@ -1,14 +1,16 @@
-import { useState } from "react";
-import { FaTable, FaWindowMaximize, FaCreditCard } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+
+// ICONS
+import { FaTable, FaWindowMaximize, FaCreditCard } from "react-icons/fa";
 import { RiExpandRightLine, RiExpandLeftLine } from "react-icons/ri";
 
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+// STATE
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export const ClientViewNav = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const [isOpen, setIsOpen] = useState(true);
 
   const handleNavCollapse = () => {

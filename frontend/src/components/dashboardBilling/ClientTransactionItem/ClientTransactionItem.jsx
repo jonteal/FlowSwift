@@ -1,12 +1,11 @@
 import { BsArrowUpSquare, BsArrowDownSquare } from "react-icons/bs";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { useSelector } from "react-redux";
 
 export const ClientTransactionItem = ({ transaction }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   return (
     <div className="flex flex-row justify-between items-center w-full px-4 my-2">
       <div className="flex flex-row items-center">

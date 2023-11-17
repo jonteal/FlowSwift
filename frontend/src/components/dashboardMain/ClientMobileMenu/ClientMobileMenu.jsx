@@ -1,14 +1,20 @@
-import { useContext, useState } from "react";
-import Button from "react-bootstrap/Button";
-import Offcanvas from "react-bootstrap/Offcanvas";
+import { NavLink } from "react-router-dom";
+
+// ICONS
 import { FaCreditCard, FaTable, FaWindowMaximize } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
-import { NavLink } from "react-router-dom";
-import { ThemeContext } from "../../../context";
+
+// COMPONENTS
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
+
+// STATE
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export const ClientMobileMenu = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

@@ -2,7 +2,6 @@ import { useMutation } from "@apollo/client";
 
 // ICONS
 import { FaRegTrashAlt } from "react-icons/fa";
-// import { FiEdit2 } from "react-icons/fi";
 
 // GRAPHQL
 import { DELETE_CLIENT_ACTIVITY_COMMENT_REPLY } from "../../graphql/mutations/clientActivityCommentReplyMutations";
@@ -11,12 +10,10 @@ import { GET_CLIENT_ACTIVITY_COMMENT_REPLIES } from "../../graphql/queries/clien
 import { GET_PROJECT_ACTIVITY_COMMENT_REPLIES } from "../../graphql/queries/projectActivityCommentReplyQueries";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { useSelector } from "react-redux";
 
 export const CommentReply = ({ reply, formattedDate, type, commentId }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   const [deleteClientCommentReply] = useMutation(
     DELETE_CLIENT_ACTIVITY_COMMENT_REPLY,
@@ -71,9 +68,6 @@ export const CommentReply = ({ reply, formattedDate, type, commentId }) => {
           <p>{reply.commentText}</p>
         </div>
         <div className="flex justify-end">
-          {/* <button className="mr-2">
-            <FiEdit2 />
-          </button> */}
           <button onClick={handleCommentDelete}>
             <FaRegTrashAlt className="text-red-500" />
           </button>

@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
@@ -18,12 +18,11 @@ import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 
 // STATE
-import { ThemeContext } from "../../../../context";
 import { useSelector } from "react-redux";
 
 export const EditKanbanTicket = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { ticketId, kanbanId } = useParams();
 
   const {

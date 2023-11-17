@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 // LIBRARIES
@@ -10,21 +9,21 @@ import { GET_ALL_CLIENT_INVOICES } from "../../../../graphql/queries/invoiceQuer
 import { GET_CLIENT_PROJECTS } from "../../../../graphql/queries/projectQueries";
 
 // COMPONENTS
+import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
+import { PageHeadline } from "../../../../components/reusable/PageHeadline/PageHeadline";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../../context";
-import { PageHeadline } from "../../../../components/reusable/PageHeadline/PageHeadline";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export const AddInvoice = () => {
   const navigate = useNavigate();
 
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { clientId } = useParams();
 
   const [date, setDate] = useState("");

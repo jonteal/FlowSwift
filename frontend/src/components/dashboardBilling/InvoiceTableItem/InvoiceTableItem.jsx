@@ -1,12 +1,11 @@
 import { FaRegFilePdf } from "react-icons/fa";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { useSelector } from "react-redux";
 
 export const InvoiceTableItem = ({ invoice }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { date, invoiceNumber, amount } = invoice;
 
   return (

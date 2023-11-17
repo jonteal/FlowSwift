@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
@@ -17,11 +17,10 @@ import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 
 // STATE
 import { useSelector } from "react-redux";
-import { ThemeContext } from "../../../../context";
 
 export const AddKanbanTicket = () => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const { kanbanId } = useParams();
   const [title, setTitle] = useState("");
   const [typeOfTicket, setTypeOfTicket] = useState("userStory");

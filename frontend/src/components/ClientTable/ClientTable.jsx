@@ -8,12 +8,10 @@ import { DeleteModal } from "../../components/modals/DeleteModal/DeleteModal";
 import { EditClientModal } from "../modals/EditClientModal/EditClientModal";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../context";
+import { useSelector } from "react-redux";
 
 export const ClientTable = ({ clients, clientContainer }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
 
   return (
     <table className="table-auto overflow-x-scroll">

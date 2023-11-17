@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useMutation } from "@apollo/client";
 
 // ICONS
@@ -15,12 +14,12 @@ import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
 import { DynamicInput } from "../../reusable/DynamicInput/DynamicInput";
 
 // STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../../context";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export const EditClientModal = ({ subject, client }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

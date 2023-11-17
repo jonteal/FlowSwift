@@ -1,16 +1,13 @@
-import { useState } from "react";
-
 // COMPONENTS
 import { ClientTable } from "../ClientTable/ClientTable";
-
-// STATE
-import { useContext } from "react";
-import { ThemeContext } from "../../context";
 import { ClientsAccordion } from "../Accordions/ClientsAccordion/ClientsAccordion";
 
+// STATE
+import { useState } from "react";
+import { useSelector } from "react-redux";
+
 export const ClientsContainer = ({ clientData, clientContainer }) => {
-  const theme = useContext(ThemeContext);
-  const darkMode = theme.state.darkMode;
+  const { darkMode } = useSelector((state) => state.theme);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const clientCount = clientData.clients.filter(

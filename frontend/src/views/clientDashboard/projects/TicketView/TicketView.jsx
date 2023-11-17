@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
@@ -12,14 +12,9 @@ import { NameValuePair } from "../../../../components/reusable/NameValuePair/Nam
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
-import { ThemeContext } from "../../../../context";
-import { useContext } from "react";
 import { useSelector } from "react-redux";
 
 export const TicketView = () => {
-  // const theme = useContext(ThemeContext);
-  // const darkMode = theme.state.darkMode;
-
   const { darkMode } = useSelector((state) => state.theme);
 
   const { ticketId, clientId, projectId, kanbanId } = useParams();
