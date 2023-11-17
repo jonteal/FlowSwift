@@ -78,8 +78,9 @@ export const Ticket = ({ ticket }) => {
   const handleBlockTicket = () => {
     if (blocked) {
       setShow(true);
-      console.log("show: ", show);
       setBlocked(false);
+      setBlockedReason("");
+      setEditBlockedReason(false);
     } else {
       setEditBlockedReason(true);
       setBlocked(true);
@@ -108,6 +109,7 @@ export const Ticket = ({ ticket }) => {
       blockedReason,
       userId
     );
+    setEditBlockedReason(false);
   };
 
   const [deleteTicket] = useMutation(DELETE_TICKET, {
@@ -215,7 +217,7 @@ export const Ticket = ({ ticket }) => {
         </form>
       )}
 
-      {blocked && (
+      {blocked && !editBlockedReason && (
         <div className="bg-red-500 text-slate-50 text-sm rounded-2xl mt-2 py-1">
           {ticket.blockedReason || "Blocked"}
         </div>
