@@ -26,4 +26,11 @@ const store = configureStore({
   devTools: true,
 });
 
+export const setupStore = (preloadedState) => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  });
+};
+
 export default store;

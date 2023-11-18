@@ -5,6 +5,10 @@ import { useQuery } from "@apollo/client";
 import { GET_TICKET } from "../../../../graphql/queries/ticketQueries";
 import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 
+// ICONS
+import { FaCheckCircle } from "react-icons/fa";
+import { SiAdblock } from "react-icons/si";
+
 // COMPONENTS
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
@@ -63,7 +67,7 @@ export const TicketView = () => {
         <div
           className={`h-screen ${
             darkMode ? "bg-sky-800" : "bg-slate-50"
-          }  mx-2 mt-2 rounded-xl`}
+          } mx-2 mt-2 rounded-xl`}
         >
           <div className="mx-auto w-100 p-5">
             <div className="flex flex-row justify-start">
@@ -82,11 +86,28 @@ export const TicketView = () => {
 
             <div className="flex flex-col items-start justify-start mt-3">
               <h3>Status</h3>
-              <div className="flex flex-row mt-2">
-                <DynamicButton type="primary" className="mr-2">
+              <div className="flex flex-row mt-2 items-center">
+                <button
+                  className={`${
+                    ready ? "bg-green-500 text-slate-50" : ""
+                  } mr-3 border py-2 px-4 flex flex-row items-center cursor-pointer`}
+                >
+                  <FaCheckCircle className="mr-2" />
                   Ready
-                </DynamicButton>
-                <DynamicButton type="primary">Blocked</DynamicButton>
+                </button>
+                <button
+                  className={`${
+                    blocked ? "bg-red-500 text-slate-50" : ""
+                  } border py-2 px-4 flex flex-row items-center cursor-pointer`}
+                >
+                  <SiAdblock className="mr-2" />
+                  Blocked
+                </button>
+                {blockedReason && (
+                  <p className="border-red-500 ml-3 p-2">
+                    Reason: {blockedReason}
+                  </p>
+                )}
               </div>
             </div>
 
