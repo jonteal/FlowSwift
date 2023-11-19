@@ -5,21 +5,20 @@ import { useQuery } from "@apollo/client";
 import { GET_TICKET } from "../../../../graphql/queries/ticketQueries";
 import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 
-// ICONS
-import { FaCheckCircle } from "react-icons/fa";
-import { SiAdblock } from "react-icons/si";
-
 // COMPONENTS
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { NameValuePair } from "../../../../components/reusable/NameValuePair/NameValuePair";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
 import { useSelector } from "react-redux";
+import { TicketViewContent } from "../../../../components/kanban/TicketViewContent/TicketViewContent";
+import { useState } from "react";
 
 export const TicketView = () => {
   const { darkMode } = useSelector((state) => state.theme);
+  const { userInfo } = useSelector((state) => state.auth);
+  const [userId, setUserId] = useState(userInfo._id);
 
   const { ticketId, clientId, projectId, kanbanId } = useParams();
   const {
@@ -44,23 +43,6 @@ export const TicketView = () => {
   if (ticketLoading) return <Spinner />;
   if (ticketError) return <p>Something went wrong</p>;
 
-  const {
-    id,
-    title,
-    description,
-    status,
-    createdAt,
-    user,
-    blocked,
-    blockedReason,
-    ready,
-    typeOfTicket,
-  } = ticketData.ticket;
-
-  const ticketStatus = kanbanStatusColumnData.kanbanStatusColumns.find(
-    (column) => column.id === status
-  );
-
   return (
     <DynamicContainer className="mt-2">
       {!ticketLoading && !ticketError && (
@@ -78,58 +60,17 @@ export const TicketView = () => {
                 className="ml-5"
                 type="link"
                 color="lightBlue"
-                link={`/clients/${clientId}/projects/${projectId}/kanbans/${kanbanId}/${id}/edit`}
+                link={`/clients/${clientId}/projects/${projectId}/kanbans/${kanbanId}/${ticketId}/edit`}
               >
                 Edit
               </DynamicButton>
             </div>
 
-            <div className="flex flex-col items-start justify-start mt-3">
-              <h3>Status</h3>
-              <div className="flex flex-row mt-2 items-center">
-                <button
-                  className={`${
-                    ready ? "bg-green-500 text-slate-50" : ""
-                  } mr-3 border py-2 px-4 flex flex-row items-center cursor-pointer`}
-                >
-                  <FaCheckCircle className="mr-2" />
-                  Ready
-                </button>
-                <button
-                  className={`${
-                    blocked ? "bg-red-500 text-slate-50" : ""
-                  } border py-2 px-4 flex flex-row items-center cursor-pointer`}
-                >
-                  <SiAdblock className="mr-2" />
-                  Blocked
-                </button>
-                {blockedReason && (
-                  <p className="border-red-500 ml-3 p-2">
-                    Reason: {blockedReason}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="flex flex-row justify-start mt-4">
-              <h3>Description</h3>
-            </div>
-
-            <div
-              className={`${
-                darkMode ? "bg-sky-950" : ""
-              } mt-2 flex flex-col items-start border rounded-xl py-3 pl-3`}
-            >
-              <NameValuePair name="Title" value={title} />
-
-              <NameValuePair name="Description" value={description} />
-
-              <NameValuePair name="Status" value={ticketStatus.columnState} />
-
-              <NameValuePair name="Owned by: " value={user.name} />
-
-              {/* <NameValuePair name="Created: " value={createdAt} /> */}
-            </div>
+            <TicketViewContent
+              kanbanStatusColumnData={kanbanStatusColumnData}
+              userInfo={userInfo}
+              ticket={ticketData.ticket}
+            />
           </div>
         </div>
       )}
