@@ -1,5 +1,6 @@
 // ICONS
 import { PiArrowsOutLineHorizontalBold } from "react-icons/pi";
+import { PiArrowsInLineHorizontalBold } from "react-icons/pi";
 
 // COLUMNS
 import { Ticket } from "../Ticket/Ticket";
@@ -58,12 +59,25 @@ export const KanbanColumn = ({ column, ticketData }) => {
               columnId={column.id}
               kanbanId={kanbanId}
             /> */}
-          <PiArrowsOutLineHorizontalBold
-            onClick={handleColumnHorizontalCollapse}
-            className={`text-slate-900 text-xl cursor-pointer mr-3 ${
-              isColumnHorizontallyCollapsed ? "mt-2 ml-2" : ""
-            }`}
-          />
+          {isColumnHorizontallyCollapsed ? (
+            <PiArrowsOutLineHorizontalBold
+              onClick={handleColumnHorizontalCollapse}
+              className={` ${
+                darkMode ? "text-slate-50" : "text-slate-900"
+              } text-xl cursor-pointer mr-3 ${
+                isColumnHorizontallyCollapsed ? "mt-2 ml-2" : ""
+              }`}
+            />
+          ) : (
+            <PiArrowsInLineHorizontalBold
+              onClick={handleColumnHorizontalCollapse}
+              className={` ${
+                darkMode ? "text-slate-50" : "text-slate-900"
+              } text-2xl cursor-pointer mr-3 ${
+                isColumnHorizontallyCollapsed ? "mt-2 ml-2" : ""
+              }`}
+            />
+          )}
         </div>
 
         {!isColumnHorizontallyCollapsed && (

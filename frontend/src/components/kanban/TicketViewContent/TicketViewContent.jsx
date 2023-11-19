@@ -6,7 +6,10 @@ import { SiAdblock } from "react-icons/si";
 
 // GRAPHQL
 import { UPDATE_TICKET } from "../../../graphql/mutations/ticketMutations";
-import { GET_TICKET } from "../../../graphql/queries/ticketQueries";
+import {
+  GET_TICKET,
+  GET_TICKETS,
+} from "../../../graphql/queries/ticketQueries";
 
 // COMPONENTS
 import Button from "react-bootstrap/Button";
@@ -67,17 +70,17 @@ export const TicketViewContent = ({
       ready,
     },
     refetchQueries: [{ query: GET_TICKET, variables: { ticketId } }],
-    update(cache, { data: { updateTicket } }) {
-      const { ticket } = cache.readQuery({
-        query: GET_TICKET,
-        variables: { ticketId },
-      });
-      cache.writeQuery({
-        query: GET_TICKET,
-        variables: { ticketId },
-        data: { ticket: [...ticket, updateTicket] },
-      });
-    },
+    // update(cache, { data: { updateTicket } }) {
+    //   const { tickets } = cache.readQuery({
+    //     query: GET_TICKETS,
+    //     variables: { ticketId },
+    //   });
+    //   cache.writeQuery({
+    //     query: GET_TICKETS,
+    //     variables: { ticketId },
+    //     data: { ticket: [...tickets, updateTicket] },
+    //   });
+    // },
   });
 
   const handleBlockTicket = () => {
@@ -88,6 +91,7 @@ export const TicketViewContent = ({
       setEditBlockedReason(false);
       setActionType("unblock");
     } else {
+      setShow(true);
       setEditBlockedReason(true);
       setBlocked(true);
       setReady(false);
