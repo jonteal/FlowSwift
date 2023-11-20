@@ -1,5 +1,24 @@
 import { gql } from "@apollo/client";
 
+const GET_ALL_KANBANS = gql`
+  query getAllKanbans {
+    allKanbans {
+      id
+      title
+      description
+      project {
+        id
+        title
+        client {
+          id
+          firstName
+          lastName
+        }
+      }
+    }
+  }
+`;
+
 const GET_KANBANS = gql`
   query getKanbans($projectId: ID) {
     kanbans(projectId: $projectId) {
@@ -9,6 +28,11 @@ const GET_KANBANS = gql`
       project {
         id
         title
+        client {
+          id
+          firstName
+          lastName
+        }
       }
     }
   }
@@ -23,9 +47,14 @@ const GET_KANBAN = gql`
       project {
         id
         title
+        client {
+          id
+          firstName
+          lastName
+        }
       }
     }
   }
 `;
 
-export { GET_KANBANS, GET_KANBAN };
+export { GET_KANBANS, GET_KANBAN, GET_ALL_KANBANS };

@@ -103,6 +103,14 @@ export const Home = () => {
         >
           Projects
         </DynamicButton>
+        <DynamicButton
+          color="lightBlue"
+          type="link"
+          link="kanbans"
+          className="mx-2"
+        >
+          Kanbans
+        </DynamicButton>
       </div>
     </div>
   );

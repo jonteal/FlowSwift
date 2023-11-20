@@ -423,6 +423,12 @@ const RootQuery = new GraphQLObjectType({
         return Project.findById(args.id);
       },
     },
+    allKanbans: {
+      type: new GraphQLList(KanbanType),
+      resolve(parent, args) {
+        return Kanban.find();
+      },
+    },
     kanbans: {
       type: new GraphQLList(KanbanType),
       args: { projectId: { type: GraphQLID } },

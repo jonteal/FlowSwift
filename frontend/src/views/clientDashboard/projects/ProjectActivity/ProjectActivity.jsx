@@ -20,7 +20,7 @@ export const ProjectActivity = () => {
     return <p>There was an error loading comments...</p>;
 
   return (
-    <div className="flex flex-row w-full h-screen">
+    <div className="flex flex-row w-full h-screen mx-2">
       <div className="w-full">
         <ProjectCommentFeed
           projectId={projectId}

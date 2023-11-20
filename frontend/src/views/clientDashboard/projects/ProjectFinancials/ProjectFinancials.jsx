@@ -52,8 +52,8 @@ export const ProjectFinancials = () => {
           <h2 className="text-left my-2">Budget Used</h2>
           <ProgressBarComponent now={budgetUsed} />
         </div>
-        <div className="flex flex-col md:flex-row w-full">
-          <div className="flex flex-col w-full items-start mx-0 md:mr-2">
+        <div className="flex flex-col md:flex-row w-full items-start">
+          <div className="flex flex-col w-full items-start mx-2 md:mr-2">
             <DynamicButton
               className="mx-2 mb-3"
               link="invoices"
@@ -68,7 +68,7 @@ export const ProjectFinancials = () => {
               invoices={invoicesData.projectInvoices}
             />
           </div>
-          <div className="flex flex-col w-full items-start mx-0 md:mr-2 mt-4">
+          <div className="flex flex-col w-full items-start mr-2 md:mr-2">
             <DynamicButton
               link="transactions"
               color="blue"

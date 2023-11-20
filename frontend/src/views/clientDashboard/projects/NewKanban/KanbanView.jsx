@@ -175,7 +175,7 @@ export const KanbanView = () => {
       <div className="flex flex-row justify-around items-start">
         <DynamicButton
           clickHandler={() => setIsAddingColumn(!isAddingColumn)}
-          type="add"
+          type="submit"
           color="red"
         >
           Add Column

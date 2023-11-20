@@ -29,7 +29,6 @@ import { ProjectService } from "./views/clientDashboard/projects/ProjectService/
 import { EditService } from "./views/clientDashboard/projects/EditService/EditService";
 import { ProjectActivity } from "./views/clientDashboard/projects/ProjectActivity/ProjectActivity";
 import { ProjectFinancials } from "./views/clientDashboard/projects/ProjectFinancials/ProjectFinancials";
-import { ProjectKanban } from "./views/clientDashboard/projects/ProjectKanban/ProjectKanban";
 import { AddKanbanTicket } from "./views/clientDashboard/projects/AddKanbanTicket/AddKanbanTicket";
 import { EditKanbanTicket } from "./views/clientDashboard/projects/EditKanbanTicket/EditKanbanTicket";
 import { TicketView } from "./views/clientDashboard/projects/TicketView/TicketView";
@@ -56,6 +55,7 @@ import { NewKanban } from "./views/clientDashboard/projects/NewKanban/NewKanban"
 import { AddKanban } from "./views/clientDashboard/projects/NewKanban/AddKanban";
 import { KanbanView } from "./views/clientDashboard/projects/NewKanban/KanbanView";
 import { KanbanEdit } from "./views/clientDashboard/projects/NewKanban/KanbanEdit";
+import { Kanbans } from "./views/Kanbans/Kanbans.jsx";
 
 import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -156,10 +156,6 @@ const router = createBrowserRouter(
               path="/clients/:clientId/projects/:projectId/financials"
             />
             <Route
-              element={<ProjectKanban />}
-              path="/clients/:clientId/projects/:projectId/kanban"
-            />
-            <Route
               element={<NewKanban />}
               path="/clients/:clientId/projects/:projectId/kanbans"
             />
@@ -225,6 +221,7 @@ const router = createBrowserRouter(
         </Route>
         <Route path="/clients/list/:status" element={<ClientsListByStatus />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/kanbans" element={<Kanbans />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Route>

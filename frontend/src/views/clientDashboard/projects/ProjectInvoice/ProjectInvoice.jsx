@@ -10,6 +10,7 @@ import { NameValuePair } from "../../../../components/reusable/NameValuePair/Nam
 
 // STATE
 import { useSelector } from "react-redux";
+import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 export const ProjectInvoice = () => {
   const { invoiceId } = useParams();
@@ -28,10 +29,10 @@ export const ProjectInvoice = () => {
   const { amount, createdAt, date, invoiceNumber } = invoiceData.invoice;
 
   return (
-    <div
+    <DynamicContainer
       className={`${
         darkMode ? "bg-sky-800" : "bg-slate-50"
-      } w-full rounded-xl mx-0 md:mx-2 py-2 mt-2`}
+      } w-full rounded-xl md:mx-2 py-2 mt-2`}
     >
       <div className="flex flex-col items-start px-3">
         <h1
@@ -47,6 +48,6 @@ export const ProjectInvoice = () => {
         <NameValuePair name="Invoice Date" value={date} />
         <NameValuePair name="Created" value={createdAt} />
       </div>
-    </div>
+    </DynamicContainer>
   );
 };

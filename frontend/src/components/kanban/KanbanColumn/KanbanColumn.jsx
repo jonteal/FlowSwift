@@ -4,7 +4,7 @@ import { PiArrowsInLineHorizontalBold } from "react-icons/pi";
 
 // COLUMNS
 import { Ticket } from "../Ticket/Ticket";
-import { DeleteColumn } from "../../../views/clientDashboard/projects/NewKanban/DeleteColumn";
+// import { DeleteColumn } from "../../../views/clientDashboard/projects/NewKanban/DeleteColumn";
 
 // STATE
 import { useState } from "react";
