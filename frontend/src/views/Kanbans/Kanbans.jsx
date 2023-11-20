@@ -3,8 +3,12 @@ import { GET_ALL_KANBANS } from "../../graphql/queries/kanbanQueries";
 import { Spinner } from "../../components/reusable/Spinner/Spinner";
 import { KanbanPageCard } from "../../components/kanban/KanbanPageCard/KanbanPageCard";
 import {
+  setKanbanCardClientOff,
+  setKanbanCardClientOn,
   setKanbanCardDescriptionOff,
   setKanbanCardDescriptionOn,
+  setKanbanCardProjectOff,
+  setKanbanCardProjectOn,
 } from "../../slices/kanbanSlice";
 import { FiltersList } from "../../components/reusable/FiltersList/FiltersList";
 import { useState } from "react";
@@ -16,7 +20,9 @@ export const Kanbans = () => {
 
   const dispatch = useDispatch();
 
-  const { cardDescription } = useSelector((state) => state.kanban);
+  const { cardDescription, cardClient, cardProject } = useSelector(
+    (state) => state.kanban
+  );
 
   if (loading) return <Spinner />;
   if (error) return <p>Something went wrong...</p>;
@@ -31,6 +37,18 @@ export const Kanbans = () => {
       : dispatch(setKanbanCardDescriptionOn());
   };
 
+  const handleKanbanCardClientToggle = () => {
+    cardClient
+      ? dispatch(setKanbanCardClientOff())
+      : dispatch(setKanbanCardClientOn());
+  };
+
+  const handleKanbanCardProjectToggle = () => {
+    cardProject
+      ? dispatch(setKanbanCardProjectOff())
+      : dispatch(setKanbanCardProjectOn());
+  };
+
   console.log("data: ", data);
 
   const kanbanCardFilters = [
@@ -40,6 +58,20 @@ export const Kanbans = () => {
       value: cardDescription,
       isChecked: cardDescription,
       ariaLabel: "Description filter",
+    },
+    {
+      name: "Client",
+      toggle: handleKanbanCardClientToggle,
+      value: cardClient,
+      isChecked: cardClient,
+      ariaLabel: "Client filter",
+    },
+    {
+      name: "Project",
+      toggle: handleKanbanCardProjectToggle,
+      value: cardProject,
+      isChecked: cardProject,
+      ariaLabel: "Project filter",
     },
   ];
   return (

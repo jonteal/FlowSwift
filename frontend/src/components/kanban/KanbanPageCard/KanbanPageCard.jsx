@@ -1,4 +1,7 @@
 import { PiKanbanLight } from "react-icons/pi";
+import { BsPersonCircle } from "react-icons/bs";
+import { FaProjectDiagram } from "react-icons/fa";
+
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -6,7 +9,9 @@ export const KanbanPageCard = ({ kanban }) => {
   const { project, title, description } = kanban;
   const { darkMode } = useSelector((state) => state.theme);
 
-  const { cardDescription } = useSelector((state) => state.kanban);
+  const { cardDescription, cardClient, cardProject } = useSelector(
+    (state) => state.kanban
+  );
 
   return (
     <Link
@@ -23,11 +28,27 @@ export const KanbanPageCard = ({ kanban }) => {
           <PiKanbanLight className="mr-3 text-lg" />
           <h3 className="font-bold py-4">{title}</h3>
         </div>
-        {cardDescription && <p className="text-base">{description}</p>}
-        <p>
-          Client: {`${project.client.firstName} ${project.client.lastName}`}
-        </p>
-        <p>Project: {project.title}</p>
+
+        {cardDescription && (
+          <div className="my-2">
+            <p className="my-2">{description}</p>
+          </div>
+        )}
+
+        {cardClient && (
+          <div className="flex flex-row items-center">
+            <BsPersonCircle className="mr-2" />
+            <p className="my-2">
+              {`${project.client.firstName} ${project.client.lastName}`}
+            </p>
+          </div>
+        )}
+        {cardProject && (
+          <div className="flex flex-row items-center">
+            <FaProjectDiagram className="mr-2" />
+            <p className="my-2">{project.title}</p>
+          </div>
+        )}
       </div>
     </Link>
   );
