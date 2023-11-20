@@ -7,6 +7,7 @@ import projectsSlice from "./slices/projectsSlice";
 import clientBilling from "./slices/clientBilling";
 import clientsListSlice from "./slices/clientsListSlice";
 import themeSlice from "./slices/themeSlice";
+import kanbanSlice from "./slices/kanbanSlice";
 // import settingsSlice from "./slices/settingsSlice";
 
 const store = configureStore({
@@ -19,6 +20,7 @@ const store = configureStore({
     clientBilling: clientBilling,
     clientsList: clientsListSlice,
     theme: themeSlice,
+    kanban: kanbanSlice,
     // settings: settingsSlice,
   },
   middleware: (getDefaultMiddleware) =>

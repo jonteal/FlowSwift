@@ -6,6 +6,8 @@ export const KanbanPageCard = ({ kanban }) => {
   const { project, title, description } = kanban;
   const { darkMode } = useSelector((state) => state.theme);
 
+  const { cardDescription } = useSelector((state) => state.kanban);
+
   return (
     <Link
       to={`/clients/${project.client.id}/projects/${project.id}/kanbans/${kanban.id}`}
@@ -21,7 +23,7 @@ export const KanbanPageCard = ({ kanban }) => {
           <PiKanbanLight className="mr-3 text-lg" />
           <h3 className="font-bold py-4">{title}</h3>
         </div>
-        <p className="text-base">{description}</p>
+        {cardDescription && <p className="text-base">{description}</p>}
         <p>
           Client: {`${project.client.firstName} ${project.client.lastName}`}
         </p>
