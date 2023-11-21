@@ -20,8 +20,10 @@ import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicI
 // STATE
 import { useSelector } from "react-redux";
 import { useUpdateUserMutation } from "../../../slices/usersApiSlice";
+import { useNavigate } from "react-router-dom";
 
 export const AddOrganization = () => {
+  const navigate = useNavigate();
   const { darkMode } = useSelector((state) => state.theme);
 
   const { userInfo } = useSelector((state) => state.auth);
@@ -43,6 +45,7 @@ export const AddOrganization = () => {
       organizationName,
       userId,
     },
+    onCompleted: () => navigate(`/`),
     update(cache, { data: { addOrganization } }) {
       const { organizations } = cache.readQuery({
         query: GET_ORGANIZATIONS,

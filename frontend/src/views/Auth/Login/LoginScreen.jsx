@@ -63,7 +63,7 @@ export const LoginScreen = () => {
 
         {isLoading && <Loader />}
 
-        <DynamicButton type="submit" color="red" className="mt-3">
+        <DynamicButton type="submit" color="red" className="my-3">
           Sign In
         </DynamicButton>
 

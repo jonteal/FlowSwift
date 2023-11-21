@@ -65,7 +65,67 @@ const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
+        organizations: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
         clients: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        projects: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        invoices: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        transactions: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        services: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        projectActivityComments: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        clientActivityComments: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        clientActivityCommentReplies: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        projectActivityCommentReplies: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        tickets: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        kanbans: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        kanbanStatusColumns: {
           merge(existing, incoming) {
             return incoming;
           },

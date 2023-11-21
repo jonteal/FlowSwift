@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 const GET_USERS = gql`
-  query getUsers($organizationId: ID) {
+  query getUsers($organizationId: ID!) {
     users(organizationId: $organizationId) {
       _id
       name

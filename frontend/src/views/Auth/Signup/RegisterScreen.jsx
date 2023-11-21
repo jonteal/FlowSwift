@@ -56,7 +56,7 @@ export const RegisterScreen = () => {
     }
   };
   return (
-    <FormContainer>
+    <FormContainer className="max-h-max">
       <h1>Sign Up</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group className="my-2" controlId="name">
@@ -108,7 +108,7 @@ export const RegisterScreen = () => {
             value={organization}
             onChange={(e) => setOrganization(e.target.value)}
           ></Form.Control>
-        </Form.Group>
+        </Form.Group> */}
 
         <label htmlFor="role" className="form-label mt-8">
           Role
@@ -123,11 +123,11 @@ export const RegisterScreen = () => {
           <option value="admin">Admin</option>
           <option value="manager">Manager</option>
           <option value="employee">Employee</option>
-        </select> */}
+        </select>
 
         {isLoading && <Loader />}
 
-        <DynamicButton type="submit" color="red" className="mt-3">
+        <DynamicButton type="submit" color="red" className="my-3">
           Sign Up
         </DynamicButton>
 

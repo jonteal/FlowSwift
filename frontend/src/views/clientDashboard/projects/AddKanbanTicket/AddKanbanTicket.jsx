@@ -130,7 +130,7 @@ export const AddKanbanTicket = () => {
   ];
 
   return (
-    <DynamicContainer>
+    <DynamicContainer className="mt-2">
       <h1 className="text-lg text-left">New Ticket</h1>
       <label
         className={`block uppercase tracking-wide ${

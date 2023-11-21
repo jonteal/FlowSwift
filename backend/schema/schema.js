@@ -425,8 +425,9 @@ const RootQuery = new GraphQLObjectType({
     },
     allKanbans: {
       type: new GraphQLList(KanbanType),
+      args: { organizationId: { type: GraphQLID } },
       resolve(parent, args) {
-        return Kanban.find();
+        return Kanban.find({ organizationId: args.organizationId });
       },
     },
     kanbans: {

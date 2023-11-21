@@ -10,7 +10,7 @@ export const App = () => {
 
   return (
     <div
-      className={`transform xl:translate-x-0 ease-in-out transition duration-500 h-screen ${
+      className={`transform xl:translate-x-0 ease-in-out transition duration-500 max-h-max ${
         darkMode ? "bg-sky-950 max-h-max	" : "white"
       } ${darkMode ? "text-sky-50" : "text-slate-900"}`}
     >

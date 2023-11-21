@@ -124,6 +124,8 @@ export const AddProject = () => {
     variables: { id: organizationId },
   });
 
+  console.log("allUsers: ", allUsers);
+
   useEffect(() => {
     setOrganizationId(userData?.user?.organizationId);
   }, [userData?.user?.organizationId]);

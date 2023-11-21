@@ -52,6 +52,8 @@ export const Home = () => {
 
   const { name } = userInfo;
 
+  console.log("organizationsData: ", organizationsData);
+
   // let organizationName = "";
 
   // const { organizationName } = organizationsData.organizations[0];
@@ -70,6 +72,12 @@ export const Home = () => {
           Add Organization
         </DynamicButton>
       )}
+
+      {organizationsData.organizations.map((org) => (
+        <>
+          <p key={org.id}>{org.organizationName}</p>
+        </>
+      ))}
 
       {/* {organizationName && ( */}
       {/* <h2 className="font-semibold text-1xl mt-3">
