@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 export const TransactionTable = ({ transactions, shortList }) => {
   const { darkMode } = useSelector((state) => state.theme);
 
-  const { clientId, projectId } = useParams();
+  const { clientId, projectId, organizationId } = useParams();
 
   const filteredList = shortList ? transactions : transactions.slice(0, 5);
 
@@ -42,7 +42,7 @@ export const TransactionTable = ({ transactions, shortList }) => {
           <DynamicButton
             color="red"
             type="link"
-            link={`/clients/${clientId}/addTransaction`}
+            link={`/organizations/${organizationId}/clients/${clientId}/addTransaction`}
           >
             Add Transaction
           </DynamicButton>
@@ -61,7 +61,7 @@ export const TransactionTable = ({ transactions, shortList }) => {
         filteredList.map((transaction) => (
           <Link
             key={transaction.id}
-            to={`/clients/${clientId}/projects/${projectId}/financials/transactions/${transaction.id}`}
+            to={`/organizations/${organizationId}/clients/${clientId}/projects/${projectId}/financials/transactions/${transaction.id}`}
           >
             <ClientTransactionItem
               key={transaction.id}

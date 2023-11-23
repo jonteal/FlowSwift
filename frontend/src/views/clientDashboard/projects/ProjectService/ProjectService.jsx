@@ -10,7 +10,7 @@ import { DynamicButton } from "../../../../components/reusable/DynamicButton/Dyn
 import { NameValuePair } from "../../../../components/reusable/NameValuePair/NameValuePair";
 
 export const ProjectService = () => {
-  const { clientId, projectId, serviceId } = useParams();
+  const { clientId, projectId, serviceId, organizationId } = useParams();
 
   const { loading, error, data } = useQuery(GET_SERVICE, {
     variables: { id: serviceId },
@@ -36,7 +36,7 @@ export const ProjectService = () => {
     <div className="rounded-xl bg-slate-50 mx-2 mt-3 p-2 w-full">
       <DynamicButton
         type="link"
-        link={`/clients/${clientId}/projects/${projectId}/services/${serviceId}/edit`}
+        link={`/organizations/${organizationId}/clients/${clientId}/projects/${projectId}/services/${serviceId}/edit`}
       >
         Edit
       </DynamicButton>

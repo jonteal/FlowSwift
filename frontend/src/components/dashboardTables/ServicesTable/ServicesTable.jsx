@@ -14,17 +14,17 @@ import { useSelector } from "react-redux";
 
 // UTILS
 import { capitalized } from "../../../utils/format";
+import { DynamicContainer } from "../../reusable/DynamicContainer/DynamicContainer";
 
 export const ServicesTable = ({ services, type }) => {
+  const { clientId, projectId, organizationId } = useParams();
   const { darkMode } = useSelector((state) => state.theme);
 
-  const { clientId, projectId } = useParams();
-
   return (
-    <div
+    <DynamicContainer
       className={`rounded-xl ${
         darkMode ? "bg-sky-800" : "bg-slate-50"
-      } mx-0 md:mx-2 mt-3 px-3 w-full`}
+      } mx-2 mt-3 px-3 w-full`}
     >
       <div className="flex flex-row justify-between items-center py-3">
         <div className="flex flex-row items-center">
@@ -46,7 +46,7 @@ export const ServicesTable = ({ services, type }) => {
         <DynamicButton
           type="link"
           color="red"
-          link={`/clients/${clientId}/projects/${projectId}/addService`}
+          link={`/organizations/${organizationId}/clients/${clientId}/projects/${projectId}/addService`}
         >
           Add Service
         </DynamicButton>
@@ -114,7 +114,7 @@ export const ServicesTable = ({ services, type }) => {
                 </td>
                 <td>
                   <Link
-                    to={`/clients/${clientId}/projects/${projectId}/services/${service.id}`}
+                    to={`/organizations/${organizationId}/clients/${clientId}/projects/${projectId}/services/${service.id}`}
                   >
                     <FaRegEye className="text-sky-600" />
                   </Link>
@@ -124,6 +124,6 @@ export const ServicesTable = ({ services, type }) => {
           </tbody>
         </Table>
       )}
-    </div>
+    </DynamicContainer>
   );
 };

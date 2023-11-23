@@ -12,6 +12,7 @@ import { DynamicButton } from "../../../../components/reusable/DynamicButton/Dyn
 import { TransactionTable } from "../../../../components/TransactionTable/TransactionTable";
 import { InvoiceTable } from "../../../../components/InvoiceTable/InvoiceTable";
 import { ProgressBarComponent } from "../../../../components/ProgressBar/ProgressBar";
+import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 export const ProjectFinancials = () => {
   const { projectId } = useParams();
@@ -53,7 +54,7 @@ export const ProjectFinancials = () => {
           <ProgressBarComponent now={budgetUsed} />
         </div>
         <div className="flex flex-col md:flex-row w-full items-start">
-          <div className="flex flex-col w-full items-start mx-2 md:mr-2">
+          <DynamicContainer className="flex flex-col w-full items-start mx-2">
             <DynamicButton
               className="mx-2 mb-3"
               link="invoices"
@@ -67,8 +68,8 @@ export const ProjectFinancials = () => {
               shortList={true}
               invoices={invoicesData.projectInvoices}
             />
-          </div>
-          <div className="flex flex-col w-full items-start mr-2 md:mr-2">
+          </DynamicContainer>
+          <DynamicContainer className="flex flex-col w-full items-start mr-2">
             <DynamicButton
               link="transactions"
               color="blue"
@@ -81,7 +82,7 @@ export const ProjectFinancials = () => {
               shortList={true}
               transactions={transactionsData.projectTransactions}
             />
-          </div>
+          </DynamicContainer>
         </div>
       </div>
     </div>

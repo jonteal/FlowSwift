@@ -9,19 +9,20 @@ import { InvoiceTableItem } from "../dashboardBilling/InvoiceTableItem/InvoiceTa
 
 // STATE
 import { useSelector } from "react-redux";
+import { DynamicContainer } from "../reusable/DynamicContainer/DynamicContainer";
 
 export const InvoiceTable = ({ invoices, shortList }) => {
   const { darkMode } = useSelector((state) => state.theme);
 
-  const { clientId, projectId } = useParams();
+  const { clientId, projectId, organizationId } = useParams();
 
   const filteredList = shortList ? invoices : invoices.slice(0, 5);
 
   return (
-    <div
+    <DynamicContainer
       className={`${
         darkMode ? "bg-sky-800" : "bg-slate-50"
-      } w-full rounded-xl mx-0 md:mx-2 py-2 md:mt-0`}
+      } w-full rounded-xl mx-2 py-2 md:mt-0`}
     >
       <div className="flex flex-row justify-between items-start">
         <div className="flex flex-row items-center mx-1">
@@ -38,7 +39,7 @@ export const InvoiceTable = ({ invoices, shortList }) => {
           <DynamicButton
             color="red"
             type="link"
-            link={`/clients/${clientId}/addInvoice`}
+            link={`/organizations/${organizationId}/clients/${clientId}/addInvoice`}
           >
             Add Invoice
           </DynamicButton>
@@ -63,6 +64,6 @@ export const InvoiceTable = ({ invoices, shortList }) => {
           </Link>
         ))
       )}
-    </div>
+    </DynamicContainer>
   );
 };
