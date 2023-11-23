@@ -3,9 +3,11 @@ import { BsPersonCircle } from "react-icons/bs";
 import { FaProjectDiagram } from "react-icons/fa";
 
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const KanbanPageCard = ({ kanban }) => {
+  const { organizationId } = useParams();
+
   const { project, title, description } = kanban;
   const { darkMode } = useSelector((state) => state.theme);
 
@@ -15,7 +17,7 @@ export const KanbanPageCard = ({ kanban }) => {
 
   return (
     <Link
-      to={`/clients/${project.client.id}/projects/${project.id}/kanbans/${kanban.id}`}
+      to={`/organizations/${organizationId}/clients/${project.client.id}/projects/${project.id}/kanbans/${kanban.id}`}
     >
       <div
         className={`mt-3 border w-72 my-0 md:my-2 rounded-xl shadow-md p-3 mx-2 transform xl:translate-x-0 ease-in-out transition duration-500  ${

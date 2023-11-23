@@ -64,13 +64,13 @@ export const MenuDrawer = ({ name, ...props }) => {
                 >
                   My Dashboard
                 </Link>
-                <Link
+                {/* <Link
                   onClick={handleClose}
                   className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
-                  to="clients"
+                  to={`/organizations/${organization.id}/clients`}
                 >
                   Clients
-                </Link>
+                </Link> */}
                 <Link
                   onClick={handleClose}
                   className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"

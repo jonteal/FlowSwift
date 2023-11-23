@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 // ICONS
 import { FaRegEye } from "react-icons/fa";
@@ -11,6 +11,8 @@ import { EditClientModal } from "../modals/EditClientModal/EditClientModal";
 import { useSelector } from "react-redux";
 
 export const ClientTable = ({ clients, clientContainer }) => {
+  const { organizationId } = useParams();
+
   const { darkMode } = useSelector((state) => state.theme);
 
   return (
@@ -137,7 +139,9 @@ export const ClientTable = ({ clients, clientContainer }) => {
                   darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
                 }  font-light text-left border pl-2`}
               >
-                <Link to={`/clients/${client.id}/dashboard`}>
+                <Link
+                  to={`/organizations/${organizationId}/clients/${client.id}/dashboard`}
+                >
                   <FaRegEye
                     className={`${
                       darkMode ? "text-sky-200" : "text-sky-600"

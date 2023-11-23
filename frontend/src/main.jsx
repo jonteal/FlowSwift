@@ -56,6 +56,7 @@ import { AddKanban } from "./views/clientDashboard/projects/NewKanban/AddKanban"
 import { KanbanView } from "./views/clientDashboard/projects/NewKanban/KanbanView";
 import { KanbanEdit } from "./views/clientDashboard/projects/NewKanban/KanbanEdit";
 import { Kanbans } from "./views/Kanbans/Kanbans.jsx";
+import { OrganizationView } from "./views/Organization/OrganizationView/OrganizationView.jsx";
 
 import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -152,136 +153,174 @@ const router = createBrowserRouter(
           <Route path="/settings/profile" element={<ProfileScreen />} />
           <Route path="/settings/documentation" element={<Documentation />} />
         </Route>
-        <Route path="/addClient" element={<AddClient />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/addUser" element={<AddUser />} />
-        <Route path="/addOrganization" element={<AddOrganization />} />
-        <Route path="/dashboard" element={<MainDashboard />} />
-        <Route path="/clients" element={<Clients />} />
-        <Route path="/clients/:clientId" element={<ClientView />}>
+        <Route
+          path="/organizations/:organizationId"
+          element={<OrganizationView />}
+        >
           <Route
-            path="/clients/:clientId/dashboard"
-            element={<ClientDashboard />}
+            path="/organizations/:organizationId/home"
+            element={<Home />}
           />
           <Route
-            path="/clients/:clientId/billing"
-            element={<ClientBilling />}
+            path="/organizations/:organizationId/addClient"
+            element={<AddClient />}
           />
           <Route
-            path="/clients/:clientId/projects"
-            element={<ClientProjects />}
+            path="/organizations/:organizationId/addUser"
+            element={<AddUser />}
           />
           <Route
-            path="/clients/:clientId/addInvoice"
-            element={<AddInvoice />}
+            path="/organizations/:organizationId/clients"
+            element={<Clients />}
           />
           <Route
-            path="/clients/:clientId/addTransaction"
-            element={<AddTransaction />}
+            path="/organizations/:organizationId/addOrganization"
+            element={<AddOrganization />}
           />
           <Route
-            path="/clients/:clientId/projects/addProject"
-            element={<AddProject />}
+            path="/organizations/:organizationId/dashboard"
+            element={<MainDashboard />}
           />
           <Route
-            path="/clients/:clientId/projects/:projectId"
-            element={<ProjectView />}
+            path="/organizations/:organizationId/clients/:clientId"
+            element={<ClientView />}
           >
             <Route
-              element={<ProjectProfile />}
-              path="/clients/:clientId/projects/:projectId/profile"
+              path="/organizations/:organizationId/clients/:clientId/dashboard"
+              element={<ClientDashboard />}
             />
             <Route
-              element={<ProjectServices />}
-              path="/clients/:clientId/projects/:projectId/services"
+              path="/organizations/:organizationId/clients/:clientId/billing"
+              element={<ClientBilling />}
             />
-            {/* <Route
+            <Route
+              path="/organizations/:organizationId/clients/:clientId/projects"
+              element={<ClientProjects />}
+            />
+            <Route
+              path="/organizations/:organizationId/clients/:clientId/addInvoice"
+              element={<AddInvoice />}
+            />
+            <Route
+              path="/organizations/:organizationId/clients/:clientId/addTransaction"
+              element={<AddTransaction />}
+            />
+            <Route
+              path="/organizations/:organizationId/clients/:clientId/projects/addProject"
+              element={<AddProject />}
+            />
+            <Route
+              path="/organizations/:organizationId/clients/:clientId/projects/:projectId"
+              element={<ProjectView />}
+            >
+              <Route
+                element={<ProjectProfile />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/profile"
+              />
+              <Route
+                element={<ProjectServices />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/services"
+              />
+              {/* <Route
                     element={<ProjectServicesByProvider />}
                     path="/clients/:clientId/projects/:projectId/services/:serviceProvider"
                   /> */}
+              <Route
+                element={<ProjectService />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/services/:serviceId"
+              />
+              <Route
+                element={<EditService />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/services/:serviceId/edit"
+              />
+              <Route
+                element={<ProjectActivity />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/activity"
+              />
+              <Route
+                element={<ProjectFinancials />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/financials"
+              />
+              <Route
+                element={<NewKanban />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/kanbans"
+              />
+              <Route
+                element={<AddKanban />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/kanbans/build"
+              />
+              <Route
+                element={<KanbanView />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/kanbans/:kanbanId"
+              />
+              <Route
+                element={<KanbanEdit />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/kanbans/:kanbanId/edit"
+              />
+              <Route
+                element={<AddKanbanTicket />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/kanbans/:kanbanId/addTicket"
+              />
+              <Route
+                element={<EditKanbanTicket />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/kanbans/:kanbanId/:ticketId/edit"
+              />
+              <Route
+                element={<TicketView />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/kanbans/:kanbanId/:ticketId"
+              />
+              <Route
+                element={<ProjectInvoices />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/financials/invoices"
+              />
+              <Route
+                element={<ProjectTransactions />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/financials/transactions"
+              />
+              <Route
+                element={<ProjectTransaction />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/financials/transactions/:transactionId"
+              />
+              <Route
+                element={<ProjectInvoice />}
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/financials/invoices/:invoiceId"
+              />
+              <Route
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/addService"
+                element={<AddService />}
+              />
+              <Route
+                path="/organizations/:organizationId/clients/:clientId/projects/:projectId/edit"
+                element={<EditProject />}
+              />
+            </Route>
+
             <Route
-              element={<ProjectService />}
-              path="/clients/:clientId/projects/:projectId/services/:serviceId"
+              path="/organizations/:organizationId/clients/:clientId/edit"
+              element={<EditClient />}
             />
             <Route
-              element={<EditService />}
-              path="/clients/:clientId/projects/:projectId/services/:serviceId/edit"
+              path="/organizations/:organizationId/clients/:clientId/billing/invoices"
+              element={<ClientInvoices />}
             />
             <Route
-              element={<ProjectActivity />}
-              path="/clients/:clientId/projects/:projectId/activity"
-            />
-            <Route
-              element={<ProjectFinancials />}
-              path="/clients/:clientId/projects/:projectId/financials"
-            />
-            <Route
-              element={<NewKanban />}
-              path="/clients/:clientId/projects/:projectId/kanbans"
-            />
-            <Route
-              element={<AddKanban />}
-              path="/clients/:clientId/projects/:projectId/kanbans/build"
-            />
-            <Route
-              element={<KanbanView />}
-              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId"
-            />
-            <Route
-              element={<KanbanEdit />}
-              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId/edit"
-            />
-            <Route
-              element={<AddKanbanTicket />}
-              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId/addTicket"
-            />
-            <Route
-              element={<EditKanbanTicket />}
-              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId/:ticketId/edit"
-            />
-            <Route
-              element={<TicketView />}
-              path="/clients/:clientId/projects/:projectId/kanbans/:kanbanId/:ticketId"
-            />
-            <Route
-              element={<ProjectInvoices />}
-              path="/clients/:clientId/projects/:projectId/financials/invoices"
-            />
-            <Route
-              element={<ProjectTransactions />}
-              path="/clients/:clientId/projects/:projectId/financials/transactions"
-            />
-            <Route
-              element={<ProjectTransaction />}
-              path="/clients/:clientId/projects/:projectId/financials/transactions/:transactionId"
-            />
-            <Route
-              element={<ProjectInvoice />}
-              path="/clients/:clientId/projects/:projectId/financials/invoices/:invoiceId"
-            />
-            <Route
-              path="/clients/:clientId/projects/:projectId/addService"
-              element={<AddService />}
-            />
-            <Route
-              path="/clients/:clientId/projects/:projectId/edit"
-              element={<EditProject />}
+              path="/organizations/:organizationId/clients/:clientId/billing/transactions"
+              element={<ClientTransactionsView />}
             />
           </Route>
-
-          <Route path="/clients/:clientId/edit" element={<EditClient />} />
           <Route
-            path="/clients/:clientId/billing/invoices"
-            element={<ClientInvoices />}
+            path="/organizations/:organizationId/clients/list/:status"
+            element={<ClientsListByStatus />}
           />
           <Route
-            path="/clients/:clientId/billing/transactions"
-            element={<ClientTransactionsView />}
+            path="/organizations/:organizationId/projects"
+            element={<Projects />}
+          />
+          <Route
+            path="/organizations/:organizationId/kanbans"
+            element={<Kanbans />}
           />
         </Route>
-        <Route path="/clients/list/:status" element={<ClientsListByStatus />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/kanbans" element={<Kanbans />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Route>

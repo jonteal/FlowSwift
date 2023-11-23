@@ -34,7 +34,7 @@ import {
 } from "../../../../slices/projectsSlice";
 
 export const ClientProjects = () => {
-  const { clientId } = useParams();
+  const { clientId, organizationId } = useParams();
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -146,7 +146,7 @@ export const ClientProjects = () => {
         <div className="rounded-xl bg-slate-50 mx-2 py-3 px-4 w-full">
           <DynamicButton
             color="red"
-            link={`/clients/${clientId}/projects/addProject`}
+            link={`/organizations/${organizationId}/clients/${clientId}/projects/addProject`}
             type="link"
           >
             Add Project
@@ -160,7 +160,7 @@ export const ClientProjects = () => {
           <div className="flex flex-row justify-between items-start">
             <DynamicButton
               color="red"
-              link={`/clients/${clientId}/projects/addProject`}
+              link={`/organizations/${organizationId}/clients/${clientId}/projects/addProject`}
               type="link"
               className="ml-2"
             >

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 // ICONS
 import { BsPersonCircle, BsFillCalendarDateFill } from "react-icons/bs";
@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 
 export const ProjectPageCard = ({ project }) => {
   const { darkMode } = useSelector((state) => state.theme);
+  const { organizationId } = useParams();
 
   const {
     statusBadge,
@@ -33,7 +34,9 @@ export const ProjectPageCard = ({ project }) => {
     deadline,
   } = project;
   return (
-    <Link to={`/clients/${project.client.id}/projects/${project.id}/profile`}>
+    <Link
+      to={`/organizations/${organizationId}/clients/${project.client.id}/projects/${project.id}/profile`}
+    >
       <div
         className={`mt-3 border w-72 my-0 md:my-2 rounded-xl shadow-md p-3 mx-2 transform xl:translate-x-0 ease-in-out transition duration-500  ${
           darkMode

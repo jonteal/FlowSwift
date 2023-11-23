@@ -19,9 +19,11 @@ import { DynamicContainer } from "../../../../components/reusable/DynamicContain
 
 // STATE
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 export const AddProject = () => {
   const { darkMode } = useSelector((state) => state.theme);
+  const { organizationId } = useParams();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -34,8 +36,7 @@ export const AddProject = () => {
   const [projectEstimate, setProjectEstimate] = useState("");
   const [alertOn, setAlertOn] = useState(false);
   const { userInfo } = useSelector((state) => state.auth);
-  const [organizationId, setOrganizationId] = useState("");
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(userInfo._id);
 
   const [addProject] = useMutation(ADD_PROJECT, {
     variables: {
@@ -126,9 +127,7 @@ export const AddProject = () => {
 
   console.log("allUsers: ", allUsers);
 
-  useEffect(() => {
-    setOrganizationId(userData?.user?.organizationId);
-  }, [userData?.user?.organizationId]);
+  console.log("data: ", data);
 
   if (loading) return <Spinner />;
   if (error) return <p>There was an error loading the content</p>;

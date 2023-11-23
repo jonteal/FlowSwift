@@ -14,8 +14,11 @@ import { DynamicContainer } from "../../components/reusable/DynamicContainer/Dyn
 
 // STATE
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 export const AddClient = () => {
+  const { organizationId } = useParams();
+
   const { darkMode } = useSelector((state) => state.theme);
 
   const [firstName, setFirstName] = useState("");
@@ -24,7 +27,6 @@ export const AddClient = () => {
   const [emailAddress, setEmailAddress] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [status, setStatus] = useState("prospect");
-  const [organizationId, setOrganizationId] = useState("");
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -60,11 +62,6 @@ export const AddClient = () => {
     variables: { id: userInfo._id },
   });
 
-  useEffect(() => {
-    if (userData?.user?.organizationId)
-      setOrganizationId(userData?.user?.organizationId);
-  }, []);
-
   if (userLoading) return <Spinner />;
   if (userError) return <p>There was an error..</p>;
 
@@ -74,8 +71,6 @@ export const AddClient = () => {
     if (firstName === "" || lastName === "") {
       alert("Please fill in the client name");
     }
-
-    // setOrganizationId(userData?.user?.organizationId);
 
     addClient(
       firstName,
@@ -93,7 +88,6 @@ export const AddClient = () => {
     setEmailAddress("");
     setCompanyName("");
     setStatus("prospect");
-    setOrganizationId("");
   };
 
   return (

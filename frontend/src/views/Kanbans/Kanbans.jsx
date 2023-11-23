@@ -1,7 +1,16 @@
+import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+
+// GRAPHQL
 import { GET_ALL_KANBANS } from "../../graphql/queries/kanbanQueries";
+import { GET_USER } from "../../graphql/queries/userQueries";
+
+// COMPONENTS
 import { Spinner } from "../../components/reusable/Spinner/Spinner";
 import { KanbanPageCard } from "../../components/kanban/KanbanPageCard/KanbanPageCard";
+import { FiltersList } from "../../components/reusable/FiltersList/FiltersList";
+
+// STATE
 import {
   setKanbanCardClientOff,
   setKanbanCardClientOn,
@@ -10,14 +19,13 @@ import {
   setKanbanCardProjectOff,
   setKanbanCardProjectOn,
 } from "../../slices/kanbanSlice";
-import { FiltersList } from "../../components/reusable/FiltersList/FiltersList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_USER } from "../../graphql/queries/userQueries";
 
 export const Kanbans = () => {
+  const { organizationId } = useParams();
+
   const { userInfo } = useSelector((state) => state.auth);
-  const [organizationId, setOrganizationId] = useState("");
 
   const {
     loading: userLoading,
@@ -26,10 +34,6 @@ export const Kanbans = () => {
   } = useQuery(GET_USER, {
     variables: { id: userInfo._id },
   });
-
-  console.log("organizationId: ", organizationId);
-
-  console.log("userInfo: ", userInfo);
 
   const { loading, error, data } = useQuery(GET_ALL_KANBANS, {
     variables: { id: organizationId },
@@ -42,9 +46,6 @@ export const Kanbans = () => {
   const { cardDescription, cardClient, cardProject } = useSelector(
     (state) => state.kanban
   );
-  useEffect(() => {
-    setOrganizationId(userData?.user?.organizationId);
-  }, [userData?.user?.organizationId]);
 
   if (loading) return <Spinner />;
   if (error) return <p>Something went wrong...</p>;
@@ -70,8 +71,6 @@ export const Kanbans = () => {
       ? dispatch(setKanbanCardProjectOff())
       : dispatch(setKanbanCardProjectOn());
   };
-
-  console.log("data: ", data);
 
   const kanbanCardFilters = [
     {

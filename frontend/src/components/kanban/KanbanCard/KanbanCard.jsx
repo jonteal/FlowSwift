@@ -8,14 +8,14 @@ import { PiKanbanLight } from "react-icons/pi";
 import { useSelector } from "react-redux";
 
 export const KanbanCard = ({ kanban }) => {
-  const { clientId, projectId } = useParams();
+  const { clientId, projectId, organizationId } = useParams();
 
   const { darkMode } = useSelector((state) => state.theme);
 
   const { title, description } = kanban;
   return (
     <Link
-      to={`/clients/${clientId}/projects/${projectId}/kanbans/${kanban.id}`}
+      to={`/organizations/${organizationId}/clients/${clientId}/projects/${projectId}/kanbans/${kanban.id}`}
     >
       <div
         className={`h-auto border w-72 my-2 rounded-xl border-t-green-700 shadow-md p-3 mx-2 transform xl:translate-x-0 ease-in-out transition duration-500 ${

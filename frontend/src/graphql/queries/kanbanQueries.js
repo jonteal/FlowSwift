@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 const GET_ALL_KANBANS = gql`
-  query getAllKanbans($organizationId: ID!) {
+  query getAllKanbans($organizationId: ID) {
     allKanbans(organizationId: $organizationId) {
       id
       title

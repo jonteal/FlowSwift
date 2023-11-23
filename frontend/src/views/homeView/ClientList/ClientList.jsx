@@ -1,8 +1,8 @@
+import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
 import { GET_CLIENTS } from "../../../graphql/queries/clientQueries";
-import { GET_USER } from "../../../graphql/queries/userQueries";
 
 // ICONS
 import { FaUserAlt } from "react-icons/fa";
@@ -31,6 +31,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { clientContainers } from "../../Clients/constants";
 
 export const ClientList = () => {
+  const { organizationId } = useParams();
+
   const { darkMode } = useSelector((state) => state.theme);
 
   const { userInfo } = useSelector((state) => state.auth);
@@ -42,16 +44,12 @@ export const ClientList = () => {
     (state) => state.clientsList
   );
 
-  const { data: userData } = useQuery(GET_USER, {
-    variables: { id: userInfo._id },
-  });
-
   const {
     loading: clientLoading,
     error: clientError,
     data: clientData,
   } = useQuery(GET_CLIENTS, {
-    variables: { organizationId: userData?.user.organizationId },
+    variables: { organizationId },
   });
 
   const handleChartsToggle = () => {

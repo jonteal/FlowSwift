@@ -13,6 +13,7 @@ import { DynamicButton } from "../../../components/reusable/DynamicButton/Dynami
 
 // STATE
 import { useSelector } from "react-redux";
+import { OrganizationCard } from "../../../components/OrganizationCard/OrganizationCard";
 
 export const Home = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -52,8 +53,6 @@ export const Home = () => {
 
   const { name } = userInfo;
 
-  console.log("organizationsData: ", organizationsData);
-
   // let organizationName = "";
 
   // const { organizationName } = organizationsData.organizations[0];
@@ -64,7 +63,7 @@ export const Home = () => {
 
       {isOwner && (
         <DynamicButton
-          className="mt-3"
+          className="my-3"
           type="link"
           color="red"
           link="/addOrganization"
@@ -72,12 +71,11 @@ export const Home = () => {
           Add Organization
         </DynamicButton>
       )}
-
-      {organizationsData.organizations.map((org) => (
-        <>
-          <p key={org.id}>{org.organizationName}</p>
-        </>
-      ))}
+      <div className="flex md:flex-row flex-wrap justify-center items-center flex-col border mx-20 py-5">
+        {organizationsData.organizations.map((org) => (
+          <OrganizationCard key={org.id} organization={org} />
+        ))}
+      </div>
 
       {/* {organizationName && ( */}
       {/* <h2 className="font-semibold text-1xl mt-3">
@@ -94,32 +92,6 @@ export const Home = () => {
             </DynamicButton>
           </div>
         ))}
-      <div className="mt-4 flex flex-row justify-center">
-        <DynamicButton
-          color="lightBlue"
-          type="link"
-          link="clients"
-          className="mx-2"
-        >
-          Clients
-        </DynamicButton>
-        <DynamicButton
-          color="lightBlue"
-          type="link"
-          link="projects"
-          className="mx-2"
-        >
-          Projects
-        </DynamicButton>
-        <DynamicButton
-          color="lightBlue"
-          type="link"
-          link="kanbans"
-          className="mx-2"
-        >
-          Kanbans
-        </DynamicButton>
-      </div>
     </div>
   );
 };
