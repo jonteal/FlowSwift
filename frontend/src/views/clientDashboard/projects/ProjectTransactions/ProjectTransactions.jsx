@@ -9,13 +9,13 @@ import { TransactionTable } from "../../../../components/TransactionTable/Transa
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 
 export const ProjectTransactions = () => {
-  const { projectId } = useParams();
+  const { clientId } = useParams();
 
   const {
     loading: transactionsLoading,
     error: transactionsError,
     data: transactionsData,
-  } = useQuery(GET_ALL_CLIENT_TRANSACTIONS, { variables: { projectId } });
+  } = useQuery(GET_ALL_CLIENT_TRANSACTIONS, { variables: { clientId } });
 
   if (transactionsLoading) return <Spinner />;
   if (transactionsError)
@@ -25,7 +25,7 @@ export const ProjectTransactions = () => {
     <div className="mt-2">
       <TransactionTable
         shortList={false}
-        transactions={transactionsData.transactions}
+        transactions={transactionsData.clientTransactions}
       />
     </div>
   );

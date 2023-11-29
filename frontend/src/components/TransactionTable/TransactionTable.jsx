@@ -5,6 +5,7 @@ import { GrTransaction } from "react-icons/gr";
 
 // COMPONENTS
 import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
+import { DynamicContainer } from "../reusable/DynamicContainer/DynamicContainer";
 import { ClientTransactionItem } from "../dashboardBilling/ClientTransactionItem/ClientTransactionItem";
 
 // STATE
@@ -18,10 +19,10 @@ export const TransactionTable = ({ transactions, shortList }) => {
   const filteredList = shortList ? transactions : transactions.slice(0, 5);
 
   return (
-    <div
+    <DynamicContainer
       className={`${
         darkMode ? "bg-sky-800" : "bg-slate-50"
-      } w-full rounded-xl mx-0 md:mx-2 py-2 md:mt-0`}
+      } w-full rounded-xl mx-2 py-2 md:mt-0`}
     >
       <div className="flex flex-row justify-between items-start">
         <div className="flex flex-row items-center mx-1">
@@ -70,6 +71,6 @@ export const TransactionTable = ({ transactions, shortList }) => {
           </Link>
         ))
       )}
-    </div>
+    </DynamicContainer>
   );
 };
