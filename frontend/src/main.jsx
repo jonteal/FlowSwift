@@ -49,18 +49,19 @@ import { NotFound } from "./views/NotFound";
 import { Settings } from "./views/Settings/Settings";
 import { Documentation } from "./views/Settings/Documentation";
 import { AddUser } from "./views/Organization/AddUser/AddUser";
-import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganization";
 import { Features } from "./views/Features/Features";
 import { NewKanban } from "./views/clientDashboard/projects/NewKanban/NewKanban";
 import { AddKanban } from "./views/clientDashboard/projects/NewKanban/AddKanban";
 import { KanbanView } from "./views/clientDashboard/projects/NewKanban/KanbanView";
 import { KanbanEdit } from "./views/clientDashboard/projects/NewKanban/KanbanEdit";
 import { Kanbans } from "./views/Kanbans/Kanbans.jsx";
+import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganization";
 import { OrganizationView } from "./views/Organization/OrganizationView/OrganizationView.jsx";
 
 import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import { OrganizationProfile } from "./views/Organization/OrganizationProfile/OrganizationProfile.jsx";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -158,8 +159,8 @@ const router = createBrowserRouter(
           element={<OrganizationView />}
         >
           <Route
-            path="/organizations/:organizationId/home"
-            element={<Home />}
+            path="/organizations/:organizationId/profile"
+            element={<OrganizationProfile />}
           />
           <Route
             path="/organizations/:organizationId/addClient"

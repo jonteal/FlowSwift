@@ -21,6 +21,7 @@ export const ProjectPageCard = ({ project }) => {
     budget,
     estimate,
     dates,
+    projectOwner,
   } = useSelector((state) => state.projects);
 
   const {
@@ -32,6 +33,7 @@ export const ProjectPageCard = ({ project }) => {
     projectEstimate,
     startDate,
     deadline,
+    user,
   } = project;
   return (
     <Link
@@ -100,6 +102,11 @@ export const ProjectPageCard = ({ project }) => {
             <div className="flex flex-row items-center ml-2">
               <p className="my-2">{deadline ? deadline : "No deadline"}</p>
             </div>
+          </div>
+        )}
+        {projectOwner && (
+          <div className="flex flex-row items-center">
+            <p className="my-2">Owner: {user.name}</p>
           </div>
         )}
       </div>

@@ -122,7 +122,7 @@ export const AddProject = () => {
   });
 
   const { data: allUsers } = useQuery(GET_USERS, {
-    variables: { id: organizationId },
+    variables: { organizationId },
   });
 
   console.log("allUsers: ", allUsers);

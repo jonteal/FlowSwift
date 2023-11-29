@@ -31,6 +31,8 @@ import {
   setDatesOn,
   setEstimateOff,
   setEstimateOn,
+  setProjectOwnerOff,
+  setProjectOwnerOn,
 } from "../../../../slices/projectsSlice";
 
 export const ClientProjects = () => {
@@ -50,6 +52,7 @@ export const ClientProjects = () => {
     budget,
     dates,
     estimate,
+    projectOwner,
   } = useSelector((state) => state.projects);
 
   const handleGridViewToggle = () => {
@@ -78,6 +81,12 @@ export const ClientProjects = () => {
 
   const handleDatesToggle = () => {
     dates ? dispatch(setDatesOff()) : dispatch(setDatesOn());
+  };
+
+  const handleProjectOwnerToggle = () => {
+    projectOwner
+      ? dispatch(setProjectOwnerOff())
+      : dispatch(setProjectOwnerOn());
   };
 
   const handleOpenFilters = () => {
@@ -137,6 +146,13 @@ export const ClientProjects = () => {
       value: estimate,
       isChecked: estimate,
       ariaLabel: "Project Estimate filter",
+    },
+    {
+      name: "Project Owner",
+      toggle: handleProjectOwnerToggle,
+      value: projectOwner,
+      isChecked: projectOwner,
+      ariaLabel: "Project Owner filter",
     },
   ];
 

@@ -8,6 +8,7 @@ const initialState = {
   budget: true,
   estimate: true,
   dates: true,
+  projectOwner: true,
 };
 
 const projectsSlice = createSlice({
@@ -56,6 +57,12 @@ const projectsSlice = createSlice({
     setDatesOn(state) {
       state.dates = true;
     },
+    setProjectOwnerOff(state) {
+      state.projectOwner = false;
+    },
+    setProjectOwnerOn(state) {
+      state.projectOwner = true;
+    },
   },
 });
 
@@ -74,6 +81,8 @@ export const {
   setEstimateOn,
   setDatesOff,
   setDatesOn,
+  setProjectOwnerOff,
+  setProjectOwnerOn,
 } = projectsSlice.actions;
 
 export default projectsSlice.reducer;
