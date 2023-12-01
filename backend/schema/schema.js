@@ -97,6 +97,7 @@ const ProjectType = new GraphQLObjectType({
     title: { type: GraphQLString },
     description: { type: GraphQLString },
     status: { type: GraphQLString },
+    priority: { type: GraphQLString },
     notes: { type: GraphQLString },
     client: {
       type: ClientType,
@@ -812,6 +813,17 @@ const mutation = new GraphQLObjectType({
           }),
           defaultValue: "notStarted",
         },
+        priority: {
+          type: new GraphQLEnumType({
+            name: "ProjectPriority",
+            values: {
+              low: { value: "low" },
+              medium: { value: "medium" },
+              high: { value: "high" },
+            },
+          }),
+          defaultValue: "medium",
+        },
         clientId: { type: new GraphQLNonNull(GraphQLID) },
         userId: { type: GraphQLID },
         startDate: { type: GraphQLString },
@@ -824,6 +836,7 @@ const mutation = new GraphQLObjectType({
           title: args.title,
           description: args.description,
           status: args.status,
+          priority: args.priority,
           notes: args.notes,
           clientId: args.clientId,
           userId: args.userId,
@@ -890,6 +903,16 @@ const mutation = new GraphQLObjectType({
             },
           }),
         },
+        priority: {
+          type: new GraphQLEnumType({
+            name: "ProjectPriorityUpdate",
+            values: {
+              low: { value: "low" },
+              medium: { value: "medium" },
+              high: { value: "high" },
+            },
+          }),
+        },
         userId: { type: GraphQLID },
         startDate: { type: GraphQLString },
         deadline: { type: GraphQLString },
@@ -904,6 +927,7 @@ const mutation = new GraphQLObjectType({
               title: args.title,
               description: args.description,
               status: args.status,
+              priority: args.priority,
               notes: args.notes,
               clientId: args.clientId,
               userId: args.userId,

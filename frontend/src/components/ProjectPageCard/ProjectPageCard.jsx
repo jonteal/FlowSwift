@@ -9,6 +9,7 @@ import { StatusBadge } from "../reusable/StatusBadge/StatusBadge";
 
 // STATE
 import { useSelector } from "react-redux";
+import { PriorityBadge } from "../reusable/PriorityBadge/PriorityBadge";
 
 export const ProjectPageCard = ({ project }) => {
   const { darkMode } = useSelector((state) => state.theme);
@@ -22,6 +23,7 @@ export const ProjectPageCard = ({ project }) => {
     estimate,
     dates,
     projectOwner,
+    priorityBadge,
   } = useSelector((state) => state.projects);
 
   const {
@@ -34,6 +36,7 @@ export const ProjectPageCard = ({ project }) => {
     startDate,
     deadline,
     user,
+    priority,
   } = project;
   return (
     <Link
@@ -61,6 +64,13 @@ export const ProjectPageCard = ({ project }) => {
             <StatusBadge status={status} />
           </div>
         )}
+
+        {priorityBadge && (
+          <div className="my-2">
+            <PriorityBadge priority={priority} />
+          </div>
+        )}
+
         {projectDescription && (
           <div className="my-2">
             <p className="my-2">{description}</p>

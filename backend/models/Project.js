@@ -12,6 +12,10 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     enum: ["notStarted", "inProgress", "completed", "paused", "needsAttention"],
   },
+  priority: {
+    type: String,
+    enum: ["low", "medium", "high"],
+  },
   notes: {
     type: String,
   },

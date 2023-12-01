@@ -28,6 +28,7 @@ export const AddProject = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("notStarted");
+  const [priority, setPriority] = useState("medium");
   const [clientId, setClientId] = useState("");
   const [startDate, setStartDate] = useState(new Date());
   const [deadline, setDeadline] = useState(new Date());
@@ -44,6 +45,7 @@ export const AddProject = () => {
       description,
       clientId,
       status,
+      priority,
       startDate,
       deadline,
       notes,
@@ -87,7 +89,7 @@ export const AddProject = () => {
       setAlertOn(true);
       return (
         <div className="alert alert-danger" role="alert">
-          Please provide a title, description, and status!
+          Please provide a title, description, status, budget, and estimate!
         </div>
       );
     }
@@ -97,6 +99,7 @@ export const AddProject = () => {
       description,
       clientId,
       status,
+      priority,
       startDate,
       deadline,
       notes,
@@ -108,6 +111,7 @@ export const AddProject = () => {
     setTitle("");
     setDescription("");
     setStatus("notStarted");
+    setPriority("medium");
     setClientId("");
     setStartDate(new Date());
     setDeadline(new Date());
@@ -124,10 +128,6 @@ export const AddProject = () => {
   const { data: allUsers } = useQuery(GET_USERS, {
     variables: { organizationId },
   });
-
-  console.log("allUsers: ", allUsers);
-
-  console.log("data: ", data);
 
   if (loading) return <Spinner />;
   if (error) return <p>There was an error loading the content</p>;
@@ -232,6 +232,20 @@ export const AddProject = () => {
                 { value: "needsAttention", label: "Needs Attention" },
               ]}
               ariaLabel="Project status select"
+            />
+
+            <DynamicInput
+              id="project-status"
+              inputType="select"
+              label="Priority"
+              changeHandler={(e) => setPriority(e.target.value)}
+              value={priority}
+              selectOptions={[
+                { value: "low", label: "Low" },
+                { value: "medium", label: "Medium" },
+                { value: "high", label: "High" },
+              ]}
+              ariaLabel="Project priority select"
             />
 
             <DateSelector

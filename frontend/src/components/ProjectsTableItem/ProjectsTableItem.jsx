@@ -17,6 +17,8 @@ import { camelCaseToWords } from "../../utils/format";
 export const ProjectsTableItem = ({ project, index }) => {
   const { darkMode } = useSelector((state) => state.theme);
 
+  const { projectName } = useSelector((state) => state.projects);
+
   const [statusColor, setStatusColor] = useState("");
 
   const status = project.status;
@@ -44,13 +46,15 @@ export const ProjectsTableItem = ({ project, index }) => {
       >
         {index + 1}
       </td>
-      <td
-        className={`${
-          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2`}
-      >
-        {project.title}
-      </td>
+      {projectName && (
+        <td
+          className={`${
+            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+          } font-light text-left border pl-2`}
+        >
+          {project.title}
+        </td>
+      )}
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"

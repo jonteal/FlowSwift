@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  // project card
   gridView: true,
   statusBadge: true,
   clientName: true,
@@ -9,6 +10,10 @@ const initialState = {
   estimate: true,
   dates: true,
   projectOwner: true,
+  priorityBadge: true,
+
+  // table
+  projectName: true,
 };
 
 const projectsSlice = createSlice({
@@ -26,6 +31,12 @@ const projectsSlice = createSlice({
     },
     setStatusBadgeOn(state) {
       state.statusBadge = true;
+    },
+    setPriorityBadgeOff(state) {
+      state.priorityBadge = false;
+    },
+    setPriorityBadgeOn(state) {
+      state.priorityBadge = true;
     },
     setClientNameOff(state) {
       state.clientName = false;
@@ -63,6 +74,14 @@ const projectsSlice = createSlice({
     setProjectOwnerOn(state) {
       state.projectOwner = true;
     },
+
+    // table
+    setProjectNameOff(state) {
+      state.projectName = false;
+    },
+    setProjectNameOn(state) {
+      state.projectName = true;
+    },
   },
 });
 
@@ -71,6 +90,8 @@ export const {
   setGridViewOn,
   setStatusBadgeOff,
   setStatusBadgeOn,
+  setPriorityBadgeOff,
+  setPriorityBadgeOn,
   setClientNameOff,
   setClientNameOn,
   setDescriptionOff,
@@ -83,6 +104,8 @@ export const {
   setDatesOn,
   setProjectOwnerOff,
   setProjectOwnerOn,
+  setProjectNameOff,
+  setProjectNameOn,
 } = projectsSlice.actions;
 
 export default projectsSlice.reducer;

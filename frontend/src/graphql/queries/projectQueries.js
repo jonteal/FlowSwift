@@ -7,6 +7,7 @@ const GET_PROJECTS = gql`
       title
       description
       status
+      priority
       notes
       client {
         id
@@ -33,6 +34,7 @@ const GET_CLIENT_PROJECTS = gql`
       title
       description
       status
+      priority
       notes
       client {
         id
@@ -59,6 +61,7 @@ const GET_PROJECT = gql`
       title
       description
       status
+      priority
       notes
       client {
         id

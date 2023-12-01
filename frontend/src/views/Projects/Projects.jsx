@@ -30,6 +30,10 @@ import {
   setEstimateOn,
   setProjectOwnerOff,
   setProjectOwnerOn,
+  setPriorityBadgeOff,
+  setPriorityBadgeOn,
+  setProjectNameOff,
+  setProjectNameOn,
 } from "../../slices/projectsSlice";
 
 export const Projects = () => {
@@ -50,6 +54,8 @@ export const Projects = () => {
     estimate,
     dates,
     projectOwner,
+    priorityBadge,
+    projectName,
   } = useSelector((state) => state.projects);
 
   const handleGridViewToggle = () => {
@@ -58,6 +64,12 @@ export const Projects = () => {
 
   const handleStatusBadgeToggle = () => {
     statusBadge ? dispatch(setStatusBadgeOff()) : dispatch(setStatusBadgeOn());
+  };
+
+  const handlePriorityBadgeToggle = () => {
+    priorityBadge
+      ? dispatch(setPriorityBadgeOff())
+      : dispatch(setPriorityBadgeOn());
   };
 
   const handleClientNameToggle = () => {
@@ -86,6 +98,11 @@ export const Projects = () => {
       : dispatch(setProjectOwnerOn());
   };
 
+  // TABLE FILTERS
+  const handleProjectNameToggle = () => {
+    projectName ? dispatch(setProjectNameOff()) : dispatch(setProjectNameOn());
+  };
+
   const handleOpenFilters = () => {
     setIsFilterOptionsOpen(!isFilterOptionsOpen);
   };
@@ -100,6 +117,13 @@ export const Projects = () => {
       value: statusBadge,
       isChecked: statusBadge,
       ariaLabel: "Status Badge filter",
+    },
+    {
+      name: "Priority Badge",
+      toggle: handlePriorityBadgeToggle,
+      value: priorityBadge,
+      isChecked: priorityBadge,
+      ariaLabel: "Priority Badge filter",
     },
     {
       name: "Client Name",
@@ -145,6 +169,16 @@ export const Projects = () => {
     },
   ];
 
+  const projectTableFilters = [
+    {
+      name: "Project Name",
+      toggle: handleProjectNameToggle,
+      value: projectName,
+      isChecked: projectName,
+      ariaLabel: "Project Name filter",
+    },
+  ];
+
   return (
     <div
       className={`flex flex-col h-screen ${
@@ -160,20 +194,24 @@ export const Projects = () => {
         />
 
         <button
-          className="border bg-sky-500 text-slate-50 px-4 py-1 mb-4 w-1/12 rounded-lg mt-3 mr-2"
+          className="border bg-sky-500 text-slate-50 px-2 py-1 mb-4 w-1/12 rounded-lg mt-3 mr-2"
           onClick={handleOpenFilters}
         >
-          Filters
+          {`${gridView ? "Grid" : "Table"} Filters`}
         </button>
 
         <Switch isChecked={gridView} changeHandler={handleGridViewToggle} />
       </div>
-      {isFilterOptionsOpen && <FiltersList filters={projectCardFilters} />}
+      {isFilterOptionsOpen && (
+        <FiltersList
+          filters={gridView ? projectCardFilters : projectTableFilters}
+        />
+      )}
 
       <p
         className={`block uppercase tracking-wide ${
           darkMode ? "text-sky-100" : "text-slate-700"
-        }  text-base font-bold mb-2`}
+        } text-base font-bold mb-2`}
       >
         Total Projects: {data.projects.length}
       </p>
@@ -218,13 +256,15 @@ export const Projects = () => {
                 >
                   #
                 </th>
-                <th
-                  className={`${
-                    darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-3/12 md:w-2/12 text-left pl-2 border`}
-                >
-                  Project Name
-                </th>
+                {projectName && (
+                  <th
+                    className={`${
+                      darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                    } w-3/12 md:w-2/12 text-left pl-2 border`}
+                  >
+                    Project Name
+                  </th>
+                )}
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
