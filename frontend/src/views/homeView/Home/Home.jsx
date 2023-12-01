@@ -35,27 +35,12 @@ export const Home = () => {
     variables: { userId: userInfo._id },
   });
 
-  const {
-    loading: organizationLoading,
-    error: organizationError,
-    data: organizationData,
-  } = useQuery(GET_ORGANIZATION, {
-    variables: { id: userData?.user.organizationId },
-  });
+  if (organizationsLoading || userLoading) return <Spinner />;
+  if (organizationsError || userError) return <p>There was an error...</p>;
 
-  if (organizationsLoading || userLoading || organizationLoading)
-    return <Spinner />;
-  if (organizationsError || userError || organizationError)
-    return <p>There was an error...</p>;
-
-  const isAdmin = userData.user.role === "admin";
   const isOwner = userData.user.role === "owner";
 
   const { name } = userInfo;
-
-  // let organizationName = "";
-
-  // const { organizationName } = organizationsData.organizations[0];
 
   return (
     <div className={`${darkMode ? "bg-sky-950" : "bg-slate-50"} h-screen`}>
@@ -76,22 +61,6 @@ export const Home = () => {
           <OrganizationCard key={org.id} organization={org} />
         ))}
       </div>
-
-      {/* {organizationName && ( */}
-      {/* <h2 className="font-semibold text-1xl mt-3">
-        Company: {organizationName || ""}
-      </h2> */}
-      {/* )} */}
-
-      {isAdmin ||
-        (isOwner && (
-          <div className="text-base mt-10 border py-4 w-1/2 mx-auto">
-            <p className="mb-3">Add employees to your organization</p>
-            <DynamicButton link="/addUser" type="link" color="lightBlue">
-              Add Employees
-            </DynamicButton>
-          </div>
-        ))}
     </div>
   );
 };

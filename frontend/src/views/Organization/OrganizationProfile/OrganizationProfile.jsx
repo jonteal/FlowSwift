@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { GET_USER } from "../../../graphql/queries/userQueries";
 import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 import { useParams } from "react-router-dom";
+import { GET_ORGANIZATION } from "../../../graphql/queries/organizationQueries";
 
 export const OrganizationProfile = () => {
   const { organizationId } = useParams();
@@ -17,14 +18,27 @@ export const OrganizationProfile = () => {
     variables: { id: userInfo._id },
   });
 
-  if (userLoading) return <Spinner />;
-  if (userError) return <p>There was an error...</p>;
+  const {
+    loading: organizationLoading,
+    error: organizationError,
+    data: organizationData,
+  } = useQuery(GET_ORGANIZATION, {
+    variables: { id: organizationId },
+  });
+
+  if (userLoading || organizationLoading) return <Spinner />;
+  if (userError || organizationError) return <p>There was an error...</p>;
+
+  console.log("organizationData: ", organizationData);
+
+  const { organizationName } = organizationData.organization;
 
   const isAdmin = userData.user.role === "admin";
   const isOwner = userData.user.role === "owner";
+
   return (
     <div>
-      OrganizationProfile
+      <h1 className="mt-3 font-semibold text-lg">{organizationName}</h1>
       {isAdmin ||
         (isOwner && (
           <div className="text-base mt-10 border py-4 w-1/2 mx-auto">

@@ -1,12 +1,13 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { SlOrganization } from "react-icons/sl";
 
 export const OrganizationCard = ({ organization }) => {
   const { darkMode } = useSelector((state) => state.theme);
 
   const { organizationName, id } = organization;
   return (
-    <Link to={`organizations/${id}/`}>
+    <Link to={`organizations/${id}/profile`}>
       <div
         className={`border w-72 my-0 rounded-xl shadow-md p-3 mx-2 transform xl:translate-x-0 ease-in-out transition duration-500  ${
           darkMode
@@ -15,7 +16,7 @@ export const OrganizationCard = ({ organization }) => {
         } flex flex-col items-center hover:scale-x-105 hover:scale-y-105 transition ease-in-out duration-200`}
       >
         <div className="flex flex-row items-center">
-          {/* <FaProjectDiagram className="mr-2" /> */}
+          <SlOrganization className="mr-2 text-sky-600" />
           <h2 className="my-2 font-bold">{organizationName}</h2>
         </div>
       </div>

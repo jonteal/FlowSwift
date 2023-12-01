@@ -62,6 +62,7 @@ import store from "./store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import { OrganizationProfile } from "./views/Organization/OrganizationProfile/OrganizationProfile.jsx";
+import { OrganizationFinancials } from "./views/Organization/OrganizationFinancials/OrganizationFinancials.jsx";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -161,6 +162,10 @@ const router = createBrowserRouter(
           <Route
             path="/organizations/:organizationId/profile"
             element={<OrganizationProfile />}
+          />
+          <Route
+            path="/organizations/:organizationId/financials"
+            element={<OrganizationFinancials />}
           />
           <Route
             path="/organizations/:organizationId/addClient"
