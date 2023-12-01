@@ -20,8 +20,9 @@ export const ProjectsTableItem = ({ project, index }) => {
   const { projectName } = useSelector((state) => state.projects);
 
   const [statusColor, setStatusColor] = useState("");
+  const [priorityColor, setPriorityColor] = useState("");
 
-  const status = project.status;
+  const { status, priority } = project;
 
   useEffect(() => {
     if (status === "notStarted") {
@@ -36,6 +37,16 @@ export const ProjectsTableItem = ({ project, index }) => {
       setStatusColor("bg-orange-500");
     }
   }, [status]);
+
+  useEffect(() => {
+    if (priority === "low") {
+      setPriorityColor("bg-sky-500");
+    } else if (priority === "medium") {
+      setPriorityColor("bg-green-600");
+    } else if (priority === "high") {
+      setPriorityColor("bg-orange-500");
+    }
+  }, [priority]);
 
   return (
     <tr key={project.id}>
@@ -64,7 +75,7 @@ export const ProjectsTableItem = ({ project, index }) => {
       </td>
       <td
         className={`${
-          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-50"
         } ${statusColor} font-light text-left border pl-2`}
       >
         {camelCaseToWords(project.status)}
@@ -82,6 +93,13 @@ export const ProjectsTableItem = ({ project, index }) => {
         }  font-light text-left border pl-2`}
       >
         {project.deadline}
+      </td>
+      <td
+        className={`${
+          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-50"
+        } ${priorityColor} font-light text-left border pl-2`}
+      >
+        {project?.priority ? camelCaseToWords(project?.priority) : ""}
       </td>
       <td
         className={`${

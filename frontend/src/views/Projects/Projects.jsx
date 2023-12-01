@@ -296,6 +296,13 @@ export const Projects = () => {
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                  } w-3/12 text-left pl-2 border`}
+                >
+                  Priority
+                </th>
+                <th
+                  className={`${
+                    darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
                   } w-2/12 text-left pl-2 border`}
                 >
                   Client Budget
