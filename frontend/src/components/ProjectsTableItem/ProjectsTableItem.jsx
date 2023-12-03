@@ -71,12 +71,12 @@ export const ProjectsTableItem = ({ project, index }) => {
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
         } font-light text-left border pl-2`}
       >
-        {project.client.firstName}
+        {`${project.client.firstName} ${project.client.lastName} `}
       </td>
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-50"
-        } ${statusColor} font-light text-left border pl-2`}
+        } ${statusColor} font-light text-left border flex justify-center py-2`}
       >
         {camelCaseToWords(project.status)}
       </td>
@@ -97,7 +97,7 @@ export const ProjectsTableItem = ({ project, index }) => {
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-50"
-        } ${priorityColor} font-light text-left border pl-2`}
+        } ${priorityColor} font-light text-left border flex justify-center py-2`}
       >
         {project?.priority ? camelCaseToWords(project?.priority) : ""}
       </td>
