@@ -29,8 +29,6 @@ export const OrganizationProfile = () => {
   if (userLoading || organizationLoading) return <Spinner />;
   if (userError || organizationError) return <p>There was an error...</p>;
 
-  console.log("organizationData: ", organizationData);
-
   const { organizationName } = organizationData.organization;
 
   const isAdmin = userData.user.role === "admin";
@@ -38,18 +36,29 @@ export const OrganizationProfile = () => {
 
   return (
     <div>
-      <h1 className="mt-3 font-semibold text-lg">{organizationName}</h1>
+      <h1 className="mt-3 font-semibold text-xl">{organizationName}</h1>
       {isAdmin ||
         (isOwner && (
-          <div className="text-base mt-10 border py-4 w-1/2 mx-auto">
-            <p className="mb-3">Add employees to your organization</p>
-            <DynamicButton
-              link={`/organizations/${organizationId}/addUser`}
-              type="link"
-              color="lightBlue"
-            >
-              Add Employees
-            </DynamicButton>
+          <div className="text-base mt-10 border flex flex-col items-center pt-2 pb-4 w-1/2 mx-auto">
+            <h2 className="font-semibold text-lg mb-4">Employee Dashboard</h2>
+            <div className="flex flex-row">
+              <DynamicButton
+                link={`/organizations/${organizationId}/addUser`}
+                type="link"
+                color="lightBlue"
+                className="mr-1"
+              >
+                Add Employees
+              </DynamicButton>
+              <DynamicButton
+                link={`/organizations/${organizationId}/employees`}
+                type="link"
+                color="lightBlue"
+                className="ml-1"
+              >
+                Current Employees
+              </DynamicButton>
+            </div>
           </div>
         ))}
     </div>

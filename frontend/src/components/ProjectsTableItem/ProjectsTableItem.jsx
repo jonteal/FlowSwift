@@ -18,8 +18,6 @@ export const ProjectsTableItem = ({ project, index }) => {
   const { darkMode } = useSelector((state) => state.theme);
   const { organizationId } = useParams();
 
-  console.log("project: ", project);
-
   const {
     projectName,
     projectClient,

@@ -33,7 +33,7 @@ export const OrganizationViewNav = () => {
             } rounded my-1 px-3 py-2 w-full md:w-30`}
           >
             <BsFillPersonVcardFill className="text-lime-500" />
-            <p className="text-base leading-4">Profile</p>
+            <p className="text-base leading-4">Organization</p>
           </NavLink>
           <NavLink
             to="clients"

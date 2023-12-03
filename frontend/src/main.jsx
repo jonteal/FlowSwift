@@ -63,6 +63,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import { OrganizationProfile } from "./views/Organization/OrganizationProfile/OrganizationProfile.jsx";
 import { OrganizationFinancials } from "./views/Organization/OrganizationFinancials/OrganizationFinancials.jsx";
+import { OrganizationEmployees } from "./views/Organization/OrganizationEmployees/OrganizationEmployees.jsx";
+import { EmployeeProfile } from "./views/Organization/EmployeeProfile/EmployeeProfile.jsx";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -174,6 +176,14 @@ const router = createBrowserRouter(
           <Route
             path="/organizations/:organizationId/addUser"
             element={<AddUser />}
+          />
+          <Route
+            path="/organizations/:organizationId/:userId/profile"
+            element={<EmployeeProfile />}
+          />
+          <Route
+            path="/organizations/:organizationId/employees"
+            element={<OrganizationEmployees />}
           />
           <Route
             path="/organizations/:organizationId/clients"
