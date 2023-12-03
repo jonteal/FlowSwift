@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 // ICONS
 import { FaRegEye } from "react-icons/fa6";
@@ -16,13 +16,37 @@ import { camelCaseToWords } from "../../utils/format";
 
 export const ProjectsTableItem = ({ project, index }) => {
   const { darkMode } = useSelector((state) => state.theme);
+  const { organizationId } = useParams();
 
-  const { projectName } = useSelector((state) => state.projects);
+  console.log("project: ", project);
+
+  const {
+    projectName,
+    projectClient,
+    projectStatus,
+    projectStartDate,
+    projectDeadline,
+    projectPriority,
+    projectBudget,
+    projectEstimate,
+    projectOwnerTable,
+  } = useSelector((state) => state.projects);
 
   const [statusColor, setStatusColor] = useState("");
   const [priorityColor, setPriorityColor] = useState("");
 
-  const { status, priority } = project;
+  const {
+    id,
+    status,
+    priority,
+    title,
+    user,
+    client,
+    startDate,
+    deadline,
+    clientBudget,
+    projectEstimate: estimate,
+  } = project;
 
   useEffect(() => {
     if (status === "notStarted") {
@@ -63,7 +87,79 @@ export const ProjectsTableItem = ({ project, index }) => {
             darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
           } font-light text-left border pl-2`}
         >
-          {project.title}
+          {title}
+        </td>
+      )}
+      {projectClient && (
+        <td
+          className={`${
+            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+          } font-light text-left border pl-2`}
+        >
+          {`${client.firstName} ${client.lastName} `}
+        </td>
+      )}
+      {projectOwnerTable && (
+        <td
+          className={`${
+            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+          } font-light text-left border pl-2`}
+        >
+          {user.name}
+        </td>
+      )}
+      {projectStatus && (
+        <td
+          className={`${
+            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-50"
+          } ${statusColor} font-light text-left border flex justify-center py-2`}
+        >
+          {camelCaseToWords(status)}
+        </td>
+      )}
+      {projectStartDate && (
+        <td
+          className={`${
+            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+          } font-light text-left border pl-2`}
+        >
+          {startDate}
+        </td>
+      )}
+      {projectDeadline && (
+        <td
+          className={`${
+            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+          } font-light text-left border pl-2`}
+        >
+          {deadline}
+        </td>
+      )}
+      {projectPriority && (
+        <td
+          className={`${
+            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-50"
+          } ${priorityColor} font-light text-left border flex justify-center py-2`}
+        >
+          {priority ? camelCaseToWords(priority) : ""}
+        </td>
+      )}
+      {projectBudget && (
+        <td
+          className={`${
+            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+          } font-light text-left border pl-2`}
+        >
+          {clientBudget}
+        </td>
+      )}
+      {projectEstimate && (
+        <td
+          className={`${
+            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+          } font-light text-left border pl-2`}
+        >
+          {estimate}
         </td>
       )}
       <td
@@ -71,57 +167,8 @@ export const ProjectsTableItem = ({ project, index }) => {
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
         } font-light text-left border pl-2`}
       >
-        {`${project.client.firstName} ${project.client.lastName} `}
-      </td>
-      <td
-        className={`${
-          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-50"
-        } ${statusColor} font-light text-left border flex justify-center py-2`}
-      >
-        {camelCaseToWords(project.status)}
-      </td>
-      <td
-        className={`${
-          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
-      >
-        {project.startDate}
-      </td>
-      <td
-        className={`${
-          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
-      >
-        {project.deadline}
-      </td>
-      <td
-        className={`${
-          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-50"
-        } ${priorityColor} font-light text-left border flex justify-center py-2`}
-      >
-        {project?.priority ? camelCaseToWords(project?.priority) : ""}
-      </td>
-      <td
-        className={`${
-          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2`}
-      >
-        {project.clientBudget}
-      </td>
-      <td
-        className={`${
-          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
-      >
-        {project.projectEstimate}
-      </td>
-      <td
-        className={`${
-          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
-      >
         <Link
-          to={`/clients/${project.client.id}/projects/${project.id}/profile`}
+          to={`/organizations/${organizationId}/clients/${client.id}/projects/${id}/profile`}
         >
           <FaRegEye
             className={`${darkMode ? "text-sky-200" : "text-sky-600"} mr-2`}
@@ -131,9 +178,9 @@ export const ProjectsTableItem = ({ project, index }) => {
       <td
         className={`${
           darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        }  font-light text-left border pl-2`}
+        } font-light text-left border pl-2`}
       >
-        <DeleteProject subject="Project" projectId={project.id}>
+        <DeleteProject subject="Project" projectId={id}>
           <FaRegTrashAlt className="text-red-500 self-center mx-1" />
         </DeleteProject>
       </td>

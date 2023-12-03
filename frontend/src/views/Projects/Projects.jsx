@@ -34,6 +34,22 @@ import {
   setPriorityBadgeOn,
   setProjectNameOff,
   setProjectNameOn,
+  setProjectClientOff,
+  setProjectClientOn,
+  setProjectStatusOff,
+  setProjectStatusOn,
+  setProjectStartDateOff,
+  setProjectStartDateOn,
+  setProjectDeadlineOff,
+  setProjectDeadlineOn,
+  setProjectPriorityOff,
+  setProjectPriorityOn,
+  setProjectBudgetOff,
+  setProjectBudgetOn,
+  setProjectEstimateOff,
+  setProjectEstimateOn,
+  setProjectOwnerTableOff,
+  setProjectOwnerTableOn,
 } from "../../slices/projectsSlice";
 
 export const Projects = () => {
@@ -56,6 +72,14 @@ export const Projects = () => {
     projectOwner,
     priorityBadge,
     projectName,
+    projectClient,
+    projectStatus,
+    projectStartDate,
+    projectDeadline,
+    projectPriority,
+    projectBudget,
+    projectEstimate,
+    projectOwnerTable,
   } = useSelector((state) => state.projects);
 
   const handleGridViewToggle = () => {
@@ -101,6 +125,54 @@ export const Projects = () => {
   // TABLE FILTERS
   const handleProjectNameToggle = () => {
     projectName ? dispatch(setProjectNameOff()) : dispatch(setProjectNameOn());
+  };
+
+  const handleProjectClientToggle = () => {
+    projectClient
+      ? dispatch(setProjectClientOff())
+      : dispatch(setProjectClientOn());
+  };
+
+  const handleProjectStatusToggle = () => {
+    projectStatus
+      ? dispatch(setProjectStatusOff())
+      : dispatch(setProjectStatusOn());
+  };
+
+  const handleProjectStartDateToggle = () => {
+    projectStartDate
+      ? dispatch(setProjectStartDateOff())
+      : dispatch(setProjectStartDateOn());
+  };
+
+  const handleProjectDeadlineToggle = () => {
+    projectDeadline
+      ? dispatch(setProjectDeadlineOff())
+      : dispatch(setProjectDeadlineOn());
+  };
+
+  const handleProjectPriorityToggle = () => {
+    projectPriority
+      ? dispatch(setProjectPriorityOff())
+      : dispatch(setProjectPriorityOn());
+  };
+
+  const handleProjectBudgetToggle = () => {
+    projectBudget
+      ? dispatch(setProjectBudgetOff())
+      : dispatch(setProjectBudgetOn());
+  };
+
+  const handleProjectEstimateToggle = () => {
+    projectEstimate
+      ? dispatch(setProjectEstimateOff())
+      : dispatch(setProjectEstimateOn());
+  };
+
+  const handleProjectOwnerTableToggle = () => {
+    projectOwnerTable
+      ? dispatch(setProjectOwnerTableOff())
+      : dispatch(setProjectOwnerTableOn());
   };
 
   const handleOpenFilters = () => {
@@ -176,6 +248,62 @@ export const Projects = () => {
       value: projectName,
       isChecked: projectName,
       ariaLabel: "Project Name filter",
+    },
+    {
+      name: "Project Client",
+      toggle: handleProjectClientToggle,
+      value: projectClient,
+      isChecked: projectClient,
+      ariaLabel: "Project Client filter",
+    },
+    {
+      name: "Project Status",
+      toggle: handleProjectStatusToggle,
+      value: projectStatus,
+      isChecked: projectStatus,
+      ariaLabel: "Project Status filter",
+    },
+    {
+      name: "Project Start Date",
+      toggle: handleProjectStartDateToggle,
+      value: projectStartDate,
+      isChecked: projectStartDate,
+      ariaLabel: "Project Start Date filter",
+    },
+    {
+      name: "Project Deadline",
+      toggle: handleProjectDeadlineToggle,
+      value: projectDeadline,
+      isChecked: projectDeadline,
+      ariaLabel: "Project Deadline filter",
+    },
+    {
+      name: "Project Priority",
+      toggle: handleProjectPriorityToggle,
+      value: projectPriority,
+      isChecked: projectPriority,
+      ariaLabel: "Project Priority filter",
+    },
+    {
+      name: "Project Budget",
+      toggle: handleProjectBudgetToggle,
+      value: projectBudget,
+      isChecked: projectBudget,
+      ariaLabel: "Project Budget filter",
+    },
+    {
+      name: "Project Estimate",
+      toggle: handleProjectEstimateToggle,
+      value: projectEstimate,
+      isChecked: projectEstimate,
+      ariaLabel: "Project Estimate filter",
+    },
+    {
+      name: "Project Owner",
+      toggle: handleProjectOwnerTableToggle,
+      value: projectOwnerTable,
+      isChecked: projectOwnerTable,
+      ariaLabel: "Project Owner filter",
     },
   ];
 
@@ -265,55 +393,78 @@ export const Projects = () => {
                     Project Name
                   </th>
                 )}
-                <th
-                  className={`${
-                    darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-3/12 md:w-2/12 text-left pl-2 border`}
-                >
-                  Client
-                </th>
-                <th
-                  className={`${
-                    darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border`}
-                >
-                  Status
-                </th>
-                <th
-                  className={`${
-                    darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border`}
-                >
-                  Start Date
-                </th>
-                <th
-                  className={`${
-                    darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-3/12 text-left pl-2 border`}
-                >
-                  Deadline
-                </th>
-                <th
-                  className={`${
-                    darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-3/12 text-left pl-2 border`}
-                >
-                  Priority
-                </th>
-                <th
-                  className={`${
-                    darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border`}
-                >
-                  Client Budget
-                </th>
-                <th
-                  className={`${
-                    darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                  } w-2/12 text-left pl-2 border`}
-                >
-                  Project Estimate
-                </th>
+                {projectClient && (
+                  <th
+                    className={`${
+                      darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                    } w-3/12 md:w-2/12 text-left pl-2 border`}
+                  >
+                    Client
+                  </th>
+                )}
+                {projectOwnerTable && (
+                  <th
+                    className={`${
+                      darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                    } w-3/12 md:w-2/12 text-left pl-2 border`}
+                  >
+                    Owner
+                  </th>
+                )}
+                {projectStatus && (
+                  <th
+                    className={`${
+                      darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                    } w-2/12 text-left pl-2 border`}
+                  >
+                    Status
+                  </th>
+                )}
+                {projectStartDate && (
+                  <th
+                    className={`${
+                      darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                    } w-2/12 text-left pl-2 border`}
+                  >
+                    Start Date
+                  </th>
+                )}
+                {projectDeadline && (
+                  <th
+                    className={`${
+                      darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                    } w-3/12 text-left pl-2 border`}
+                  >
+                    Deadline
+                  </th>
+                )}
+                {projectPriority && (
+                  <th
+                    className={`${
+                      darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                    } w-3/12 text-left pl-2 border`}
+                  >
+                    Priority
+                  </th>
+                )}
+                {projectBudget && (
+                  <th
+                    className={`${
+                      darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                    } w-2/12 text-left pl-2 border`}
+                  >
+                    Client Budget
+                  </th>
+                )}
+                {projectEstimate && (
+                  <th
+                    className={`${
+                      darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                    } w-2/12 text-left pl-2 border`}
+                  >
+                    Project Estimate
+                  </th>
+                )}
                 <th
                   className={`${
                     darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
