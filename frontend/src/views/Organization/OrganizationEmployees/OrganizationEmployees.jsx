@@ -2,9 +2,12 @@ import { Link, useParams } from "react-router-dom";
 import { GET_USERS } from "../../../graphql/queries/userQueries";
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 import { useQuery } from "@apollo/client";
+import { useSelector } from "react-redux";
+import { EmployeeRowItem } from "../../../components/EmployeeRowItem/EmployeeRowItem";
 
 export const OrganizationEmployees = () => {
   const { organizationId } = useParams();
+  const { darkMode } = useSelector((state) => state.theme);
 
   const {
     loading: userLoading,
@@ -20,14 +23,47 @@ export const OrganizationEmployees = () => {
   return (
     <div>
       <h1 className="text-xl font-bold mt-3">Employees</h1>
-      {userData.users.map((user) => (
-        <Link
-          key={user._id}
-          to={`/organizations/${organizationId}/${user._id}/profile`}
-        >
-          {user.name}
-        </Link>
-      ))}
+      <div className="flex flex-col">
+        <table className="mx-3">
+          <thead>
+            <tr>
+              <th
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                } text-left pl-2 border`}
+              >
+                #
+              </th>
+              <th
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                } text-left pl-2 border`}
+              >
+                Name
+              </th>
+              <th
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                } text-left pl-2 border`}
+              >
+                Email
+              </th>
+              <th
+                className={`${
+                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+                } text-left pl-2 border`}
+              >
+                Role
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {userData.users.map((user, index) => (
+              <EmployeeRowItem key={user._id} index={index} employee={user} />
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
