@@ -57,14 +57,14 @@ import { KanbanEdit } from "./views/clientDashboard/projects/NewKanban/KanbanEdi
 import { Kanbans } from "./views/Kanbans/Kanbans.jsx";
 import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganization";
 import { OrganizationView } from "./views/Organization/OrganizationView/OrganizationView.jsx";
-
-import store from "./store";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./index.css";
 import { OrganizationProfile } from "./views/Organization/OrganizationProfile/OrganizationProfile.jsx";
 import { OrganizationFinancials } from "./views/Organization/OrganizationFinancials/OrganizationFinancials.jsx";
 import { OrganizationEmployees } from "./views/Organization/OrganizationEmployees/OrganizationEmployees.jsx";
 import { EmployeeProfile } from "./views/Organization/EmployeeProfile/EmployeeProfile.jsx";
+
+import store from "./store";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
 const cache = new InMemoryCache({
   typePolicies: {
