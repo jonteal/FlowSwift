@@ -6,7 +6,13 @@ import { PiPauseDuotone } from "react-icons/pi";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { camelCaseToWords } from "../../../utils/format";
 
-export const StatusBadge = ({ status, position, className }) => {
+export type StatusBadgeProps = {
+  status: 'notStarted' | 'inProgress' | 'completed' | 'paused' | 'needsAttention'
+  position: string;
+  className: string;
+}
+
+export const StatusBadge = ({ status, position, className }: StatusBadgeProps) => {
   const [statusColor, setStatusColor] = useState("");
 
   useEffect(() => {
@@ -25,7 +31,7 @@ export const StatusBadge = ({ status, position, className }) => {
 
   const statusText = camelCaseToWords(status);
 
-  const getStatusIcon = (status) => {
+  const getStatusIcon = (status: string) => {
     if (status === "notStarted") {
       return <CiNoWaitingSign />;
     } else if (status === "inProgress") {
@@ -39,14 +45,17 @@ export const StatusBadge = ({ status, position, className }) => {
     }
   };
 
-  const getPosition = (position) => {
+  const getPosition = (position: string) => {
     switch (position) {
       case "left":
         position = "justify-start";
+        break;
       case "center":
         position = "justify-center";
+        break;
       case "right":
         position = "justify-end";
+        break;
       default:
         break;
     }
