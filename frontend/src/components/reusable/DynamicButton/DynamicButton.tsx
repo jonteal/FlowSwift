@@ -1,6 +1,17 @@
+import { ReactNode } from "react";
 import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
+export type DynamicButtonProps = {
+  link: string;
+  type: string;
+  children: ReactNode;
+  className: string;
+  color: string;
+  clickHandler: () => void;
+  disabled: boolean
+}
 
 export const DynamicButton = ({
   link,
@@ -10,7 +21,7 @@ export const DynamicButton = ({
   color,
   clickHandler,
   disabled,
-}) => {
+}: DynamicButtonProps) => {
   const navigate = useNavigate();
   const handleBackNavigate = () => {
     navigate(-1);
@@ -23,15 +34,18 @@ export const DynamicButton = ({
     case "green":
       color =
         "bg-green-500 hover:from-green-500 hover:to-green-400 hover:ring-green-400 hover:bg-gradient-to-r";
+        break;
     case "lightBlue":
       color = "bg-blue-50 hover:bg-blue-100 hover:text-blue-600 text-blue-500";
+      break;
     case "blue":
       color = "bg-blue-500 hover:bg-blue-100 hover:text-blue-600 text-blue-50";
+      break;
     default:
       break;
   }
   // GET BUTTON
-  const renderButton = (type) => {
+  const renderButton = (type: string) => {
     switch (type) {
       case "submit":
         return (
