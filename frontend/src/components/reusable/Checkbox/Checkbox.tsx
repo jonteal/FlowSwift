@@ -1,8 +1,15 @@
 // STATE
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
 
-export const Checkbox = ({ value, setChangeHandler, label }) => {
-  const { darkMode } = useSelector((state) => state.theme);
+export type CheckboxProps = {
+  value?: string,
+  setChangeHandler: () => void,
+  label: string
+}
+
+export const Checkbox = ({ value, setChangeHandler, label }: CheckboxProps) => {
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   return (
     <div className="flex flex-row items-center w-full mx-10 mb-5">
