@@ -25,6 +25,8 @@ export const AddProject = () => {
   const { darkMode } = useSelector((state) => state.theme);
   const { organizationId } = useParams();
 
+  console.log("organizationId: ", organizationId);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("notStarted");
@@ -52,6 +54,7 @@ export const AddProject = () => {
       clientBudget,
       projectEstimate,
       userId,
+      organizationId,
     },
     update(cache, { data: { addProject } }) {
       const { projects } = cache.readQuery({
@@ -105,7 +108,8 @@ export const AddProject = () => {
       notes,
       clientBudget,
       projectEstimate,
-      userId
+      userId,
+      organizationId
     );
 
     setTitle("");

@@ -13,6 +13,7 @@ const ADD_PROJECT = gql`
     $clientBudget: String
     $projectEstimate: String
     $userId: ID
+    $organizationId: ID!
   ) {
     addProject(
       title: $title
@@ -26,6 +27,7 @@ const ADD_PROJECT = gql`
       clientBudget: $clientBudget
       projectEstimate: $projectEstimate
       userId: $userId
+      organizationId: $organizationId
     ) {
       id
       title
@@ -37,6 +39,10 @@ const ADD_PROJECT = gql`
         id
         firstName
         lastName
+      }
+      organization {
+        id
+        organizationName
       }
       user {
         _id
@@ -72,6 +78,7 @@ const UPDATE_PROJECT = gql`
     $clientBudget: String
     $projectEstimate: String
     $userId: ID
+    $organizationId: ID
   ) {
     updateProject(
       id: $id
@@ -85,6 +92,7 @@ const UPDATE_PROJECT = gql`
       clientBudget: $clientBudget
       projectEstimate: $projectEstimate
       userId: $userId
+      organizationId: $organizationId
     ) {
       id
       title
@@ -96,6 +104,10 @@ const UPDATE_PROJECT = gql`
         id
         firstName
         lastName
+      }
+      organization {
+        id
+        organizationName
       }
       user {
         _id

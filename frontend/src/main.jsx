@@ -62,7 +62,7 @@ import { OrganizationFinancials } from "./views/Organization/OrganizationFinanci
 import { OrganizationEmployees } from "./views/Organization/OrganizationEmployees/OrganizationEmployees.jsx";
 import { EmployeeProfile } from "./views/Organization/EmployeeProfile/EmployeeProfile.jsx";
 
-import store from "./store";
+import store from "./store/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -157,6 +157,7 @@ const router = createBrowserRouter(
           <Route path="/settings/profile" element={<ProfileScreen />} />
           <Route path="/settings/documentation" element={<Documentation />} />
         </Route>
+        <Route path="/addOrganization" element={<AddOrganization />} />
         <Route
           path="/organizations/:organizationId"
           element={<OrganizationView />}
@@ -188,10 +189,6 @@ const router = createBrowserRouter(
           <Route
             path="/organizations/:organizationId/clients"
             element={<Clients />}
-          />
-          <Route
-            path="/organizations/:organizationId/addOrganization"
-            element={<AddOrganization />}
           />
           <Route
             path="/organizations/:organizationId/dashboard"

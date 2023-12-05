@@ -111,6 +111,12 @@ const ProjectType = new GraphQLObjectType({
         return User.findById(parent.userId);
       },
     },
+    organization: {
+      type: OrganizationType,
+      resolve(parent, args) {
+        return Organization.findById(parent.userId);
+      },
+    },
     createdAt: { type: GraphQLString },
     startDate: { type: GraphQLString },
     deadline: { type: GraphQLString },
@@ -411,10 +417,11 @@ const RootQuery = new GraphQLObjectType({
         return Project.find({ clientId: args.clientId });
       },
     },
-    projects: {
+    organizationProjects: {
       type: new GraphQLList(ProjectType),
+      args: { organizationId: { type: GraphQLID } },
       resolve(parent, args) {
-        return Project.find();
+        return Project.find({ organizationId: args.organizationId });
       },
     },
     project: {
@@ -826,6 +833,7 @@ const mutation = new GraphQLObjectType({
         },
         clientId: { type: new GraphQLNonNull(GraphQLID) },
         userId: { type: GraphQLID },
+        organizationId: { type: new GraphQLNonNull(GraphQLID) },
         startDate: { type: GraphQLString },
         deadline: { type: GraphQLString },
         clientBudget: { type: GraphQLString },
@@ -840,6 +848,7 @@ const mutation = new GraphQLObjectType({
           notes: args.notes,
           clientId: args.clientId,
           userId: args.userId,
+          organizationId: args.organizationId,
           startDate: args.startDate,
           deadline: args.deadline,
           clientBudget: args.clientBudget,
@@ -931,6 +940,7 @@ const mutation = new GraphQLObjectType({
               notes: args.notes,
               clientId: args.clientId,
               userId: args.userId,
+              organizationId: args.organizationId,
               startDate: args.startDate,
               deadline: args.deadline,
               clientBudget: args.clientBudget,
