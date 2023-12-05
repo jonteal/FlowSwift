@@ -6,14 +6,17 @@ import { FaRegTrashAlt } from "react-icons/fa";
 
 // GRAPHQL
 import { DELETE_PROJECT } from "../../graphql/mutations/projectMutations";
-import { GET_PROJECTS } from "../../graphql/queries/projectQueries";
+import { GET_ORGANIZATION_PROJECTS } from "../../graphql/queries/projectQueries";
 
 // COMPONENTS
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
+import { useParams } from "react-router-dom";
 
-export const DeleteProject = ({ subject, projectId, children, clientId }) => {
+export const DeleteProject = ({ subject, projectId, children }) => {
+  const { organizationId } = useParams();
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -21,7 +24,9 @@ export const DeleteProject = ({ subject, projectId, children, clientId }) => {
 
   const [deleteProject] = useMutation(DELETE_PROJECT, {
     variables: { id: projectId },
-    refetchQueries: [{ query: GET_PROJECTS, variables: { clientId } }],
+    refetchQueries: [
+      { query: GET_ORGANIZATION_PROJECTS, variables: { organizationId } },
+    ],
   });
 
   return (

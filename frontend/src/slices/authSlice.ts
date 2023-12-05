@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   userInfo: localStorage.getItem("userInfo")
+  // @ts-ignore
     ? JSON.parse(localStorage.getItem("userInfo"))
     : null,
 };

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-const GET_PROJECTS = gql`
-  query getProjects {
-    projects {
+const GET_ORGANIZATION_PROJECTS = gql`
+  query getProjects($organizationId: ID) {
+    organizationProjects(organizationId: $organizationId) {
       id
       title
       description
@@ -13,6 +13,10 @@ const GET_PROJECTS = gql`
         id
         firstName
         lastName
+      }
+      organization {
+        id
+        organizationName
       }
       createdAt
       startDate
@@ -41,6 +45,10 @@ const GET_CLIENT_PROJECTS = gql`
         firstName
         lastName
       }
+      organization {
+        id
+        organizationName
+      }
       user {
         _id
         name
@@ -68,6 +76,10 @@ const GET_PROJECT = gql`
         firstName
         lastName
       }
+      organization {
+        id
+        organizationName
+      }
       user {
         _id
         name
@@ -81,4 +93,4 @@ const GET_PROJECT = gql`
   }
 `;
 
-export { GET_PROJECTS, GET_CLIENT_PROJECTS, GET_PROJECT };
+export { GET_ORGANIZATION_PROJECTS, GET_CLIENT_PROJECTS, GET_PROJECT };

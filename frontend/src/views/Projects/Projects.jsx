@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
-import { GET_PROJECTS } from "../../graphql/queries/projectQueries";
+import { GET_ORGANIZATION_PROJECTS } from "../../graphql/queries/projectQueries";
 
 // COMPONENTS
 import { Spinner } from "../../components/reusable/Spinner/Spinner";
@@ -51,11 +51,15 @@ import {
   setProjectOwnerTableOff,
   setProjectOwnerTableOn,
 } from "../../slices/projectsSlice";
+import { useParams } from "react-router-dom";
 
 export const Projects = () => {
+  const { organizationId } = useParams();
   const { darkMode } = useSelector((state) => state.theme);
 
-  const { loading, error, data } = useQuery(GET_PROJECTS);
+  const { loading, error, data } = useQuery(GET_ORGANIZATION_PROJECTS, {
+    variables: { organizationId },
+  });
   const [searchTerm, setSearchTerm] = useState("");
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
 
@@ -341,12 +345,12 @@ export const Projects = () => {
           darkMode ? "text-sky-100" : "text-slate-700"
         } text-base font-bold mb-2`}
       >
-        Total Projects: {data.projects.length}
+        Total Projects: {data.organizationProjects.length}
       </p>
 
       {gridView ? (
         <div className="flex md:flex-row flex-wrap mx-auto flex-col">
-          {data.projects
+          {data.organizationProjects
             .filter((val) => {
               if (searchTerm === "") {
                 return val;
@@ -478,7 +482,7 @@ export const Projects = () => {
               </tr>
             </thead>
             <tbody>
-              {data.projects
+              {data.organizationProjects
                 .filter((val) => {
                   if (searchTerm === "") {
                     return val;

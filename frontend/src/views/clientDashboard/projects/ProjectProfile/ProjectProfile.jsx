@@ -3,8 +3,8 @@ import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
 import {
+  GET_ORGANIZATION_PROJECTS,
   GET_PROJECT,
-  GET_PROJECTS,
 } from "../../../../graphql/queries/projectQueries";
 import { DELETE_PROJECT } from "../../../../graphql/mutations/projectMutations";
 
@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 export const ProjectProfile = () => {
   const { darkMode } = useSelector((state) => state.theme);
 
-  const { projectId, clientId } = useParams();
+  const { projectId, clientId, organizationId } = useParams();
   const navigate = useNavigate();
 
   const {
@@ -34,7 +34,10 @@ export const ProjectProfile = () => {
   const [deleteProject] = useMutation(DELETE_PROJECT, {
     variables: { id: projectId },
     onCompleted: () => navigate(`/clients/${clientId}/projects`),
-    refetchQueries: [{ query: GET_PROJECTS }, { query: GET_PROJECTS }],
+    refetchQueries: [
+      { query: GET_ORGANIZATION_PROJECTS, variables: { organizationId } },
+      { query: GET_ORGANIZATION_PROJECTS, variables: { organizationId } },
+    ],
   });
 
   if (projectLoading) return <p>Loading...</p>;

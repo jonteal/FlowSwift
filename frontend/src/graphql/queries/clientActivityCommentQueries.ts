@@ -1,4 +1,5 @@
-import { gql } from "@apollo/client";
+// import { gql } from "@apollo/client";
+import { gql } from 'graphql-tag';
 
 const GET_CLIENT_ACTIVITY_COMMENTS = gql`
   query getClientActivityComments($clientId: ID) {
