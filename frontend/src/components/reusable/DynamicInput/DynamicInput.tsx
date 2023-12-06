@@ -1,8 +1,33 @@
 // STATE
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
 
 // UTILS
 import { capitalized } from "../../../utils/format";
+
+type SelectOptions = {
+  ariaLabel?: string,
+  value?: string,
+  label?: string,
+  title?: string,
+  id: string
+  columnState?: string
+}
+
+export type DynamicInputProps = {
+  id: string,
+  inputType: string,
+  type: string,
+  label: string,
+  changeHandler: () => void,
+  placeholder: string,
+  value: string | number,
+  selectOptions: SelectOptions[],
+  className: string,
+  rows: number,
+  ariaLabel: string,
+  step: string,
+  min: string
+}
 
 export const DynamicInput = ({
   id,
@@ -18,10 +43,10 @@ export const DynamicInput = ({
   ariaLabel,
   step = "",
   min = "",
-}) => {
-  const { darkMode } = useSelector((state) => state.theme);
+}: DynamicInputProps) => {
+  const { darkMode } = useAppSelector((state) => state.theme);
 
-  const renderInput = () => {
+  const renderInput = (inputType: string) => {
     switch (inputType) {
       case "input":
         return (
@@ -78,7 +103,7 @@ export const DynamicInput = ({
               >
                 {option.label ||
                   option.title ||
-                  capitalized(option.columnState)}
+                  capitalized(option.columnState || '')}
               </option>
             ))}
           </select>
@@ -98,7 +123,7 @@ export const DynamicInput = ({
       >
         {label}
       </label>
-      {renderInput(type)}
+      {renderInput(inputType)}
     </div>
   );
 };

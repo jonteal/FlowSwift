@@ -3,12 +3,12 @@ import { BsFillSunFill, BsMoonFill } from "react-icons/bs";
 
 // STATE
 import { setDarkModeOff, setDarkModeOn } from "../../../slices/themeSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
 export const Toggle = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { darkMode } = useSelector((state) => state.theme);
+  const { darkMode } = useAppSelector((state) => state.theme);
 
   const handleThemeToggle = () => {
     darkMode ? dispatch(setDarkModeOff()) : dispatch(setDarkModeOn());

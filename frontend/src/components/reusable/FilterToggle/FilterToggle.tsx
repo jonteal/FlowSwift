@@ -1,9 +1,16 @@
+export type FilterToggleProps = {
+  value?: string,
+  toggleHandler: () => void,
+  isChecked: boolean,
+  ariaLabel: string
+}
+
 export const FilterToggle = ({
   value,
   toggleHandler,
   isChecked,
   ariaLabel,
-}) => (
+}: FilterToggleProps) => (
   <div>
     <label className="relative inline-flex items-center cursor-pointer">
       <input

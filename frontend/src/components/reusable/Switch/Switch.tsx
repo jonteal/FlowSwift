@@ -3,10 +3,15 @@ import { FaRectangleList } from "react-icons/fa6";
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 
 // STATE
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
 
-export const Switch = ({ changeHandler, isChecked }) => {
-  const { darkMode } = useSelector((state) => state.theme);
+export type SwitchProps = {
+  changeHandler: () => void,
+  isChecked: boolean
+}
+
+export const Switch = ({ changeHandler, isChecked }: SwitchProps) => {
+  const { darkMode } = useAppSelector((state) => state.theme);
 
   return (
     <label

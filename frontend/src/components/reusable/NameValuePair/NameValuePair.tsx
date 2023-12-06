@@ -1,8 +1,16 @@
 // STATE
-import { useSelector } from "react-redux";
+import { ReactNode } from "react";
+import { useAppSelector } from "../../../store/hooks";
 
-export const NameValuePair = ({ name, value, type, children }) => {
-  const { darkMode } = useSelector((state) => state.theme);
+export type NameValuePairProps = {
+  name: string,
+  value: string,
+  type: string,
+  children: ReactNode
+}
+
+export const NameValuePair = ({ name, value, type, children }: NameValuePairProps) => {
+  const { darkMode } = useAppSelector((state) => state.theme);
 
   return (
     <div className="flex flex-col ml-2 my-3">
