@@ -2,7 +2,7 @@ export type FilterToggleProps = {
   value?: string,
   toggleHandler: () => void,
   isChecked: boolean,
-  ariaLabel: string
+  ariaLabel?: string
 }
 
 export const FilterToggle = ({

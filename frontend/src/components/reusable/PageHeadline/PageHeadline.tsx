@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export type PageHeadlineProps = {
   children: ReactNode,
-  className: string
+  className?: string
 }
 
 export const PageHeadline = ({ children, className }: PageHeadlineProps) =>  (

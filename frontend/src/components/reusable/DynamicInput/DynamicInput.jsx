@@ -1,33 +1,33 @@
 // STATE
-import { useAppSelector } from "../../../store/hooks";
+import { useSelector } from "react-redux";
 
 // UTILS
 import { capitalized } from "../../../utils/format";
 
-type SelectOptions = {
-  ariaLabel?: string,
-  value?: string,
-  label?: string,
-  title?: string,
-  id: string
-  columnState?: string
-}
+// type SelectOptions = {
+//   ariaLabel?: string,
+//   value?: string,
+//   label?: string,
+//   title?: string,
+//   id: string
+//   columnState?: string
+// }
 
-export type DynamicInputProps = {
-  id: string,
-  inputType: string,
-  type: string,
-  label: string,
-  changeHandler: () => void,
-  placeholder: string,
-  value: string | number,
-  selectOptions: SelectOptions[],
-  className: string,
-  rows: number,
-  ariaLabel: string,
-  step: string,
-  min: string
-}
+// export type DynamicInputProps = {
+//   id: string,
+//   inputType: string,
+//   type: string,
+//   label: string,
+//   changeHandler: (e: ChangeEvent<HTMLInputElement>) => (e),
+//   placeholder: string,
+//   value: string | number,
+//   selectOptions?: SelectOptions[],
+//   className: string,
+//   rows?: number,
+//   ariaLabel: string,
+//   step?: string,
+//   min?: string
+// }
 
 export const DynamicInput = ({
   id,
@@ -43,10 +43,10 @@ export const DynamicInput = ({
   ariaLabel,
   step = "",
   min = "",
-}: DynamicInputProps) => {
-  const { darkMode } = useAppSelector((state) => state.theme);
+}) => {
+  const { darkMode } = useSelector((state) => state.theme);
 
-  const renderInput = (inputType: string) => {
+  const renderInput = (inputType) => {
     switch (inputType) {
       case "input":
         return (
@@ -103,7 +103,7 @@ export const DynamicInput = ({
               >
                 {option.label ||
                   option.title ||
-                  capitalized(option.columnState || '')}
+                  capitalized(option.columnState || "")}
               </option>
             ))}
           </select>

@@ -2,10 +2,22 @@
 import { FilterToggle } from "../FilterToggle/FilterToggle";
 
 // STATE
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
 
-export const FiltersList = ({ filters }) => {
-  const { darkMode } = useSelector((state) => state.theme);
+type FiltersType = {
+  name: string,
+  toggle: () => void,
+  value: string,
+  isChecked: boolean,
+  ariaLabel: string,
+}
+
+export type FiltersListProps = {
+  filters: FiltersType[]
+}
+
+export const FiltersList = ({ filters }: FiltersListProps) => {
+  const { darkMode } = useAppSelector((state) => state.theme);
 
   return (
     <div
