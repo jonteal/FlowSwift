@@ -21,6 +21,9 @@ import {
 } from "../../slices/kanbanSlice";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { PageHeadline } from "../../components/reusable/PageHeadline/PageHeadline";
+import { Body } from "../../components/reusable/Body/Body";
+import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
 
 export const Kanbans = () => {
   const { organizationId } = useParams();
@@ -95,6 +98,7 @@ export const Kanbans = () => {
       ariaLabel: "Project filter",
     },
   ];
+
   return (
     <div className="flex flex-col items-center">
       <button
@@ -107,13 +111,22 @@ export const Kanbans = () => {
         {isFilterOptionsOpen && <FiltersList filters={kanbanCardFilters} />}
       </div>
 
-      <div className="flex flex-col items-center md:flex-row flex-wrap mt-3 w-full p-3">
-        <div className="flex md:flex-row flex-wrap mx-auto flex-col">
-          {data.allKanbans.map((kanban) => (
-            <KanbanPageCard key={kanban.id} kanban={kanban} />
-          ))}
+      {data.allKanbans.length > 0 ? (
+        <div className="flex flex-col items-center md:flex-row flex-wrap mt-3 w-full p-3">
+          <div className="flex md:flex-row flex-wrap mx-auto flex-col">
+            {data.allKanbans.map((kanban) => (
+              <KanbanPageCard key={kanban.id} kanban={kanban} />
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <>
+          <Body className="mt-5 italic">
+            You don't have any kanbans. Would you like to add one?
+          </Body>
+          <DynamicButton>Add Kanban</DynamicButton>
+        </>
+      )}
     </div>
   );
 };

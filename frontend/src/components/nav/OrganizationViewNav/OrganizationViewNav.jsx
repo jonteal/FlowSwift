@@ -16,7 +16,7 @@ export const OrganizationViewNav = () => {
     <div
       id="Main"
       className={`transform xl:translate-x-0 ease-in-out transition duration-500 flex justify-start items-start h-10 border w-full ${
-        darkMode ? "bg-sky-800" : "bg-slate-50"
+        darkMode ? "bg-sky-800" : "bg-sky-50"
       } flex-row pr-10`}
     >
       <div className="flex flex-row justify-center items-center px-6 w-full">

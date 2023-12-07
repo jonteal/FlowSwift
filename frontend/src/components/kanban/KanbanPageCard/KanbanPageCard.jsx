@@ -8,7 +8,10 @@ import { Link, useParams } from "react-router-dom";
 export const KanbanPageCard = ({ kanban }) => {
   const { organizationId } = useParams();
 
-  const { project, title, description } = kanban;
+  console.log("kanban: ", kanban);
+
+  const { title, description, project } = kanban;
+
   const { darkMode } = useSelector((state) => state.theme);
 
   const { cardDescription, cardClient, cardProject } = useSelector(

@@ -22,7 +22,7 @@ export const OrganizationEmployees = () => {
 
   return (
     <div>
-      <h1 className="text-xl font-bold mt-3">Employees</h1>
+      <h1 className="text-xl font-bold my-3">Employees</h1>
       <div className="flex flex-col">
         <table className="mx-3">
           <thead>
