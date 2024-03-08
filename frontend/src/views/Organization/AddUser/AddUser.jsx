@@ -41,6 +41,8 @@ export const AddUser = () => {
 
   const organizationId = organizationsData?.organizations[0].id;
 
+  console.log("organizationId: ", organizationId);
+
   const {
     loading: usersLoading,
     error: usersError,

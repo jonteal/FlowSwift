@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom";
 
 // ICONS
-import { BsFillPersonVcardFill, BsPersonCircle } from "react-icons/bs";
+import { BsPersonCircle } from "react-icons/bs";
 import { GiMoneyStack } from "react-icons/gi";
 import { PiKanbanLight } from "react-icons/pi";
 import { FaProjectDiagram } from "react-icons/fa";
+import { SlOrganization } from "react-icons/sl";
 
 // STATE
 import { useSelector } from "react-redux";
@@ -32,7 +33,7 @@ export const OrganizationViewNav = () => {
                 : "text-slate-600 focus:bg-sky-600 hover:text-white hover:bg-sky-300 transition ease-in-out delay-50 duration-200"
             } rounded my-1 px-3 py-2 w-full md:w-30`}
           >
-            <BsFillPersonVcardFill className="text-lime-500" />
+            <SlOrganization className="text-sky-500" />
             <p className="text-base leading-4">Organization</p>
           </NavLink>
           <NavLink

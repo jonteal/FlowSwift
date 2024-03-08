@@ -133,7 +133,10 @@ export const RegisterScreen = () => {
 
         <Row>
           <Col>
-            Already have an account? <Link to="/login">Login</Link>
+            Already have an account?
+            <DynamicButton className="mt-3" type="link" link="/login">
+              Login
+            </DynamicButton>
           </Col>
         </Row>
       </Form>

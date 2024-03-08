@@ -67,7 +67,7 @@ export const ProjectProfile = () => {
             <DynamicButton
               type="link"
               color="lightBlue"
-              link={`/clients/${clientId}/projects/${projectId}/edit`}
+              link={`/organizations/$organizationId/clients/${clientId}/projects/${projectId}/edit`}
             >
               Edit
             </DynamicButton>

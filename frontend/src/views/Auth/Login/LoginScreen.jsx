@@ -68,9 +68,12 @@ export const LoginScreen = () => {
         </DynamicButton>
 
         <Row>
-          <Col>
-            New Customer? <Link to="/register">Register</Link>
-          </Col>
+          <div>
+            New Customer?{" "}
+            <DynamicButton className="mt-3" type="link" link="/register">
+              Register
+            </DynamicButton>
+          </div>
         </Row>
       </Form>
     </FormContainer>

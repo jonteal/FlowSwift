@@ -17,6 +17,8 @@ export const OrganizationEmployees = () => {
     variables: { organizationId },
   });
 
+  console.log("userData: ", userData);
+
   if (userLoading) return <Spinner />;
   if (userError) return <p>There was an error...</p>;
 
