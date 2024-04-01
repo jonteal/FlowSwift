@@ -26,7 +26,7 @@ export const ClientCard = ({ clientData }) => {
           type="link"
           color="lightBlue"
           className="mr-2"
-          link={`/clients/${id}/edit`}
+          link={`/organizations/${organization.id}/clients/${id}/edit`}
         >
           Edit
         </DynamicButton>

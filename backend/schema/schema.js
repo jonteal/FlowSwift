@@ -899,6 +899,7 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
         title: { type: GraphQLString },
         description: { type: GraphQLString },
+        organizationId: { type: new GraphQLNonNull(GraphQLID) },
         notes: { type: GraphQLString },
         status: {
           type: new GraphQLEnumType({

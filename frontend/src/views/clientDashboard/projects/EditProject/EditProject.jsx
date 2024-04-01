@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 export const EditProject = () => {
   const { darkMode } = useSelector((state) => state.theme);
 
-  const { projectId } = useParams();
+  const { projectId, organizationId } = useParams();
 
   const {
     loading: projectLoading,
@@ -50,6 +50,7 @@ export const EditProject = () => {
       deadline,
       clientBudget,
       projectEstimate,
+      organizationId,
     },
     refetchQueries: [{ query: GET_PROJECT, variables: { id: projectId } }],
   });
@@ -78,7 +79,8 @@ export const EditProject = () => {
       startDate,
       deadline,
       clientBudget,
-      projectEstimate
+      projectEstimate,
+      organizationId
     );
   };
 

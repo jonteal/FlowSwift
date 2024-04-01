@@ -62,7 +62,10 @@ export const EditClient = () => {
       status,
       organizationId,
     },
-    onCompleted: () => navigate(`/clients/${clientId}/dashboard`),
+    onCompleted: () =>
+      navigate(
+        `/organizations/${organizationId}/clients/${clientId}/dashboard`
+      ),
     refetchQueries: [
       {
         query: GET_CLIENT,

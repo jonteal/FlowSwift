@@ -26,7 +26,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export const Ticket = ({ ticket }) => {
-  const { kanbanId, clientId, projectId } = useParams();
+  const { kanbanId, clientId, projectId, organizationId } = useParams();
 
   const { darkMode } = useSelector((state) => state.theme);
 
@@ -200,7 +200,7 @@ export const Ticket = ({ ticket }) => {
           </button>
           <Link
             className="mr-2"
-            to={`/clients/${clientId}/projects/${projectId}/kanbans/${kanbanId}/${ticket.id}`}
+            to={`/organizations/${organizationId}/clients/${clientId}/projects/${projectId}/kanbans/${kanbanId}/${ticket.id}`}
           >
             <span className="text-sm">View</span>
           </Link>

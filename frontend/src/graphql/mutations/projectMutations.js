@@ -78,7 +78,7 @@ const UPDATE_PROJECT = gql`
     $clientBudget: String
     $projectEstimate: String
     $userId: ID
-    $organizationId: ID
+    $organizationId: ID!
   ) {
     updateProject(
       id: $id
