@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import gql from 'graphql-tag'
 
-const GET_SERVICES = gql`
+export const GET_SERVICES = gql`
   query getServices($projectId: ID) {
     services(projectId: $projectId) {
       id
@@ -21,7 +21,7 @@ const GET_SERVICES = gql`
   }
 `;
 
-const GET_SERVICE = gql`
+export const GET_SERVICE = gql`
   query getService($id: ID) {
     service(id: $id) {
       id
@@ -42,4 +42,3 @@ const GET_SERVICE = gql`
   }
 `;
 
-export { GET_SERVICES, GET_SERVICE };

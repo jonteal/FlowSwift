@@ -15,10 +15,12 @@ import { StatusBadge } from "../../../../components/reusable/StatusBadge/StatusB
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../../store/hooks";
+import { RootState } from "../../../../store/store";
 
 export const ProjectProfile = () => {
-  const { darkMode } = useSelector((state) => state.theme);
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   const { projectId, clientId, organizationId } = useParams();
   const navigate = useNavigate();
@@ -72,11 +74,13 @@ export const ProjectProfile = () => {
               Edit
             </DynamicButton>
 
-            <div onClick={deleteProject}>
-              <DynamicButton color="red" type="delete">
-                Delete
-              </DynamicButton>
-            </div>
+            <DynamicButton
+              clickHandler={deleteProject}
+              color="red"
+              type="delete"
+            >
+              Delete
+            </DynamicButton>
           </div>
           <>
             <NameValuePair type="header" name="Title" value={title} />

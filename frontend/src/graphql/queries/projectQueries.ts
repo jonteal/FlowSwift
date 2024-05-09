@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import gql from 'graphql-tag'
 
-const GET_ORGANIZATION_PROJECTS = gql`
+export const GET_ORGANIZATION_PROJECTS = gql`
   query getProjects($organizationId: ID) {
     organizationProjects(organizationId: $organizationId) {
       id
@@ -31,7 +31,7 @@ const GET_ORGANIZATION_PROJECTS = gql`
   }
 `;
 
-const GET_CLIENT_PROJECTS = gql`
+export const GET_CLIENT_PROJECTS = gql`
   query getProjects($clientId: ID) {
     clientProjects(clientId: $clientId) {
       id
@@ -62,7 +62,7 @@ const GET_CLIENT_PROJECTS = gql`
   }
 `;
 
-const GET_PROJECT = gql`
+export const GET_PROJECT = gql`
   query getProject($id: ID) {
     project(id: $id) {
       id
@@ -93,4 +93,3 @@ const GET_PROJECT = gql`
   }
 `;
 
-export { GET_ORGANIZATION_PROJECTS, GET_CLIENT_PROJECTS, GET_PROJECT };

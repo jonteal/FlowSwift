@@ -8,13 +8,11 @@ import { GET_CLIENT } from "../../../graphql/queries/clientQueries";
 // COMPONENTS
 import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
 import Table from "react-bootstrap/Table";
-import { ProjectType } from "../../../types/types";
+import { ProjectContainer, ProjectType } from "../../../types/types";
 
 export type ProjectsTableProps = {
   projects: ProjectType[];
-  projectContainer: {
-    state: string;
-  };
+  projectContainer: ProjectContainer;
 };
 
 export const ProjectsTable = ({

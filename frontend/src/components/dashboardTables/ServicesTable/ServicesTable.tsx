@@ -15,10 +15,18 @@ import { useSelector } from "react-redux";
 // UTILS
 import { capitalized } from "../../../utils/format";
 import { DynamicContainer } from "../../reusable/DynamicContainer/DynamicContainer";
+import { ServiceType } from "../../../types/types";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
 
-export const ServicesTable = ({ services, type }) => {
+export type ServicesTableProps = {
+  services: ServiceType[];
+  type?: "In House" | "Third Party Services";
+};
+
+export const ServicesTable = ({ services, type }: ServicesTableProps) => {
   const { clientId, projectId, organizationId } = useParams();
-  const { darkMode } = useSelector((state) => state.theme);
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   return (
     <DynamicContainer

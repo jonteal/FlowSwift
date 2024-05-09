@@ -7,12 +7,21 @@ import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { camelCaseToWords } from "../../../utils/format";
 
 export type StatusBadgeProps = {
-  status: 'notStarted' | 'inProgress' | 'completed' | 'paused' | 'needsAttention'
-  position: string;
-  className: string;
-}
+  status:
+    | "notStarted"
+    | "inProgress"
+    | "completed"
+    | "paused"
+    | "needsAttention";
+  position?: string;
+  className?: string;
+};
 
-export const StatusBadge = ({ status, position, className }: StatusBadgeProps) => {
+export const StatusBadge = ({
+  status,
+  position,
+  className,
+}: StatusBadgeProps) => {
   const [statusColor, setStatusColor] = useState("");
 
   useEffect(() => {
@@ -45,7 +54,7 @@ export const StatusBadge = ({ status, position, className }: StatusBadgeProps) =
     }
   };
 
-  const getPosition = (position: string) => {
+  const getPosition = (position?: string) => {
     switch (position) {
       case "left":
         position = "justify-start";

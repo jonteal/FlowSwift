@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import { camelCaseToWords } from "../../../utils/format";
 
 export type PriorityBadgeProps = {
-  priority: 'low' | 'medium' | 'high',
-  position: string,
-  className: string
-}
+  priority: "low" | "medium" | "high";
+  position?: string;
+  className?: string;
+};
 
-export const PriorityBadge = ({ priority, position, className }: PriorityBadgeProps) => {
+export const PriorityBadge = ({
+  priority,
+  position,
+  className,
+}: PriorityBadgeProps) => {
   const [priorityColor, setPriorityColor] = useState("");
 
   useEffect(() => {
@@ -22,7 +26,7 @@ export const PriorityBadge = ({ priority, position, className }: PriorityBadgePr
 
   const priorityText = priority ? camelCaseToWords(priority) : "";
 
-  const getPosition = (position: string) => {
+  const getPosition = (position?: string) => {
     switch (position) {
       case "left":
         position = "justify-start";

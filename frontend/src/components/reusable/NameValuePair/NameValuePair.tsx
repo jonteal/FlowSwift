@@ -3,13 +3,18 @@ import { ReactNode } from "react";
 import { useAppSelector } from "../../../store/hooks";
 
 export type NameValuePairProps = {
-  name: string,
-  value: string,
-  type: string,
-  children: ReactNode
-}
+  name: string;
+  value?: string;
+  type?: string;
+  children?: ReactNode;
+};
 
-export const NameValuePair = ({ name, value, type, children }: NameValuePairProps) => {
+export const NameValuePair = ({
+  name,
+  value,
+  type,
+  children,
+}: NameValuePairProps) => {
   const { darkMode } = useAppSelector((state) => state.theme);
 
   return (

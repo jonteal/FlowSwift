@@ -6,6 +6,7 @@ import { GET_SERVICES } from "../../../../graphql/queries/serviceQueries";
 
 // COMPONENTS
 import { ServicesTable } from "../../../../components/dashboardTables/ServicesTable/ServicesTable";
+import { ServiceType } from "../../../../types/types";
 
 export const ProjectServices = () => {
   const { projectId } = useParams();
@@ -24,12 +25,13 @@ export const ProjectServices = () => {
       <ServicesTable
         type="In House"
         services={servicesData.services.filter(
-          (service) => service.serviceProvider === "In House"
+          (service: ServiceType) => service.serviceProvider === "In House"
         )}
       />
       <ServicesTable
+        type="Third Party Services"
         services={servicesData.services.filter(
-          (service) => service.serviceProvider === "Third Party"
+          (service: ServiceType) => service.serviceProvider === "Third Party"
         )}
       />
     </div>

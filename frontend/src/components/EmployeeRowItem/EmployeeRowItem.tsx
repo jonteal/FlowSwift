@@ -1,7 +1,15 @@
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { UserType } from "../../types/types";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
 
-export const EmployeeRowItem = ({ index, employee }) => {
-  const { darkMode } = useSelector((state) => state.theme);
+export type EmployeeRowItemProps = {
+  index: number;
+  employee: UserType;
+};
+
+export const EmployeeRowItem = ({ index, employee }: EmployeeRowItemProps) => {
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   const { name, email, role } = employee;
 

@@ -8,7 +8,7 @@ export type DynamicButtonProps = {
   type: string;
   children: ReactNode;
   className?: string;
-  color: string;
+  color?: string;
   clickHandler?: () => void;
   disabled?: boolean;
 };

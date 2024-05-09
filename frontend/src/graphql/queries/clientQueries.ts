@@ -1,7 +1,7 @@
 // import { gql } from "@apollo/client";
 import gql from 'graphql-tag'
 
-const GET_CLIENTS = gql`
+export const GET_CLIENTS = gql`
   query getClients($organizationId: ID) {
     clients(organizationId: $organizationId) {
       id
@@ -19,7 +19,7 @@ const GET_CLIENTS = gql`
   }
 `;
 
-const GET_CLIENTS_BY_STATUS = gql`
+export const GET_CLIENTS_BY_STATUS = gql`
   query getClients($status: String) {
     clientsByStatus(status: $status) {
       id
@@ -37,7 +37,7 @@ const GET_CLIENTS_BY_STATUS = gql`
   }
 `;
 
-const GET_CLIENT = gql`
+export const GET_CLIENT = gql`
   query getClient($id: ID) {
     client(id: $id) {
       id
@@ -55,4 +55,3 @@ const GET_CLIENT = gql`
   }
 `;
 
-export { GET_CLIENTS, GET_CLIENT, GET_CLIENTS_BY_STATUS };

@@ -8,11 +8,18 @@ import { FaProjectDiagram } from "react-icons/fa";
 import { StatusBadge } from "../reusable/StatusBadge/StatusBadge";
 
 // STATE
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { PriorityBadge } from "../reusable/PriorityBadge/PriorityBadge";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
+import { ProjectType } from "../../types/types";
 
-export const ProjectPageCard = ({ project }) => {
-  const { darkMode } = useSelector((state) => state.theme);
+export type ProjectPageCardProps = {
+  project: ProjectType;
+};
+
+export const ProjectPageCard = ({ project }: ProjectPageCardProps) => {
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
   const { organizationId } = useParams();
 
   const {
@@ -24,7 +31,7 @@ export const ProjectPageCard = ({ project }) => {
     dates,
     projectOwner,
     priorityBadge,
-  } = useSelector((state) => state.projects);
+  } = useAppSelector((state: RootState) => state.projects);
 
   const {
     title,

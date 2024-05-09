@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import gql from 'graphql-tag'
 
-const ADD_PROJECT = gql`
+export const ADD_PROJECT = gql`
   mutation AddProject(
     $title: String!
     $description: String!
@@ -57,7 +57,7 @@ const ADD_PROJECT = gql`
   }
 `;
 
-const DELETE_PROJECT = gql`
+export const DELETE_PROJECT = gql`
   mutation DeleteProject($id: ID!) {
     deleteProject(id: $id) {
       id
@@ -65,7 +65,7 @@ const DELETE_PROJECT = gql`
   }
 `;
 
-const UPDATE_PROJECT = gql`
+export const UPDATE_PROJECT = gql`
   mutation UpdateProject(
     $id: ID!
     $title: String
@@ -122,4 +122,3 @@ const UPDATE_PROJECT = gql`
   }
 `;
 
-export { ADD_PROJECT, UPDATE_PROJECT, DELETE_PROJECT };

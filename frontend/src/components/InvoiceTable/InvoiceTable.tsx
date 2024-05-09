@@ -8,11 +8,19 @@ import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import { InvoiceTableItem } from "../dashboardBilling/InvoiceTableItem/InvoiceTableItem";
 
 // STATE
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { DynamicContainer } from "../reusable/DynamicContainer/DynamicContainer";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
+import { InvoiceType } from "../../types/types";
 
-export const InvoiceTable = ({ invoices, shortList }) => {
-  const { darkMode } = useSelector((state) => state.theme);
+export type InvoiceTableProps = {
+  invoices: InvoiceType[];
+  shortList: boolean;
+};
+
+export const InvoiceTable = ({ invoices, shortList }: InvoiceTableProps) => {
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   const { clientId, projectId, organizationId } = useParams();
 
