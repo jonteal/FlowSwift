@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import gql from 'graphql-tag'
 
-const GET_PROJECT_ACTIVITY_COMMENTS = gql`
+export const GET_PROJECT_ACTIVITY_COMMENTS = gql`
   query getProjectActivityComments($projectId: ID) {
     projectActivityComments(projectId: $projectId) {
       id
@@ -22,7 +22,7 @@ const GET_PROJECT_ACTIVITY_COMMENTS = gql`
   }
 `;
 
-const GET_PROJECT_ACTIVITY_COMMENT = gql`
+export const GET_PROJECT_ACTIVITY_COMMENT = gql`
   query getProjectActivityComment($id: ID) {
     projectActivityComment(id: $id) {
       id
@@ -44,4 +44,3 @@ const GET_PROJECT_ACTIVITY_COMMENT = gql`
   }
 `;
 
-export { GET_PROJECT_ACTIVITY_COMMENTS, GET_PROJECT_ACTIVITY_COMMENT };

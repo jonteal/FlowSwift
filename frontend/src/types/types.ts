@@ -12,6 +12,7 @@ export type UserType = {
   managerId?: string;
   organizationId?: string;
   role?: string;
+  _id: string;
 };
 
 

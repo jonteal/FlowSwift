@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { gql } from "graphql-tag";
 
-const ADD_CLIENT_ACTIVITY_COMMENT = gql`
+export const ADD_CLIENT_ACTIVITY_COMMENT = gql`
   mutation addClientActivityComment(
     $commentText: String!
     $clientId: ID!
@@ -27,7 +27,7 @@ const ADD_CLIENT_ACTIVITY_COMMENT = gql`
   }
 `;
 
-const DELETE_CLIENT_ACTIVITY_COMMENT = gql`
+export const DELETE_CLIENT_ACTIVITY_COMMENT = gql`
   mutation DeleteClientActivityComment($id: ID!) {
     deleteClientActivityComment(id: $id) {
       id
@@ -35,7 +35,7 @@ const DELETE_CLIENT_ACTIVITY_COMMENT = gql`
   }
 `;
 
-const UPDATE_CLIENT_ACTIVITY_COMMENT = gql`
+export const UPDATE_CLIENT_ACTIVITY_COMMENT = gql`
   mutation UpdateClientActivityComment(
     $commentText: String!
     $clientId: ID!
@@ -59,9 +59,3 @@ const UPDATE_CLIENT_ACTIVITY_COMMENT = gql`
     }
   }
 `;
-
-export {
-  ADD_CLIENT_ACTIVITY_COMMENT,
-  UPDATE_CLIENT_ACTIVITY_COMMENT,
-  DELETE_CLIENT_ACTIVITY_COMMENT,
-};

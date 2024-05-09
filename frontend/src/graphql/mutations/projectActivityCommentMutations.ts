@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { gql } from 'graphql-tag';
 
-const ADD_PROJECT_ACTIVITY_COMMENT = gql`
+export const ADD_PROJECT_ACTIVITY_COMMENT = gql`
   mutation addProjectActivityComment(
     $commentText: String!
     $projectId: ID!
@@ -31,7 +31,7 @@ const ADD_PROJECT_ACTIVITY_COMMENT = gql`
   }
 `;
 
-const DELETE_PROJECT_ACTIVITY_COMMENT = gql`
+export const DELETE_PROJECT_ACTIVITY_COMMENT = gql`
   mutation DeleteProjectActivityComment($id: ID!) {
     deleteProjectActivityComment(id: $id) {
       id
@@ -39,7 +39,7 @@ const DELETE_PROJECT_ACTIVITY_COMMENT = gql`
   }
 `;
 
-const UPDATE_PROJECT_ACTIVITY_COMMENT = gql`
+export const UPDATE_PROJECT_ACTIVITY_COMMENT = gql`
   mutation UpdateProjectActivityComment(
     $id: ID!
     $commentText: String!
@@ -71,9 +71,3 @@ const UPDATE_PROJECT_ACTIVITY_COMMENT = gql`
     }
   }
 `;
-
-export {
-  ADD_PROJECT_ACTIVITY_COMMENT,
-  UPDATE_PROJECT_ACTIVITY_COMMENT,
-  DELETE_PROJECT_ACTIVITY_COMMENT,
-};

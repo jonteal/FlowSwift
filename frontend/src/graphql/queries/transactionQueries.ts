@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import gql from 'graphql-tag'
 
 const GET_PROJECT_TRANSACTIONS = gql`
   query getTransactions($projectId: ID) {

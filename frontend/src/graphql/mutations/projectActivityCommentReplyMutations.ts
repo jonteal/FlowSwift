@@ -1,12 +1,12 @@
-import { gql } from "@apollo/client";
+import { gql } from "graphql-tag";
 
-const ADD_CLIENT_ACTIVITY_COMMENT_REPLY = gql`
-  mutation addClientActivityCommentReply(
+export const ADD_PROJECT_ACTIVITY_COMMENT_REPLY = gql`
+  mutation addProjectActivityCommentReply(
     $commentText: String!
     $commentId: ID!
     $userId: ID
   ) {
-    addClientActivityCommentReply(
+    addProjectActivityCommentReply(
       commentText: $commentText
       commentId: $commentId
       userId: $userId
@@ -14,7 +14,7 @@ const ADD_CLIENT_ACTIVITY_COMMENT_REPLY = gql`
       id
       commentText
       createdAt
-      clientActivityComment {
+      projectActivityComment {
         id
       }
       user {
@@ -25,22 +25,22 @@ const ADD_CLIENT_ACTIVITY_COMMENT_REPLY = gql`
   }
 `;
 
-const DELETE_CLIENT_ACTIVITY_COMMENT_REPLY = gql`
-  mutation DeleteClientActivityCommentReply($id: ID!) {
-    deleteClientActivityCommentReply(id: $id) {
+export const DELETE_PROJECT_ACTIVITY_COMMENT_REPLY = gql`
+  mutation DeleteProjectActivityCommentReply($id: ID!) {
+    deleteProjectActivityCommentReply(id: $id) {
       id
     }
   }
 `;
 
-const UPDATE_CLIENT_ACTIVITY_COMMENT_REPLY = gql`
-  mutation UpdateClientActivityCommentReply(
+export const UPDATE_PROJECT_ACTIVITY_COMMENT_REPLY = gql`
+  mutation UpdateProjectActivityCommentReply(
     $commentText: String!
     $createdAt: String!
     $commentId: ID!
     $userId: ID
   ) {
-    updateClientActivityCommentReply(
+    updateProjectActivityCommentReply(
       commentText: $commentText
       commentId: $commentId
       userId: $userId
@@ -58,9 +58,3 @@ const UPDATE_CLIENT_ACTIVITY_COMMENT_REPLY = gql`
     }
   }
 `;
-
-export {
-  ADD_CLIENT_ACTIVITY_COMMENT_REPLY,
-  UPDATE_CLIENT_ACTIVITY_COMMENT_REPLY,
-  DELETE_CLIENT_ACTIVITY_COMMENT_REPLY,
-};

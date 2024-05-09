@@ -2,12 +2,15 @@ import { Link, useParams } from "react-router-dom";
 import { GET_USERS } from "../../../graphql/queries/userQueries";
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 import { useQuery } from "@apollo/client";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { EmployeeRowItem } from "../../../components/EmployeeRowItem/EmployeeRowItem";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
+import { UserType } from "../../../types/types";
 
 export const OrganizationEmployees = () => {
   const { organizationId } = useParams();
-  const { darkMode } = useSelector((state) => state.theme);
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   const {
     loading: userLoading,
@@ -16,8 +19,6 @@ export const OrganizationEmployees = () => {
   } = useQuery(GET_USERS, {
     variables: { organizationId },
   });
-
-  console.log("userData: ", userData);
 
   if (userLoading) return <Spinner />;
   if (userError) return <p>There was an error...</p>;
@@ -60,7 +61,7 @@ export const OrganizationEmployees = () => {
             </tr>
           </thead>
           <tbody>
-            {userData.users.map((user, index) => (
+            {userData.users.map((user: UserType, index: number) => (
               <EmployeeRowItem key={user._id} index={index} employee={user} />
             ))}
           </tbody>

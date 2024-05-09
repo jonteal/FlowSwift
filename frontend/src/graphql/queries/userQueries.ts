@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import gql from 'graphql-tag'
 
-const GET_USERS = gql`
+export const GET_USERS = gql`
   query getUsers($organizationId: ID!) {
     users(organizationId: $organizationId) {
       _id
@@ -14,7 +14,7 @@ const GET_USERS = gql`
   }
 `;
 
-const GET_USER = gql`
+export const GET_USER = gql`
   query getUser($id: ID) {
     user(id: $id) {
       _id
@@ -28,4 +28,3 @@ const GET_USER = gql`
   }
 `;
 
-export { GET_USERS, GET_USER };

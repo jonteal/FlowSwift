@@ -40,9 +40,13 @@ export const ProjectFinancials = () => {
   if (invoicesError || transactionsError || projectError)
     return <p>There was a problem loading the client invoices...</p>;
 
-  const invoiceSum = invoicesData.projectInvoices.reduce(function (acc, obj) {
+  const invoiceSum = invoicesData.projectInvoices.reduce(function (
+    acc: number,
+    obj: { amount: string }
+  ) {
     return acc + parseFloat(obj.amount);
-  }, 0);
+  },
+  0);
 
   const budgetUsed = (invoiceSum / projectData.project.clientBudget) * 100;
 

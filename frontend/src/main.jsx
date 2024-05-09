@@ -59,7 +59,7 @@ import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganiz
 import { OrganizationView } from "./views/Organization/OrganizationView/OrganizationView.jsx";
 import { OrganizationProfile } from "./views/Organization/OrganizationProfile/OrganizationProfile.jsx";
 import { OrganizationFinancials } from "./views/Organization/OrganizationFinancials/OrganizationFinancials.jsx";
-import { OrganizationEmployees } from "./views/Organization/OrganizationEmployees/OrganizationEmployees.jsx";
+import { OrganizationEmployees } from "./views/Organization/OrganizationEmployees/OrganizationEmployees.tsx";
 import { EmployeeProfile } from "./views/Organization/EmployeeProfile/EmployeeProfile.jsx";
 
 import store from "./store/store";
