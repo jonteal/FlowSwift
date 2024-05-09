@@ -2,8 +2,20 @@ import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 import { ProjectsTable } from "../dashboardTables/ProjectsTable/ProjectsTable";
+import { ProjectType } from "../../types/types";
 
-export const ProjectsContainer = ({ clientProjects, projectContainer }) => {
+export type ProjectsContainerProps = {
+  clientProjects: ProjectType[];
+  projectContainer: {
+    id: string;
+    state: string;
+  };
+};
+
+export const ProjectsContainer = ({
+  clientProjects,
+  projectContainer,
+}: ProjectsContainerProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleClick = () => {

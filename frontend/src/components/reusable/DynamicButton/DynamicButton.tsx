@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export type DynamicButtonProps = {
-  link: string;
+  link?: string;
   type: string;
   children: ReactNode;
-  className: string;
+  className?: string;
   color: string;
-  clickHandler: () => void;
-  disabled: boolean
-}
+  clickHandler?: () => void;
+  disabled?: boolean;
+};
 
 export const DynamicButton = ({
   link,
@@ -34,7 +34,7 @@ export const DynamicButton = ({
     case "green":
       color =
         "bg-green-500 hover:from-green-500 hover:to-green-400 hover:ring-green-400 hover:bg-gradient-to-r";
-        break;
+      break;
     case "lightBlue":
       color = "bg-blue-50 hover:bg-blue-100 hover:text-blue-600 text-blue-500";
       break;
@@ -69,7 +69,7 @@ export const DynamicButton = ({
       case "link":
         return (
           <Link
-            to={link}
+            to={link || ""}
             className={`border px-3 py-2 ${className} font-medium bg-blue-50 hover:bg-blue-100 hover:text-blue-600 text-blue-500 rounded-lg text-sm`}
           >
             {children}

@@ -8,8 +8,19 @@ import { GET_CLIENT } from "../../../graphql/queries/clientQueries";
 // COMPONENTS
 import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
 import Table from "react-bootstrap/Table";
+import { ProjectType } from "../../../types/types";
 
-export const ProjectsTable = ({ projects, projectContainer }) => {
+export type ProjectsTableProps = {
+  projects: ProjectType[];
+  projectContainer: {
+    state: string;
+  };
+};
+
+export const ProjectsTable = ({
+  projects,
+  projectContainer,
+}: ProjectsTableProps) => {
   const { clientId } = useParams();
   const { data: clientData } = useQuery(GET_CLIENT, {
     variables: { id: clientId },
@@ -87,7 +98,7 @@ export const ProjectsTable = ({ projects, projectContainer }) => {
                   </Link>
                 </td>
                 <td className="text-slate-700 font-light text-left border pl-2">
-                  <Link>
+                  <Link to="/">
                     <FaRegTrashAlt className="text-red-500" />
                   </Link>
                 </td>

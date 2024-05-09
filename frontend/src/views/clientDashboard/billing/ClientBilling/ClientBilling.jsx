@@ -67,6 +67,11 @@ export const ClientBilling = () => {
     },
   ];
 
+  console.log(
+    "transactionsData.clientTransactions: ",
+    transactionsData.clientTransactions
+  );
+
   // const budgetRemaining = budgetsTotalSum - invoicesTotalSum;
   // const billedThisMonth = 50;
 

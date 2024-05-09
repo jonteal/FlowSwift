@@ -9,10 +9,38 @@ import { DynamicContainer } from "../reusable/DynamicContainer/DynamicContainer"
 import { ClientTransactionItem } from "../dashboardBilling/ClientTransactionItem/ClientTransactionItem";
 
 // STATE
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
+// import { useSelector } from "react-redux";
 
-export const TransactionTable = ({ transactions, shortList }) => {
-  const { darkMode } = useSelector((state) => state.theme);
+export type TransactionTableProps = {
+  transactions: TransactionType[];
+  shortList: boolean;
+};
+
+export type TransactionType = {
+  amount: string;
+  client: {
+    firstName: string;
+    id: string;
+    lastName: string;
+  };
+  createdAt: string;
+  id: string;
+  incomingOutgoing: string;
+  paymentDate: string;
+  paymentParty: string;
+  project: {
+    id: string;
+    title: string;
+  };
+};
+
+export const TransactionTable = ({
+  transactions,
+  shortList,
+}: TransactionTableProps) => {
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   const { clientId, projectId, organizationId } = useParams();
 

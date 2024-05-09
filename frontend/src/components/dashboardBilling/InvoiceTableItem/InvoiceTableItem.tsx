@@ -1,10 +1,34 @@
 import { FaRegFilePdf } from "react-icons/fa";
 
 // STATE
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
 
-export const InvoiceTableItem = ({ invoice }) => {
-  const { darkMode } = useSelector((state) => state.theme);
+export type InvoiceType = {
+  amount: string;
+  client: {
+    firstName: string;
+    id: string;
+    lastName: string;
+  };
+  createdAt: string;
+  date: string;
+  id: string;
+  invoiceNumber: string;
+  notes: string;
+  project: {
+    id: string;
+    title: string;
+  };
+};
+
+export type InvoiceTableItemProps = {
+  invoice: InvoiceType;
+};
+
+export const InvoiceTableItem = ({ invoice }: InvoiceTableItemProps) => {
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   const { date, invoiceNumber, amount } = invoice;
 

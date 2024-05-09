@@ -1,10 +1,19 @@
 import { BsArrowUpSquare, BsArrowDownSquare } from "react-icons/bs";
 
 // STATE
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
+import { TransactionType } from "../../TransactionTable/TransactionTable";
+import { RootState } from "../../../store/store";
 
-export const ClientTransactionItem = ({ transaction }) => {
-  const { darkMode } = useSelector((state) => state.theme);
+export type ClientTransactionItemProps = {
+  transaction: TransactionType;
+};
+
+export const ClientTransactionItem = ({
+  transaction,
+}: ClientTransactionItemProps) => {
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   return (
     <div className="flex flex-row justify-between items-center w-full px-4 my-2">

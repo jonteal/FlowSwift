@@ -1,4 +1,5 @@
-import { gql } from "@apollo/client";
+// import { gql } from "@apollo/client";
+import gql from 'graphql-tag'
 
 const GET_CLIENTS = gql`
   query getClients($organizationId: ID) {

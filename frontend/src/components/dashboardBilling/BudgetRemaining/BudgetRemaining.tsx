@@ -1,6 +1,10 @@
 import { TbPigMoney } from "react-icons/tb";
 
-export const BudgetRemaining = ({ budgetRemaining }) => {
+export const BudgetRemaining = ({
+  budgetRemaining,
+}: {
+  budgetRemaining: number;
+}) => {
   return (
     <div className="bg-slate-50 w-auto rounded-xl mx-2 mt-2 mb-3 py-2 flex flex-row items-start justify-between">
       <div className="flex flex-col justify-center py-2 pl-3">
