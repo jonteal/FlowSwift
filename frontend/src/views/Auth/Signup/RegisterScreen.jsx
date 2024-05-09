@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 // COMPONENTS
 import { Form, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
-import FormContainer from "../../../components/FormContainer";
+import { FormContainer } from "../../../components/FormContainer";
 import Loader from "../../../components/Loader";
 import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 

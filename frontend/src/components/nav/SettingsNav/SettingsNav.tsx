@@ -6,10 +6,11 @@ import { RiExpandLeftLine, RiExpandRightLine } from "react-icons/ri";
 import { FaWindowMaximize } from "react-icons/fa";
 
 // STATE
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
 
 export const SettingsNav = () => {
-  const { darkMode } = useSelector((state) => state.theme);
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   const [isOpen, setIsOpen] = useState(true);
 

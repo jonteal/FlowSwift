@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { gql } from 'graphql-tag';
 
-const ADD_ORGANIZATION = gql`
+export const ADD_ORGANIZATION = gql`
   mutation AddOrganization($organizationName: String!, $userId: ID!) {
     addOrganization(organizationName: $organizationName, userId: $userId) {
       id
@@ -15,7 +15,7 @@ const ADD_ORGANIZATION = gql`
   }
 `;
 
-const DELETE_ORGANIZATION = gql`
+export const DELETE_ORGANIZATION = gql`
   mutation DeleteOrganization($id: ID!) {
     deleteOrganization(id: $id) {
       id
@@ -23,7 +23,7 @@ const DELETE_ORGANIZATION = gql`
   }
 `;
 
-const UPDATE_ORGANIZATION = gql`
+export const UPDATE_ORGANIZATION = gql`
   mutation UpdateOrganization(
     $id: ID!
     $organizationName: String
@@ -46,4 +46,3 @@ const UPDATE_ORGANIZATION = gql`
   }
 `;
 
-export { ADD_ORGANIZATION, UPDATE_ORGANIZATION, DELETE_ORGANIZATION };

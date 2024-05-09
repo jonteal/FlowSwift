@@ -7,19 +7,21 @@ import { GET_ORGANIZATIONS } from "../../../graphql/queries/organizationQueries"
 
 // COMPONENTS
 import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
-import FormContainer from "../../../components/FormContainer";
+import { FormContainer } from "../../../components/FormContainer";
 import { Form, Spinner } from "react-bootstrap";
 
 // STATE
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
+import { UserType } from "../../../types/types";
 
 // import { setCredentials } from "../../../slices/authSlice";
 
 export const AddUser = () => {
-  const { darkMode } = useSelector((state) => state.theme);
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useAppSelector((state: RootState) => state.auth);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -34,14 +36,12 @@ export const AddUser = () => {
     loading: organizationsLoading,
     error: organizationsError,
     data: organizationsData,
-    refetchOnMount,
+    // refetchOnMount,
   } = useQuery(GET_ORGANIZATIONS, {
     variables: { userId: userInfo._id },
   });
 
   const organizationId = organizationsData?.organizations[0].id;
-
-  console.log("organizationId: ", organizationId);
 
   const {
     loading: usersLoading,
@@ -57,11 +57,11 @@ export const AddUser = () => {
   if (usersError || organizationsError) return <p>There was an error...</p>;
 
   const potentialManagers = usersData.users.filter(
-    (user) =>
+    (user: UserType) =>
       user.role === "admin" || user.role === "manager" || user.role === "owner"
   );
 
-  const submitHandler = async (e) => {
+  const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       console.log("passwords do not match");
@@ -76,7 +76,7 @@ export const AddUser = () => {
           manager,
           managerId,
         }).unwrap();
-        refetchOnMount;
+        // refetchOnMount;
       } catch (error) {
         console.log("Error: ", error);
       }
@@ -169,7 +169,7 @@ export const AddUser = () => {
           onChange={(e) => setManagerId(e.target.value)}
         >
           <option value="">N/A</option>
-          {potentialManagers.map((user) => (
+          {potentialManagers.map((user: UserType) => (
             <option key={user._id} value={user._id}>
               {user.name}
             </option>

@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
-import FormContainer from "../../components/FormContainer";
+import { FormContainer } from "../../components/FormContainer";
 import { toast } from "react-toastify";
 import Loader from "../../components/Loader";
 import { setCredentials } from "../../slices/authSlice";

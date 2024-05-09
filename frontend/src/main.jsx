@@ -56,11 +56,11 @@ import { KanbanView } from "./views/clientDashboard/projects/NewKanban/KanbanVie
 import { KanbanEdit } from "./views/clientDashboard/projects/NewKanban/KanbanEdit";
 import { Kanbans } from "./views/Kanbans/Kanbans.jsx";
 import { AddOrganization } from "./views/Organization/AddOrganization/AddOrganization";
-import { OrganizationView } from "./views/Organization/OrganizationView/OrganizationView.jsx";
+import { OrganizationView } from "./views/Organization/OrganizationView/OrganizationView.tsx";
 import { OrganizationProfile } from "./views/Organization/OrganizationProfile/OrganizationProfile.jsx";
 import { OrganizationFinancials } from "./views/Organization/OrganizationFinancials/OrganizationFinancials.jsx";
 import { OrganizationEmployees } from "./views/Organization/OrganizationEmployees/OrganizationEmployees.tsx";
-import { EmployeeProfile } from "./views/Organization/EmployeeProfile/EmployeeProfile.jsx";
+import { EmployeeProfile } from "./views/Organization/EmployeeProfile/EmployeeProfile.tsx";
 
 import store from "./store/store";
 import "bootstrap/dist/css/bootstrap.min.css";

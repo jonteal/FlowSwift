@@ -5,16 +5,16 @@ import { FilterToggle } from "../FilterToggle/FilterToggle";
 import { useAppSelector } from "../../../store/hooks";
 
 type FiltersType = {
-  name: string,
-  toggle: () => void,
-  value: string,
-  isChecked: boolean,
-  ariaLabel: string,
-}
+  name: string;
+  toggle: () => void;
+  value: string;
+  isChecked: boolean;
+  ariaLabel: string;
+};
 
 export type FiltersListProps = {
-  filters: FiltersType[]
-}
+  filters: FiltersType[];
+};
 
 export const FiltersList = ({ filters }: FiltersListProps) => {
   const { darkMode } = useAppSelector((state) => state.theme);

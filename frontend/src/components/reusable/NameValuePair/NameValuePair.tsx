@@ -4,14 +4,14 @@ import { useAppSelector } from "../../../store/hooks";
 
 export type NameValuePairProps = {
   name: string;
-  value?: string;
+  value: string;
   type?: string;
   children?: ReactNode;
 };
 
 export const NameValuePair = ({
   name,
-  value,
+  value = "",
   type,
   children,
 }: NameValuePairProps) => {
