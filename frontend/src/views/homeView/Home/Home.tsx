@@ -12,12 +12,15 @@ import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 
 // STATE
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { OrganizationCard } from "../../../components/OrganizationCard/OrganizationCard";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
+import { OrganizationType } from "../../../types/types";
 
 export const Home = () => {
-  const { userInfo } = useSelector((state) => state.auth);
-  const { darkMode } = useSelector((state) => state.theme);
+  const { userInfo } = useAppSelector((state: RootState) => state.auth);
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   const {
     loading: userLoading,
@@ -57,7 +60,7 @@ export const Home = () => {
         </DynamicButton>
       )}
       <div className="flex md:flex-row flex-wrap justify-center items-center flex-col border mx-20 py-5">
-        {organizationsData.organizations.map((org) => (
+        {organizationsData.organizations.map((org: OrganizationType) => (
           <OrganizationCard key={org.id} organization={org} />
         ))}
       </div>

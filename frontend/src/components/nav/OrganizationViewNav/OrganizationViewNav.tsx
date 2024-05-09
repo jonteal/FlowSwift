@@ -8,10 +8,12 @@ import { FaProjectDiagram } from "react-icons/fa";
 import { SlOrganization } from "react-icons/sl";
 
 // STATE
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
 
 export const OrganizationViewNav = () => {
-  const { darkMode } = useSelector((state) => state.theme);
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   return (
     <div

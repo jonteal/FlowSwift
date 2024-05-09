@@ -25,8 +25,12 @@ export const MainDashboard = () => {
     data: invoicesData,
   } = useQuery(GET_ALL_CLIENT_INVOICES);
 
+  console.log("data: ", invoicesData);
+
   //   if (clientLoading) return <Spinner />;
   if (clientError) return <p>There was an error loading the content</p>;
+
+  console.log("clientsData: ", clientsData);
 
   return (
     <div className="bg-slate-200 h-screen flex flex-row">

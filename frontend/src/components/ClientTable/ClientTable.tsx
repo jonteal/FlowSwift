@@ -4,16 +4,27 @@ import { Link, useParams } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
 
 // COMPONENTS
-import { DeleteModal } from "../../components/modals/DeleteModal/DeleteModal";
-import { EditClientModal } from "../modals/EditClientModal/EditClientModal";
+import { DeleteModal } from "../modals/DeleteModal/DeleteModal";
+// import { EditClientModal } from "../modals/EditClientModal/EditClientModal";
 
 // STATE
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { ClientType } from "../../types/types";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
 
-export const ClientTable = ({ clients, clientContainer }) => {
+export type ClientTableProps = {
+  clients: ClientType[];
+  clientContainer: {
+    id: string;
+    state: string;
+  };
+};
+
+export const ClientTable = ({ clients, clientContainer }: ClientTableProps) => {
   const { organizationId } = useParams();
 
-  const { darkMode } = useSelector((state) => state.theme);
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   return (
     <table className="table-auto overflow-x-scroll">
@@ -154,11 +165,11 @@ export const ClientTable = ({ clients, clientContainer }) => {
                   darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
                 }  font-light text-left border pl-2`}
               >
-                <EditClientModal
+                {/* <EditClientModal
                   subject="Client"
-                  organizationId={client.organization.id}
+                  organizationId={client?.organization?.id || ""}
                   client={client}
-                />
+                /> */}
               </td>
               <td
                 className={`${
@@ -167,7 +178,7 @@ export const ClientTable = ({ clients, clientContainer }) => {
               >
                 <DeleteModal
                   subject="Client"
-                  organizationId={client.organization.id}
+                  organizationId={client?.organization?.id || ""}
                   clientId={client.id}
                 />
               </td>

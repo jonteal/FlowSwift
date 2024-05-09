@@ -1,9 +1,16 @@
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { SlOrganization } from "react-icons/sl";
+import { OrganizationType } from "../../types/types";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
 
-export const OrganizationCard = ({ organization }) => {
-  const { darkMode } = useSelector((state) => state.theme);
+export const OrganizationCard = ({
+  organization,
+}: {
+  organization: OrganizationType;
+}) => {
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   const { organizationName, id } = organization;
   return (

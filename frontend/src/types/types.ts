@@ -1,7 +1,12 @@
 export type ClientType = {
-  firstName: string;
   id: string;
+  firstName: string;
   lastName: string;
+  phoneNumber?: string;
+  emailAddress?: string;
+  companyName?: string;
+  status?: "Lead" | "Prospect" | "Current" | "Former" | "Cold"
+  organization?: OrganizationType
 };
 
 export type UserType = {
@@ -17,7 +22,11 @@ export type UserType = {
 
 
 
-export type OrganizationType = {};
+export type OrganizationType = {
+  id: string;
+  organizationName: string;
+  user: UserType
+};
 
 export type ProjectContainer = {
   id: string;

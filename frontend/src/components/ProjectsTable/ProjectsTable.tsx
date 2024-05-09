@@ -1,10 +1,18 @@
+import { useAppSelector } from "../../store/hooks";
+import { ProjectType } from "../../types/types";
 import { ProjectsTableItem } from "../ProjectsTableItem/ProjectsTableItem";
 
 // STATE
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
-export const ProjectsTable = ({ projects, searchTerm }) => {
-  const { darkMode } = useSelector((state) => state.theme);
+export type ProjectsTableProps = {
+  projects: ProjectType[];
+  searchTerm: string;
+};
+
+export const ProjectsTable = ({ projects, searchTerm }: ProjectsTableProps) => {
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   return (
     <div className="border w-full flex flex-col">

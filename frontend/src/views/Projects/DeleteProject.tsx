@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { useMutation } from "@apollo/client";
 
 // ICONS
@@ -14,7 +14,17 @@ import Modal from "react-bootstrap/Modal";
 import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
 import { useParams } from "react-router-dom";
 
-export const DeleteProject = ({ subject, projectId, children }) => {
+export type DeleteProjectProps = {
+  subject: string;
+  projectId: string;
+  children: ReactNode;
+};
+
+export const DeleteProject = ({
+  subject,
+  projectId,
+  children,
+}: DeleteProjectProps) => {
   const { organizationId } = useParams();
 
   const [show, setShow] = useState(false);
@@ -54,11 +64,11 @@ export const DeleteProject = ({ subject, projectId, children }) => {
           >
             Close
           </Button>
-          <div onClick={deleteProject}>
-            <DynamicButton color="red" type="delete">
-              Delete
-            </DynamicButton>
-          </div>
+          {/* <div onClick={deleteProject}> */}
+          <DynamicButton color="red" type="delete">
+            Delete
+          </DynamicButton>
+          {/* </div> */}
         </Modal.Footer>
       </Modal>
     </div>

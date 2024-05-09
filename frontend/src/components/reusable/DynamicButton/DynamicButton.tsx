@@ -9,7 +9,7 @@ export type DynamicButtonProps = {
   children: ReactNode;
   className?: string;
   color?: string;
-  clickHandler?: () => void;
+  clickHandler?: React.MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
 };
 

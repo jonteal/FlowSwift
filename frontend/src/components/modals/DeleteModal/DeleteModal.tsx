@@ -14,7 +14,17 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
 
-export const DeleteModal = ({ subject, clientId, organizationId }) => {
+export type DeleteModalProps = {
+  subject: string;
+  clientId: string;
+  organizationId: string;
+};
+
+export const DeleteModal = ({
+  subject,
+  clientId,
+  organizationId,
+}: DeleteModalProps) => {
   const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
@@ -55,11 +65,11 @@ export const DeleteModal = ({ subject, clientId, organizationId }) => {
           >
             Close
           </Button>
-          <div onClick={deleteClient}>
-            <DynamicButton clickHandler={handleClose} color="red" type="delete">
-              Delete
-            </DynamicButton>
-          </div>
+          {/* <div onClick={deleteClient}> */}
+          <DynamicButton clickHandler={handleClose} color="red" type="delete">
+            Delete
+          </DynamicButton>
+          {/* </div> */}
         </Modal.Footer>
       </Modal>
     </>

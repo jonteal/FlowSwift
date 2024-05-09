@@ -9,13 +9,24 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { DeleteProject } from "../../views/Projects/DeleteProject";
 
 // STATE
-import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+// import { useSelector } from "react-redux";
 
 // UTILS
 import { camelCaseToWords } from "../../utils/format";
+import { ProjectType } from "../../types/types";
+import { useAppSelector } from "../../store/hooks";
 
-export const ProjectsTableItem = ({ project, index }) => {
-  const { darkMode } = useSelector((state) => state.theme);
+export type ProjectsTableItemProps = {
+  project: ProjectType;
+  index: number;
+};
+
+export const ProjectsTableItem = ({
+  project,
+  index,
+}: ProjectsTableItemProps) => {
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
   const { organizationId } = useParams();
 
   const {
@@ -28,7 +39,7 @@ export const ProjectsTableItem = ({ project, index }) => {
     projectBudget,
     projectEstimate,
     projectOwnerTable,
-  } = useSelector((state) => state.projects);
+  } = useAppSelector((state: RootState) => state.projects);
 
   const [statusColor, setStatusColor] = useState("");
   const [priorityColor, setPriorityColor] = useState("");

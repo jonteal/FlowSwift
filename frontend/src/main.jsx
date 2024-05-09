@@ -15,7 +15,7 @@ import { RegisterScreen } from "./views/Auth/Signup/RegisterScreen.jsx";
 import { ProfileScreen } from "./views/Settings/ProfileScreen";
 import { AddClient } from "./views/Clients/AddClient";
 import { PrivateRoute } from "./components/PrivateRoute";
-import { MainDashboard } from "./views/homeView/MainDashboard/MainDashboard";
+import { MainDashboard } from "./views/homeView/MainDashboard/MainDashboard.tsx";
 import { ClientView } from "./views/clientDashboard/ClientView/ClientView";
 import { ClientDashboard } from "./views/clientDashboard/profile/ClientDashboard/ClientDashboard";
 import { ClientBilling } from "./views/clientDashboard/billing/ClientBilling/ClientBilling";
