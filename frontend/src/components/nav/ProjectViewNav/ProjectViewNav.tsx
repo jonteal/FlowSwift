@@ -7,10 +7,16 @@ import { GiMoneyStack } from "react-icons/gi";
 import { PiKanbanLight } from "react-icons/pi";
 
 // STATE
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
+import { ProjectType } from "../../../types/types";
 
-export const ProjectViewNav = () => {
-  const { darkMode } = useSelector((state) => state.theme);
+export type ProjectViewNavProps = {
+  projectData?: ProjectType[];
+};
+
+export const ProjectViewNav = ({ projectData }: ProjectViewNavProps) => {
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   return (
     <div

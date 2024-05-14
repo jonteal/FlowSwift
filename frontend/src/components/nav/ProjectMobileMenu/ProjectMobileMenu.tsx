@@ -12,10 +12,11 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 
 // STATE
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
 
 export const ProjectMobileMenu = () => {
-  const { darkMode } = useSelector((state) => state.theme);
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   const [show, setShow] = useState(false);
 

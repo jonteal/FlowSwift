@@ -9,12 +9,13 @@ import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 import { NameValuePair } from "../../../components/reusable/NameValuePair/NameValuePair";
 
 // STATE
-import { useSelector } from "react-redux";
 import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
 
 export const ProjectTransaction = () => {
   const { transactionId } = useParams();
-  const { darkMode } = useSelector((state) => state.theme);
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   const {
     loading: transactionLoading,

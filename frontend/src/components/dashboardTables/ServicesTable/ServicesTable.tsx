@@ -7,10 +7,18 @@ import { FaRegEye } from "react-icons/fa";
 
 // COMPONENTS
 import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
-import Table from "react-bootstrap/Table";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../../../@/components/ui/table";
 
 // STATE
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 // UTILS
 import { capitalized } from "../../../utils/format";
@@ -64,43 +72,25 @@ export const ServicesTable = ({ services, type }: ServicesTableProps) => {
           You do not currently have any active services for this project
         </p>
       ) : (
-        <Table responsive>
-          <thead className="border">
-            <tr>
-              <th className="text-slate-400 font-light w-10 text-left pl-2 border">
-                #
-              </th>
-              <th className="text-slate-400 font-light w-2/12 text-left pl-2 border">
-                Service
-              </th>
-              <th className="text-slate-400 font-light w-2/12 text-left pl-2 border">
-                Cost
-              </th>
-              <th className="text-slate-400 font-light w-2/12 text-left pl-2 border">
-                Status
-              </th>
-              <th className="text-slate-400 font-light w-2/12 text-left pl-2 border">
-                Start Date
-              </th>
-              <th className="text-slate-400 font-light w-2/12 text-left pl-2 border">
-                End Date
-              </th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table>
+          <TableCaption>A list of your services</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>#</TableHead>
+              <TableHead className="w-[100px]">Service</TableHead>
+              <TableHead>Cost</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Start Date</TableHead>
+              <TableHead>EndDate</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {services.map((service, index) => (
-              <tr key={service.id}>
-                <td className="text-slate-700 font-light text-left border pl-2 pr-2">
-                  {index + 1}
-                </td>
-                <td className="text-slate-700 font-light text-left border pl-2">
-                  {service.service}
-                </td>
-                <td className="text-slate-700 font-light text-left border pl-2">
-                  $ {service.cost}
-                </td>
-                <td className="font-light text-left flex flex-row justify-center">
+              <TableRow key={service.id}>
+                <TableCell className="text-left">{index + 1}</TableCell>
+                <TableCell className="text-left">{service.service}</TableCell>
+                <TableCell className="text-left">$ {service.cost}</TableCell>
+                <TableCell className="text-left">
                   <span
                     className={`${
                       service.status === "on"
@@ -110,26 +100,19 @@ export const ServicesTable = ({ services, type }: ServicesTableProps) => {
                   >
                     {capitalized(service.status)}
                   </span>
-                </td>
-
-                <td className="text-slate-700 font-light text-left border pl-2">
-                  {service.startDate}
-                </td>
-                <td className="text-slate-700 font-light text-left border pl-2">
-                  {service.endDate === "Invalid date"
-                    ? "Current"
-                    : service.endDate}
-                </td>
-                <td>
+                </TableCell>
+                <TableCell className="text-left">{service.startDate}</TableCell>
+                <TableCell className="text-left">{service.endDate}</TableCell>
+                <TableCell>
                   <Link
                     to={`/organizations/${organizationId}/clients/${clientId}/projects/${projectId}/services/${service.id}`}
                   >
                     <FaRegEye className="text-sky-600" />
                   </Link>
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ))}
-          </tbody>
+          </TableBody>
         </Table>
       )}
     </DynamicContainer>
