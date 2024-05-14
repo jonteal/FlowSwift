@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { gql } from "graphql-tag";
 
-const ADD_HISTORY_ITEM = gql`
+export const ADD_HISTORY_ITEM = gql`
   mutation addClient($event: HistoryItem!, $projectId: ID, $clientId: ID) {
     addClient(event: $event, projectId: $projectId, clientID: $clientID) {
       id
@@ -17,5 +17,3 @@ const ADD_HISTORY_ITEM = gql`
     }
   }
 `;
-
-export { ADD_HISTORY_ITEM };

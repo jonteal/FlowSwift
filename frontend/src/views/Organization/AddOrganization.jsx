@@ -5,21 +5,18 @@ import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
-import { GET_USER } from "../../../graphql/queries/userQueries";
-import {
-  GET_ORGANIZATION,
-  GET_ORGANIZATIONS,
-} from "../../../graphql/queries/organizationQueries";
-import { ADD_ORGANIZATION } from "../../../graphql/mutations/organizationMutations";
+import { GET_USER } from "../../graphql/queries/userQueries";
+import { GET_ORGANIZATIONS } from "../../graphql/queries/organizationQueries";
+import { ADD_ORGANIZATION } from "../../graphql/mutations/organizationMutations";
 
 // COMPONENTS
-import { Spinner } from "../../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
-import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicInput";
+import { Spinner } from "../../components/reusable/Spinner/Spinner";
+import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
+import { DynamicInput } from "../../components/reusable/DynamicInput/DynamicInput";
 
 // STATE
 import { useSelector } from "react-redux";
-import { useUpdateUserMutation } from "../../../slices/usersApiSlice";
+import { useUpdateUserMutation } from "../../slices/usersApiSlice";
 import { useNavigate } from "react-router-dom";
 
 export const AddOrganization = () => {

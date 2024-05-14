@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
-import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { Spinner } from "../../components/reusable/Spinner/Spinner";
 import { useQuery } from "@apollo/client";
-import { GET_USER } from "../../../graphql/queries/userQueries";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { GET_USER } from "../../graphql/queries/userQueries";
+import { GET_ORGANIZATION } from "../../graphql/queries/organizationQueries";
+import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
 import { useParams } from "react-router-dom";
-import { GET_ORGANIZATION } from "../../../graphql/queries/organizationQueries";
+import { Button } from "../../@/components/ui/button";
 
 export const OrganizationProfile = () => {
   const { organizationId } = useParams();
@@ -50,6 +51,13 @@ export const OrganizationProfile = () => {
               >
                 Add Employees
               </DynamicButton>
+              <Button
+                href={`/organizations/${organizationId}/addUser`}
+                className="text-slate-500 border"
+                variant="default"
+              >
+                Add Employees
+              </Button>
               <DynamicButton
                 link={`/organizations/${organizationId}/employees`}
                 type="link"

@@ -20,15 +20,19 @@ import {
   setKanbanCardProjectOn,
 } from "../../slices/kanbanSlice";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { PageHeadline } from "../../components/reusable/PageHeadline/PageHeadline";
+import { useDispatch } from "react-redux";
+// import { PageHeadline } from "../../components/reusable/PageHeadline/PageHeadline";
 import { Body } from "../../components/reusable/Body/Body";
 import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
+import { KanbanType } from "../../types/types";
+import { Button } from "../../@/components/ui/button";
 
 export const Kanbans = () => {
   const { organizationId } = useParams();
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useAppSelector((state: RootState) => state.auth);
 
   const {
     loading: userLoading,
@@ -38,6 +42,8 @@ export const Kanbans = () => {
     variables: { id: userInfo._id },
   });
 
+  console.log("userData: ", userData);
+
   const { loading, error, data } = useQuery(GET_ALL_KANBANS, {
     variables: { id: organizationId },
   });
@@ -46,8 +52,8 @@ export const Kanbans = () => {
 
   const dispatch = useDispatch();
 
-  const { cardDescription, cardClient, cardProject } = useSelector(
-    (state) => state.kanban
+  const { cardDescription, cardClient, cardProject } = useAppSelector(
+    (state: RootState) => state.kanban
   );
 
   if (loading) return <Spinner />;
@@ -107,14 +113,14 @@ export const Kanbans = () => {
       >
         Filters
       </button>
-      <div className="w-full">
+      {/* <div className="w-full">
         {isFilterOptionsOpen && <FiltersList filters={kanbanCardFilters} />}
-      </div>
+      </div> */}
 
       {data.allKanbans.length > 0 ? (
         <div className="flex flex-col items-center md:flex-row flex-wrap mt-3 w-full p-3">
           <div className="flex md:flex-row flex-wrap mx-auto flex-col">
-            {data.allKanbans.map((kanban) => (
+            {data.allKanbans.map((kanban: KanbanType) => (
               <KanbanPageCard key={kanban.id} kanban={kanban} />
             ))}
           </div>
@@ -124,7 +130,7 @@ export const Kanbans = () => {
           <Body className="mt-5 italic">
             You don't have any kanbans. Would you like to add one?
           </Body>
-          <DynamicButton>Add Kanban</DynamicButton>
+          <Button className="text-slate-700">Add Kanban</Button>
         </>
       )}
     </div>

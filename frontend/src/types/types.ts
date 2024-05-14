@@ -72,6 +72,13 @@ export type ServiceType = {
   status: "on" | "off"
 }
 
+export type KanbanType = {
+  id: string;
+  title: string;
+  description: string;
+  project: ProjectType;
+};
+
 export type InvoiceType = {
   amount: string;
   client: {

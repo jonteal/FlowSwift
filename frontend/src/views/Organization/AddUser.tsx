@@ -1,20 +1,20 @@
 import { useQuery } from "@apollo/client";
-import { useRegisterMutation } from "../../../slices/usersApiSlice";
+import { useRegisterMutation } from "../../slices/usersApiSlice";
 
 // GRAPHQL
-import { GET_USERS } from "../../../graphql/queries/userQueries";
-import { GET_ORGANIZATIONS } from "../../../graphql/queries/organizationQueries";
+import { GET_USERS } from "../../graphql/queries/userQueries";
+import { GET_ORGANIZATIONS } from "../../graphql/queries/organizationQueries";
 
 // COMPONENTS
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
-import { FormContainer } from "../../../components/FormContainer";
+import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
+import { FormContainer } from "../../components/FormContainer";
 import { Form, Spinner } from "react-bootstrap";
 
 // STATE
 import { useState } from "react";
-import { useAppSelector } from "../../../store/hooks";
-import { RootState } from "../../../store/store";
-import { UserType } from "../../../types/types";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
+import { UserType } from "../../types/types";
 
 // import { setCredentials } from "../../../slices/authSlice";
 

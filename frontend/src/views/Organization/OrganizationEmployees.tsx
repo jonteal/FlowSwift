@@ -1,12 +1,12 @@
 import { Link, useParams } from "react-router-dom";
-import { GET_USERS } from "../../../graphql/queries/userQueries";
-import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { GET_USERS } from "../../graphql/queries/userQueries";
+import { Spinner } from "../../components/reusable/Spinner/Spinner";
 import { useQuery } from "@apollo/client";
 // import { useSelector } from "react-redux";
-import { EmployeeRowItem } from "../../../components/EmployeeRowItem/EmployeeRowItem";
-import { useAppSelector } from "../../../store/hooks";
-import { RootState } from "../../../store/store";
-import { UserType } from "../../../types/types";
+import { EmployeeRowItem } from "../../components/EmployeeRowItem/EmployeeRowItem";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
+import { UserType } from "../../types/types";
 
 export const OrganizationEmployees = () => {
   const { organizationId } = useParams();

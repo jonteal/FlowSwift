@@ -2,20 +2,26 @@ import { PiKanbanLight } from "react-icons/pi";
 import { BsPersonCircle } from "react-icons/bs";
 import { FaProjectDiagram } from "react-icons/fa";
 
-import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
+import { KanbanType } from "../../../types/types";
 
-export const KanbanPageCard = ({ kanban }) => {
+export type KanbanPageCardProps = {
+  kanban: KanbanType;
+};
+
+export const KanbanPageCard = ({ kanban }: KanbanPageCardProps) => {
   const { organizationId } = useParams();
 
   console.log("kanban: ", kanban);
 
   const { title, description, project } = kanban;
 
-  const { darkMode } = useSelector((state) => state.theme);
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
-  const { cardDescription, cardClient, cardProject } = useSelector(
-    (state) => state.kanban
+  const { cardDescription, cardClient, cardProject } = useAppSelector(
+    (state: RootState) => state.kanban
   );
 
   return (

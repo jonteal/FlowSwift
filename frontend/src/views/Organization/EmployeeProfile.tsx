@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
-import { GET_USER } from "../../../graphql/queries/userQueries";
-import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { GET_USER } from "../../graphql/queries/userQueries";
+import { Spinner } from "../../components/reusable/Spinner/Spinner";
 import { useParams } from "react-router-dom";
 
 export const EmployeeProfile = () => {
