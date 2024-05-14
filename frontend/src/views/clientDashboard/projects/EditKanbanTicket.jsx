@@ -6,16 +6,16 @@ import { useMutation, useQuery } from "@apollo/client";
 import {
   GET_TICKET,
   GET_TICKETS,
-} from "../../../../graphql/queries/ticketQueries";
-import { UPDATE_TICKET } from "../../../../graphql/mutations/ticketMutations";
-import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
-import { GET_USER, GET_USERS } from "../../../../graphql/queries/userQueries";
+} from "../../../graphql/queries/ticketQueries";
+import { UPDATE_TICKET } from "../../../graphql/mutations/ticketMutations";
+import { GET_KANBAN_STATUS_COLUMNS } from "../../../graphql/queries/kanbanStatusColumnQueries";
+import { GET_USER, GET_USERS } from "../../../graphql/queries/userQueries";
 
 // COMPONENTS
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
-import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { Checkbox } from "../../../components/reusable/Checkbox/Checkbox";
+import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicInput";
 
 // STATE
 import { useSelector } from "react-redux";

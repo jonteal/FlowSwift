@@ -5,17 +5,17 @@ import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
-import { ADD_PROJECT } from "../../../../graphql/mutations/projectMutations";
-import { GET_CLIENT_PROJECTS } from "../../../../graphql/queries/projectQueries";
-import { GET_CLIENTS } from "../../../../graphql/queries/clientQueries";
-import { GET_USER, GET_USERS } from "../../../../graphql/queries/userQueries";
+import { ADD_PROJECT } from "../../../graphql/mutations/projectMutations";
+import { GET_CLIENT_PROJECTS } from "../../../graphql/queries/projectQueries";
+import { GET_CLIENTS } from "../../../graphql/queries/clientQueries";
+import { GET_USER, GET_USERS } from "../../../graphql/queries/userQueries";
 
 // COMPONENTS
-import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
+import { DateSelector } from "../../../components/reusable/DateSelector/DateSelector";
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicInput";
+import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
 import { useSelector } from "react-redux";

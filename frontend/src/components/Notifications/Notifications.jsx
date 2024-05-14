@@ -6,7 +6,6 @@ export const Notifications = () => {
 
   const handleOpenNotifications = () => {
     setIsNotificationsOpen(!isNotificationsOpen);
-    console.log("isNotificationsOpen", isNotificationsOpen);
   };
   return (
     <FaBell className="cursor-pointer" onClick={handleOpenNotifications} />

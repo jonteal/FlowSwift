@@ -5,23 +5,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 // STATE
-import { useAppSelector } from "../../../store/hooks";
-import { RootState } from "../../../store/store";
+import { useSelector } from "react-redux";
 
-export type DateSelectorProps = {
-  label: string;
-  date: Date;
-  dateChangeHandler: () => void;
-  className: string;
-};
-
-export const DateSelector = ({
-  label,
-  date,
-  dateChangeHandler,
-  className,
-}: DateSelectorProps) => {
-  const { darkMode } = useAppSelector((state: RootState) => state.theme);
+export const DateSelector = ({ label, date, dateChangeHandler, className }) => {
+  const { darkMode } = useSelector((state) => state.theme);
 
   return (
     <div className={className}>

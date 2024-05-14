@@ -2,11 +2,11 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
-import { GET_SERVICES } from "../../../../graphql/queries/serviceQueries";
+import { GET_SERVICES } from "../../../graphql/queries/serviceQueries";
 
 // COMPONENTS
-import { ServicesTable } from "../../../../components/dashboardTables/ServicesTable/ServicesTable";
-import { ServiceType } from "../../../../types/types";
+import { ServicesTable } from "../../../components/dashboardTables/ServicesTable/ServicesTable";
+import { ServiceType } from "../../../types/types";
 
 export const ProjectServices = () => {
   const { projectId } = useParams();

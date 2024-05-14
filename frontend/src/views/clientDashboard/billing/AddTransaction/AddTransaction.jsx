@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 // LIBRARIES
 import { useMutation, useQuery } from "@apollo/client";
@@ -22,6 +23,13 @@ import { useSelector } from "react-redux";
 
 export const AddTransaction = () => {
   const { darkMode } = useSelector((state) => state.theme);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   const { clientId } = useParams();
 
@@ -116,7 +124,7 @@ export const AddTransaction = () => {
           <label
             className={`block uppercase tracking-wide ${
               darkMode ? "text-slate-50" : "text-gray-700"
-            }  text-xs font-bold mb-2 mt-3`}
+            } text-xs font-bold mb-2 mt-3`}
           >
             Project Name
           </label>
@@ -136,6 +144,20 @@ export const AddTransaction = () => {
           </select>
         </div>
       </div>
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input type="date" {...register("paymentDate")} />
+        <input type="text" {...register("paymentParty")} />
+        <input type="text" {...register("amount")} />
+        <select {...register("incomingOutgoing")}>
+          <option value="incoming">Incoming</option>
+          <option value="outgoing">Outgoing</option>
+        </select>
+        {/* errors will return when field validation fails  */}
+        {/* {errors.exampleRequired && <span>This field is required</span>} */}
+
+        <button type="submit">Save</button>
+      </form>
 
       <form className="w-full max-w-lg pb-3" onSubmit={onSubmit}>
         <div className="flex flex-wrap -mx-3 mb-3">

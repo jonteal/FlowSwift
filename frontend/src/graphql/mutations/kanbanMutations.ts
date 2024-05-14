@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { gql } from "graphql-tag";
 
-const ADD_KANBAN = gql`
+export const ADD_KANBAN = gql`
   mutation AddKanban($title: String!, $description: String, $projectId: ID!) {
     addKanban(title: $title, description: $description, projectId: $projectId) {
       id
@@ -14,7 +14,7 @@ const ADD_KANBAN = gql`
   }
 `;
 
-const DELETE_KANBAN = gql`
+export const DELETE_KANBAN = gql`
   mutation DeleteKanban($id: ID!) {
     deleteKanban(id: $id) {
       id
@@ -22,7 +22,7 @@ const DELETE_KANBAN = gql`
   }
 `;
 
-const UPDATE_KANBAN = gql`
+export const UPDATE_KANBAN = gql`
   mutation UpdateKanban($id: ID!, $title: String, $description: String) {
     updateKanban(id: $id, title: $title, description: $description) {
       id
@@ -36,4 +36,3 @@ const UPDATE_KANBAN = gql`
   }
 `;
 
-export { ADD_KANBAN, UPDATE_KANBAN, DELETE_KANBAN };

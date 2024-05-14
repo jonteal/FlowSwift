@@ -2,17 +2,17 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
-import { GET_INVOICE } from "../../../../graphql/queries/invoiceQueries";
+import { GET_INVOICE } from "../../../graphql/queries/invoiceQueries";
 
 // COMPONENTS
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { NameValuePair } from "../../../../components/reusable/NameValuePair/NameValuePair";
+import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { NameValuePair } from "../../../components/reusable/NameValuePair/NameValuePair";
 
 // STATE
 // import { useSelector } from "react-redux";
-import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
-import { useAppSelector } from "../../../../store/hooks";
-import { RootState } from "../../../../store/store";
+import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
 
 export const ProjectInvoice = () => {
   const { invoiceId } = useParams();

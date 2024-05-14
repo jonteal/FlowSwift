@@ -2,14 +2,14 @@ import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
-import { UPDATE_PROJECT } from "../../../../graphql/mutations/projectMutations";
-import { GET_PROJECT } from "../../../../graphql/queries/projectQueries";
+import { UPDATE_PROJECT } from "../../../graphql/mutations/projectMutations";
+import { GET_PROJECT } from "../../../graphql/queries/projectQueries";
 
 // COMPONENTS
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
-import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
+import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { DateSelector } from "../../../components/reusable/DateSelector/DateSelector";
+import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicInput";
 
 // STATE
 import { useState } from "react";

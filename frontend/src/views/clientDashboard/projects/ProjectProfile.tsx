@@ -5,19 +5,19 @@ import { useMutation, useQuery } from "@apollo/client";
 import {
   GET_ORGANIZATION_PROJECTS,
   GET_PROJECT,
-} from "../../../../graphql/queries/projectQueries";
-import { DELETE_PROJECT } from "../../../../graphql/mutations/projectMutations";
+} from "../../../graphql/queries/projectQueries";
+import { DELETE_PROJECT } from "../../../graphql/mutations/projectMutations";
 
 // COMPONENTS
-import { NameValuePair } from "../../../../components/reusable/NameValuePair/NameValuePair";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { StatusBadge } from "../../../../components/reusable/StatusBadge/StatusBadge";
-import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
+import { NameValuePair } from "../../../components/reusable/NameValuePair/NameValuePair";
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { StatusBadge } from "../../../components/reusable/StatusBadge/StatusBadge";
+import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
 // import { useSelector } from "react-redux";
-import { useAppSelector } from "../../../../store/hooks";
-import { RootState } from "../../../../store/store";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
 
 export const ProjectProfile = () => {
   const { darkMode } = useAppSelector((state: RootState) => state.theme);
@@ -74,21 +74,21 @@ export const ProjectProfile = () => {
               Edit
             </DynamicButton>
 
-            <DynamicButton
+            {/* <DynamicButton
               clickHandler={deleteProject}
               color="red"
               type="delete"
             >
               Delete
-            </DynamicButton>
+            </DynamicButton> */}
           </div>
           <>
             <NameValuePair type="header" name="Title" value={title} />
             <NameValuePair name="Description" value={description} />
             <NameValuePair name="Notes" value={notes} />
-            <NameValuePair name="Status">
+            {/* <NameValuePair name="Status">
               <StatusBadge className="mt-2" position="left" status={status} />
-            </NameValuePair>
+            </NameValuePair> */}
             <NameValuePair name="Start Date" value={startDate} />
             <NameValuePair name="Deadline" value={deadline} />
             <NameValuePair name="Client Budget" value={`$ ${clientBudget}`} />

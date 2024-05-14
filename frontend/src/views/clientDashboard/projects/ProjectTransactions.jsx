@@ -2,11 +2,11 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
-import { GET_ALL_CLIENT_TRANSACTIONS } from "../../../../graphql/queries/transactionQueries";
+import { GET_ALL_CLIENT_TRANSACTIONS } from "../../../graphql/queries/transactionQueries";
 
 // COMPONENTS
-import { TransactionTable } from "../../../../components/TransactionTable/TransactionTable";
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
+import { TransactionTable } from "../../../components/TransactionTable/TransactionTable";
+import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 
 export const ProjectTransactions = () => {
   const { clientId } = useParams();

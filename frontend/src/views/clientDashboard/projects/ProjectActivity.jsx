@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
-import { GET_PROJECT_ACTIVITY_COMMENTS } from "../../../../graphql/queries/projectActivityCommentQueries";
+import { GET_PROJECT_ACTIVITY_COMMENTS } from "../../../graphql/queries/projectActivityCommentQueries";
 
-import { ProjectCommentFeed } from "../../../../components/ProjectCommentFeed/ProjectCommentFeed";
+import { ProjectCommentFeed } from "../../../components/ProjectCommentFeed/ProjectCommentFeed";
 // import ProjectHistory from "../../../../components/ProjectHistory/ProjectHistory";
 
 export const ProjectActivity = () => {

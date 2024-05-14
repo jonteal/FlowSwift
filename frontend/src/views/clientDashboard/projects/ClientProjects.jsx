@@ -2,16 +2,16 @@ import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 
 // GRAPHQL
-import { GET_CLIENT_PROJECTS } from "../../../../graphql/queries/projectQueries";
+import { GET_CLIENT_PROJECTS } from "../../../graphql/queries/projectQueries";
 
 // COMPONENTS
-import { ProjectPageCard } from "../../../../components/ProjectPageCard/ProjectPageCard";
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
-import { Switch } from "../../../../components/reusable/Switch/Switch";
-import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
-import { ProjectsAccordion } from "../../../../components/Accordions/ProjectsAccordion.jsx/ProjectsAccordion";
+import { ProjectPageCard } from "../../../components/ProjectPageCard/ProjectPageCard";
+import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { FiltersList } from "../../../components/reusable/FiltersList/FiltersList";
+import { Switch } from "../../../components/reusable/Switch/Switch";
+import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
+import { ProjectsAccordion } from "../../../components/Accordions/ProjectsAccordion.jsx/ProjectsAccordion";
 
 // STATE
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +33,7 @@ import {
   setEstimateOn,
   setProjectOwnerOff,
   setProjectOwnerOn,
-} from "../../../../slices/projectsSlice";
+} from "../../../slices/projectsSlice";
 
 export const ClientProjects = () => {
   const { clientId, organizationId } = useParams();

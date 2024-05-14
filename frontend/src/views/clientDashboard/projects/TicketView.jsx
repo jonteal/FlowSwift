@@ -2,17 +2,17 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
-import { GET_TICKET } from "../../../../graphql/queries/ticketQueries";
-import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
+import { GET_TICKET } from "../../../graphql/queries/ticketQueries";
+import { GET_KANBAN_STATUS_COLUMNS } from "../../../graphql/queries/kanbanStatusColumnQueries";
 
 // COMPONENTS
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
+import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
 import { useSelector } from "react-redux";
-import { TicketViewContent } from "../../../../components/kanban/TicketViewContent/TicketViewContent";
+import { TicketViewContent } from "../../../components/kanban/TicketViewContent/TicketViewContent";
 import { useState } from "react";
 
 export const TicketView = () => {

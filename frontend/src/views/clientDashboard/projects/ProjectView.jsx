@@ -2,11 +2,11 @@ import { Outlet, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
-import { GET_PROJECT } from "../../../../graphql/queries/projectQueries";
+import { GET_PROJECT } from "../../../graphql/queries/projectQueries";
 
 // COMPONENTS
-import { ProjectViewNav } from "../../../../components/nav/ProjectViewNav/ProjectViewNav";
-import { ProjectMobileMenu } from "../../../../components/nav/ProjectMobileMenu/ProjectMobileMenu";
+import { ProjectViewNav } from "../../../components/nav/ProjectViewNav/ProjectViewNav";
+import { ProjectMobileMenu } from "../../../components/nav/ProjectMobileMenu/ProjectMobileMenu";
 
 export const ProjectView = () => {
   const { id } = useParams();

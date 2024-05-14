@@ -101,6 +101,9 @@ export const AddClient = () => {
           Add Client
         </h3>
 
+        {/* react hook form */}
+        <form></form>
+
         <form className="w-full max-w-lg" onSubmit={onSubmit}>
           <div className="flex flex-wrap -mx-3 mb-6">
             <DynamicInput

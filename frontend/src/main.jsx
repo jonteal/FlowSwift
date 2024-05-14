@@ -29,7 +29,7 @@ import { ProjectService } from "./views/clientDashboard/projects/ProjectService/
 import { EditService } from "./views/clientDashboard/projects/EditService/EditService";
 import { ProjectActivity } from "./views/clientDashboard/projects/ProjectActivity/ProjectActivity";
 import { ProjectFinancials } from "./views/clientDashboard/projects/ProjectFinancials/ProjectFinancials";
-import { AddKanbanTicket } from "./views/clientDashboard/projects/AddKanbanTicket/AddKanbanTicket";
+import { AddKanbanTicket } from "./views/clientDashboard/projects/AddKanbanTicket";
 import { EditKanbanTicket } from "./views/clientDashboard/projects/EditKanbanTicket/EditKanbanTicket";
 import { TicketView } from "./views/clientDashboard/projects/TicketView/TicketView";
 import { ProjectInvoices } from "./views/clientDashboard/projects/ProjectInvoices/ProjectInvoices";
@@ -40,7 +40,7 @@ import { AddService } from "./views/clientDashboard/projects/AddService/AddServi
 import { EditProject } from "./views/clientDashboard/projects/EditProject/EditProject";
 import { EditClient } from "./views/homeView/EditClient/EditClient";
 import { ClientInvoices } from "./views/clientDashboard/billing/ClientInvoices/ClientInvoices";
-import { ClientTransactionsView } from "./views/clientDashboard/billing/ClientTransactionsView/ClientTransactionsView";
+import { ClientTransactionsView } from "./views/clientDashboard/billing/ClientTransactionsView";
 import { AddProject } from "./views/clientDashboard/projects/AddProject/AddProject";
 import { Clients } from "./views/Clients/Clients";
 import { ClientsListByStatus } from "./views/Clients/ClientsListByStatus/ClientsListByStatus";

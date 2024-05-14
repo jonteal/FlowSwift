@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import gql from "graphql-tag";
 
-const ADD_TRANSACTION = gql`
+export const ADD_TRANSACTION = gql`
   mutation AddTransaction(
     $paymentDate: String!
     $amount: String!
@@ -36,7 +36,7 @@ const ADD_TRANSACTION = gql`
   }
 `;
 
-const DELETE_TRANSACTION = gql`
+export const DELETE_TRANSACTION = gql`
   mutation DeleteTransaction($id: ID!) {
     deleteTransaction(id: $id) {
       id
@@ -44,7 +44,7 @@ const DELETE_TRANSACTION = gql`
   }
 `;
 
-const UPDATE_TRANSACTION = gql`
+export const UPDATE_TRANSACTION = gql`
   mutation UpdateTransaction(
     $id: ID!
     $paymentDate: String
@@ -77,5 +77,3 @@ const UPDATE_TRANSACTION = gql`
     }
   }
 `;
-
-export { ADD_TRANSACTION, UPDATE_TRANSACTION, DELETE_TRANSACTION };

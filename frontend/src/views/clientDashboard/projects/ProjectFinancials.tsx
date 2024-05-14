@@ -2,17 +2,17 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
-import { GET_PROJECT_INVOICES } from "../../../../graphql/queries/invoiceQueries";
-import { GET_PROJECT } from "../../../../graphql/queries/projectQueries";
-import { GET_PROJECT_TRANSACTIONS } from "../../../../graphql/queries/transactionQueries";
+import { GET_PROJECT_INVOICES } from "../../../graphql/queries/invoiceQueries";
+import { GET_PROJECT } from "../../../graphql/queries/projectQueries";
+import { GET_PROJECT_TRANSACTIONS } from "../../../graphql/queries/transactionQueries";
 
 // COMPONENTS
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { TransactionTable } from "../../../../components/TransactionTable/TransactionTable";
-import { InvoiceTable } from "../../../../components/InvoiceTable/InvoiceTable";
-import { ProgressBarComponent } from "../../../../components/ProgressBar/ProgressBar";
-import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
+import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { TransactionTable } from "../../../components/TransactionTable/TransactionTable";
+import { InvoiceTable } from "../../../components/InvoiceTable/InvoiceTable";
+import { ProgressBarComponent } from "../../../components/ProgressBar/ProgressBar";
+import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
 
 export const ProjectFinancials = () => {
   const { projectId } = useParams();

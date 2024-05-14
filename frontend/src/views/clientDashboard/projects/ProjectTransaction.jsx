@@ -2,15 +2,15 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
-import { GET_TRANSACTION } from "../../../../graphql/queries/transactionQueries";
+import { GET_TRANSACTION } from "../../../graphql/queries/transactionQueries";
 
 // COMPONENT
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { NameValuePair } from "../../../../components/reusable/NameValuePair/NameValuePair";
+import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { NameValuePair } from "../../../components/reusable/NameValuePair/NameValuePair";
 
 // STATE
 import { useSelector } from "react-redux";
-import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
+import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
 
 export const ProjectTransaction = () => {
   const { transactionId } = useParams();

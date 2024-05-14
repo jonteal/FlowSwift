@@ -2,12 +2,12 @@ import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 
 // GRAPHQL
-import { GET_SERVICE } from "../../../../graphql/queries/serviceQueries";
+import { GET_SERVICE } from "../../../graphql/queries/serviceQueries";
 
 // COMPONENTS
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { NameValuePair } from "../../../../components/reusable/NameValuePair/NameValuePair";
+import { Spinner } from "../../../components/reusable/Spinner/Spinner";
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { NameValuePair } from "../../../components/reusable/NameValuePair/NameValuePair";
 
 export const ProjectService = () => {
   const { clientId, projectId, serviceId, organizationId } = useParams();

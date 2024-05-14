@@ -6,15 +6,15 @@ import { useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 
 // GRAPHQL
-import { ADD_SERVICE } from "../../../../graphql/mutations/serviceMutations";
-import { GET_SERVICES } from "../../../../graphql/queries/serviceQueries";
+import { ADD_SERVICE } from "../../../graphql/mutations/serviceMutations";
+import { GET_SERVICES } from "../../../graphql/queries/serviceQueries";
 
 // COMPONENTS
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
-import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
-import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
-import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { DateSelector } from "../../../components/reusable/DateSelector/DateSelector";
+import { Checkbox } from "../../../components/reusable/Checkbox/Checkbox";
+import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicInput";
+import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
 
 // STATE
 import { useSelector } from "react-redux";
