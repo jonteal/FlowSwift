@@ -7,7 +7,7 @@ import { GET_KANBANS } from "../../../../graphql/queries/kanbanQueries";
 // COMPONENTS
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { KanbanCard } from "../../../../components/kanban/KanbanCard/KanbanCard";
+import { KanbanCard } from "../../../../components/kanban/KanbanCard";
 
 export const NewKanban = () => {
   const { projectId } = useParams();

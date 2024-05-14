@@ -7,7 +7,7 @@ import { GET_USER } from "../../graphql/queries/userQueries";
 
 // COMPONENTS
 import { Spinner } from "../../components/reusable/Spinner/Spinner";
-import { KanbanPageCard } from "../../components/kanban/KanbanPageCard/KanbanPageCard";
+import { KanbanPageCard } from "../../components/kanban/KanbanPageCard";
 import { FiltersList } from "../../components/reusable/FiltersList/FiltersList";
 
 // STATE

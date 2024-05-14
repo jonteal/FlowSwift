@@ -3,17 +3,17 @@ import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
-import { ADD_TICKET } from "../../../../graphql/mutations/ticketMutations";
-import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
-import { GET_USER, GET_USERS } from "../../../../graphql/queries/userQueries";
-import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
+import { ADD_TICKET } from "../../../graphql/mutations/ticketMutations";
+import { GET_KANBAN_STATUS_COLUMNS } from "../../../graphql/queries/kanbanStatusColumnQueries";
+import { GET_USER, GET_USERS } from "../../../graphql/queries/userQueries";
+import { GET_TICKETS } from "../../../graphql/queries/ticketQueries";
 
 // COMPONENTS
-import { Checkbox } from "../../../../components/reusable/Checkbox/Checkbox";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
-import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
-import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
+import { Checkbox } from "../../../components/reusable/Checkbox/Checkbox";
+import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
+import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicInput";
+import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 
 // STATE
 import { useSelector } from "react-redux";

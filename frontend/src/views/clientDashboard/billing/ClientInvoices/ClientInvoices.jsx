@@ -4,6 +4,8 @@ import { GET_ALL_CLIENT_INVOICES } from "../../../../graphql/queries/invoiceQuer
 // COMPONENTS
 import { InvoiceTable } from "../../../../components/InvoiceTable/InvoiceTable";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 
 export const ClientInvoices = () => {
   const { clientId } = useParams();

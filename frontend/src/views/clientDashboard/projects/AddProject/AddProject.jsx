@@ -149,7 +149,7 @@ export const AddProject = () => {
           <label
             className={`block uppercase tracking-wide ${
               darkMode ? "text-slate-50" : "text-gray-700"
-            }  text-xs font-bold mb-2 mt-3`}
+            } text-xs font-bold mb-2 mt-3`}
           >
             Client Name
           </label>

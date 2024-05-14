@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { gql } from "graphql-tag";
 
-const ADD_INVOICE = gql`
+export const ADD_INVOICE = gql`
   mutation AddInvoice(
     $date: String!
     $amount: String!
@@ -36,7 +36,7 @@ const ADD_INVOICE = gql`
   }
 `;
 
-const DELETE_INVOICE = gql`
+export const DELETE_INVOICE = gql`
   mutation DeleteInvoice($id: ID!) {
     deleteInvoice(id: $id) {
       id
@@ -44,7 +44,7 @@ const DELETE_INVOICE = gql`
   }
 `;
 
-const UPDATE_INVOICE = gql`
+export const UPDATE_INVOICE = gql`
   mutation UpdateInvoice(
     $id: ID!
     $date: String
@@ -78,4 +78,3 @@ const UPDATE_INVOICE = gql`
   }
 `;
 
-export { ADD_INVOICE, UPDATE_INVOICE, DELETE_INVOICE };
