@@ -10,7 +10,7 @@ import { GET_ALL_CLIENT_TRANSACTIONS } from "../../../../graphql/queries/transac
 import { InvoiceTable } from "../../../../components/InvoiceTable/InvoiceTable";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { TransactionTable } from "../../../../components/TransactionTable/TransactionTable";
-import { BilledThisMonth } from "../../../../components/dashboardBilling/BilledThisMonth/BilledThisMonth";
+import { BilledThisMonth } from "../../../../components/dashboardBilling/BilledThisMonth";
 import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
 
 // STATE

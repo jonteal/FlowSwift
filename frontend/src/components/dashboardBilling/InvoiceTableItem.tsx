@@ -2,9 +2,9 @@ import { FaRegFilePdf } from "react-icons/fa";
 
 // STATE
 // import { useSelector } from "react-redux";
-import { useAppSelector } from "../../../store/hooks";
-import { RootState } from "../../../store/store";
-import { InvoiceType } from "../../../types/types";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
+import { InvoiceType } from "../../types/types";
 
 export type InvoiceTableItemProps = {
   invoice: InvoiceType;

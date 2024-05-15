@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-import { ProjectsTable } from "../dashboardTables/ProjectsTable/ProjectsTable";
+import { ProjectsTable } from "../dashboardTables/ProjectsTable";
 import { ProjectType } from "../../types/types";
 
 export type ProjectsContainerProps = {

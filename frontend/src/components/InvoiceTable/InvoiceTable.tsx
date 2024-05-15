@@ -5,7 +5,7 @@ import { TbFileInvoice } from "react-icons/tb";
 
 // COMPONENTS
 import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
-import { InvoiceTableItem } from "../dashboardBilling/InvoiceTableItem/InvoiceTableItem";
+import { InvoiceTableItem } from "../dashboardBilling/InvoiceTableItem";
 
 // STATE
 // import { useSelector } from "react-redux";

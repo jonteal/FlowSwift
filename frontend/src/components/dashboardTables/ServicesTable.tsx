@@ -6,7 +6,7 @@ import { AiFillHome } from "react-icons/ai";
 import { FaRegEye } from "react-icons/fa";
 
 // COMPONENTS
-import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
+import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import {
   Table,
   TableBody,
@@ -15,17 +15,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../../@/components/ui/table";
+} from "../../@/components/ui/table";
 
 // STATE
 // import { useSelector } from "react-redux";
 
 // UTILS
-import { capitalized } from "../../../utils/format";
-import { DynamicContainer } from "../../reusable/DynamicContainer/DynamicContainer";
-import { ServiceType } from "../../../types/types";
-import { useAppSelector } from "../../../store/hooks";
-import { RootState } from "../../../store/store";
+import { capitalized } from "../../utils/format";
+import { DynamicContainer } from "../reusable/DynamicContainer/DynamicContainer";
+import { ServiceType } from "../../types/types";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
 
 export type ServicesTableProps = {
   services: ServiceType[];

@@ -2,9 +2,9 @@ import { BsArrowUpSquare, BsArrowDownSquare } from "react-icons/bs";
 
 // STATE
 // import { useSelector } from "react-redux";
-import { useAppSelector } from "../../../store/hooks";
-import { TransactionType } from "../../TransactionTable/TransactionTable";
-import { RootState } from "../../../store/store";
+import { useAppSelector } from "../../store/hooks";
+import { TransactionType } from "../TransactionTable/TransactionTable";
+import { RootState } from "../../store/store";
 
 export type ClientTransactionItemProps = {
   transaction: TransactionType;

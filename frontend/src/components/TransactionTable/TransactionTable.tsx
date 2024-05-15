@@ -6,7 +6,7 @@ import { GrTransaction } from "react-icons/gr";
 // COMPONENTS
 import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import { DynamicContainer } from "../reusable/DynamicContainer/DynamicContainer";
-import { ClientTransactionItem } from "../dashboardBilling/ClientTransactionItem/ClientTransactionItem";
+import { ClientTransactionItem } from "../dashboardBilling/ClientTransactionItem";
 
 // STATE
 import { useAppSelector } from "../../store/hooks";

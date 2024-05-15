@@ -9,6 +9,8 @@ import { setCredentials } from "../../../slices/authSlice";
 import { toast } from "react-toastify";
 import Loader from "../../../components/Loader";
 import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -19,7 +21,7 @@ export const LoginScreen = () => {
 
   const [login, { isLoading }] = useLoginMutation();
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useAppSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     if (userInfo) {
@@ -27,14 +29,14 @@ export const LoginScreen = () => {
     }
   }, [navigate, userInfo]);
 
-  const submitHandler = async (e) => {
+  const submitHandler = async (e: any) => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
       navigate("/");
     } catch (error) {
-      toast.error(err.data.message || err.error);
+      toast.error("Cannot login at this time");
     }
   };
   return (

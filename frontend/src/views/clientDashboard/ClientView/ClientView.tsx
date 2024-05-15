@@ -6,15 +6,16 @@ import { useQuery } from "@apollo/client";
 import { GET_CLIENT } from "../../../graphql/queries/clientQueries";
 
 // COMPONENTS
-import { ClientViewNav } from "../../../components/dashboardMain/ClientViewNav/ClientViewNav";
-import { ClientMobileMenu } from "../../../components/dashboardMain/ClientMobileMenu/ClientMobileMenu";
+import { ClientViewNav } from "../../../components/dashboardMain/ClientViewNav";
+import { ClientMobileMenu } from "../../../components/dashboardMain/ClientMobileMenu";
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 
 // STATE
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
 
 export const ClientView = () => {
-  const { darkMode } = useSelector((state) => state.theme);
+  const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   const { clientId } = useParams();
 
