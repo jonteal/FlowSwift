@@ -8,17 +8,22 @@ import { DeleteModal } from "../modals/DeleteModal/DeleteModal";
 // import { EditClientModal } from "../modals/EditClientModal/EditClientModal";
 
 // STATE
-// import { useSelector } from "react-redux";
-import { ClientType } from "../../types/types";
+import { ClientContainerType, ClientType } from "../../types/types";
 import { useAppSelector } from "../../store/hooks";
 import { RootState } from "../../store/store";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../../@/components/ui/table";
 
 export type ClientTableProps = {
   clients: ClientType[];
-  clientContainer: {
-    id: string;
-    state: string;
-  };
+  clientContainer: ClientContainerType;
 };
 
 export const ClientTable = ({ clients, clientContainer }: ClientTableProps) => {
@@ -27,164 +32,63 @@ export const ClientTable = ({ clients, clientContainer }: ClientTableProps) => {
   const { darkMode } = useAppSelector((state: RootState) => state.theme);
 
   return (
-    <table className="table-auto overflow-x-scroll">
-      <thead>
-        <tr>
-          <th
-            className={`${
-              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            } w-auto text-left pl-2 border font-semibold`}
-          >
-            #
-          </th>
-          <th
-            className={`${
-              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            } font-semibold w-2/12 text-left pl-2 border`}
-          >
-            First Name
-          </th>
-          <th
-            className={`${
-              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            } font-semibold w-2/12 text-left pl-2 border`}
-          >
-            Last Name
-          </th>
-          <th
-            className={`${
-              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            } font-semibold w-2/12 text-left pl-2 border`}
-          >
-            Phone Number
-          </th>
-          <th
-            className={`${
-              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            } font-semibold w-2/12 text-left pl-2 border`}
-          >
-            Email Address
-          </th>
-          <th
-            className={`${
-              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            } font-semibold w-3/12 text-left pl-2 border`}
-          >
-            Company
-          </th>
-          <th
-            className={`${
-              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            } font-semibold w-2/12 text-left pl-2 border`}
-          >
-            Status
-          </th>
-          <th
-            className={`${
-              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            } font-semibold w-2/12 text-left pl-2 border`}
-          ></th>
-          <th
-            className={`${
-              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-            } font-semibold w-2/12 text-left pl-2 border`}
-          ></th>
-        </tr>
-      </thead>
-      <tbody>
-        {clients
-          .filter((client) => client.status === clientContainer.state)
-          .map((client, index) => (
-            <tr key={client.id}>
-              <td
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                }  font-light text-left border pl-2 pr-2`}
-              >
-                {index + 1}
-              </td>
-              <td
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                }  font-light text-left border pl-2`}
-              >
-                {client.firstName}
-              </td>
-              <td
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                }  font-light text-left border pl-2`}
-              >
-                {client.lastName}
-              </td>
-              <td
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                }  font-light text-left border pl-2`}
-              >
-                {client.phoneNumber}
-              </td>
-              <td
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                }  font-light text-left border pl-2`}
-              >
-                {client.emailAddress}
-              </td>
-              <td
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                }  font-light text-left border pl-2`}
-              >
-                {client.companyName}
-              </td>
-              <td
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                }  font-light text-left border pl-2`}
-              >
-                {client.status}
-              </td>
-              <td
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                }  font-light text-left border pl-2`}
-              >
-                <Link
-                  to={`/organizations/${organizationId}/clients/${client.id}/dashboard`}
-                >
-                  <FaRegEye
-                    className={`${
-                      darkMode ? "text-sky-200" : "text-sky-600"
-                    } mr-2`}
+    <>
+      <Table>
+        <TableCaption>A list of your services</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>#</TableHead>
+            <TableHead className="w-[100px]">First Name</TableHead>
+            <TableHead>Last Name</TableHead>
+            <TableHead>Phone Number</TableHead>
+            <TableHead>Email Address</TableHead>
+            <TableHead>Company</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead></TableHead>
+            <TableHead></TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {clients
+            .filter((client) => client.status === clientContainer.state)
+            .map((client, index) => (
+              <TableRow key={client.id}>
+                <TableCell className="text-left">{index + 1}</TableCell>
+                <TableCell className="text-left">{client.firstName}</TableCell>
+                <TableCell className="text-left">{client.lastName}</TableCell>
+                <TableCell className="text-left">
+                  {client.phoneNumber}
+                </TableCell>
+                <TableCell className="text-left">
+                  {client.emailAddress}
+                </TableCell>
+                <TableCell className="text-left">
+                  {client.companyName}
+                </TableCell>
+                <TableCell>{client.status}</TableCell>
+                <TableCell>
+                  <Link
+                    to={`/organizations/${organizationId}/clients/${client.id}/dashboard`}
+                  >
+                    <FaRegEye
+                      className={`${
+                        darkMode ? "text-sky-200" : "text-sky-600"
+                      } mr-2`}
+                    />
+                  </Link>
+                </TableCell>
+                <TableCell></TableCell>
+                <TableCell>
+                  <DeleteModal
+                    subject="Client"
+                    organizationId={client?.organization?.id || ""}
+                    clientId={client.id}
                   />
-                </Link>
-              </td>
-              <td
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                }  font-light text-left border pl-2`}
-              >
-                {/* <EditClientModal
-                  subject="Client"
-                  organizationId={client?.organization?.id || ""}
-                  client={client}
-                /> */}
-              </td>
-              <td
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                }  font-light text-left border pl-2`}
-              >
-                <DeleteModal
-                  subject="Client"
-                  organizationId={client?.organization?.id || ""}
-                  clientId={client.id}
-                />
-              </td>
-            </tr>
-          ))}
-      </tbody>
-    </table>
+                </TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    </>
   );
 };

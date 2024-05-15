@@ -11,7 +11,7 @@ import { DynamicButton } from "../../../components/reusable/DynamicButton/Dynami
 import { FiltersList } from "../../../components/reusable/FiltersList/FiltersList";
 import { Switch } from "../../../components/reusable/Switch/Switch";
 import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
-import { ProjectsAccordion } from "../../../components/Accordions/ProjectsAccordion.jsx/ProjectsAccordion";
+import { ProjectsAccordion } from "../../../components/Accordions/ProjectsAccordion";
 
 // STATE
 import { useDispatch, useSelector } from "react-redux";

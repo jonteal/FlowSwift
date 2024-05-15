@@ -10,7 +10,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import { Provider } from "react-redux";
 import { App } from "./App.jsx";
 import { Home } from "./views/homeView/Home/Home";
-import { LoginScreen } from "./views/Auth/Login/LoginScreen.jsx";
+import { LoginScreen } from "./views/Auth/Login/LoginScreen";
 import { RegisterScreen } from "./views/Auth/Signup/RegisterScreen.jsx";
 import { ProfileScreen } from "./views/Settings/ProfileScreen";
 import { AddClient } from "./views/Clients/AddClient";

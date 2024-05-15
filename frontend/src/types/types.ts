@@ -97,4 +97,9 @@ export type InvoiceType = {
   };
 };
 
+export type ClientContainerType = {
+  id: string;
+  state: string;
+}
+
 

@@ -1,4 +1,4 @@
-import { ClientType } from "../../../types/types";
+import { ClientType } from "../../types/types";
 
 export type TotalClientsProps = {
   clientsData: {

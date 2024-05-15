@@ -7,7 +7,7 @@ import { GET_CLIENTS_BY_STATUS } from "../../../graphql/queries/clientQueries";
 
 // COMPONENTS
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
-import { ClientsAccordion } from "../../../components/Accordions/ClientsAccordion/ClientsAccordion";
+import { ClientsAccordion } from "../../../components/Accordions/ClientsAccordion";
 
 // UTILS
 import { clientContainers } from "../constants";
@@ -36,13 +36,15 @@ export const ClientsListByStatus = () => {
         Total {status} Records: {clientData.clientsByStatus.length}
       </h2>
 
-      <ClientsAccordion
-        isExpanded={isExpanded}
-        clientCount={clientData.clientsByStatus.length}
-        clients={clientData.clientsByStatus}
-        container={clientContainer}
-        containerState={clientContainer.state}
-      />
+      {clientContainer && (
+        <ClientsAccordion
+          // isExpanded={isExpanded}
+          clientCount={clientData.clientsByStatus.length}
+          clients={clientData.clientsByStatus}
+          container={clientContainer}
+          containerState={clientContainer?.state || ""}
+        />
+      )}
     </>
   );
 };

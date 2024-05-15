@@ -6,7 +6,7 @@ import { GET_ALL_CLIENT_INVOICES } from "../../../graphql/queries/invoiceQueries
 
 // COMPONENTS
 import { NewClientsThisMonth } from "../../../components/mainDashboard/NewClientsThisMonth";
-import { TotalClients } from "../../../components/mainDashboard/TotalClients/TotalClients";
+import { TotalClients } from "../../../components/mainDashboard/TotalClients";
 // import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 
 export const MainDashboard = () => {
