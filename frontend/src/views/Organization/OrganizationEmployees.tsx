@@ -7,6 +7,15 @@ import { EmployeeRowItem } from "../../components/EmployeeRowItem/EmployeeRowIte
 import { useAppSelector } from "../../store/hooks";
 import { RootState } from "../../store/store";
 import { UserType } from "../../types/types";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../../@/components/ui/table";
 
 export const OrganizationEmployees = () => {
   const { organizationId } = useParams();
@@ -27,45 +36,22 @@ export const OrganizationEmployees = () => {
     <div>
       <h1 className="text-xl font-bold my-3">Employees</h1>
       <div className="flex flex-col">
-        <table className="mx-3">
-          <thead>
-            <tr>
-              <th
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                } text-left pl-2 border`}
-              >
-                #
-              </th>
-              <th
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                } text-left pl-2 border`}
-              >
-                Name
-              </th>
-              <th
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                } text-left pl-2 border`}
-              >
-                Email
-              </th>
-              <th
-                className={`${
-                  darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-                } text-left pl-2 border`}
-              >
-                Role
-              </th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table>
+          <TableCaption>A list of your employees</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>#</TableHead>
+              <TableHead className="w-[100px]">Name</TableHead>
+              <TableHead>Email Address</TableHead>
+              <TableHead>Role</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {userData.users.map((user: UserType, index: number) => (
               <EmployeeRowItem key={user._id} index={index} employee={user} />
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

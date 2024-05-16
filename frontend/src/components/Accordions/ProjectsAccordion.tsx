@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 // COMPONENTS
-import { ClientTable } from "../ClientTable/ClientTable";
+import { ProjectsTable } from "../ProjectsTable/ProjectsTable";
 import {
   Accordion,
   AccordionContent,
@@ -10,30 +10,26 @@ import {
 } from "../../@/components/ui/accordion";
 
 // STATE
+import { ProjectType } from "../../types/types";
 import { useAppSelector } from "../../store/hooks";
 import { RootState } from "../../store/store";
 
-// TYPES
-import { ClientContainerType, ClientType } from "../../types/types";
-
-export type ClientsAccordionProps = {
-  clientCount: number;
-  containerState: string;
+export type ProjectsAccordionProps = {
   linkLabel?: string;
   link?: string;
-  clients: ClientType[];
-  container: ClientContainerType;
+  projects: ProjectType[];
+  searchTerm: string;
 };
 
-export const ClientsAccordion = ({
-  clientCount,
-  containerState,
+export const ProjectsAccordion = ({
   linkLabel,
   link,
-  clients,
-  container,
-}: ClientsAccordionProps) => {
+  projects,
+  searchTerm,
+}: ProjectsAccordionProps) => {
   const { darkMode } = useAppSelector((state: RootState) => state.theme);
+
+  const projectCount = projects.length;
 
   return (
     <>
@@ -44,7 +40,7 @@ export const ClientsAccordion = ({
               <p
                 className={`${darkMode ? "text-slate-50" : "text-slate-900"} `}
               >
-                ({clientCount}) {containerState}
+                ({projectCount})
               </p>
               {link && linkLabel && (
                 <Link
@@ -59,11 +55,7 @@ export const ClientsAccordion = ({
             </div>
           </AccordionTrigger>
           <AccordionContent>
-            <ClientTable
-              key={container?.id}
-              clientContainer={container}
-              clients={clients}
-            />
+            <ProjectsTable searchTerm={searchTerm} projects={projects} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

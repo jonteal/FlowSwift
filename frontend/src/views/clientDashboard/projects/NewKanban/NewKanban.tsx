@@ -8,6 +8,7 @@ import { GET_KANBANS } from "../../../../graphql/queries/kanbanQueries";
 import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { KanbanCard } from "../../../../components/kanban/KanbanCard";
+import { KanbanType } from "../../../../types/types";
 
 export const NewKanban = () => {
   const { projectId } = useParams();
@@ -26,7 +27,7 @@ export const NewKanban = () => {
       </DynamicButton>
 
       <div className="mt-5 flex flex-col md:flex-row items-center flex-wrap">
-        {data.kanbans.map((kanban) => (
+        {data.kanbans.map((kanban: KanbanType) => (
           <KanbanCard key={kanban.id} kanban={kanban} />
         ))}
       </div>

@@ -16,6 +16,8 @@ import { RootState } from "../../store/store";
 import { camelCaseToWords } from "../../utils/format";
 import { ProjectType } from "../../types/types";
 import { useAppSelector } from "../../store/hooks";
+import { TableCell, TableRow } from "../../@/components/ui/table";
+import { DeleteModal } from "../modals/DeleteModal/DeleteModal";
 
 export type ProjectsTableItemProps = {
   project: ProjectType;
@@ -82,117 +84,148 @@ export const ProjectsTableItem = ({
   }, [priority]);
 
   return (
-    <tr key={project.id}>
-      <td
-        className={`${
-          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2 pr-2`}
-      >
-        {index + 1}
-      </td>
-      {projectName && (
-        <td
-          className={`${
-            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-          } font-light text-left border pl-2`}
-        >
-          {title}
-        </td>
-      )}
-      {projectClient && (
-        <td
-          className={`${
-            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-          } font-light text-left border pl-2`}
-        >
-          {`${client.firstName} ${client.lastName} `}
-        </td>
-      )}
-      {projectOwnerTable && (
-        <td
-          className={`${
-            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-          } font-light text-left border pl-2`}
-        >
-          {user.name}
-        </td>
-      )}
-      {projectStatus && (
-        <td
-          className={`${
-            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-50"
-          } ${statusColor} font-light text-left border flex justify-center py-2`}
-        >
-          {camelCaseToWords(status)}
-        </td>
-      )}
-      {projectStartDate && (
-        <td
-          className={`${
-            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-          } font-light text-left border pl-2`}
-        >
-          {startDate}
-        </td>
-      )}
-      {projectDeadline && (
-        <td
-          className={`${
-            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-          } font-light text-left border pl-2`}
-        >
-          {deadline}
-        </td>
-      )}
-      {projectPriority && (
-        <td
-          className={`${
-            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-50"
-          } ${priorityColor} font-light text-left border flex justify-center py-2`}
-        >
+    <>
+      <TableRow key={id}>
+        <TableCell className="text-left">{index + 1}</TableCell>
+        {projectName && <TableCell className="text-left">{title}</TableCell>}
+        <TableCell className="text-left">{`${client.firstName} ${client.lastName} `}</TableCell>
+        <TableCell className="text-left">{user.name}</TableCell>
+        <TableCell className="text-left">{camelCaseToWords(status)}</TableCell>
+        <TableCell className="text-left">{startDate}</TableCell>
+        <TableCell className="text-left">{deadline}</TableCell>
+        <TableCell className="text-left">
           {priority ? camelCaseToWords(priority) : ""}
+        </TableCell>
+        <TableCell className="text-left">{clientBudget}</TableCell>
+        <TableCell className="text-left">{estimate}</TableCell>
+        <TableCell className="text-left">
+          <Link
+            to={`/organizations/${organizationId}/clients/${client.id}/projects/${id}/profile`}
+          >
+            <FaRegEye
+              className={`${darkMode ? "text-sky-200" : "text-sky-600"} mr-2`}
+            />
+          </Link>
+        </TableCell>
+
+        <TableCell>
+          <DeleteProject subject="Project" projectId={id}>
+            <FaRegTrashAlt className="text-red-500 self-center mx-1" />
+          </DeleteProject>
+        </TableCell>
+      </TableRow>
+      {/* <tr key={project.id}>
+        <td
+          className={`${
+            darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+          } font-light text-left border pl-2 pr-2`}
+        >
+          {index + 1}
         </td>
-      )}
-      {projectBudget && (
+        {projectName && (
+          <td
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            } font-light text-left border pl-2`}
+          >
+            {title}
+          </td>
+        )}
+        {projectClient && (
+          <td
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            } font-light text-left border pl-2`}
+          >
+            {`${client.firstName} ${client.lastName} `}
+          </td>
+        )}
+        {projectOwnerTable && (
+          <td
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            } font-light text-left border pl-2`}
+          >
+            {user.name}
+          </td>
+        )}
+        {projectStatus && (
+          <td
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-50"
+            } ${statusColor} font-light text-left border flex justify-center py-2`}
+          >
+            {camelCaseToWords(status)}
+          </td>
+        )}
+        {projectStartDate && (
+          <td
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            } font-light text-left border pl-2`}
+          >
+            {startDate}
+          </td>
+        )}
+        {projectDeadline && (
+          <td
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            } font-light text-left border pl-2`}
+          >
+            {deadline}
+          </td>
+        )}
+        {projectPriority && (
+          <td
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-50"
+            } ${priorityColor} font-light text-left border flex justify-center py-2`}
+          >
+            {priority ? camelCaseToWords(priority) : ""}
+          </td>
+        )}
+        {projectBudget && (
+          <td
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            } font-light text-left border pl-2`}
+          >
+            {clientBudget}
+          </td>
+        )}
+        {projectEstimate && (
+          <td
+            className={`${
+              darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
+            } font-light text-left border pl-2`}
+          >
+            {estimate}
+          </td>
+        )}
         <td
           className={`${
             darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
           } font-light text-left border pl-2`}
         >
-          {clientBudget}
+          <Link
+            to={`/organizations/${organizationId}/clients/${client.id}/projects/${id}/profile`}
+          >
+            <FaRegEye
+              className={`${darkMode ? "text-sky-200" : "text-sky-600"} mr-2`}
+            />
+          </Link>
         </td>
-      )}
-      {projectEstimate && (
         <td
           className={`${
             darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
           } font-light text-left border pl-2`}
         >
-          {estimate}
+          <DeleteProject subject="Project" projectId={id}>
+            <FaRegTrashAlt className="text-red-500 self-center mx-1" />
+          </DeleteProject>
         </td>
-      )}
-      <td
-        className={`${
-          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2`}
-      >
-        <Link
-          to={`/organizations/${organizationId}/clients/${client.id}/projects/${id}/profile`}
-        >
-          <FaRegEye
-            className={`${darkMode ? "text-sky-200" : "text-sky-600"} mr-2`}
-          />
-        </Link>
-      </td>
-      <td
-        className={`${
-          darkMode ? "bg-sky-900 text-slate-50" : "text-slate-700"
-        } font-light text-left border pl-2`}
-      >
-        <DeleteProject subject="Project" projectId={id}>
-          <FaRegTrashAlt className="text-red-500 self-center mx-1" />
-        </DeleteProject>
-      </td>
-    </tr>
+      </tr> */}
+    </>
   );
 };

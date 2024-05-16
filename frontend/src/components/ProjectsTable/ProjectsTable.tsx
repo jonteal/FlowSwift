@@ -1,10 +1,21 @@
-import { useAppSelector } from "../../store/hooks";
-import { ProjectType } from "../../types/types";
+// COMPONENTS
 import { ProjectsTableItem } from "../ProjectsTableItem/ProjectsTableItem";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../../@/components/ui/table";
 
 // STATE
-// import { useSelector } from "react-redux";
+import { useAppSelector } from "../../store/hooks";
 import { RootState } from "../../store/store";
+
+// TYPES
+import { ProjectType } from "../../types/types";
 
 export type ProjectsTableProps = {
   projects: ProjectType[];
@@ -16,7 +27,55 @@ export const ProjectsTable = ({ projects, searchTerm }: ProjectsTableProps) => {
 
   return (
     <div className="border w-full flex flex-col">
-      <table className="table-auto overflow-x-scroll">
+      <Table>
+        <TableCaption>A list of your client's projects</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>#</TableHead>
+            <TableHead className="w-[100px]">Project Name</TableHead>
+            <TableHead>Client</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Start Date</TableHead>
+            <TableHead>Deadline</TableHead>
+            <TableHead>Budget</TableHead>
+            <TableHead>Estimate</TableHead>
+            <TableHead></TableHead>
+            <TableHead></TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {projects
+            .filter((val) => {
+              if (searchTerm === "") {
+                return val;
+              } else if (
+                val?.client.firstName
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase())
+              ) {
+                return val;
+              } else if (
+                val?.title.toLowerCase().includes(searchTerm.toLowerCase())
+              ) {
+                return val;
+              } else if (
+                val?.client.lastName
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase())
+              ) {
+                return val;
+              }
+            })
+            .map((project, index) => (
+              <ProjectsTableItem
+                index={index}
+                key={project.id}
+                project={project}
+              />
+            ))}
+        </TableBody>
+      </Table>
+      {/* <table className="table-auto overflow-x-scroll">
         <thead>
           <tr>
             <th
@@ -118,7 +177,7 @@ export const ProjectsTable = ({ projects, searchTerm }: ProjectsTableProps) => {
               />
             ))}
         </tbody>
-      </table>
+      </table> */}
     </div>
   );
 };
