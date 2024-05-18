@@ -6,7 +6,7 @@ import { GET_USERS } from "../../graphql/queries/userQueries";
 import { GET_ORGANIZATIONS } from "../../graphql/queries/organizationQueries";
 
 // COMPONENTS
-import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
+import { Button } from "../../@/components/ui/button";
 import { FormContainer } from "../../components/FormContainer";
 import { Form, Spinner } from "react-bootstrap";
 
@@ -178,9 +178,9 @@ export const AddUser = () => {
 
         {isLoading && <Spinner />}
 
-        <DynamicButton type="submit" color="red" className="mt-3">
+        <Button type="submit" className="mt-3">
           Add User
-        </DynamicButton>
+        </Button>
       </Form>
     </FormContainer>
   );

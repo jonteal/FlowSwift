@@ -7,8 +7,8 @@ import { GET_CLIENT } from "../../../graphql/queries/clientQueries";
 import { UPDATE_CLIENT } from "../../../graphql/mutations/clientMutations";
 
 // COMPONENTS
+import { Button } from "../../../@/components/ui/button";
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicInput";
 import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
 
@@ -180,9 +180,7 @@ export const EditClient = () => {
             </div>
 
             <div onClick={onSubmit}>
-              <DynamicButton color="blue" type="submit">
-                Submit
-              </DynamicButton>
+              <Button type="submit">Submit</Button>
             </div>
           </form>
         </div>

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
@@ -8,7 +8,6 @@ import { GET_PROJECT_TRANSACTIONS } from "../../../graphql/queries/transactionQu
 
 // COMPONENTS
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 import { TransactionTable } from "../../../components/TransactionTable/TransactionTable";
 import { InvoiceTable } from "../../../components/InvoiceTable/InvoiceTable";
 import { ProgressBarComponent } from "../../../components/ProgressBar/ProgressBar";
@@ -59,14 +58,9 @@ export const ProjectFinancials = () => {
         </div>
         <div className="flex flex-col md:flex-row w-full items-start">
           <DynamicContainer className="flex flex-col w-full items-start mx-2">
-            <DynamicButton
-              className="mx-2 mb-3"
-              link="invoices"
-              type="link"
-              color="blue"
-            >
+            <Link className="mx-2 mb-3" to="invoices">
               View All Invoices
-            </DynamicButton>
+            </Link>
 
             <InvoiceTable
               shortList={true}
@@ -74,14 +68,9 @@ export const ProjectFinancials = () => {
             />
           </DynamicContainer>
           <DynamicContainer className="flex flex-col w-full items-start mr-2">
-            <DynamicButton
-              link="transactions"
-              color="blue"
-              type="link"
-              className="mx-2 mb-3"
-            >
+            <Link to="transactions" className="mx-2 mb-3">
               View All Transactions
-            </DynamicButton>
+            </Link>
             <TransactionTable
               shortList={true}
               transactions={transactionsData.projectTransactions}

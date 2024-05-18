@@ -10,9 +10,8 @@ import { DELETE_CLIENT } from "../../../graphql/mutations/clientMutations";
 import { GET_CLIENTS } from "../../../graphql/queries/clientQueries";
 
 // COMPONENTS
-import Button from "react-bootstrap/Button";
+import { Button } from "../../../@/components/ui/button";
 import Modal from "react-bootstrap/Modal";
-import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
 
 export type DeleteModalProps = {
   subject: string;
@@ -58,17 +57,11 @@ export const DeleteModal = ({
           action!`}
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            className="border bg-slate-500"
-            variant="secondary"
-            onClick={handleClose}
-          >
+          <Button className="border bg-slate-500" onClick={handleClose}>
             Close
           </Button>
           {/* <div onClick={deleteClient}> */}
-          <DynamicButton clickHandler={handleClose} color="red" type="delete">
-            Delete
-          </DynamicButton>
+          <Button onClick={handleClose}>Delete</Button>
           {/* </div> */}
         </Modal.Footer>
       </Modal>

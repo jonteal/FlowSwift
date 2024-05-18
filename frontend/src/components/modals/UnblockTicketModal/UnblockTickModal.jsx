@@ -1,9 +1,8 @@
 import { useState } from "react";
 
 // COMPONENTS
-import Button from "react-bootstrap/Button";
+import { Button } from "../../../@/components/ui/button";
 import Modal from "react-bootstrap/Modal";
-import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
 
 export const UnblockTicketModal = ({ ticket, unblockTicket, modalOpen }) => {
   const [show, setShow] = useState(modalOpen);
@@ -45,22 +44,14 @@ export const UnblockTicketModal = ({ ticket, unblockTicket, modalOpen }) => {
       </Modal.Header> */}
       <Modal.Body>{`Unblock ticket?`}</Modal.Body>
       <Modal.Footer>
-        <Button
-          className="border bg-slate-500"
-          variant="secondary"
-          onClick={handleClose}
-        >
+        <Button className="border bg-slate-500" onClick={handleClose}>
           Close
         </Button>
         <form onSubmit={onSubmit}>
           <div onClick={unblockTicket}>
-            <DynamicButton
-              clickHandler={handleClose}
-              color="blue"
-              type="submit"
-            >
+            <Button onClick={handleClose} type="submit">
               Yes
-            </DynamicButton>
+            </Button>
           </div>
         </form>
       </Modal.Footer>

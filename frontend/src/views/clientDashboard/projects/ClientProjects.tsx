@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 // GRAPHQL
 import { GET_CLIENT_PROJECTS } from "../../../graphql/queries/projectQueries";
@@ -7,14 +7,13 @@ import { GET_CLIENT_PROJECTS } from "../../../graphql/queries/projectQueries";
 // COMPONENTS
 import { ProjectPageCard } from "../../../components/ProjectPageCard/ProjectPageCard";
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 import { FiltersList } from "../../../components/reusable/FiltersList/FiltersList";
 import { Switch } from "../../../components/reusable/Switch/Switch";
 import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
 import { ProjectsAccordion } from "../../../components/Accordions/ProjectsAccordion";
 
 // STATE
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import {
   setGridViewOn,
@@ -163,13 +162,11 @@ export const ClientProjects = () => {
     <DynamicContainer className="w-full">
       {projectsData.clientProjects.length === 0 ? (
         <div className="rounded-xl bg-slate-50 mx-2 py-3 px-4 w-full">
-          <DynamicButton
-            color="red"
-            link={`/organizations/${organizationId}/clients/${clientId}/projects/addProject`}
-            type="link"
+          <Link
+            to={`/organizations/${organizationId}/clients/${clientId}/projects/addProject`}
           >
             Add Project
-          </DynamicButton>
+          </Link>
           <p className="mt-4">
             This client does not have any current projects.
           </p>
@@ -177,14 +174,12 @@ export const ClientProjects = () => {
       ) : (
         <div className="flex flex-col w-full">
           <div className="flex flex-row justify-between items-start">
-            <DynamicButton
-              color="red"
-              link={`/organizations/${organizationId}/clients/${clientId}/projects/addProject`}
-              type="link"
+            <Link
+              to={`/organizations/${organizationId}/clients/${clientId}/projects/addProject`}
               className="ml-2"
             >
               Add Project
-            </DynamicButton>
+            </Link>
 
             <input
               type="text"

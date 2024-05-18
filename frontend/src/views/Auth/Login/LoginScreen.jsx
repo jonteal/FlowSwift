@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
+import { Button } from "../../../@/components/ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { FormContainer } from "../../../components/FormContainer";
 import { useLoginMutation } from "../../../slices/usersApiSlice";
 import { setCredentials } from "../../../slices/authSlice";
 import { toast } from "react-toastify";
 import Loader from "../../../components/Loader";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 
 export const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -63,16 +63,16 @@ export const LoginScreen = () => {
 
         {isLoading && <Loader />}
 
-        <DynamicButton type="submit" color="red" className="my-3">
+        <Button type="submit" className="my-3">
           Sign In
-        </DynamicButton>
+        </Button>
 
         <Row>
           <div>
             New Customer?{" "}
-            <DynamicButton className="mt-3" type="link" link="/register">
+            <Link className="mt-3" to="/register">
               Register
-            </DynamicButton>
+            </Link>
           </div>
         </Row>
       </Form>

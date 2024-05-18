@@ -10,8 +10,8 @@ import { GET_ORGANIZATIONS } from "../../graphql/queries/organizationQueries";
 import { ADD_ORGANIZATION } from "../../graphql/mutations/organizationMutations";
 
 // COMPONENTS
+import { Button } from "../../@/components/ui/button";
 import { Spinner } from "../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
 import { DynamicInput } from "../../components/reusable/DynamicInput/DynamicInput";
 
 // STATE
@@ -97,9 +97,7 @@ export const AddOrganization = () => {
             className="py-5"
           />
 
-          <DynamicButton color="red" type="submit">
-            Submit
-          </DynamicButton>
+          <Button type="submit">Submit</Button>
         </form>
       </div>
     </div>

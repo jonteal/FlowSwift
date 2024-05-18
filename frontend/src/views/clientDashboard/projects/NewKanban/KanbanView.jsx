@@ -9,7 +9,7 @@ import { GET_TICKETS } from "../../../../graphql/queries/ticketQueries";
 
 // COMPONENTS
 import { Spinner } from "react-bootstrap";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
+import { Button } from "../../../../@/components/ui/button";
 import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
@@ -173,19 +173,14 @@ export const KanbanView = () => {
   return (
     <DynamicContainer className="h-screen mt-2">
       <div className="flex flex-row justify-around items-start">
-        <DynamicButton
+        <Button
           clickHandler={() => setIsAddingColumn(!isAddingColumn)}
           type="submit"
-          color="red"
         >
           Add Column
-        </DynamicButton>
+        </Button>
 
-        {hasStatusColumn && (
-          <DynamicButton type="link" link="addTicket" color="lightBlue">
-            Add Ticket
-          </DynamicButton>
-        )}
+        {hasStatusColumn && <Button to="addTicket">Add Ticket</Button>}
 
         <button
           className="border bg-sky-300 px-3 py-1 rounded-lg"
@@ -235,9 +230,7 @@ export const KanbanView = () => {
               ariaLabel="Flow state position"
             />
 
-            <DynamicButton color="red" type="submit">
-              Submit
-            </DynamicButton>
+            <Button type="submit">Submit</Button>
 
             <button
               className="border bg-sky-300 px-3 py-1 rounded-lg"

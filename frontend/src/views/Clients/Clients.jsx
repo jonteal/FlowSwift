@@ -1,10 +1,10 @@
 // COMPONENTS
 import { ClientList } from "../homeView/ClientList/ClientList";
-import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
+import { Button } from "../../@/components/ui/button";
 
 // STATE
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const Clients = () => {
   const { organizationId } = useParams();
@@ -14,14 +14,14 @@ export const Clients = () => {
     <div
       className={`${darkMode ? "bg-sky-950" : "bg-slate-50"} px-10 py-5 h-fit`}
     >
-      <DynamicButton
-        className="mb-4"
-        color="red"
-        type="link"
-        link={`/organizations/${organizationId}/addClient`}
-      >
-        Add Client
-      </DynamicButton>
+      <Button asChild>
+        <Link
+          className="mb-4"
+          to={`/organizations/${organizationId}/addClient`}
+        >
+          Add Client
+        </Link>
+      </Button>
       <ClientList />
     </div>
   );

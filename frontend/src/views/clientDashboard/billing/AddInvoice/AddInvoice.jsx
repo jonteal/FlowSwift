@@ -9,8 +9,8 @@ import { GET_ALL_CLIENT_INVOICES } from "../../../../graphql/queries/invoiceQuer
 import { GET_CLIENT_PROJECTS } from "../../../../graphql/queries/projectQueries";
 
 // COMPONENTS
+import { Button } from "../../../../@/components/ui/button";
 import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
 import { PageHeadline } from "../../../../components/reusable/PageHeadline/PageHeadline";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
@@ -193,16 +193,10 @@ export const AddInvoice = () => {
           />
         </div>
 
-        <DynamicButton
-          onClick={() => setSubmitType("return")}
-          color="blue"
-          type="submit"
-        >
+        <Button onClick={() => setSubmitType("return")} type="submit">
           Save
-        </DynamicButton>
-        <DynamicButton color="blue" type="submit">
-          Save and Add Another
-        </DynamicButton>
+        </Button>
+        <Button type="submit">Save and Add Another</Button>
       </form>
     </div>
   );

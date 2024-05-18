@@ -1,11 +1,16 @@
-import { useSelector } from "react-redux";
-import { Spinner } from "../../components/reusable/Spinner/Spinner";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+
+// GRAPHQL
 import { GET_USER } from "../../graphql/queries/userQueries";
 import { GET_ORGANIZATION } from "../../graphql/queries/organizationQueries";
-import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
-import { useParams } from "react-router-dom";
+
+// COMPONENTS
 import { Button } from "../../@/components/ui/button";
+import { Spinner } from "../../components/reusable/Spinner/Spinner";
+
+// STATE
+import { useSelector } from "react-redux";
 
 export const OrganizationProfile = () => {
   const { organizationId } = useParams();
@@ -43,29 +48,34 @@ export const OrganizationProfile = () => {
           <div className="text-base mt-10 border flex flex-col items-center pt-2 pb-4 w-1/2 mx-auto">
             <h2 className="font-semibold text-lg mb-4">Employee Dashboard</h2>
             <div className="flex flex-row">
-              <DynamicButton
-                link={`/organizations/${organizationId}/addUser`}
-                type="link"
-                color="lightBlue"
-                className="mr-1"
-              >
-                Add Employees
-              </DynamicButton>
-              <Button
-                href={`/organizations/${organizationId}/addUser`}
-                className="text-slate-500 border"
-                variant="default"
-              >
-                Add Employees
+              <Button asChild>
+                <Link
+                  to={`/organizations/${organizationId}/addUser`}
+                  className="mr-1"
+                >
+                  Add Employees
+                </Link>
               </Button>
-              <DynamicButton
-                link={`/organizations/${organizationId}/employees`}
-                type="link"
-                color="lightBlue"
-                className="ml-1"
-              >
-                Current Employees
-              </DynamicButton>
+
+              <Button asChild>
+                <Link
+                  to={`/organizations/${organizationId}/addUser`}
+                  className="text-slate-500 border"
+                >
+                  Add Employees
+                </Link>
+              </Button>
+
+              <Button asChild>
+                <Link
+                  link={`/organizations/${organizationId}/employees`}
+                  type="link"
+                  color="lightBlue"
+                  className="ml-1"
+                >
+                  Current Employees
+                </Link>
+              </Button>
             </div>
           </div>
         ))}

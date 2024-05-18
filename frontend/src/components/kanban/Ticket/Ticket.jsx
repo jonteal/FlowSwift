@@ -17,8 +17,7 @@ import { GET_TICKETS } from "../../../graphql/queries/ticketQueries";
 
 // COMPONENTS
 import { DynamicInput } from "../../reusable/DynamicInput/DynamicInput";
-import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
-import Button from "react-bootstrap/Button";
+import { Button } from "../../../@/components/ui/button";
 import Modal from "react-bootstrap/Modal";
 
 // STATE
@@ -178,7 +177,7 @@ export const Ticket = ({ ticket }) => {
           )}
         </div>
         <div>
-          <button
+          <Button
             onClick={handleTicketReady}
             className={`border ${
               ready ? "bg-green-600" : "bg-slate-200"
@@ -187,8 +186,8 @@ export const Ticket = ({ ticket }) => {
             <AiOutlineCheckCircle
               className={`${ready ? "text-slate-50" : "text-slate-700"}`}
             />
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={handleBlockTicket}
             className={`border ${
               blocked ? "bg-red-600" : "bg-red-50"
@@ -197,16 +196,16 @@ export const Ticket = ({ ticket }) => {
             <AiOutlineStop
               className={`${blocked ? "text-slate-50" : "text-slate-700"}`}
             />
-          </button>
+          </Button>
           <Link
             className="mr-2"
             to={`/organizations/${organizationId}/clients/${clientId}/projects/${projectId}/kanbans/${kanbanId}/${ticket.id}`}
           >
             <span className="text-sm">View</span>
           </Link>
-          <button onClick={deleteTicket}>
+          <Button onClick={deleteTicket}>
             <FaRegTrashAlt className="text-red-500" />
-          </button>
+          </Button>
         </div>
       </div>
       <p
@@ -253,9 +252,7 @@ export const Ticket = ({ ticket }) => {
             rows="3"
             ariaLabel="Block story input"
           />
-          <DynamicButton type="submit" color="blue">
-            Save
-          </DynamicButton>
+          <Button type="submit">Save</Button>
         </form>
       )}
 
@@ -281,13 +278,9 @@ export const Ticket = ({ ticket }) => {
             Close
           </Button>
           <form onSubmit={onSubmit}>
-            <DynamicButton
-              clickHandler={handleClose}
-              color="blue"
-              type="submit"
-            >
+            <Button clickHandler={handleClose} type="submit">
               Yes
-            </DynamicButton>
+            </Button>
           </form>
         </Modal.Footer>
       </Modal>

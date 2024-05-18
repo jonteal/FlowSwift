@@ -10,7 +10,7 @@ import { GET_TICKETS } from "../../../graphql/queries/ticketQueries";
 
 // COMPONENTS
 import { Checkbox } from "../../../components/reusable/Checkbox/Checkbox";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { Button } from "../../../@/components/ui/button";
 import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
 import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicInput";
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
@@ -235,9 +235,7 @@ export const AddKanbanTicket = () => {
           )}
         </div>
 
-        <DynamicButton color="red" type="submit">
-          Submit
-        </DynamicButton>
+        <Button type="submit">Submit</Button>
       </form>
     </DynamicContainer>
   );

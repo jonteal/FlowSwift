@@ -4,14 +4,14 @@ import { Link, useParams } from "react-router-dom";
 import { TbFileInvoice } from "react-icons/tb";
 
 // COMPONENTS
-import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import { InvoiceTableItem } from "../dashboardBilling/InvoiceTableItem";
+import { DynamicContainer } from "../reusable/DynamicContainer/DynamicContainer";
 
 // STATE
-// import { useSelector } from "react-redux";
-import { DynamicContainer } from "../reusable/DynamicContainer/DynamicContainer";
 import { useAppSelector } from "../../store/hooks";
 import { RootState } from "../../store/store";
+
+// TYPES
 import { InvoiceType } from "../../types/types";
 
 export type InvoiceTableProps = {
@@ -44,13 +44,11 @@ export const InvoiceTable = ({ invoices, shortList }: InvoiceTableProps) => {
           </h2>
         </div>
         <div className="flex flex-row justify-between py-2 px-2">
-          <DynamicButton
-            color="red"
-            type="link"
-            link={`/organizations/${organizationId}/clients/${clientId}/addInvoice`}
+          <Link
+            to={`/organizations/${organizationId}/clients/${clientId}/addInvoice`}
           >
             Add Invoice
-          </DynamicButton>
+          </Link>
         </div>
       </div>
 

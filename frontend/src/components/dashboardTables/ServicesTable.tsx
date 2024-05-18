@@ -6,7 +6,6 @@ import { AiFillHome } from "react-icons/ai";
 import { FaRegEye } from "react-icons/fa";
 
 // COMPONENTS
-import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import {
   Table,
   TableBody,
@@ -18,14 +17,15 @@ import {
 } from "../../@/components/ui/table";
 
 // STATE
-// import { useSelector } from "react-redux";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
 
 // UTILS
 import { capitalized } from "../../utils/format";
 import { DynamicContainer } from "../reusable/DynamicContainer/DynamicContainer";
+
+// TYPES
 import { ServiceType } from "../../types/types";
-import { useAppSelector } from "../../store/hooks";
-import { RootState } from "../../store/store";
 
 export type ServicesTableProps = {
   services: ServiceType[];
@@ -59,13 +59,11 @@ export const ServicesTable = ({ services, type }: ServicesTableProps) => {
             {type === "In House" ? "In House" : "Third Party Services"}
           </h2>
         </div>
-        <DynamicButton
-          type="link"
-          color="red"
-          link={`/organizations/${organizationId}/clients/${clientId}/projects/${projectId}/addService`}
+        <Link
+          to={`/organizations/${organizationId}/clients/${clientId}/projects/${projectId}/addService`}
         >
           Add Service
-        </DynamicButton>
+        </Link>
       </div>
       {services.length === 0 ? (
         <p className="italic text-lg py-3 px-2">

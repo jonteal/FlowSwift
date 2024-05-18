@@ -2,16 +2,16 @@ import { ReactNode, useState } from "react";
 import { useMutation } from "@apollo/client";
 
 // ICONS
-import { FaRegTrashAlt } from "react-icons/fa";
+// import { FaRegTrashAlt } from "react-icons/fa";
 
 // GRAPHQL
 import { DELETE_PROJECT } from "../../graphql/mutations/projectMutations";
 import { GET_ORGANIZATION_PROJECTS } from "../../graphql/queries/projectQueries";
 
 // COMPONENTS
-import Button from "react-bootstrap/Button";
+import { Button } from "../../@/components/ui/button";
 import Modal from "react-bootstrap/Modal";
-import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
+
 import { useParams } from "react-router-dom";
 
 export type DeleteProjectProps = {
@@ -57,18 +57,10 @@ export const DeleteProject = ({
           action!`}
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            className="border bg-slate-500"
-            variant="secondary"
-            onClick={handleClose}
-          >
+          <Button className="border bg-slate-500" onClick={handleClose}>
             Close
           </Button>
-          {/* <div onClick={deleteProject}> */}
-          <DynamicButton color="red" type="delete">
-            Delete
-          </DynamicButton>
-          {/* </div> */}
+          <Button onClick={deleteProject}>Delete</Button>
         </Modal.Footer>
       </Modal>
     </div>

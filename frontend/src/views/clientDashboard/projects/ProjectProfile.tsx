@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
@@ -9,8 +9,8 @@ import {
 import { DELETE_PROJECT } from "../../../graphql/mutations/projectMutations";
 
 // COMPONENTS
+import { Button } from "../../../@/components/ui/button";
 import { NameValuePair } from "../../../components/reusable/NameValuePair/NameValuePair";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 import { StatusBadge } from "../../../components/reusable/StatusBadge/StatusBadge";
 import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
 
@@ -66,21 +66,15 @@ export const ProjectProfile = () => {
           } mx-0 md:mx-2 mt-3 p-2 w-full`}
         >
           <div className="w-full flex flex-row items-center justify-end">
-            <DynamicButton
-              type="link"
-              color="lightBlue"
-              link={`/organizations/$organizationId/clients/${clientId}/projects/${projectId}/edit`}
-            >
-              Edit
-            </DynamicButton>
+            <Button asChild>
+              <Link
+                to={`/organizations/$organizationId/clients/${clientId}/projects/${projectId}/edit`}
+              >
+                Edit
+              </Link>
+            </Button>
 
-            {/* <DynamicButton
-              clickHandler={deleteProject}
-              color="red"
-              type="delete"
-            >
-              Delete
-            </DynamicButton> */}
+            <Button onClick={() => deleteProject}>Delete</Button>
           </div>
           <>
             <NameValuePair type="header" name="Title" value={title} />

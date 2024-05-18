@@ -2,10 +2,14 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+// GRAPHQL
+import { ADD_KANBAN } from "../../../../graphql/mutations/kanbanMutations";
+import { GET_KANBANS } from "../../../../graphql/queries/kanbanQueries";
 
+// COMPONENTS
+import { Button } from "../../../../@/components/ui/button";
+import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
+import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 import {
   Form,
   FormControl,
@@ -16,22 +20,6 @@ import {
   FormMessage,
 } from "../../../../@/components/ui/form";
 import { Input } from "../../../../@/components/ui/input";
-import { Button } from "../../../../@/components/ui/button";
-
-// const formSchema = z.object({
-//   title: z.ZodString,
-//   description: z.ZodString,
-//   projectId: z.ZodString,
-// });
-
-// GRAPHQL
-import { ADD_KANBAN } from "../../../../graphql/mutations/kanbanMutations";
-import { GET_KANBANS } from "../../../../graphql/queries/kanbanQueries";
-
-// COMPONENTS
-import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
-import { DynamicContainer } from "../../../../components/reusable/DynamicContainer/DynamicContainer";
 
 export const AddKanban = () => {
   const { projectId } = useParams();
@@ -45,8 +33,6 @@ export const AddKanban = () => {
   //     projectId,
   //   },
   // });
-
-  // console.log("title: ", title);
 
   const [addKanban] = useMutation(ADD_KANBAN, {
     variables: {
@@ -106,9 +92,7 @@ export const AddKanban = () => {
             ariaLabel="Kanban Description"
           />
 
-          <DynamicButton color="red" type="submit">
-            Submit
-          </DynamicButton>
+          <Button type="submit">Submit</Button>
         </form>
       </DynamicContainer>
       {/* <Form {...form}> */}

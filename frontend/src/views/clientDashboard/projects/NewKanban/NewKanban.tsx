@@ -1,11 +1,11 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
 import { GET_KANBANS } from "../../../../graphql/queries/kanbanQueries";
 
 // COMPONENTS
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
+import { Button } from "../../../../@/components/ui/button";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { KanbanCard } from "../../../../components/kanban/KanbanCard";
 import { KanbanType } from "../../../../types/types";
@@ -22,10 +22,11 @@ export const NewKanban = () => {
 
   return (
     <div className="mx-2">
-      <DynamicButton color="red" type="link" link="build" className="my-3">
-        New Kanban
-      </DynamicButton>
-
+      <Button asChild>
+        <Link to="build" className="my-3">
+          New Kanban
+        </Link>
+      </Button>
       <div className="mt-5 flex flex-col md:flex-row items-center flex-wrap">
         {data.kanbans.map((kanban: KanbanType) => (
           <KanbanCard key={kanban.id} kanban={kanban} />

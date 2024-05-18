@@ -12,7 +12,7 @@ import { GET_KANBAN_STATUS_COLUMNS } from "../../../graphql/queries/kanbanStatus
 import { GET_USER, GET_USERS } from "../../../graphql/queries/userQueries";
 
 // COMPONENTS
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { Button } from "../../../@/components/ui/button";
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 import { Checkbox } from "../../../components/reusable/Checkbox/Checkbox";
 import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicInput";
@@ -215,7 +215,7 @@ export const EditKanbanTicket = () => {
             </div>
           </div>
 
-          <DynamicButton type="submit">Submit</DynamicButton>
+          <Button type="submit">Submit</Button>
         </form>
       </div>
     </div>

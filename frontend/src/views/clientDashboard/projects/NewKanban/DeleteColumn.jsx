@@ -9,9 +9,8 @@ import { DELETE_KANBAN_STATUS_COLUMN } from "../../../../graphql/mutations/kanba
 import { GET_KANBAN_STATUS_COLUMNS } from "../../../../graphql/queries/kanbanStatusColumnQueries";
 
 // COMPONENTS
-import Button from "react-bootstrap/Button";
+import { Button } from "../../../../@/components/ui/button";
 import Modal from "react-bootstrap/Modal";
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
 
 export const DeleteColumn = ({ subject, kanbanId, columnId }) => {
   const [show, setShow] = useState(false);
@@ -47,17 +46,11 @@ export const DeleteColumn = ({ subject, kanbanId, columnId }) => {
           action!`}
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            className="border bg-slate-500"
-            variant="secondary"
-            onClick={handleClose}
-          >
+          <Button className="border bg-slate-500" onClick={handleClose}>
             Close
           </Button>
           <div onClick={deleteKanbanStatusColumn}>
-            <DynamicButton color="red" type="delete">
-              Delete
-            </DynamicButton>
+            <Button>Delete</Button>
           </div>
         </Modal.Footer>
       </Modal>

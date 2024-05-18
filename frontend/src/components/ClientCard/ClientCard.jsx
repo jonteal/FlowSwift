@@ -1,11 +1,11 @@
 // COMPONENTS
 import { DeleteModal } from "../modals/DeleteModal/DeleteModal";
 import { NameValuePair } from "../../components/reusable/NameValuePair/NameValuePair";
-import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import { DynamicContainer } from "../reusable/DynamicContainer/DynamicContainer";
 
 // UTILS
 import { formatPhoneNumber } from "../../utils/format";
+import { Link } from "react-router-dom";
 
 export const ClientCard = ({ clientData }) => {
   const {
@@ -22,14 +22,14 @@ export const ClientCard = ({ clientData }) => {
   return (
     <DynamicContainer className="h-auto">
       <div className="flex flex-row items-center justify-end pr-2">
-        <DynamicButton
+        <Link
           type="link"
           color="lightBlue"
           className="mr-2"
           link={`/organizations/${organization.id}/clients/${id}/edit`}
         >
           Edit
-        </DynamicButton>
+        </Link>
         <DeleteModal
           organizationId={organization.id}
           clientId={id}

@@ -10,7 +10,7 @@ import { ADD_SERVICE } from "../../../graphql/mutations/serviceMutations";
 import { GET_SERVICES } from "../../../graphql/queries/serviceQueries";
 
 // COMPONENTS
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
+import { Button } from "../../../@/components/ui/button";
 import { DateSelector } from "../../../components/reusable/DateSelector/DateSelector";
 import { Checkbox } from "../../../components/reusable/Checkbox/Checkbox";
 import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicInput";
@@ -235,9 +235,9 @@ export const AddService = () => {
             </div>
           </div>
 
-          <DynamicButton className="mb-10 pb-10" color="red" type="submit">
+          <Button className="mb-10 pb-10" type="submit">
             Submit
-          </DynamicButton>
+          </Button>
         </form>
       </div>
     </DynamicContainer>

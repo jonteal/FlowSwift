@@ -11,8 +11,8 @@ import { GET_CLIENTS } from "../../../graphql/queries/clientQueries";
 import { GET_USER, GET_USERS } from "../../../graphql/queries/userQueries";
 
 // COMPONENTS
+import { Button } from "../../../@/components/ui/button";
 import { DateSelector } from "../../../components/reusable/DateSelector/DateSelector";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 import { DynamicInput } from "../../../components/reusable/DynamicInput/DynamicInput";
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
@@ -302,9 +302,7 @@ export const AddProject = () => {
               ariaLabel="Project Estimate"
             />
 
-            <DynamicButton color="red" type="submit">
-              Submit
-            </DynamicButton>
+            <Button type="submit">Submit</Button>
           </form>
         </div>
       )}

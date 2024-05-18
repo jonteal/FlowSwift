@@ -10,7 +10,7 @@ import { GET_ALL_CLIENT_TRANSACTIONS } from "../../../../graphql/queries/transac
 import { GET_CLIENT_PROJECTS } from "../../../../graphql/queries/projectQueries";
 
 // COMPONENTS
-import { DynamicButton } from "../../../../components/reusable/DynamicButton/DynamicButton";
+import { Button } from "../../../../@/components/ui/button";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
 import { DateSelector } from "../../../../components/reusable/DateSelector/DateSelector";
 import { DynamicInput } from "../../../../components/reusable/DynamicInput/DynamicInput";
@@ -156,7 +156,7 @@ export const AddTransaction = () => {
         {/* errors will return when field validation fails  */}
         {/* {errors.exampleRequired && <span>This field is required</span>} */}
 
-        <button type="submit">Save</button>
+        <Button type="submit">Save</Button>
       </form>
 
       <form className="w-full max-w-lg pb-3" onSubmit={onSubmit}>
@@ -215,9 +215,7 @@ export const AddTransaction = () => {
           </div>
         </div>
 
-        <DynamicButton color="red" type="submit">
-          Submit
-        </DynamicButton>
+        <Button type="submit">Submit</Button>
       </form>
     </DynamicContainer>
   );

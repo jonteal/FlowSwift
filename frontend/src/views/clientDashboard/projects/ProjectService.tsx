@@ -1,13 +1,13 @@
 import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 // GRAPHQL
 import { GET_SERVICE } from "../../../graphql/queries/serviceQueries";
 
 // COMPONENTS
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 import { NameValuePair } from "../../../components/reusable/NameValuePair/NameValuePair";
+import { Button } from "../../../@/components/ui/button";
 
 export const ProjectService = () => {
   const { clientId, projectId, serviceId, organizationId } = useParams();
@@ -34,12 +34,13 @@ export const ProjectService = () => {
 
   return (
     <div className="rounded-xl bg-slate-50 mx-2 mt-3 p-2 w-full">
-      <DynamicButton
-        type="link"
-        link={`/organizations/${organizationId}/clients/${clientId}/projects/${projectId}/services/${serviceId}/edit`}
-      >
-        Edit
-      </DynamicButton>
+      <Button>
+        <Link
+          to={`/organizations/${organizationId}/clients/${clientId}/projects/${projectId}/services/${serviceId}/edit`}
+        >
+          Edit
+        </Link>
+      </Button>
       <NameValuePair type="header" name="Service" value={service} />
       <NameValuePair name="Project" value={project.title} />
       <NameValuePair name="Cost" value={`$ ${cost}`} />

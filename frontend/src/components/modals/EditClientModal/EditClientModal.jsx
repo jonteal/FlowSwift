@@ -8,9 +8,8 @@ import { UPDATE_CLIENT } from "../../../graphql/mutations/clientMutations";
 import { GET_CLIENT } from "../../../graphql/queries/clientQueries";
 
 // COMPONENTS
-import Button from "react-bootstrap/Button";
+import { Button } from "../../../@/components/ui/button";
 import Modal from "react-bootstrap/Modal";
-import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
 import { DynamicInput } from "../../reusable/DynamicInput/DynamicInput";
 
 // STATE
@@ -185,16 +184,10 @@ export const EditClientModal = ({ subject, client }) => {
           />
         </Modal.Body>
         <Modal.Footer className={darkMode ? "bg-sky-800" : "bg-slate-50"}>
-          <Button
-            className="border bg-slate-500"
-            variant="secondary"
-            onClick={handleClose}
-          >
+          <Button className="border bg-slate-500" onClick={handleClose}>
             Close
           </Button>
-          <DynamicButton clickHandler={onSubmit} color="blue" type="delete">
-            Save
-          </DynamicButton>
+          <Button clickHandler={onSubmit}>Save</Button>
         </Modal.Footer>
       </Modal>
     </>

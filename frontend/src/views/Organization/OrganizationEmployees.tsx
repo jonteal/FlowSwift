@@ -33,26 +33,24 @@ export const OrganizationEmployees = () => {
   if (userError) return <p>There was an error...</p>;
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center">
       <h1 className="text-xl font-bold my-3">Employees</h1>
-      <div className="flex flex-col">
-        <Table>
-          <TableCaption>A list of your employees</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead>#</TableHead>
-              <TableHead className="w-[100px]">Name</TableHead>
-              <TableHead>Email Address</TableHead>
-              <TableHead>Role</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {userData.users.map((user: UserType, index: number) => (
-              <EmployeeRowItem key={user._id} index={index} employee={user} />
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+      <Table className="w-3/4">
+        <TableCaption>A list of your employees</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>#</TableHead>
+            <TableHead className="w-[100px]">Name</TableHead>
+            <TableHead>Email Address</TableHead>
+            <TableHead>Role</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {userData.users.map((user: UserType, index: number) => (
+            <EmployeeRowItem key={user._id} index={index} employee={user} />
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 };

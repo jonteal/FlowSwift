@@ -5,10 +5,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 // COMPONENTS
 import { Form, Row, Col } from "react-bootstrap";
+import { Button } from "../../../@/components/ui/button";
 import { toast } from "react-toastify";
 import { FormContainer } from "../../../components/FormContainer";
 import Loader from "../../../components/Loader";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 
 // REDUX
 import { useRegisterMutation } from "../../../slices/usersApiSlice";
@@ -127,16 +127,16 @@ export const RegisterScreen = () => {
 
         {isLoading && <Loader />}
 
-        <DynamicButton type="submit" color="red" className="my-3">
+        <Button type="submit" className="my-3">
           Sign Up
-        </DynamicButton>
+        </Button>
 
         <Row>
           <Col>
             Already have an account?
-            <DynamicButton className="mt-3" type="link" link="/login">
+            <Link className="mt-3" to="/login">
               Login
-            </DynamicButton>
+            </Link>
           </Col>
         </Row>
       </Form>

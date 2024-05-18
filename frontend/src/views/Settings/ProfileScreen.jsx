@@ -1,14 +1,17 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
-import { FormContainer } from "../../components/FormContainer";
-import { toast } from "react-toastify";
-import Loader from "../../components/Loader";
-import { setCredentials } from "../../slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+// COMPONENT
+import { Button } from "../../@/components/ui/button";
+import Loader from "../../components/Loader";
+import { toast } from "react-toastify";
+import { Form } from "react-bootstrap";
+import { FormContainer } from "../../components/FormContainer";
+
+// STATE
+import { setCredentials } from "../../slices/authSlice";
 import { useUpdateUserMutation } from "../../slices/usersApiSlice";
-import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
 
 export const ProfileScreen = () => {
   const [name, setName] = useState("");
@@ -93,9 +96,9 @@ export const ProfileScreen = () => {
 
         {isLoading && <Loader />}
 
-        <DynamicButton type="submit" color="red" className="mt-3">
+        <Button type="submit" className="mt-3">
           Sign Up
-        </DynamicButton>
+        </Button>
       </Form>
     </FormContainer>
   );

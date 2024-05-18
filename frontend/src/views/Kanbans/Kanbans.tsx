@@ -23,7 +23,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 // import { PageHeadline } from "../../components/reusable/PageHeadline/PageHeadline";
 import { Body } from "../../components/reusable/Body/Body";
-import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
 import { useAppSelector } from "../../store/hooks";
 import { RootState } from "../../store/store";
 import { KanbanType } from "../../types/types";

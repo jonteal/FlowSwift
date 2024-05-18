@@ -6,7 +6,6 @@ import { FaRegEye, FaRegTrashAlt } from "react-icons/fa";
 import { GET_CLIENT } from "../../graphql/queries/clientQueries";
 
 // COMPONENTS
-import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import {
   Table,
   TableBody,
@@ -15,6 +14,8 @@ import {
   TableHeader,
   TableRow,
 } from "../../@/components/ui/table";
+
+// TYPES
 import { ProjectContainer, ProjectType } from "../../types/types";
 
 export type ProjectsTableProps = {
@@ -37,13 +38,7 @@ export const ProjectsTable = ({
         <h2 className="text-left text-slate-700 text-lg mx-3">
           Projects Table
         </h2>
-        <DynamicButton
-          type="link"
-          color="red"
-          link={`/clients/${clientId}/addProject`}
-        >
-          Add Project
-        </DynamicButton>
+        <Link to={`/clients/${clientId}/addProject`}>Add Project</Link>
       </div>
       <Table>
         <TableHeader>

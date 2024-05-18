@@ -5,8 +5,6 @@ import { useMutation } from "@apollo/client";
 import { UPDATE_PROJECT_ACTIVITY_COMMENT } from "../../graphql/mutations/projectActivityCommentMutations";
 import { GET_PROJECT_ACTIVITY_COMMENTS } from "../../graphql/queries/projectActivityCommentQueries";
 
-import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
-
 export const CommentEdit = ({ id, comment, projectId, setIsEditing }) => {
   const [commentText, setCommentText] = useState(comment);
 
@@ -58,7 +56,7 @@ export const CommentEdit = ({ id, comment, projectId, setIsEditing }) => {
         onChange={(e) => setCommentText(e.target.value)}
       />
       <div className="w-1/2 text-left mt-2">
-        <DynamicButton type="submit">Save</DynamicButton>
+        <Button type="submit">Save</Button>
       </div>
     </form>
   );

@@ -17,7 +17,7 @@ import { DELETE_CLIENT_ACTIVITY_COMMENT } from "../../graphql/mutations/clientAc
 // COMPONENTS
 import { CommentReply } from "../CommentReply/CommentReply";
 import { Spinner } from "../reusable/Spinner/Spinner";
-import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
+import { Button } from "../../@/components/ui/button";
 
 // STATE
 import { useState } from "react";
@@ -237,13 +237,9 @@ export const Comment = ({ comment, type }) => {
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
             />
-            <DynamicButton
-              color="red"
-              type="submit"
-              className="w-1/2 text-left mt-2"
-            >
+            <Button type="submit" className="w-1/2 text-left mt-2">
               Save
-            </DynamicButton>
+            </Button>
           </form>
         </>
       )}

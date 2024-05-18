@@ -12,9 +12,8 @@ import {
 } from "../../../graphql/queries/ticketQueries";
 
 // COMPONENTS
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { DynamicButton } from "../../reusable/DynamicButton/DynamicButton";
+import { Button } from "../../../@/components/ui/button";
 import { NameValuePair } from "../../reusable/NameValuePair/NameValuePair";
 
 // STATE
@@ -155,7 +154,7 @@ export const TicketViewContent = ({
     <div className="flex flex-col items-start justify-start mt-3 w-full">
       <h3>Status</h3>
       <div className="flex flex-row mt-2 items-center">
-        <button
+        <Button
           onClick={handleTicketReady}
           className={`${
             ready ? "bg-green-500 text-slate-50" : ""
@@ -163,8 +162,8 @@ export const TicketViewContent = ({
         >
           <FaCheckCircle className="mr-2" />
           Ready
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={handleBlockTicket}
           className={`${
             blocked ? "bg-red-500 text-slate-50" : ""
@@ -172,7 +171,7 @@ export const TicketViewContent = ({
         >
           <SiAdblock className="mr-2" />
           Blocked
-        </button>
+        </Button>
         {blockedReason && (
           <p className="border-red-500 ml-3 p-2">Reason: {blockedReason}</p>
         )}
@@ -211,13 +210,9 @@ export const TicketViewContent = ({
             Close
           </Button>
           <form onSubmit={onSubmit}>
-            <DynamicButton
-              clickHandler={handleClose}
-              color="blue"
-              type="submit"
-            >
+            <Button clickHandler={handleClose} type="submit">
               Yes
-            </DynamicButton>
+            </Button>
           </form>
         </Modal.Footer>
       </Modal>

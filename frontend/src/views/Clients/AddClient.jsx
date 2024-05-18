@@ -7,7 +7,7 @@ import { GET_CLIENTS } from "../../graphql/queries/clientQueries";
 import { GET_USER } from "../../graphql/queries/userQueries";
 
 // COMPONENTS
-import { DynamicButton } from "../../components/reusable/DynamicButton/DynamicButton";
+import { Button } from "../../@/components/ui/button";
 import { Spinner } from "react-bootstrap";
 import { DynamicInput } from "../../components/reusable/DynamicInput/DynamicInput";
 import { DynamicContainer } from "../../components/reusable/DynamicContainer/DynamicContainer";
@@ -184,9 +184,7 @@ export const AddClient = () => {
             className="w-full md:w-1/3 px-3 mb-6 md:mb-0 mt-5"
             ariaLabel="Client Status select"
           />
-          <DynamicButton color="blue" type="submit">
-            Save
-          </DynamicButton>
+          <Button type="submit">Save</Button>
         </form>
       </div>
     </DynamicContainer>

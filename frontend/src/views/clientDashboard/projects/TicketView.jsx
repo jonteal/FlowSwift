@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 // GRAPHQL
@@ -7,12 +7,12 @@ import { GET_KANBAN_STATUS_COLUMNS } from "../../../graphql/queries/kanbanStatus
 
 // COMPONENTS
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
-import { DynamicButton } from "../../../components/reusable/DynamicButton/DynamicButton";
 import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
+import { Button } from "../../../@/components/ui/button";
+import { TicketViewContent } from "../../../components/kanban/TicketViewContent/TicketViewContent";
 
 // STATE
 import { useSelector } from "react-redux";
-import { TicketViewContent } from "../../../components/kanban/TicketViewContent/TicketViewContent";
 import { useState } from "react";
 
 export const TicketView = () => {
@@ -53,17 +53,15 @@ export const TicketView = () => {
         >
           <div className="mx-auto w-100 p-5">
             <div className="flex flex-row justify-start">
-              <DynamicButton type="back" color="lightBlue">
-                Back
-              </DynamicButton>
-              <DynamicButton
-                className="ml-5"
-                type="link"
-                color="lightBlue"
-                link={`/clients/${clientId}/projects/${projectId}/kanbans/${kanbanId}/${ticketId}/edit`}
-              >
-                Edit
-              </DynamicButton>
+              <Button>Back</Button>
+              <Button asChild>
+                <Link
+                  className="ml-5"
+                  to={`/clients/${clientId}/projects/${projectId}/kanbans/${kanbanId}/${ticketId}/edit`}
+                >
+                  Edit
+                </Link>
+              </Button>
             </div>
 
             <TicketViewContent

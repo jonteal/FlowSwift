@@ -6,8 +6,8 @@ import { ADD_CLIENT_ACTIVITY_COMMENT } from "../../graphql/mutations/clientActiv
 import { GET_CLIENT_ACTIVITY_COMMENTS } from "../../graphql/queries/clientActivityCommentQueries";
 
 // COMPONENTS
-import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import { Comment } from "../Comment/Comment";
+import { Button } from "../../@/components/ui/button";
 
 // STATE
 import { useState } from "react";
@@ -86,9 +86,7 @@ export const ClientCommentFeed = ({ clientId, comments }) => {
           onChange={(e) => setCommentText(e.target.value)}
         />
         <div className="w-1/2 text-left mt-2">
-          <DynamicButton color="blue" type="submit">
-            Submit
-          </DynamicButton>
+          <Button type="submit">Submit</Button>
         </div>
       </form>
 

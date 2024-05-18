@@ -4,7 +4,6 @@ import { Link, useParams } from "react-router-dom";
 import { GrTransaction } from "react-icons/gr";
 
 // COMPONENTS
-import { DynamicButton } from "../reusable/DynamicButton/DynamicButton";
 import { DynamicContainer } from "../reusable/DynamicContainer/DynamicContainer";
 import { ClientTransactionItem } from "../dashboardBilling/ClientTransactionItem";
 
@@ -68,13 +67,13 @@ export const TransactionTable = ({
           </h2>
         </div>
         <div className="flex flex-row justify-between py-2 px-2">
-          <DynamicButton
+          <Link
             color="red"
             type="link"
-            link={`/organizations/${organizationId}/clients/${clientId}/addTransaction`}
+            to={`/organizations/${organizationId}/clients/${clientId}/addTransaction`}
           >
             Add Transaction
-          </DynamicButton>
+          </Link>
         </div>
       </div>
 
