@@ -20,8 +20,6 @@ export type UserType = {
   _id: string;
 };
 
-
-
 export type OrganizationType = {
   id: string;
   organizationName: string;
@@ -78,6 +76,13 @@ export type KanbanType = {
   description: string;
   project: ProjectType;
 };
+
+export type KanbanColumnType = {
+  columnState: string;
+  columnDescription: string;
+  position: number;
+  kanban: KanbanType
+}
 
 export type InvoiceType = {
   amount: string;

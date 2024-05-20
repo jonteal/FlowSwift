@@ -12,12 +12,12 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 import {
   DELETE_TICKET,
   UPDATE_TICKET,
-} from "../../../graphql/mutations/ticketMutations";
-import { GET_TICKETS } from "../../../graphql/queries/ticketQueries";
+} from "../../graphql/mutations/ticketMutations";
+import { GET_TICKETS } from "../../graphql/queries/ticketQueries";
 
 // COMPONENTS
-import { DynamicInput } from "../../reusable/DynamicInput/DynamicInput";
-import { Button } from "../../../@/components/ui/button";
+import { DynamicInput } from "../reusable/DynamicInput/DynamicInput";
+import { Button } from "../../@/components/ui/button";
 import Modal from "react-bootstrap/Modal";
 
 // STATE

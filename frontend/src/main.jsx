@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import { Provider } from "react-redux";
-import { App } from "./App.jsx";
+import { App } from "./App";
 import { Home } from "./views/homeView/Home/Home";
 import { LoginScreen } from "./views/Auth/Login/LoginScreen";
 import { RegisterScreen } from "./views/Auth/Signup/RegisterScreen.jsx";

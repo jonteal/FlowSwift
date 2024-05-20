@@ -1,4 +1,4 @@
-import { SettingsNav } from "../../components/nav/SettingsNav/SettingsNav";
+import { SettingsNav } from "../../components/nav/SettingsNav";
 import { Outlet } from "react-router-dom";
 
 // state

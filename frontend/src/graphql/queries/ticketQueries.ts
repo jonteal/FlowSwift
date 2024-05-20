@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { gql } from "graphql-tag";
 
-const GET_TICKETS = gql`
+export const GET_TICKETS = gql`
   query getTickets($kanbanId: ID) {
     tickets(kanbanId: $kanbanId) {
       id
@@ -24,7 +24,7 @@ const GET_TICKETS = gql`
   }
 `;
 
-const GET_TICKET = gql`
+export const GET_TICKET = gql`
   query getTicket($id: ID) {
     ticket(id: $id) {
       id
@@ -48,4 +48,3 @@ const GET_TICKET = gql`
   }
 `;
 
-export { GET_TICKETS, GET_TICKET };

@@ -15,7 +15,7 @@ import { DynamicInput } from "../../../../components/reusable/DynamicInput/Dynam
 import { FiltersList } from "../../../../components/reusable/FiltersList/FiltersList";
 import { Body } from "../../../../components/reusable/Body/Body";
 import { SectionHeadline } from "../../../../components/reusable/SectionHeadline/SectionHeadline";
-import { KanbanColumn } from "../../../../components/kanban/KanbanColumn/KanbanColumn";
+import { KanbanColumn } from "../../../../components/kanban/KanbanColumn";
 
 // STATE
 import { useState } from "react";

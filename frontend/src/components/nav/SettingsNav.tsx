@@ -6,8 +6,8 @@ import { RiExpandLeftLine, RiExpandRightLine } from "react-icons/ri";
 import { FaWindowMaximize } from "react-icons/fa";
 
 // STATE
-import { useAppSelector } from "../../../store/hooks";
-import { RootState } from "../../../store/store";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
 
 export const SettingsNav = () => {
   const { darkMode } = useAppSelector((state: RootState) => state.theme);

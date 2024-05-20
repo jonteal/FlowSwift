@@ -1,27 +1,24 @@
-import { useDispatch, useSelector } from "react-redux";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../../../@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "../../@/components/ui/sheet";
 import { Link, useNavigate } from "react-router-dom";
-import { useLogoutMutation } from "../../../slices/usersApiSlice";
-import { logout } from "../../../slices/authSlice";
+import { useLogoutMutation } from "../../slices/usersApiSlice";
+import { logout } from "../../slices/authSlice";
+
+import { RootState } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 export const MenuDrawer = () => {
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useAppSelector((state: RootState) => state.auth);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [logoutApiCall] = useLogoutMutation();
 
   const logoutHandler = async () => {
     try {
+      // @ts-ignore
       await logoutApiCall().unwrap();
+      // @ts-ignore
       dispatch(logout());
       navigate("/");
     } catch (err) {
@@ -79,7 +76,7 @@ export const MenuDrawer = () => {
             </div>
           </>
         ) : (
-          <Fragment>
+          <>
             <Link
               className="nav-link mx-3 text-zinc-100 font-normal text-2xl my-2"
               to="login"
@@ -92,7 +89,7 @@ export const MenuDrawer = () => {
             >
               Sign Up
             </Link>
-          </Fragment>
+          </>
         )}
       </SheetContent>
     </Sheet>
