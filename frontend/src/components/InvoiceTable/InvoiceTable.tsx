@@ -16,7 +16,7 @@ import { InvoiceType } from "../../types/types";
 
 export type InvoiceTableProps = {
   invoices: InvoiceType[];
-  shortList: boolean;
+  shortList?: boolean;
 };
 
 export const InvoiceTable = ({ invoices, shortList }: InvoiceTableProps) => {

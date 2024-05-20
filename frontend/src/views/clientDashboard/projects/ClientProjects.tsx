@@ -36,6 +36,7 @@ import {
 import { useAppSelector } from "../../../store/hooks";
 import { RootState } from "../../../store/store";
 import { ProjectType } from "../../../types/types";
+import { Button } from "../../../@/components/ui/button";
 
 export const ClientProjects = () => {
   const { clientId, organizationId } = useParams();
@@ -162,11 +163,13 @@ export const ClientProjects = () => {
     <DynamicContainer className="w-full">
       {projectsData.clientProjects.length === 0 ? (
         <div className="rounded-xl bg-slate-50 mx-2 py-3 px-4 w-full">
-          <Link
-            to={`/organizations/${organizationId}/clients/${clientId}/projects/addProject`}
-          >
-            Add Project
-          </Link>
+          <Button asChild className="bg-sky-800">
+            <Link
+              to={`/organizations/${organizationId}/clients/${clientId}/projects/addProject`}
+            >
+              Add Project
+            </Link>
+          </Button>
           <p className="mt-4">
             This client does not have any current projects.
           </p>
@@ -174,12 +177,14 @@ export const ClientProjects = () => {
       ) : (
         <div className="flex flex-col w-full">
           <div className="flex flex-row justify-between items-start">
-            <Link
-              to={`/organizations/${organizationId}/clients/${clientId}/projects/addProject`}
-              className="ml-2"
-            >
-              Add Project
-            </Link>
+            <Button asChild className="bg-sky-800">
+              <Link
+                to={`/organizations/${organizationId}/clients/${clientId}/projects/addProject`}
+                className="ml-2"
+              >
+                Add Project
+              </Link>
+            </Button>
 
             <input
               type="text"

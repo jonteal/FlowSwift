@@ -50,7 +50,7 @@ export const Home = () => {
       <h1 className="font-semibold text-3xl pt-5">Welcome back, {name}!</h1>
 
       {isOwner && (
-        <Button asChild>
+        <Button asChild className="bg-sky-800">
           <Link className="my-3" to="/addOrganization">
             Add Organization
           </Link>

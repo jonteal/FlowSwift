@@ -1,11 +1,12 @@
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+
 // GRAPHQL
 import { GET_ALL_CLIENT_INVOICES } from "../../../../graphql/queries/invoiceQueries";
 
 // COMPONENTS
 import { InvoiceTable } from "../../../../components/InvoiceTable/InvoiceTable";
 import { Spinner } from "../../../../components/reusable/Spinner/Spinner";
-import { useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
 
 export const ClientInvoices = () => {
   const { clientId } = useParams();
@@ -14,7 +15,9 @@ export const ClientInvoices = () => {
     loading: invoicesLoading,
     error: invoicesError,
     data: invoicesData,
-  } = useQuery(GET_ALL_CLIENT_INVOICES, { clientId });
+  } = useQuery(GET_ALL_CLIENT_INVOICES, {
+    variables: { id: clientId },
+  });
 
   if (invoicesLoading) return <Spinner />;
   if (invoicesError)

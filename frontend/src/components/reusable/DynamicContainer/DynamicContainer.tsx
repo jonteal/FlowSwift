@@ -3,11 +3,14 @@ import { ReactNode } from "react";
 import { useAppSelector } from "../../../store/hooks";
 
 export type DynamicContainerProps = {
-  children: ReactNode,
-  className: string
-}
+  children: ReactNode;
+  className?: string;
+};
 
-export const DynamicContainer = ({ children, className }: DynamicContainerProps) => {
+export const DynamicContainer = ({
+  children,
+  className,
+}: DynamicContainerProps) => {
   const { darkMode } = useAppSelector((state) => state.theme);
 
   return (

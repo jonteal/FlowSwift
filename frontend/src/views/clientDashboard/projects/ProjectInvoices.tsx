@@ -11,6 +11,8 @@ import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 export const ProjectInvoices = () => {
   const { projectId } = useParams();
 
+  console.log("projectId: ", projectId);
+
   const {
     loading: invoicesLoading,
     error: invoicesError,

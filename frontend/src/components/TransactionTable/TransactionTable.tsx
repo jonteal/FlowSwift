@@ -10,11 +10,10 @@ import { ClientTransactionItem } from "../dashboardBilling/ClientTransactionItem
 // STATE
 import { useAppSelector } from "../../store/hooks";
 import { RootState } from "../../store/store";
-// import { useSelector } from "react-redux";
 
 export type TransactionTableProps = {
   transactions: TransactionType[];
-  shortList: boolean;
+  shortList?: boolean;
 };
 
 export type TransactionType = {

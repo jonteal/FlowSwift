@@ -19,6 +19,8 @@ import {
   setBilledThisMonthOn,
   setBilledThisMonthOff,
 } from "../../../../slices/clientBilling";
+import { useAppSelector } from "../../../../store/hooks";
+import { RootState } from "../../../../store/store";
 
 // import { TotalBilledCard }from "../../../../components/dashboardBilling/TotalBilledCard/TotalBilledCard";
 // import { BudgetRemaining } from "../../../../components/dashboardBilling/BudgetRemaining/BudgetRemaining";
@@ -29,7 +31,9 @@ export const ClientBilling = () => {
 
   const dispatch = useDispatch();
 
-  const { billedThisMonth } = useSelector((state) => state.clientBilling);
+  const { billedThisMonth } = useAppSelector(
+    (state: RootState) => state.clientBilling
+  );
 
   const handleBilledThisMonthToggle = () => {
     billedThisMonth
@@ -67,11 +71,6 @@ export const ClientBilling = () => {
     },
   ];
 
-  console.log(
-    "transactionsData.clientTransactions: ",
-    transactionsData.clientTransactions
-  );
-
   // const budgetRemaining = budgetsTotalSum - invoicesTotalSum;
   // const billedThisMonth = 50;
 
@@ -83,13 +82,13 @@ export const ClientBilling = () => {
       >
         Filters
       </button>
-      {isFilterOptionsOpen && <FiltersList filters={clientBillingFilters} />}
+      {/* {isFilterOptionsOpen && <FiltersList filters={clientBillingFilters} />} */}
 
       <div className="w-full flex flex-row">
         {/* <TotalBilledCard totalBilled={invoicesTotalSum} /> */}
-        {billedThisMonth && (
+        {/* {billedThisMonth && (
           <BilledThisMonth billedThisMonth={billedThisMonth} />
-        )}
+        )} */}
         {/* <BudgetRemaining budgetRemaining={budgetRemaining} /> */}
       </div>
       <div className="w-full flex flex-col md:flex-row items-start">

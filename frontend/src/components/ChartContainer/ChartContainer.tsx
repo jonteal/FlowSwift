@@ -2,26 +2,47 @@ import { useState } from "react";
 import { BarChart } from "../Charts/BarChart/BarChart";
 import { PieChart } from "../Charts/PieChart/PieChart";
 import { LineChart } from "../Charts/LineChart/LineChart";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
+import { ClientType } from "../../types/types";
 
-export const ChartContainer = ({ chartData }) => {
-  const { charts, pieChart, barChart, lineChart } = useSelector(
-    (state) => state.clientsList
+export type ChartDataType = {
+  dataSets?: {
+    backgroundColor: string[];
+    data: any;
+    label: string;
+  };
+  labels?: string[];
+  clients?: ClientType[];
+};
+
+export type ChartContainerProps = {
+  chartData: ChartDataType | unknown | any;
+};
+
+export const ChartContainer = ({ chartData }: ChartContainerProps) => {
+  const { charts, pieChart, barChart, lineChart } = useAppSelector(
+    (state: RootState) => state.clientsList
   );
 
   const leadCount = chartData?.clients?.filter(
+    // @ts-ignore
     (client) => client.status === "Lead"
   ).length;
   const prospectCount = chartData?.clients?.filter(
+    // @ts-ignore
     (client) => client.status === "Prospect"
   ).length;
   const currentCount = chartData?.clients?.filter(
+    // @ts-ignore
     (client) => client.status === "Current"
   ).length;
   const formerCount = chartData?.clients?.filter(
+    // @ts-ignore
     (client) => client.status === "Former"
   ).length;
   const coldCount = chartData?.clients?.filter(
+    // @ts-ignore
     (client) => client.status === "Cold"
   ).length;
 

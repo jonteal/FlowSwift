@@ -18,6 +18,9 @@ import { DynamicInput } from "../../components/reusable/DynamicInput/DynamicInpu
 import { useSelector } from "react-redux";
 import { useUpdateUserMutation } from "../../slices/usersApiSlice";
 import { useNavigate } from "react-router-dom";
+import { Label } from "../../@/components/ui/label";
+import { Input } from "../../@/components/ui/input";
+import { DestructiveAlert } from "../../components/reusable/Alerts/DestructiveAlert";
 
 export const AddOrganization = () => {
   const navigate = useNavigate();
@@ -62,9 +65,10 @@ export const AddOrganization = () => {
     if (organizationName === "") {
       setAlertOn(true);
       return (
-        <div className="alert alert-danger" role="alert">
-          Please provide an organization name!
-        </div>
+        <DestructiveAlert
+          title=""
+          description="Please provide a name for your organization"
+        />
       );
     }
 
@@ -77,7 +81,7 @@ export const AddOrganization = () => {
   if (error) return <p>There was an error loading the content</p>;
 
   return (
-    <div className={`${darkMode ? "bg-sky-800" : "bg-slate-50"} h-screen`}>
+    <div className="bg-slate-50 h-screen">
       <div className="w-3/5 mx-auto">
         {alertOn && (
           <div className="alert alert-danger mt-3" role="alert">

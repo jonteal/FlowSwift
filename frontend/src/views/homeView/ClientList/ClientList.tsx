@@ -29,19 +29,19 @@ import { useDispatch, useSelector } from "react-redux";
 
 // UTILS
 import { clientContainers } from "../../Clients/constants";
+import { useAppSelector } from "../../../store/hooks";
+import { RootState } from "../../../store/store";
 
 export const ClientList = () => {
   const { organizationId } = useParams();
 
-  const { darkMode } = useSelector((state) => state.theme);
-
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useAppSelector((state: RootState) => state.auth);
   const [isFilterOptionsOpen, setIsFilterOptionsOpen] = useState(false);
 
   const dispatch = useDispatch();
 
-  const { charts, pieChart, barChart, lineChart } = useSelector(
-    (state) => state.clientsList
+  const { charts, pieChart, barChart, lineChart } = useAppSelector(
+    (state: RootState) => state.clientsList
   );
 
   const {
@@ -107,16 +107,14 @@ export const ClientList = () => {
   ];
 
   return (
-    <div
-      className={`${darkMode ? "bg-sky-950" : "bg-slate-50"} overflow-x-scroll`}
-    >
+    <div className="bg-slate-50 overflow-x-scroll">
       <button
         className="border bg-sky-500 text-slate-50 px-4 py-1 mb-4 w-1/12 rounded-lg mt-3 mr-2"
         onClick={handleOpenFilters}
       >
         Filters
       </button>
-      {isFilterOptionsOpen && <FiltersList filters={clientListChartsFilters} />}
+      {/* {isFilterOptionsOpen && <FiltersList filters={clientListChartsFilters} />} */}
       <div className="my-10">
         <ChartContainer chartData={clientData} />
       </div>

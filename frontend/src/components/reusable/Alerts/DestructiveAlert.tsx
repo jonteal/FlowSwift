@@ -6,12 +6,18 @@ import {
   AlertTitle,
 } from "../../../@/components/ui/alert";
 
-export const DestructiveAlert = () => (
+export type DestructiveAlertProps = {
+  title: string;
+  description: string;
+};
+
+export const DestructiveAlert = ({
+  title,
+  description,
+}: DestructiveAlertProps) => (
   <Alert variant="destructive">
     <ExclamationTriangleIcon className="h-4 w-4" />
-    <AlertTitle>Error</AlertTitle>
-    <AlertDescription>
-      Your session has expired. Please log in again.
-    </AlertDescription>
+    <AlertTitle>{title}</AlertTitle>
+    <AlertDescription>{description}</AlertDescription>
   </Alert>
 );
