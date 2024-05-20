@@ -18,6 +18,7 @@ import { DELETE_CLIENT_ACTIVITY_COMMENT } from "../../graphql/mutations/clientAc
 import { CommentReply } from "../CommentReply/CommentReply";
 import { Spinner } from "../reusable/Spinner/Spinner";
 import { Button } from "../../@/components/ui/button";
+import { DestructiveAlert } from "../../components/reusable/Alerts/DestructiveAlert";
 
 // STATE
 import { useState } from "react";
@@ -146,9 +147,10 @@ export const Comment = ({ comment, type }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log("submitting");
 
     if (commentText === "") {
-      alert("You must write a reply");
+      DestructiveAlert("You must write a reply");
     }
 
     if (type === "client") {
@@ -165,13 +167,13 @@ export const Comment = ({ comment, type }) => {
     <div
       className={`my-4 ${
         darkMode ? "bg-sky-950" : "bg-slate-200"
-      }  p-2 rounded-xl`}
+      } p-2 rounded-xl`}
     >
       <>
         <div
           className={`border px-3 py-2 ${
             darkMode ? "bg-sky-800" : "bg-slate-100"
-          }  rounded-xl flex flex-row justify-between items-center`}
+          } rounded-xl flex flex-row justify-between items-center`}
           key={comment.id}
         >
           <div className="flex flex-col items-start w-full">

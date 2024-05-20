@@ -1,8 +1,8 @@
 import { screen, render } from "@testing-library/react";
+import { expect, test } from "vitest";
+import { StatusBadge, StatusBadgeProps } from "../StatusBadge";
 
-import { StatusBadge } from "../StatusBadge";
-
-const props = {
+const props: StatusBadgeProps = {
   status: "notStarted",
   position: "left",
   className: "",
@@ -10,7 +10,6 @@ const props = {
 
 test("Status Badge Not Started status", () => {
   render(<StatusBadge {...props} />);
-  screen.debug();
   const statusText = screen.getByText("Not Started");
   expect(statusText).toBeVisible();
 });

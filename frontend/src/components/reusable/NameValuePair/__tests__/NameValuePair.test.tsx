@@ -1,28 +1,20 @@
 import { screen, render } from "@testing-library/react";
-import { expect, test, vi } from 'vitest'
+import { expect, test } from "vitest";
 
 import type { NameValuePairProps } from "../NameValuePair";
 import { NameValuePair } from "../NameValuePair";
 
-import { NameValuePairMocks } from "./__mocks__/NameValuePairMocks";
-import { useAppSelector } from "../../../../store/hooks";
-
-const { name, value, type, children } = NameValuePairMocks
-
 const props: NameValuePairProps = {
-    name,
-    value,
-    type,
-    children
-}
-
-
-vi.mock('../../../../store/hooks', () => ({
-    useAppSelector: vi.fn()
-}))
+  name: "Title",
+  value: "Mr Smith",
+  type: "header",
+};
 
 test("PageHeadline", () => {
   render(<NameValuePair {...props} />);
-  const name = screen.getByText('Title')
-  expect(name).toBeTruthy()
+  const name = screen.getByText("Title");
+  expect(name).toBeVisible();
+
+  const value = screen.getByText("Mr Smith");
+  expect(value).toBeVisible();
 });

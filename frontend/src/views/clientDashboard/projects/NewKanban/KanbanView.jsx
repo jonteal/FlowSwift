@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 
 // GRAPHQL
@@ -174,20 +174,24 @@ export const KanbanView = () => {
     <DynamicContainer className="h-screen mt-2">
       <div className="flex flex-row justify-around items-start">
         <Button
-          clickHandler={() => setIsAddingColumn(!isAddingColumn)}
+          onClick={() => setIsAddingColumn(!isAddingColumn)}
           type="submit"
         >
           Add Column
         </Button>
 
-        {hasStatusColumn && <Button to="addTicket">Add Ticket</Button>}
+        {hasStatusColumn && (
+          <Button asChild>
+            <Link to="addTicket">Add Ticket</Link>
+          </Button>
+        )}
 
-        <button
+        <Button
           className="border bg-sky-300 px-3 py-1 rounded-lg"
           onClick={handleOpenFilters}
         >
           Filters
-        </button>
+        </Button>
 
         {/* <Link to="edit">
           <BsFillGearFill />
@@ -232,12 +236,12 @@ export const KanbanView = () => {
 
             <Button type="submit">Submit</Button>
 
-            <button
+            <Button
               className="border bg-sky-300 px-3 py-1 rounded-lg"
               onClick={handleOpenFilters}
             >
               Filters
-            </button>
+            </Button>
           </form>
         </div>
       )}

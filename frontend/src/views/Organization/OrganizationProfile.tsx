@@ -10,11 +10,12 @@ import { Button } from "../../@/components/ui/button";
 import { Spinner } from "../../components/reusable/Spinner/Spinner";
 
 // STATE
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../store/hooks";
+import { RootState } from "../../store/store";
 
 export const OrganizationProfile = () => {
   const { organizationId } = useParams();
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useAppSelector((state: RootState) => state.auth);
 
   const {
     loading: userLoading,
@@ -59,18 +60,7 @@ export const OrganizationProfile = () => {
 
               <Button asChild>
                 <Link
-                  to={`/organizations/${organizationId}/addUser`}
-                  className="text-slate-500 border"
-                >
-                  Add Employees
-                </Link>
-              </Button>
-
-              <Button asChild>
-                <Link
-                  link={`/organizations/${organizationId}/employees`}
-                  type="link"
-                  color="lightBlue"
+                  to={`/organizations/${organizationId}/employees`}
                   className="ml-1"
                 >
                   Current Employees

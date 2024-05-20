@@ -48,7 +48,7 @@ export const ClientCommentFeed = ({ clientId, comments }) => {
     e.preventDefault();
 
     if (commentText === "") {
-      alert("You must write a comment");
+      ("You must write a comment");
     }
 
     addClientActivityComment(commentText, clientId, userId);
