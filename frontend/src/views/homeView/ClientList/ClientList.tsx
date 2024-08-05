@@ -108,16 +108,16 @@ export const ClientList = () => {
 
   return (
     <div className="bg-slate-50 overflow-x-scroll">
-      <button
+      {/* <button
         className="border bg-sky-500 text-slate-50 px-4 py-1 mb-4 w-1/12 rounded-lg mt-3 mr-2"
         onClick={handleOpenFilters}
       >
         Filters
-      </button>
+      </button> */}
       {/* {isFilterOptionsOpen && <FiltersList filters={clientListChartsFilters} />} */}
-      <div className="my-10">
+      {/* <div className="my-10">
         <ChartContainer chartData={clientData} />
-      </div>
+      </div> */}
 
       <div className="flex flex-row">
         <FaUserAlt className="mr-5" />

@@ -9,7 +9,7 @@ import { GET_KANBAN_STATUS_COLUMNS } from "../../../graphql/queries/kanbanStatus
 import { Spinner } from "../../../components/reusable/Spinner/Spinner";
 import { DynamicContainer } from "../../../components/reusable/DynamicContainer/DynamicContainer";
 import { Button } from "../../../@/components/ui/button";
-import { TicketViewContent } from "../../../components/kanban/TicketViewContent/TicketViewContent";
+// import { TicketViewContent } from "../../../components/kanban/";
 
 // STATE
 import { useSelector } from "react-redux";
@@ -64,11 +64,11 @@ export const TicketView = () => {
               </Button>
             </div>
 
-            <TicketViewContent
+            {/* <TicketViewContent
               kanbanStatusColumnData={kanbanStatusColumnData}
               userInfo={userInfo}
               ticket={ticketData.ticket}
-            />
+            /> */}
           </div>
         </div>
       )}

@@ -22,14 +22,14 @@ export const ClientCard = ({ clientData }) => {
   return (
     <DynamicContainer className="h-auto">
       <div className="flex flex-row items-center justify-end pr-2">
-        <Link
+        {/* <Link
           type="link"
           color="lightBlue"
           className="mr-2"
           link={`/organizations/${organization.id}/clients/${id}/edit`}
         >
           Edit
-        </Link>
+        </Link> */}
         <DeleteModal
           organizationId={organization.id}
           clientId={id}

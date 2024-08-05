@@ -133,8 +133,11 @@ export const RegisterScreen = () => {
 
         <Row>
           <Col>
-            Already have an account?
-            <Link className="mt-3" to="/login">
+            <span>Already have an account?</span>
+            <Link
+              className="mt-3 ml-3 hover:underline hover:text-blue-600"
+              to="/login"
+            >
               Login
             </Link>
           </Col>

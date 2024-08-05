@@ -27,7 +27,7 @@ export const MenuDrawer = () => {
   };
   return (
     <Sheet>
-      <SheetTrigger>&#9776;</SheetTrigger>
+      {/* <SheetTrigger>&#9776;</SheetTrigger> */}
       <SheetContent>
         {userInfo ? (
           <>
