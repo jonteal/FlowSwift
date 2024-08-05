@@ -108,8 +108,36 @@ If you have any questions or comments, please feel free to contact me by email:
 
 #### Register an account
 
-![Video Example of how to Add a customer](./assets/add-customer.gif)
+![Video Example of how to Registering](./assets/register.gif)
 
 #### Create an Organization
 
+![Video Example of how to Add an organization](./assets/add-organization.gif)
+
 #### Create a Client
+
+![Video Example of how to Add a client](./assets/add-client.gif)
+
+#### Create a Client Project
+
+![Video Example of how to Add a client project](./assets/add-client-project.gif)
+
+#### Create a comment in Client Feed
+
+![Video Example of how to create a comment in a client feed](./assets/client-comment-feed.gif)
+
+#### Create a comment in Project Feed
+
+![Video Example of how to create a comment in a project feed](./assets/project-comment-feed.gif)
+
+#### Create a Service
+
+![Video Example of how to create a service](./assets/add-service.gif)
+
+#### Create an Invoice
+
+![Video Example of how to create an invoice](./assets/add-invoice.gif)
+
+#### Create a Kanban
+
+![Video Example of how to create a Kanban](./assets/add-kanban.gif)
